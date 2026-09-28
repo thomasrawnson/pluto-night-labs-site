@@ -246,7 +246,6 @@ const principles = [
       </div>
       <div class="contact-actions">
         <a class="button button-primary" href={`mailto:${site.supportEmail}`}>{site.supportEmail} <span aria-hidden="true">↗</span></a>
-        <p>For business enquiries: <a href={`mailto:${site.businessEmail}`}>{site.businessEmail}</a></p>
       </div>
     </div>
   </section>
@@ -435,9 +434,7 @@ const principles = [
   .contact-panel::after { content: ''; position: absolute; width: 280px; height: 92px; right: -75px; bottom: -33px; border: 1px solid rgba(255,255,255,.09); border-radius: 50%; transform: rotate(-17deg); pointer-events: none; }
   .contact h2 { margin: 0; font-size: clamp(2.3rem, 4vw, 4rem); letter-spacing: -.05em; }
   .contact-panel > div > p:last-child { max-width: 630px; margin: 20px 0 0; color: var(--muted); line-height: 1.7; }
-  .contact-actions { display: grid; justify-items: start; gap: 14px; }
-  .contact-actions > p { margin: 0 !important; color: var(--dim) !important; font-size: .76rem; }
-  .contact-actions > p a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+  .contact-actions { display: grid; justify-items: start; }
 
   @media (max-width: 940px) {
     .hero { min-height: auto; padding-top: 90px; }
