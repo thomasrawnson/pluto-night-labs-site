@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config';
+---
+
+<BaseLayout title="Privacy — Pluto Night Labs" description="Privacy information for the Pluto Night Labs website.">
+  <section class="privacy shell">
+    <p class="eyebrow">Privacy</p>
+    <h1>Simple by design.</h1>
+    <p class="lede">This website does not use cookies, analytics or tracking technologies.</p>
+    <div class="privacy-copy">
+      <h2>Information we receive</h2>
+      <p>We do not collect personal information through this website. If you choose to email us, we receive the information you include in your message so that we can respond to your enquiry.</p>
+      <h2>How we use it</h2>
+      <p>We use information sent by email only to manage and respond to your enquiry, and to meet any applicable legal obligations. We do not sell your personal information.</p>
+      <h2>Questions</h2>
+      <p>For questions about privacy, email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.</p>
+      <p class="updated">Last updated: September 2026</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .privacy { min-height: 70vh; padding-block: 130px 150px; }
+  h1 { margin: 0; font-size: clamp(3.4rem, 7vw, 6.5rem); line-height: .94; letter-spacing: -.06em; }
+  .lede { max-width: 700px; margin: 32px 0 70px; color: var(--muted); font-size: 1.22rem; line-height: 1.65; }
+  .privacy-copy { max-width: 720px; padding-top: 48px; border-top: 1px solid var(--line); }
+  h2 { margin: 38px 0 12px; font-size: 1.25rem; } h2:first-child { margin-top: 0; }
+  .privacy-copy p { color: var(--muted); line-height: 1.8; } .privacy-copy a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .updated { margin-top: 50px; color: var(--dim) !important; font-size: .8rem; }
+</style>

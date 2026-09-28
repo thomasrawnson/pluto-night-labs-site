@@ -1,0 +1,255 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config';
+
+const principles = [
+  { title: 'Independent', text: 'A UK software studio', icon: 'spark' },
+  { title: 'Useful & Fun', text: 'Practical tools and playful products', icon: 'smile' },
+  { title: 'Built with Care', text: 'Thoughtful, focused development', icon: 'diamond' },
+  { title: 'For Real People', text: 'Solving everyday problems', icon: 'people' },
+];
+---
+
+<BaseLayout>
+  <section class="hero" id="home">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="kicker"><span></span> Independent software studio</p>
+        <h1>Small software.<br />Useful ideas.<br /><em>Built with curiosity.</em></h1>
+        <p class="intro">Pluto Night Labs is an independent UK software studio building useful apps, developer tools and playful digital products.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#products">See our products <span aria-hidden="true">↓</span></a>
+          <a class="button button-secondary" href="#contact">Contact us</a>
+        </div>
+      </div>
+      <div class="orbit-scene" aria-hidden="true">
+        <div class="orbit orbit-one"><span></span></div>
+        <div class="orbit orbit-two"><span></span></div>
+        <div class="pluto">
+          <span class="crater c1"></span><span class="crater c2"></span><span class="crater c3"></span>
+          <span class="pluto-glow"></span>
+        </div>
+        <p class="coordinate">50.3755° N<br />4.1427° W</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="principles" aria-label="Our principles">
+    <div class="shell principle-grid">
+      {principles.map((item) => (
+        <article class="principle">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            {item.icon === 'spark' && <><path d="M16 3v7m0 12v7M3 16h7m12 0h7"/><circle cx="16" cy="16" r="4"/></>}
+            {item.icon === 'smile' && <><circle cx="16" cy="16" r="11"/><path d="M11 18c1.5 3 8.5 3 10 0M12 13h.01M20 13h.01"/></>}
+            {item.icon === 'diamond' && <><path d="M16 3 28 16 16 29 4 16 16 3Z"/><path d="m10 16 4 4 8-9"/></>}
+            {item.icon === 'people' && <><circle cx="12" cy="11" r="4"/><circle cx="22" cy="13" r="3"/><path d="M4 27c.6-6 3-9 8-9s7.4 3 8 9m0-7c4 0 6.3 2.3 7 7"/></>}
+          </svg>
+          <div><h2>{item.title}</h2><p>{item.text}</p></div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="shell">
+      <p class="eyebrow">Our products</p>
+      <div class="section-heading"><h2 class="section-title">What we're building</h2><p>Focused products, carefully made.</p></div>
+      <div class="product-grid">
+        <article class="product-card shelfpick-card">
+          <div class="product-content">
+            <span class="status"><i></i> Coming soon</span>
+            <p class="product-label">ShelfPick</p>
+            <h3>Spend less time choosing.<br />More time playing.</h3>
+            <p class="product-description">A smarter companion for board game collections, recommendations and game nights.</p>
+          </div>
+          <div class="game-visual" aria-hidden="true">
+            <div class="card-stack"><span></span><span></span><span></span></div>
+            <div class="game-board">
+              <span class="board-path"></span>
+              <span class="tile t1"></span><span class="tile t2"></span><span class="tile t3"></span>
+              <span class="meeple m1"></span><span class="meeple m2"></span>
+              <span class="token token-one"></span><span class="token token-two"></span>
+              <span class="dice"><i></i><i></i><i></i><i></i><i></i></span>
+              <div class="pick-panel"><small>TONIGHT'S PICK</small><strong>Ready to play</strong><span>4 players · 45 min</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card usage-card">
+          <div class="product-content">
+            <span class="status"><i></i> In development</span>
+            <p class="product-label">UsageGrid</p>
+            <h3>Your AI coding usage,<br />at a glance.</h3>
+            <p class="product-description">A lightweight macOS menu-bar utility for keeping track of developer-tool usage.</p>
+          </div>
+          <div class="usage-visual" aria-hidden="true">
+            <div class="usage-window">
+              <div class="window-head"><span>UsageGrid</span><i></i></div>
+              <div class="usage-body">
+                <div class="usage-summary"><small>THIS WEEK</small><strong>68%</strong></div>
+                <div class="bar"><i style="width: 68%"></i></div>
+                <div class="usage-row"><span>Today</span><div><i style="width: 46%"></i></div><b>46%</b></div>
+                <div class="usage-row"><span>Week</span><div><i style="width: 68%"></i></div><b>68%</b></div>
+                <div class="usage-row"><span>Month</span><div><i style="width: 33%"></i></div><b>33%</b></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="shell about-grid">
+      <div class="about-orbit" aria-hidden="true"><span></span><i></i></div>
+      <div class="about-copy">
+        <p class="eyebrow">About Pluto Night Labs</p>
+        <h2 class="section-title">A small studio with big curiosity.</h2>
+        <div class="about-text">
+          <p>Pluto Night Labs Ltd is an independent software company based in the UK. We build focused products that solve everyday problems — and occasionally things that are simply fun to make.</p>
+          <p>We believe in useful tools, thoughtful design and a bit of playfulness. Whether it's productivity, hobbies or games, we're here to turn ideas into great software.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="shell contact-panel">
+      <div>
+        <p class="eyebrow">Get in touch</p>
+        <h2>Got something to say?</h2>
+        <p>Questions about Pluto Night Labs or one of our products? We'd love to hear from you.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="button button-primary" href={`mailto:${site.supportEmail}`}>{site.supportEmail} <span aria-hidden="true">↗</span></a>
+        <p>For business enquiries: <a href={`mailto:${site.businessEmail}`}>{site.businessEmail}</a></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { position: relative; min-height: 760px; display: grid; align-items: center; padding: 80px 0 110px; overflow: hidden; background: radial-gradient(circle at 73% 44%, rgba(115,87,125,.2), transparent 28%), radial-gradient(ellipse at 18% 86%, rgba(41,52,85,.19), transparent 44%), linear-gradient(180deg, #090c16 0%, #0b0f1b 100%); }
+  .hero::after { content: ''; position: absolute; inset: auto -10% -110px; height: 260px; border-top: 1px solid rgba(255,255,255,.075); border-radius: 50% 50% 0 0; background: radial-gradient(ellipse at 50% 0, rgba(255,122,95,.055), transparent 58%), linear-gradient(transparent, rgba(5,7,12,.48)); pointer-events: none; }
+  .stars { position: absolute; inset: 0; opacity: .36; background-image: radial-gradient(circle, #fff 0 1px, transparent 1.2px), radial-gradient(circle, #fff 0 .7px, transparent 1px); background-size: 143px 137px, 89px 97px; background-position: 17px 28px, 50px 74px; mask-image: linear-gradient(90deg, transparent, #000 35%, #000); }
+  .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 42px; }
+  .hero-copy { padding-top: 18px; }
+  .kicker { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; }
+  .kicker span { width: 22px; height: 1px; background: var(--accent); }
+  h1 { margin: 28px 0 26px; font-size: clamp(3.4rem, 6.5vw, 6.7rem); line-height: .91; letter-spacing: -.065em; font-weight: 730; }
+  h1 em { color: var(--accent); font-style: normal; }
+  .intro { max-width: 610px; color: var(--muted); font-size: clamp(1.02rem, 1.4vw, 1.2rem); line-height: 1.7; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .button span { margin-left: 10px; }
+  .orbit-scene { position: relative; aspect-ratio: 1; min-width: 430px; }
+  .pluto { position: absolute; width: 44%; aspect-ratio: 1; left: 30%; top: 27%; border-radius: 50%; background: radial-gradient(circle at 34% 26%, #eee7dd 0 8%, transparent 9%), radial-gradient(circle at 38% 35%, #b8aaa7 0 5%, transparent 6%), radial-gradient(circle at 67% 61%, #817982 0 10%, transparent 11%), radial-gradient(circle at 45% 40%, #d9d0c8, #8d8790 58%, #5b5965 100%); box-shadow: inset -24px -20px 35px rgba(19,20,31,.42), 0 0 80px rgba(210,190,180,.08); }
+  .pluto::after { content: ''; position: absolute; inset: 14% 8% 13% 10%; border-radius: 50%; background: linear-gradient(115deg, transparent 42%, rgba(255,255,255,.11), transparent 60%); transform: rotate(15deg); }
+  .crater { position: absolute; border-radius: 50%; background: rgba(72,70,81,.24); box-shadow: inset 2px 2px 5px rgba(20,20,25,.2); }
+  .c1 { width: 13%; height: 9%; left: 19%; top: 55%; transform: rotate(22deg); } .c2 { width: 8%; height: 8%; left: 66%; top: 27%; } .c3 { width: 12%; height: 7%; left: 59%; top: 74%; }
+  .pluto-glow { position: absolute; inset: -50%; border-radius: 50%; background: radial-gradient(circle, rgba(255,142,112,.12), transparent 59%); }
+  .orbit { position: absolute; left: 5%; top: 37%; width: 91%; height: 32%; border: 1px solid rgba(241,232,222,.34); border-radius: 50%; transform: rotate(-28deg); }
+  .orbit-one span { position: absolute; width: 13px; height: 13px; left: 6%; top: 60%; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 8px rgba(255,122,95,.065), 0 0 22px rgba(255,122,95,.46); }
+  .orbit-two { left: 18%; top: 23%; width: 66%; height: 55%; opacity: .25; transform: rotate(63deg); }
+  .orbit-two span { position: absolute; width: 5px; height: 5px; right: 5%; top: 30%; border-radius: 50%; background: var(--text); }
+  .coordinate { position: absolute; right: 2%; bottom: 14%; color: var(--dim); font: 600 .62rem/1.7 ui-monospace, monospace; letter-spacing: .12em; }
+
+  .principles { position: relative; z-index: 2; padding: 30px 0; background: linear-gradient(90deg, #0d111d, #101521 50%, #0d111d); border-block: 1px solid rgba(255,255,255,.11); box-shadow: 0 16px 45px rgba(0,0,0,.18); }
+  .principle-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .principle { display: flex; gap: 16px; min-height: 70px; align-items: center; padding: 5px 25px; border-right: 1px solid var(--line); }
+  .principle:first-child { padding-left: 0; } .principle:last-child { border: 0; }
+  .principle svg { width: 29px; flex: 0 0 auto; fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .principle h2 { margin: 0 0 5px; font-size: .88rem; } .principle p { margin: 0; color: var(--dim); font-size: .72rem; line-height: 1.45; }
+
+  .products { position: relative; padding: 140px 0 150px; overflow: hidden; background: radial-gradient(circle at 10% 35%, rgba(54,66,105,.11), transparent 31%), radial-gradient(circle at 90% 74%, rgba(255,122,95,.055), transparent 26%), linear-gradient(180deg, #090c16, #0b0e18); }
+  .products::before { content: ''; position: absolute; width: 720px; height: 250px; left: -330px; top: 90px; border: 1px solid rgba(255,255,255,.055); border-radius: 50%; transform: rotate(-18deg); pointer-events: none; }
+  .products > :global(.shell) { position: relative; z-index: 1; }
+  .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 60px; }
+  .section-heading > p { margin: 0 0 7px; color: var(--dim); font-size: .86rem; }
+  .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .product-card { position: relative; min-height: 650px; border: 1px solid rgba(255,255,255,.12); border-radius: 30px; overflow: hidden; background: var(--surface); box-shadow: 0 30px 70px rgba(0,0,0,.29), inset 0 1px rgba(255,255,255,.035); }
+  .product-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(135deg, rgba(255,255,255,.055), transparent 32%, transparent 70%, rgba(0,0,0,.09)); }
+  .product-card::after { content: ''; position: absolute; width: 250px; height: 250px; right: -150px; bottom: -150px; border: 1px solid rgba(255,255,255,.08); border-radius: 50%; pointer-events: none; }
+  .product-content { position: relative; z-index: 2; padding: 45px 46px 25px; }
+  .status { display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: rgba(0,0,0,.13); font-size: .67rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+  .status i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+  .product-label { margin: 36px 0 13px; color: var(--accent); font-size: .72rem; font-weight: 850; letter-spacing: .18em; text-transform: uppercase; }
+  .product-card h3 { margin: 0; font-size: clamp(2rem, 3.2vw, 3.25rem); line-height: 1; letter-spacing: -.05em; }
+  .product-description { max-width: 450px; margin: 22px 0 0; color: var(--muted); line-height: 1.65; }
+  .shelfpick-card { background: radial-gradient(circle at 76% 82%, rgba(242,142,83,.22), transparent 40%), linear-gradient(155deg, #191b27, #12151f 65%); }
+  .game-visual { position: absolute; inset: 55% 0 0; perspective: 900px; }
+  .card-stack { position: absolute; z-index: 0; width: 26%; height: 42%; right: 7%; top: 4%; transform: rotate(14deg); }
+  .card-stack span { position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.2); border-radius: 9px; background: linear-gradient(145deg, #986152, #543f46); box-shadow: 0 10px 22px rgba(0,0,0,.22); }
+  .card-stack span:nth-child(2) { transform: translate(-8px, 7px) rotate(-5deg); background: linear-gradient(145deg, #c19a6a, #75634f); }
+  .card-stack span:nth-child(3) { transform: translate(-16px, 14px) rotate(-10deg); background: linear-gradient(145deg, #687b76, #3c4d4d); }
+  .game-board { position: absolute; z-index: 1; left: 10%; top: 6%; width: 76%; height: 79%; border: 1px solid rgba(255,255,255,.17); border-radius: 20px; background-color: #252a38; background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px), radial-gradient(circle at 70% 24%, rgba(255,122,95,.16), transparent 24%); background-size: 52px 52px, 52px 52px, auto; transform: rotateX(54deg) rotateZ(-7deg); box-shadow: -24px 42px 55px rgba(0,0,0,.46), inset 0 0 55px rgba(0,0,0,.19); }
+  .board-path { position: absolute; inset: 11%; border: 2px dashed rgba(244,239,231,.16); border-radius: 38% 56% 45% 54%; transform: rotate(-8deg); }
+  .tile { position: absolute; width: 18%; aspect-ratio: 1; border: 1px solid rgba(255,255,255,.16); border-radius: 10px; transform: rotate(12deg); box-shadow: 0 8px 14px rgba(0,0,0,.2); } .t1 { left: 12%; top: 16%; background: #db684f; } .t2 { left: 38%; top: 42%; background: #e2c17d; } .t3 { right: 12%; top: 17%; background: #687b76; }
+  .meeple { position: absolute; width: 17px; height: 25px; clip-path: polygon(35% 0,65% 0,78% 24%,100% 38%,81% 54%,75% 100%,25% 100%,19% 54%,0 38%,22% 24%); filter: drop-shadow(3px 5px 3px rgba(0,0,0,.3)); } .m1 { left: 35%; top: 16%; background: #f4efe7; } .m2 { right: 20%; top: 58%; background: #ff7a5f; }
+  .token { position: absolute; width: 18px; height: 18px; border: 3px solid rgba(255,255,255,.45); border-radius: 50%; box-shadow: 0 5px 8px rgba(0,0,0,.25); } .token-one { left: 16%; top: 56%; background: #607993; } .token-two { right: 33%; top: 16%; background: #c99b53; }
+  .dice { position: absolute; z-index: 3; right: 8%; bottom: 7%; width: 42px; height: 42px; border-radius: 8px; background: #f1ece5; box-shadow: 4px 9px 14px rgba(0,0,0,.3); transform: rotate(12deg); }
+  .dice i { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #34313a; } .dice i:nth-child(1) { left: 9px; top: 9px; } .dice i:nth-child(2) { right: 9px; top: 9px; } .dice i:nth-child(3) { left: 18px; top: 18px; } .dice i:nth-child(4) { left: 9px; bottom: 9px; } .dice i:nth-child(5) { right: 9px; bottom: 9px; }
+  .pick-panel { position: absolute; left: 13%; bottom: 9%; display: grid; gap: 2px; width: 54%; padding: 12px 15px; border-radius: 10px; color: #1c1b22; background: rgba(247,242,235,.92); box-shadow: 0 12px 30px rgba(0,0,0,.25); }
+  .pick-panel small { font-size: .42rem; font-weight: 900; letter-spacing: .12em; color: #8c5e51; } .pick-panel strong { font-size: .76rem; } .pick-panel span { font-size: .5rem; color: #68646a; }
+  .usage-card { background: radial-gradient(circle at 70% 76%, rgba(86,95,162,.27), transparent 43%), linear-gradient(155deg, #151a2b, #0f1422 68%); }
+  .usage-visual { position: absolute; inset: 53% 0 0; display: grid; place-items: start center; }
+  .usage-window { width: 70%; min-width: 320px; border: 1px solid rgba(255,255,255,.17); border-radius: 17px; overflow: hidden; background: rgba(24,28,44,.94); box-shadow: 0 35px 70px rgba(0,0,0,.48), 18px 22px 45px rgba(51,61,111,.12); transform: rotate(2deg); }
+  .window-head { display: flex; justify-content: space-between; align-items: center; padding: 13px 16px; color: #d6d7de; background: rgba(255,255,255,.045); border-bottom: 1px solid rgba(255,255,255,.08); font-size: .68rem; font-weight: 700; }
+  .window-head i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .usage-body { padding: 20px; }
+  .usage-summary { display: flex; justify-content: space-between; align-items: end; } .usage-summary small { color: #858a9c; font-size: .5rem; letter-spacing: .14em; } .usage-summary strong { font-size: 1.5rem; }
+  .bar, .usage-row div { overflow: hidden; background: rgba(255,255,255,.08); border-radius: 999px; } .bar { height: 7px; margin: 11px 0 24px; } .bar i, .usage-row div i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), #f4aa7d); border-radius: inherit; }
+  .usage-row { display: grid; grid-template-columns: 48px 1fr 32px; gap: 10px; align-items: center; margin: 12px 0; color: #a8abb9; font-size: .58rem; } .usage-row div { height: 4px; } .usage-row b { text-align: right; color: #d9dae0; font-weight: 600; }
+
+  .about { position: relative; padding: 150px 0; background: radial-gradient(circle at 12% 52%, rgba(103,94,117,.12), transparent 30%), linear-gradient(180deg, #0e1220, #0b0f1a); border-block: 1px solid rgba(255,255,255,.08); overflow: hidden; }
+  .about::after { content: ''; position: absolute; width: 860px; height: 260px; right: -400px; bottom: -40px; border: 1px solid rgba(255,255,255,.055); border-radius: 50%; transform: rotate(18deg); pointer-events: none; }
+  .about-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 100px; align-items: center; }
+  .about-orbit { position: relative; width: 310px; aspect-ratio: 1; margin: auto; border-radius: 50%; background: radial-gradient(circle at 38% 33%, #cbc5c2, #77747e 61%, #3b3d49); box-shadow: inset -30px -30px 48px rgba(6,8,15,.45); }
+  .about-orbit::before { content: ''; position: absolute; width: 160%; height: 42%; left: -30%; top: 29%; border: 1px solid rgba(255,255,255,.3); border-radius: 50%; transform: rotate(-23deg); }
+  .about-orbit span { position: absolute; z-index: 2; width: 14px; height: 14px; left: -12%; top: 57%; border-radius: 50%; background: var(--accent); box-shadow: 0 0 20px rgba(255,122,95,.6); }
+  .about-orbit i { position: absolute; width: 22%; height: 11%; left: 23%; top: 21%; border-radius: 50%; background: rgba(60,59,70,.18); transform: rotate(-20deg); }
+  .about-copy .section-title { max-width: 680px; }
+  .about-text { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 42px; }
+  .about-text p { margin: 0; color: var(--muted); line-height: 1.78; }
+
+  .contact { padding: 110px 0; background: radial-gradient(circle at 80% 30%, rgba(53,62,95,.1), transparent 27%), #090c16; }
+  .contact-panel { position: relative; display: grid; grid-template-columns: 1.25fr .75fr; gap: 60px; align-items: center; padding: 65px 70px; border: 1px solid rgba(255,255,255,.12); border-radius: 30px; overflow: hidden; background: radial-gradient(circle at 90% 10%, rgba(255,122,95,.15), transparent 38%), linear-gradient(145deg, #141925, #101420); box-shadow: 0 28px 70px rgba(0,0,0,.22); }
+  .contact-panel::after { content: ''; position: absolute; width: 280px; height: 92px; right: -75px; bottom: -33px; border: 1px solid rgba(255,255,255,.09); border-radius: 50%; transform: rotate(-17deg); pointer-events: none; }
+  .contact h2 { margin: 0; font-size: clamp(2.3rem, 4vw, 4rem); letter-spacing: -.05em; }
+  .contact-panel > div > p:last-child { max-width: 630px; margin: 20px 0 0; color: var(--muted); line-height: 1.7; }
+  .contact-actions { display: grid; justify-items: start; gap: 14px; }
+  .contact-actions > p { margin: 0 !important; color: var(--dim) !important; font-size: .76rem; }
+  .contact-actions > p a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 940px) {
+    .hero { min-height: auto; padding-top: 90px; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .orbit-scene { width: min(620px, 100%); min-width: 0; margin: -30px auto -80px; opacity: .82; }
+    .principle-grid { grid-template-columns: 1fr 1fr; }
+    .principle { padding: 18px 25px; border-bottom: 1px solid var(--line); }
+    .principle:nth-child(2) { border-right: 0; } .principle:nth-child(3), .principle:nth-child(4) { border-bottom: 0; } .principle:nth-child(3) { padding-left: 0; }
+    .product-grid { grid-template-columns: 1fr; }
+    .product-card { min-height: 620px; }
+    .about-grid { grid-template-columns: 1fr; gap: 80px; } .about-orbit { width: min(320px, 70vw); }
+    .contact-panel { grid-template-columns: 1fr; padding: 55px; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding-top: 60px; }
+    h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
+    .orbit-scene { margin-top: -10px; }
+    .coordinate { display: none; }
+    .principle-grid { grid-template-columns: 1fr; }
+    .principle, .principle:nth-child(3) { padding: 16px 0; border-right: 0; border-bottom: 1px solid var(--line); } .principle:last-child { border-bottom: 0; }
+    .products, .about { padding: 100px 0; }
+    .section-heading { display: block; margin-bottom: 40px; } .section-heading > p { margin-top: 17px; }
+    .product-card { min-height: 590px; border-radius: 23px; }
+    .product-content { padding: 32px 26px 20px; }
+    .product-card h3 { font-size: 2.25rem; }
+    .game-visual { top: 58%; }
+    .usage-window { min-width: 0; width: 84%; }
+    .about-text { grid-template-columns: 1fr; gap: 18px; }
+    .contact { padding: 75px 0; }
+    .contact-panel { padding: 38px 26px; border-radius: 23px; gap: 38px; }
+    .contact-actions .button { width: 100%; font-size: .78rem; }
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config';
+---
+
+<BaseLayout title="Contact — Pluto Night Labs" description="Get in touch with Pluto Night Labs Ltd.">
+  <section class="contact-page shell">
+    <div class="contact-copy">
+      <p class="eyebrow">Get in touch</p>
+      <h1>Got something<br />to say?</h1>
+      <p class="lede">Questions about Pluto Night Labs or one of our products? We'd love to hear from you.</p>
+      <a class="button button-primary" href={`mailto:${site.supportEmail}`}>{site.supportEmail} <span aria-hidden="true">↗</span></a>
+      <p class="business">For business enquiries: <a href={`mailto:${site.businessEmail}`}>{site.businessEmail}</a></p>
+    </div>
+    <div class="contact-orbit" aria-hidden="true">
+      <div class="planet"><i></i></div>
+      <div class="ring"><span></span></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-page { position: relative; min-height: 72vh; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 70px; padding-block: 120px 150px; overflow: clip; }
+  .contact-page::before { content: ''; position: absolute; z-index: -1; width: 620px; height: 620px; right: -250px; top: -120px; border-radius: 50%; background: radial-gradient(circle, rgba(255,122,95,.09), transparent 68%); }
+  h1 { margin: 0; font-size: clamp(3.8rem, 8vw, 7.5rem); line-height: .9; letter-spacing: -.065em; }
+  .lede { max-width: 620px; margin: 32px 0 38px; color: var(--muted); font-size: 1.15rem; line-height: 1.7; }
+  .button span { margin-left: 10px; }
+  .business { margin: 18px 0 0; color: var(--dim); font-size: .8rem; }
+  .business a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+  .contact-orbit { position: relative; aspect-ratio: 1; }
+  .planet { position: absolute; width: 42%; aspect-ratio: 1; left: 29%; top: 29%; border-radius: 50%; background: radial-gradient(circle at 34% 28%, #e2d9d2, #8c8790 58%, #454653); box-shadow: inset -22px -18px 32px rgba(8,9,16,.43), 0 0 70px rgba(255,122,95,.08); }
+  .planet i { position: absolute; width: 24%; height: 13%; left: 18%; top: 55%; border-radius: 50%; background: rgba(50,50,60,.2); transform: rotate(16deg); }
+  .ring { position: absolute; width: 88%; height: 31%; left: 6%; top: 35%; border: 1px solid rgba(244,239,231,.32); border-radius: 50%; transform: rotate(-27deg); }
+  .ring::after { content: ''; position: absolute; inset: -31% 8%; border: 1px solid rgba(255,255,255,.08); border-radius: 50%; }
+  .ring span { position: absolute; width: 13px; height: 13px; left: 5%; top: 60%; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 7px rgba(255,122,95,.08), 0 0 24px rgba(255,122,95,.34); }
+  @media (max-width: 760px) { .contact-page { grid-template-columns: 1fr; min-height: auto; gap: 30px; padding-block: 95px 90px; } .contact-orbit { width: min(420px, 100%); margin: -20px auto -65px; opacity: .72; } }
+  @media (max-width: 480px) { h1 { font-size: 3.7rem; } .button { width: 100%; font-size: .8rem; } }
+</style>

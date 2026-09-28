@@ -1,0 +1,24 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 38 } = Astro.props;
+---
+
+<svg class="orbit-mark" width={size} height={size} viewBox="0 0 48 48" aria-hidden="true">
+  <ellipse class="orbit" cx="24" cy="24" rx="20" ry="8.6" transform="rotate(-27 24 24)" />
+  <circle class="planet" cx="24" cy="24" r="8.25" />
+  <path class="planet-detail" d="M18.7 20.1c2 1.3 3.8.9 5.2-.4 1.4-1.2 3.1-1.3 5.4.1M20.2 27.7c1.6-1 3.2-1 4.8.2" />
+  <circle class="moon-halo" cx="12.3" cy="31.7" r="4.3" />
+  <circle class="moon" cx="12.3" cy="31.7" r="2.75" />
+</svg>
+
+<style>
+  .orbit-mark { flex: 0 0 auto; overflow: visible; shape-rendering: geometricPrecision; }
+  .orbit { fill: none; stroke: currentColor; stroke-width: 1.35; opacity: .62; }
+  .planet { fill: currentColor; }
+  .planet-detail { fill: none; stroke: var(--ink); stroke-width: .9; stroke-linecap: round; opacity: .28; }
+  .moon-halo { fill: var(--accent); opacity: .14; }
+  .moon { fill: var(--accent); stroke: var(--ink); stroke-width: 1.1; }
+</style>
