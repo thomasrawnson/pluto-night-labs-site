@@ -37,7 +37,7 @@ const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
 <style>
   footer { padding: 74px 0 48px; border-top: 1px solid var(--line); background: #070a12; }
   .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 50px; }
-  .footer-brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); font-weight: 800; letter-spacing: .15em; font-size: .84rem; }
+  .footer-brand { display: inline-flex; min-height: 44px; align-items: center; gap: 12px; color: var(--text); font-weight: 800; letter-spacing: .15em; font-size: .84rem; }
   .legal { margin: 24px 0 0; color: var(--dim); font-size: .8rem; line-height: 1.8; }
   nav { display: grid; align-content: start; gap: 13px; }
   nav a, .socials a { color: var(--muted); font-size: .88rem; }
@@ -46,6 +46,6 @@ const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
   .footer-contact > span { color: var(--dim); text-transform: uppercase; letter-spacing: .16em; font-size: .68rem; font-weight: 800; }
   .footer-contact > a { color: var(--text); font-size: .9rem; }
   .socials { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
-  @media (max-width: 720px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-contact { grid-column: 1 / -1; } }
+  @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-contact { grid-column: 1 / -1; } nav a, .socials a, .footer-contact > a { display: flex; min-height: 44px; align-items: center; } }
   @media (max-width: 440px) { .footer-grid { grid-template-columns: 1fr; gap: 36px; } .footer-contact { grid-column: auto; } }
 </style>

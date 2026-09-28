@@ -19,11 +19,11 @@ import OrbitMark from './OrbitMark.astro';
 
 <style>
   .site-header { position: sticky; top: 0; z-index: 50; padding: 15px 0; background: rgba(8, 11, 20, .76); border-bottom: 1px solid rgba(255,255,255,.06); backdrop-filter: blur(18px); }
-  .nav-shell, .brand, nav { display: flex; align-items: center; }
+  .nav-shell, .brand, nav, nav a { display: flex; align-items: center; }
   .nav-shell { justify-content: space-between; }
-  .brand { gap: 10px; color: var(--text); font-size: .82rem; font-weight: 800; letter-spacing: .15em; white-space: nowrap; }
+  .brand { min-height: 44px; gap: 10px; color: var(--text); font-size: .82rem; font-weight: 800; letter-spacing: .15em; white-space: nowrap; }
   nav { gap: clamp(18px, 3vw, 38px); }
-  nav a { color: var(--muted); font-size: .88rem; font-weight: 600; transition: color .2s ease; }
+  nav a { min-height: 44px; color: var(--muted); font-size: .88rem; font-weight: 600; transition: color .2s ease; }
   nav a:hover { color: var(--text); }
   .contact-link { padding: 10px 17px; border: 1px solid var(--line-strong); border-radius: 999px; }
   @media (max-width: 650px) {
