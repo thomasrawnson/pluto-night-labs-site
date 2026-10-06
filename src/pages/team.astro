@@ -3,53 +3,62 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const team = [
   {
-    name: 'Graham',
-    role: 'Founder & Studio Director',
-    monogram: 'GR',
-    summary: 'Sets the direction for the studio and shapes each product from its earliest idea through to release.',
-    focus: ['Studio direction', 'Product design', 'Development'],
-  },
-  {
-    name: 'Dave',
-    role: 'Mission Manager',
-    monogram: 'DA',
-    summary: 'Keeps priorities clear, plans grounded and the work moving in the right order.',
-    focus: ['Planning', 'Coordination', 'Approvals'],
-  },
-  {
-    name: 'Pip',
-    role: 'Implementation Engineer',
-    monogram: 'PI',
-    summary: 'Turns plans into dependable software, with a focus on careful implementation and practical delivery.',
-    focus: ['Implementation', 'Debugging', 'Build & test'],
+    name: 'Qwen',
+    role: 'Systems & Automation',
+    image: '/team/qwen.png',
+    summary:
+      'Supports automation, structured analysis and technical workflows across Pluto Night Labs. Particularly effective when requirements are clear, inputs are well-formed, and nobody changes the schema halfway through.',
   },
   {
     name: 'Pootle',
-    role: 'Quality & Validation',
-    monogram: 'PO',
-    summary: 'Tests assumptions, checks edge cases and makes sure the details hold together before work ships.',
-    focus: ['Testing', 'Validation', 'Quality'],
+    role: 'Research & Quality Assurance',
+    image: '/team/pootle.png',
+    summary:
+      'Reviews products, features and assumptions before they become somebody else’s problem. Responsible for asking inconvenient questions, checking edge cases and establishing whether something actually works rather than merely appearing to.',
   },
   {
-    name: 'Qwen',
-    role: 'Local AI Researcher',
-    monogram: 'QW',
-    summary: 'Explores ideas locally, supports technical analysis and helps the studio investigate new possibilities.',
-    focus: ['Local AI', 'Analysis', 'Exploration'],
+    name: 'Pip',
+    role: 'Development Assistant',
+    image: '/team/pip.png',
+    summary:
+      'Supports implementation, testing and routine development work across studio projects. Reliable, methodical and generally happiest when given a clearly defined task and permission to get on with it.',
+  },
+  {
+    name: 'Dave',
+    role: 'Operations & Project Coordination',
+    image: '/team/dave.png',
+    summary:
+      'Coordinates projects, priorities and the movement of work through Pluto Night Labs. Maintains enough oversight to know what should be happening, what is actually happening, and why those are occasionally different things.',
+  },
+  {
+    name: 'Graham',
+    role: 'Product Evaluation Operative',
+    image: '/team/graham.png',
+    summary:
+      'Evaluates Pluto Night Labs products from the perspective of a reasonably patient human being. Identifies usability issues, questionable decisions and features that technically meet the requirements.',
   },
 ];
 ---
 
 <BaseLayout
   title="Our Team — Pluto Night Labs"
-  description="Meet the people and specialist studio personas behind Pluto Night Labs."
+  description="Meet the specialist studio team behind Pluto Night Labs."
 >
   <section class="team-hero">
     <div class="team-stars" aria-hidden="true"></div>
+
     <div class="shell team-intro">
       <p class="eyebrow">Our team</p>
-      <h1>Small by design.<br /><em>Broad in perspective.</em></h1>
-      <p>Pluto Night Labs brings together product direction, engineering, research and quality in one focused studio team.</p>
+
+      <h1>
+        Small by design.<br />
+        <em>Broad in perspective.</em>
+      </h1>
+
+      <p>
+        Pluto Night Labs brings together product direction, engineering,
+        research and quality in one focused studio team.
+      </p>
     </div>
   </section>
 
@@ -57,25 +66,36 @@ const team = [
     <div class="shell">
       <div class="section-heading">
         <p class="eyebrow">Meet the team</p>
+
         <h2 id="team-heading">The people behind the work</h2>
-        <p>Each member has a distinct remit, helping ideas move from a clear brief to thoughtful, tested software.</p>
+
+        <p>
+          Clear responsibilities, specialist roles and considerably fewer
+          meetings than a team of this size would normally require.
+        </p>
       </div>
 
       <div class="team-grid">
         {team.map((member, index) => (
-          <article class:list={['team-card', { 'team-card-lead': index === 0 }]}>
-            <div class="member-mark" aria-hidden="true">
-              <span>{member.monogram}</span>
-              <i></i>
+          <article class="team-card">
+            <div class="member-photo">
+              <img
+                src={member.image}
+                alt={`${member.name} — ${member.role}`}
+                loading={index > 1 ? 'lazy' : 'eager'}
+              />
             </div>
+
             <div class="member-copy">
-              <p class="member-number">{String(index + 1).padStart(2, '0')}</p>
+              <p class="member-number">
+                {String(index + 1).padStart(2, '0')}
+              </p>
+
               <h3>{member.name}</h3>
+
               <p class="member-role">{member.role}</p>
+
               <p class="member-summary">{member.summary}</p>
-              <ul aria-label={`${member.name}'s areas of focus`}>
-                {member.focus.map((item) => <li>{item}</li>)}
-              </ul>
             </div>
           </article>
         ))}
@@ -86,60 +106,316 @@ const team = [
   <section class="team-note">
     <div class="shell note-grid">
       <p class="eyebrow">How we work</p>
-      <p>Small teams work best with clear responsibilities. Direction, implementation and validation stay close together, so decisions remain considered and the work stays coherent.</p>
+
+      <p>
+        Small teams work best with clear responsibilities. Direction,
+        implementation and validation stay close together, so decisions remain
+        considered and the work stays coherent.
+      </p>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .team-hero { position: relative; min-height: 500px; display: grid; align-items: end; padding: 110px 0 92px; overflow: hidden; background: radial-gradient(circle at 76% 26%, rgba(94, 80, 133, .2), transparent 28%), linear-gradient(180deg, #090c16, #0c101d); border-bottom: 1px solid var(--line); }
-  .team-hero::after { content: ''; position: absolute; right: -12vw; bottom: -300px; width: 660px; height: 660px; border: 1px solid rgba(255,255,255,.07); border-radius: 50%; box-shadow: 0 0 0 72px rgba(255,255,255,.018), 0 0 0 144px rgba(255,255,255,.012); }
-  .team-stars { position: absolute; inset: 0; opacity: .25; background-image: radial-gradient(circle, #fff 0 1px, transparent 1.2px), radial-gradient(circle, #fff 0 .7px, transparent 1px); background-size: 151px 139px, 97px 103px; background-position: 22px 31px, 61px 79px; mask-image: linear-gradient(90deg, transparent 5%, #000 48%, #000); }
-  .team-intro { position: relative; z-index: 1; }
-  .team-intro h1 { margin: 0; max-width: 900px; font-size: clamp(3.25rem, 7vw, 6.9rem); line-height: .91; letter-spacing: -.065em; }
-  .team-intro h1 em { color: var(--accent-soft); font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
-  .team-intro > p:last-child { max-width: 650px; margin: 32px 0 0; color: var(--muted); font-size: 1.1rem; line-height: 1.75; }
-
-  .team-section { padding: 112px 0 122px; background: linear-gradient(180deg, #0c101d, var(--ink)); }
-  .section-heading { display: grid; grid-template-columns: 1fr 1.7fr; gap: 18px 64px; align-items: end; margin-bottom: 54px; }
-  .section-heading .eyebrow { grid-column: 1 / -1; margin-bottom: 0; }
-  .section-heading h2 { margin: 0; font-size: clamp(2.1rem, 4vw, 3.8rem); line-height: 1; letter-spacing: -.05em; }
-  .section-heading > p:last-child { max-width: 520px; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.75; }
-  .team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-  .team-card { position: relative; min-height: 350px; display: grid; grid-template-columns: 130px 1fr; gap: 28px; padding: 34px; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018)); }
-  .team-card::after { content: ''; position: absolute; inset: auto -70px -110px auto; width: 230px; height: 230px; border: 1px solid rgba(255,255,255,.055); border-radius: 50%; }
-  .team-card-lead { grid-column: 1 / -1; grid-template-columns: 180px minmax(0, 620px); min-height: 320px; align-items: center; background: radial-gradient(circle at 86% 50%, rgba(255,122,95,.08), transparent 26%), linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.018)); }
-  .member-mark { position: relative; width: 118px; aspect-ratio: 1; display: grid; place-items: center; align-self: start; border: 1px solid rgba(255,155,127,.28); border-radius: 50%; color: var(--accent-soft); background: radial-gradient(circle at 38% 34%, rgba(255,155,127,.16), transparent 55%), #111625; box-shadow: inset 0 0 0 9px rgba(255,255,255,.018); }
-  .team-card-lead .member-mark { width: 160px; align-self: center; }
-  .member-mark span { font-family: Georgia, 'Times New Roman', serif; font-size: 2.2rem; letter-spacing: -.06em; }
-  .team-card-lead .member-mark span { font-size: 2.8rem; }
-  .member-mark i { position: absolute; right: 5px; bottom: 14px; width: 15px; height: 15px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px #111625; }
-  .member-copy { position: relative; z-index: 1; }
-  .member-number { margin: 0 0 30px; color: var(--dim); font-size: .7rem; font-weight: 800; letter-spacing: .16em; }
-  .member-copy h3 { margin: 0; font-size: 2rem; letter-spacing: -.035em; }
-  .member-role { margin: 7px 0 0; color: var(--accent-soft); font-size: .78rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-  .member-summary { max-width: 520px; margin: 22px 0 26px; color: var(--muted); font-size: .95rem; line-height: 1.7; }
-  .member-copy ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-  .member-copy li { padding: 7px 11px; border: 1px solid var(--line); border-radius: 999px; color: #c8c6c4; font-size: .68rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
-  .team-note { padding: 84px 0; border-top: 1px solid var(--line); background: #0b0f1a; }
-  .note-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; }
-  .note-grid p:last-child { max-width: 760px; margin: 0; color: var(--text); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.55rem, 3vw, 2.35rem); line-height: 1.4; }
-
-  @media (max-width: 850px) {
-    .section-heading { grid-template-columns: 1fr; }
-    .section-heading .eyebrow { grid-column: auto; }
-    .team-card, .team-card-lead { grid-column: auto; grid-template-columns: 100px 1fr; padding: 28px; }
-    .team-card-lead .member-mark, .member-mark { width: 92px; align-self: start; }
-    .team-card-lead .member-mark span, .member-mark span { font-size: 1.9rem; }
-    .note-grid { grid-template-columns: 1fr; gap: 20px; }
+  .team-hero {
+    position: relative;
+    min-height: 500px;
+    display: grid;
+    align-items: end;
+    padding: 110px 0 92px;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 76% 26%,
+        rgba(94, 80, 133, .2),
+        transparent 28%
+      ),
+      linear-gradient(180deg, #090c16, #0c101d);
+    border-bottom: 1px solid var(--line);
   }
+
+  .team-hero::after {
+    content: '';
+    position: absolute;
+    right: -12vw;
+    bottom: -300px;
+    width: 660px;
+    height: 660px;
+    border: 1px solid rgba(255, 255, 255, .07);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 72px rgba(255, 255, 255, .018),
+      0 0 0 144px rgba(255, 255, 255, .012);
+  }
+
+  .team-stars {
+    position: absolute;
+    inset: 0;
+    opacity: .25;
+    background-image:
+      radial-gradient(circle, #fff 0 1px, transparent 1.2px),
+      radial-gradient(circle, #fff 0 .7px, transparent 1px);
+    background-size: 151px 139px, 97px 103px;
+    background-position: 22px 31px, 61px 79px;
+    mask-image: linear-gradient(90deg, transparent 5%, #000 48%, #000);
+  }
+
+  .team-intro {
+    position: relative;
+    z-index: 1;
+  }
+
+  .team-intro h1 {
+    margin: 0;
+    max-width: 900px;
+    font-size: clamp(3.25rem, 7vw, 6.9rem);
+    line-height: .91;
+    letter-spacing: -.065em;
+  }
+
+  .team-intro h1 em {
+    color: var(--accent-soft);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 400;
+  }
+
+  .team-intro > p:last-child {
+    max-width: 650px;
+    margin: 32px 0 0;
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.75;
+  }
+
+  .team-section {
+    padding: 112px 0 122px;
+    background: linear-gradient(180deg, #0c101d, var(--ink));
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 1fr 1.7fr;
+    gap: 18px 64px;
+    align-items: end;
+    margin-bottom: 54px;
+  }
+
+  .section-heading .eyebrow {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font-size: clamp(2.1rem, 4vw, 3.8rem);
+    line-height: 1;
+    letter-spacing: -.05em;
+  }
+
+  .section-heading > p:last-child {
+    max-width: 520px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .team-card {
+    position: relative;
+    min-height: 380px;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 30px;
+    padding: 34px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, .045),
+        rgba(255, 255, 255, .018)
+      );
+  }
+
+  .team-card::after {
+    content: '';
+    position: absolute;
+    right: -70px;
+    bottom: -110px;
+    width: 230px;
+    height: 230px;
+    border: 1px solid rgba(255, 255, 255, .055);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .member-photo {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 155, 127, .28);
+    border-radius: 24px;
+    background: #111625;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, .03),
+      0 18px 40px rgba(0, 0, 0, .22);
+  }
+
+  .member-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center 25%;
+  }
+
+  .member-copy {
+    position: relative;
+    z-index: 1;
+  }
+
+  .member-number {
+    margin: 0 0 30px;
+    color: var(--dim);
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+  }
+
+  .member-copy h3 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: -.035em;
+  }
+
+  .member-role {
+    margin: 7px 0 0;
+    color: var(--accent-soft);
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .member-summary {
+    max-width: 520px;
+    margin: 22px 0 0;
+    color: var(--muted);
+    font-size: .95rem;
+    line-height: 1.7;
+  }
+
+  .team-note {
+    padding: 84px 0;
+    border-top: 1px solid var(--line);
+    background: #0b0f1a;
+  }
+
+  .note-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+  }
+
+  .note-grid p:last-child {
+    max-width: 760px;
+    margin: 0;
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.55rem, 3vw, 2.35rem);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .section-heading {
+      grid-template-columns: 1fr;
+    }
+
+    .section-heading .eyebrow {
+      grid-column: auto;
+    }
+
+    .team-card {
+      grid-template-columns: 120px 1fr;
+      padding: 28px;
+    }
+
+    .member-photo {
+      width: 112px;
+      height: 112px;
+    }
+
+    .note-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
   @media (max-width: 680px) {
-    .team-hero { min-height: 440px; padding: 90px 0 70px; }
-    .team-intro h1 { font-size: clamp(2.8rem, 14vw, 4.5rem); }
-    .team-section { padding: 82px 0 88px; }
-    .team-grid { grid-template-columns: 1fr; }
-    .team-card, .team-card-lead { min-height: 0; grid-template-columns: 1fr; gap: 24px; }
-    .member-number { position: absolute; right: 0; top: -104px; }
-    .member-summary { font-size: 1rem; }
+    .team-hero {
+      min-height: 440px;
+      padding: 90px 0 70px;
+    }
+
+    .team-intro h1 {
+      font-size: clamp(2.8rem, 14vw, 4.5rem);
+    }
+
+    .team-section {
+      padding: 82px 0 88px;
+    }
+
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .team-card {
+      min-height: 0;
+      grid-template-columns: 96px 1fr;
+      gap: 20px;
+      padding: 24px;
+    }
+
+    .member-photo {
+      width: 92px;
+      height: 92px;
+      border-radius: 18px;
+    }
+
+    .member-number {
+      margin-bottom: 16px;
+    }
+
+    .member-copy h3 {
+      font-size: 1.7rem;
+    }
+
+    .member-role {
+      line-height: 1.5;
+    }
+
+    .member-summary {
+      grid-column: 1 / -1;
+      font-size: .95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .team-card {
+      grid-template-columns: 1fr;
+    }
+
+    .member-photo {
+      width: 120px;
+      height: 120px;
+    }
   }
 </style>
