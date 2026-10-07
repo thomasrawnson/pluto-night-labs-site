@@ -1,0 +1,716 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const games = [
+  {
+    title: 'Personal Effects',
+    description:
+      "Pack a stranger's final belongings into one suitcase while obeying the increasingly particular requests they left behind.",
+    tags: ['Puzzle', 'Packing', '5–10 min'],
+    url: 'https://personal-effects.pages.dev',
+    image: '/lab/personal-effects.png',
+    imageAlt: 'Personal Effects suitcase-packing game screenshot',
+    status: 'New',
+  },
+  {
+    title: 'End of the World',
+    description:
+      'Manage a tiny apocalypse shelter, weigh up impossible choices and decide who gets through the door.',
+    tags: ['Management', 'Decisions', '5–10 min'],
+    url: 'https://end-of-the-world.pages.dev',
+    image: '/lab/end-of-the-world.png',
+    imageAlt: 'End of the World apocalypse shelter game screenshot',
+  },
+  {
+    title: 'Processing the Dead',
+    description:
+      'Keep the afterlife bureaucracy moving before the queue becomes a supernatural administrative disaster.',
+    tags: ['Idle', 'Management', 'Bureaucracy'],
+    url: 'https://processing-the-dead.pages.dev',
+    image: '/lab/processing-the-dead.png',
+    imageAlt: 'Processing the Dead afterlife management game screenshot',
+  },
+  {
+    title: 'Anomaly Lab',
+    description:
+      'Inspect strange specimens, learn the rules and decide what should — and absolutely should not — leave the lab.',
+    tags: ['Logic', 'Deduction', '5 min'],
+    url: 'https://anomaly-lab.pages.dev',
+    image: '/lab/anomaly-lab.png',
+    imageAlt: 'Anomaly Lab specimen inspection game screenshot',
+  },
+  {
+    title: 'Dungeon Care Home',
+    description:
+      'Retired monsters defend bingo night from irritating level-one adventurers. Tea and mobility scooters included.',
+    tags: ['Tower Defence', 'Strategy', 'Comedy'],
+    url: 'https://dungeon-care-home.pages.dev',
+    image: '/lab/dungeon-care-home.png',
+    imageAlt: 'Dungeon Care Home monster tower defence game screenshot',
+  },
+  {
+    title: 'Night Parcel Office',
+    description:
+      'Work the final sorting desk for suspicious late-night parcels. Follow the regulations. Try not to make things worse.',
+    tags: ['Sorting', 'Rules', '5 min'],
+    url: 'https://night-parcel-office.pages.dev',
+    image: '/lab/night-parcel-office.png',
+    imageAlt: 'Night Parcel Office late-night sorting game screenshot',
+  },
+  {
+    title: 'How Much?!',
+    description:
+      'Guess bizarre prices and discover just how badly calibrated your sense of money really is.',
+    tags: ['Quiz', 'Prices', 'Quick Play'],
+    url: 'https://how-much-live.pages.dev',
+    image: '/lab/how-much.png',
+    imageAlt: 'How Much price-guessing quiz game screenshot',
+  },
+];
+---
+
+<BaseLayout
+  title="The Lab | Pluto Night Labs"
+  description="Playable game prototypes and experiments from Pluto Night Labs."
+>
+  <main class="lab-page">
+    <section class="hero">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Pluto Night Labs // Experimental Division
+      </div>
+
+      <h1>The Lab</h1>
+
+      <p class="hero-copy">
+        Small games, strange ideas and experiments from Pluto Night Labs.
+        These are playable prototypes — some may become full games, some may
+        remain questionable workplace incidents.
+      </p>
+
+      <div class="hero-note">
+        <span class="pulse"></span>
+        All experiments currently open to human testing
+      </div>
+    </section>
+
+    <section class="games-section" aria-labelledby="games-heading">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">CURRENT EXPERIMENTS</p>
+          <h2 id="games-heading">Pick something to play.</h2>
+        </div>
+
+        <span class="experiment-count">{games.length} LIVE</span>
+      </div>
+
+      <div class="game-grid">
+        {
+          games.map((game, index) => (
+            <article class="game-card">
+              <div class="card-top">
+                <div class="game-number">
+                  EXP-{String(index + 1).padStart(2, '0')}
+                </div>
+
+                {game.status && <div class="new-badge">{game.status}</div>}
+              </div>
+
+              <div class="game-art">
+                <img src={game.image} alt={game.imageAlt} loading="lazy" />
+              </div>
+
+              <div class="card-content">
+                <h3>{game.title}</h3>
+                <p>{game.description}</p>
+
+                <div class="tags" aria-label={`${game.title} categories`}>
+                  {game.tags.map((tag) => <span>{tag}</span>)}
+                </div>
+
+                <a
+                  class="play-button"
+                  href={game.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Play ${game.title} prototype`}
+                >
+                  <span>Play prototype</span>
+                  <span class="arrow" aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="feedback-section" id="feedback">
+      <div class="feedback-copy">
+        <p class="section-kicker">TEST SUBJECT DEBRIEF</p>
+        <h2>Something weird happen?</h2>
+
+        <p>
+          Brilliant. Tell us what worked, what didn't, where you got confused,
+          or what you'd change.
+        </p>
+
+        <p class="feedback-small">
+          Bug reports, balance complaints and wildly overconfident game design
+          opinions are all welcome.
+        </p>
+      </div>
+
+      <form class="feedback-form" id="feedback-form">
+        <label for="game">
+          Which experiment?
+        </label>
+
+        <div class="select-wrapper">
+          <select id="game" name="game" required>
+            <option value="" selected disabled>Select a game…</option>
+            {games.map((game) => <option value={game.title}>{game.title}</option>)}
+            <option value="General Pluto Night Labs feedback">
+              Something else
+            </option>
+          </select>
+        </div>
+
+        <label for="message">
+          What happened?
+        </label>
+
+        <textarea
+          id="message"
+          name="message"
+          rows="7"
+          required
+          placeholder="I tried to…&#10;&#10;I expected…&#10;&#10;Instead…"
+        ></textarea>
+
+        <button type="submit" class="feedback-button">
+          <span>Send feedback</span>
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <p class="form-note">
+          This opens your email app. Nothing is submitted automatically.
+        </p>
+      </form>
+    </section>
+
+    <section class="footer-note">
+      <div class="footer-line"></div>
+      <p>
+        Built after hours somewhere between sensible product development and
+        poor decision-making.
+      </p>
+      <span>PLUTO NIGHT LABS</span>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#feedback-form');
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const gameSelect = document.querySelector<HTMLSelectElement>('#game');
+    const messageInput =
+      document.querySelector<HTMLTextAreaElement>('#message');
+
+    const game = gameSelect?.value.trim();
+    const message = messageInput?.value.trim();
+
+    if (!game || !message) return;
+
+    const subject = `Prototype feedback — ${game}`;
+
+    const body = [
+      `Game: ${game}`,
+      '',
+      'Feedback:',
+      message,
+      '',
+      '—',
+      'Sent from the Pluto Night Labs prototype lab',
+    ].join('\n');
+
+    window.location.href =
+      `mailto:hello@plutonightlabs.com?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
+  });
+</script>
+
+<style>
+  :global(body) {
+    background:
+      radial-gradient(
+        circle at 20% 0%,
+        rgba(232, 115, 55, 0.08),
+        transparent 28rem
+      ),
+      #090b0f;
+  }
+
+  .lab-page {
+    --orange: #e87337;
+    --cream: #eee8dd;
+    --muted: #9da2aa;
+    --panel: #11151b;
+    --panel-light: #171c23;
+    --border: rgba(255, 255, 255, 0.1);
+
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 8rem 2rem 4rem;
+    color: var(--cream);
+  }
+
+  .hero {
+    max-width: 820px;
+    padding: 3rem 0 6rem;
+  }
+
+  .eyebrow,
+  .section-kicker {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: var(--orange);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow-dot,
+  .pulse {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 14px rgba(232, 115, 55, 0.8);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(4.5rem, 12vw, 9.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.065em;
+    font-weight: 800;
+  }
+
+  .hero-copy {
+    max-width: 710px;
+    margin: 2.5rem 0 0;
+    color: #bec2c8;
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    line-height: 1.7;
+  }
+
+  .hero-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 2rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: #8e949d;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .games-section {
+    padding: 1rem 0 7rem;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .section-heading h2,
+  .feedback-copy h2 {
+    margin: 0.4rem 0 0;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    letter-spacing: -0.04em;
+  }
+
+  .section-kicker {
+    margin: 0;
+  }
+
+  .experiment-count {
+    color: #777e87;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+  }
+
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .game-card {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(140px, 0.75fr) 1.4fr;
+    min-height: 330px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background:
+      linear-gradient(
+        140deg,
+        rgba(255, 255, 255, 0.025),
+        rgba(255, 255, 255, 0)
+      ),
+      var(--panel);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease;
+  }
+
+  .game-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(232, 115, 55, 0.45);
+    background-color: #131820;
+  }
+
+  .card-top {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .game-number,
+  .new-badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.11em;
+  }
+
+  .game-number {
+    color: rgba(255, 255, 255, 0.36);
+  }
+
+  .new-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    background: var(--orange);
+    color: #101010;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .game-art {
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
+    border-right: 1px solid var(--border);
+    background: #0d1015;
+  }
+
+  .game-art img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-content {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: 3.5rem 1.6rem 1.5rem;
+  }
+
+  .card-content h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    letter-spacing: -0.035em;
+  }
+
+  .card-content p {
+    flex: 1;
+    margin: 0.9rem 0 1.3rem;
+    color: var(--muted);
+    line-height: 1.55;
+    font-size: 0.93rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .tags span {
+    padding: 0.35rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: #858b94;
+    font-size: 0.67rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .play-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--cream);
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-weight: 650;
+    font-size: 0.9rem;
+  }
+
+  .play-button .arrow {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #0b0c0e;
+    transition: transform 160ms ease;
+  }
+
+  .play-button:hover .arrow {
+    transform: translate(2px, -2px);
+  }
+
+  .feedback-section {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(3rem, 8vw, 8rem);
+    padding: clamp(3rem, 7vw, 6rem);
+    border-radius: 28px;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(232, 115, 55, 0.075),
+        transparent 45%
+      ),
+      var(--panel);
+    border: 1px solid var(--border);
+  }
+
+  .feedback-copy > p:not(.section-kicker) {
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .feedback-small {
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.82rem;
+  }
+
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feedback-form label {
+    margin: 0 0 0.5rem;
+    color: #b9bdc4;
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .feedback-form label:not(:first-child) {
+    margin-top: 1.4rem;
+  }
+
+  .feedback-form select,
+  .feedback-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 10px;
+    background: #090c10;
+    color: #efebe4;
+    font: inherit;
+    outline: none;
+    transition: border-color 150ms ease;
+  }
+
+  .feedback-form select {
+    padding: 0.9rem 1rem;
+    appearance: none;
+  }
+
+  .select-wrapper {
+    position: relative;
+  }
+
+  .select-wrapper::after {
+    content: '⌄';
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-58%);
+    color: var(--orange);
+    pointer-events: none;
+  }
+
+  .feedback-form textarea {
+    min-height: 170px;
+    resize: vertical;
+    padding: 1rem;
+    line-height: 1.55;
+  }
+
+  .feedback-form select:focus,
+  .feedback-form textarea:focus {
+    border-color: var(--orange);
+  }
+
+  .feedback-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    border: 0;
+    border-radius: 10px;
+    background: var(--orange);
+    color: #0b0c0d;
+    font: inherit;
+    font-weight: 750;
+    cursor: pointer;
+    transition:
+      transform 150ms ease,
+      filter 150ms ease;
+  }
+
+  .feedback-button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+
+  .form-note {
+    margin: 0.75rem 0 0;
+    color: #737982;
+    font-size: 0.7rem;
+  }
+
+  .footer-note {
+    padding: 5rem 0 1rem;
+    text-align: center;
+    color: #696f77;
+  }
+
+  .footer-line {
+    width: 1px;
+    height: 40px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(var(--orange), transparent);
+  }
+
+  .footer-note p {
+    margin: 0 auto 1rem;
+    max-width: 580px;
+    font-size: 0.9rem;
+  }
+
+  .footer-note span {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+  }
+
+  @media (max-width: 950px) {
+    .game-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .feedback-section {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .lab-page {
+      padding: 6rem 1rem 2rem;
+    }
+
+    .hero {
+      padding: 2rem 0 4rem;
+    }
+
+    h1 {
+      font-size: clamp(4rem, 25vw, 6rem);
+    }
+
+    .hero-copy {
+      font-size: 1rem;
+    }
+
+    .section-heading {
+      align-items: flex-start;
+    }
+
+    .game-card {
+      display: block;
+    }
+
+    .game-art {
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-top {
+      top: 0.9rem;
+    }
+
+    .feedback-section {
+      padding: 2rem 1.25rem;
+      border-radius: 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .game-card,
+    .play-button .arrow,
+    .feedback-button {
+      transition: none;
+    }
+  }
+</style>
