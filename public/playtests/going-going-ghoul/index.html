@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#11151b" />
+  <title>Going, Going, Ghoul! — Playable Prototype</title>
+  <style>
+/* Offline-first: system fonts, no remote stylesheet blocking scripts. */
+:root { --bg:#11151b;--panel:#1b2027;--panel2:#20262e;--surface:#272c33;--edge:#383c41;--gold:#e0bd79;--gold2:#a98a54;--cream:#f8eedc;--text:#e6e3dc;--muted:#9c9fa2;--red:#d76f6d;--green:#a5d0af;--wood:#71583b;--shadow:0 20px 55px rgba(0,0,0,.25); }
+* { box-sizing:border-box; } html {scroll-behavior:smooth;} body { margin:0;background:var(--bg);color:var(--text);font:14px/1.5 'DM Sans',Inter,system-ui,sans-serif;min-height:100vh;position:relative;overflow-x:hidden; }button{font:inherit;cursor:pointer;}button:disabled{cursor:not-allowed;opacity:.47;}button:focus-visible,.slot:focus-visible{outline:2px solid var(--gold);outline-offset:2px;} .ambient{position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(1px);} .ambient-one{width:750px;height:750px;top:-450px;left:-190px;background:radial-gradient(circle,rgba(151,116,71,.15),transparent 65%);} .ambient-two{width:800px;height:800px;right:-420px;top:400px;background:radial-gradient(circle,rgba(56,100,98,.12),transparent 67%);} .shell{width:min(1230px,calc(100% - 48px));margin:0 auto;}h1,h2,h3,p{margin-top:0;}h1,h2{font-family:'Playfair Display',Georgia,serif;}h2{letter-spacing:-.028em;} .site-header{height:71px;border-bottom:1px solid rgba(224,189,121,.15);display:flex;align-items:center;justify-content:space-between;gap:16px;} .brand{font-weight:800;color:#f0e7d5;letter-spacing:2.1px;font-size:10px;} .brand-icon{font-size:17px;color:var(--gold);padding-right:9px;vertical-align:middle;} .brand-slash{padding:0 10px;color:var(--gold2);font-size:12px;} .top-actions{display:flex;gap:8px;align-items:center;} .text-button{border:1px solid #45474a;border-radius:6px;background:transparent;color:#e1d7c5;padding:9px 14px;font-size:12px;transition:.15s;} .text-button:hover,.tiny-btn:hover{border-color:var(--gold);color:var(--gold);} .text-button.reset{border-color:transparent;color:#b1acaa;} .headline{text-align:center;padding:38px 0 34px;} .eyebrow{text-transform:uppercase;color:var(--gold);letter-spacing:2px;font-size:10px;font-weight:800;} .eyebrow.muted{color:#8c8a82;} .eyebrow.gold{color:var(--gold);} .blink-dot{display:inline-block;background:#d0a668;width:6px;height:6px;border-radius:50%;vertical-align:middle;margin-right:8px;box-shadow:0 0 10px #b79260;} .headline h1{font-size:clamp(43px,6vw,73px);color:var(--cream);letter-spacing:-2px;line-height:1.14;margin:12px 0 10px;} .headline h1 em{color:var(--gold);font-weight:600;} .title-star{font:400 25px system-ui;color:var(--gold);position:relative;top:-24px;left:8px;vertical-align:baseline;} .headline p{font-size:14px;color:#adaeae;margin:0;} .scoreboard{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #34383c;border-radius:9px;overflow:hidden;background:rgba(28,33,39,.92);box-shadow:var(--shadow);margin-bottom:16px;} .score-block{min-width:0;padding:17px 26px;position:relative;border-right:1px solid #34383c;} .score-block:last-child{border-right:0;} .score-label{font-size:10px;letter-spacing:1.6px;color:#a4a29d;font-weight:800;} .score-number{font-size:29px;color:#e6e2d7;font-weight:700;line-height:1.24;margin-top:5px;letter-spacing:-1px;white-space:nowrap;} .score-number.money{color:var(--green);} .score-number.haunted{color:var(--red);} .score-number.haunted span{font-size:16px;opacity:.8;} .score-sub{font-size:11px;color:#82878b;margin-top:5px;} .score-of{font-size:16px;color:#777e83;margin-left:3px;} .haunt-bar{height:4px;background:#343236;border-radius:4px;overflow:hidden;margin-top:11px;max-width:155px;} .haunt-bar span{display:block;height:100%;background:linear-gradient(90deg,#a85b62,#e58b70);transition:width .4s;} .pips{display:flex;gap:4px;margin-top:7px;} .pips span{width:14px;height:3px;border-radius:4px;background:#43474c;} .pips span.done{background:#b89b61;} .pips span.current{background:#f2d38b;} .buyer-bar{display:flex;gap:18px;align-items:center;min-height:115px;padding:20px 24px;background:linear-gradient(112deg,#272b31,#1d252b 66%,#222c2e);border:1px solid #3c4242;border-radius:9px;margin-bottom:17px;position:relative;overflow:hidden;} .buyer-bar:after{content:'✧';font-family:Georgia,serif;position:absolute;right:265px;top:-96px;color:rgba(226,197,141,.045);font-size:235px;pointer-events:none;} .buyer-avatar{font-size:40px;display:flex;align-items:center;justify-content:center;background:#36383b;border:1px solid #74684f;min-width:72px;height:72px;border-radius:50%;box-shadow:0 0 0 5px rgba(197,172,115,.06);} .buyer-intro{flex:1;min-width:0;z-index:1;} .buyer-intro h2{color:var(--cream);font-size:25px;line-height:1.15;margin:4px 0;} .buyer-intro p{color:#aab1b0;font-size:12px;margin:0;} .buyer-offer{text-align:right;min-width:200px;z-index:1;border-left:1px solid #3c4143;padding-left:27px;} .buyer-offer-label{font-size:10px;letter-spacing:1.2px;color:#9c9e98;font-weight:800;} .buyer-cat{color:#e6bf83;font-weight:800;font-size:15px;text-transform:uppercase;margin-top:5px;letter-spacing:.5px;} .buyer-cat span{display:inline-block;padding:3px 6px;margin-left:4px;color:#18241e;background:#a6d5ad;border-radius:3px;font-size:11px;letter-spacing:0;} .next-buyer{font-size:11px;color:#939da0;margin-top:8px;} .game-layout{display:grid;grid-template-columns:minmax(0,1.48fr) minmax(345px,1fr);gap:16px;align-items:start;} .panel{background:linear-gradient(140deg,#1e232a,#1a2026);border:1px solid #35393e;border-radius:9px;box-shadow:0 13px 25px rgba(0,0,0,.12);} .cabinet-panel{padding:23px;} .section-header{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-bottom:16px;} .section-header h2{font-size:23px;margin:1px 0 0;color:#eee7db;line-height:1.2;} .small-count{font:700 11px 'DM Sans',sans-serif;color:#a9a69e;letter-spacing:0;margin-left:7px;} .small-help{font-size:11px;color:#8c9499;text-align:right;} .tiny-divider{color:var(--gold2);padding:0 3px;} .cabinet-frame{padding:13px;background:linear-gradient(135deg,#60472e,#8b6c42 32%,#5b452d 73%,#a17b4b);border:3px solid #483622;box-shadow:inset 0 0 0 2px #b58d57,0 12px 23px rgba(0,0,0,.35);border-radius:7px;position:relative;} .wood-corner{position:absolute;width:15px;height:15px;border:2px solid #c6a26c;z-index:2;border-radius:2px;} .tl{top:4px;left:4px;border-right:0;border-bottom:0;}.tr{top:4px;right:4px;border-left:0;border-bottom:0;}.bl{bottom:4px;left:4px;border-right:0;border-top:0;}.br{bottom:4px;right:4px;border-left:0;border-top:0;} .cabinet-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;background:#24242a;padding:8px;border:2px solid #3c2b20;box-shadow:inset 0 0 22px #101014;border-radius:3px;} .slot{position:relative;aspect-ratio:1/1.07;background:radial-gradient(ellipse at 50% 70%,#37343b,#27252c 70%);border:1px solid #44404a;border-bottom:4px solid #4b3a2f;border-radius:3px;min-width:0;display:flex;align-items:center;flex-direction:column;justify-content:center;text-align:center;padding:9px 4px 19px;color:var(--cream);transition:background .15s,border-color .15s;outline:0;user-select:none;cursor:pointer;} .slot.empty{background:repeating-linear-gradient(-40deg,rgba(255,255,255,.012),rgba(255,255,255,.012) 3px,transparent 3px,transparent 8px),#22232a;border-color:#36353a;border-bottom-color:#372e2b;} .slot.empty:hover{background:#313138;border-color:#887450;} .slot.occupied:hover{border-color:var(--gold2);} .slot.selected{outline:2px solid #e6c48c;outline-offset:-3px;background:radial-gradient(ellipse at 50% 60%,#4a4137,#2c2830 75%);} .slot.tagged{box-shadow:inset 0 0 0 2px rgba(209,119,109,.70);} .slot.dragover{outline:2px dashed #e6c48c;} .slot-ghost{font-size:18px;color:#454044;font-family:Georgia,serif;} .relic-art{font-size:clamp(21px,2.9vw,36px);line-height:1.1;margin-bottom:6px;filter:drop-shadow(0 3px 4px #0005);} .relic-name{font-size:clamp(9px,1vw,11px);font-weight:800;line-height:1.25;max-width:100%;overflow-wrap:break-word;} .relic-value{font-size:10px;color:#e4c184;font-weight:700;margin-top:4px;} .relic-curse{position:absolute;right:3px;top:2px;color:#e6948c;font-size:10px;line-height:1;white-space:nowrap;text-shadow:0 1px 3px #0009;} .relic-buyer{position:absolute;left:4px;top:3px;background:#294d3c;color:#b3e7c5;border-radius:2px;padding:1px 3px;font-size:9px;font-weight:900;} .lot-toggle{position:absolute;bottom:0;left:0;right:0;width:100%;height:20px;border:0;border-top:1px solid #514444;color:#c8b3a4;background:#372e34;font-size:9px;letter-spacing:.7px;font-weight:900;border-radius:0;line-height:1;} .lot-toggle:hover{background:#584349;color:white;} .tagged .lot-toggle{background:#a85652;color:#fff5ed;border-color:#bc706a;} .empty span:first-child{opacity:.6;} .cabinet-actions{display:flex;gap:14px;align-items:center;justify-content:space-between;margin:15px 0 21px;} .action-hint{display:flex;gap:8px;color:#a6a8a5;font-size:11px;line-height:1.4;max-width:430px;} .action-hint-mark{color:var(--gold);font-size:17px;line-height:1;} .mini-actions{display:flex;gap:5px;flex-shrink:0;} .tiny-btn{border:1px solid #4c4c50;background:transparent;color:#b8b4ab;border-radius:5px;font-size:10px;padding:7px 8px;white-space:nowrap;} .auction-area{display:flex;align-items:center;gap:18px;justify-content:space-between;background:#282c32;border:1px solid #414343;border-radius:6px;padding:16px 17px;} .auction-price{min-width:115px;} .auction-total{font-size:35px;line-height:1.2;font-weight:800;color:var(--gold);letter-spacing:-1px;margin-top:4px;} .lot-bonuses{font-size:10px;color:#a6aea6;max-width:220px;margin-top:3px;} .auction-buttons{display:flex;flex-direction:column;gap:8px;min-width:203px;} .button-primary,.button-secondary{display:inline-flex;justify-content:space-between;align-items:center;gap:10px;border-radius:5px;padding:13px 15px;min-height:45px;font-size:11px;letter-spacing:.8px;font-weight:900;transition:transform .15s,filter .15s;} .button-primary{border:1px solid #f7d18e;color:#1b2427;background:linear-gradient(110deg,#edcf93,#cfa66b);} .button-primary:not(:disabled):hover{transform:translateY(-1px);filter:brightness(1.08);} .button-primary span{font-size:16px;} .button-secondary{color:#e1d5bd;border:1px solid #6d6252;background:#2b3034;} .button-secondary:not(:disabled):hover{background:#343a3e;} .button-secondary span{font-size:10px;color:#d2b57e;} .night-warning{min-height:21px;margin-top:9px;color:#e8a3a0;font-size:11px;text-align:right;} .sidebar{display:flex;flex-direction:column;gap:16px;} .market-panel,.inspector-panel{padding:20px;} .market-items{display:flex;flex-direction:column;gap:9px;} .offer{display:flex;gap:12px;align-items:center;background:#252a31;border:1px solid #414449;border-radius:6px;padding:10px 11px;min-height:78px;} .offer-icon{font-size:27px;width:48px;height:51px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#343239;border-radius:4px;border:1px solid #534b45;} .offer-info{flex:1;min-width:0;} .offer-title{font-weight:800;color:var(--cream);font-size:12px;line-height:1.25;} .offer-category{color:#c9aa78;letter-spacing:.6px;text-transform:uppercase;font-size:9px;font-weight:800;margin-top:2px;} .offer-desc{font-size:10px;color:#a9a9a6;line-height:1.35;margin-top:4px;} .offer-buy{flex-shrink:0;background:#363e3d;border:1px solid #83836c;color:#dce5d3;border-radius:4px;padding:8px 10px;font-weight:800;font-size:11px;min-width:61px;} .offer-buy:not(:disabled):hover{background:#3c5045;border-color:#bed2a9;} .offer.bought{opacity:.49;} .offer.bought .offer-buy{border-style:dashed;} .market-note{color:#969ba0;font-size:10px;margin:12px 0 0;} .inspector-panel{min-height:256px;} .inspector-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#91969a;text-align:center;font-size:12px;padding:14px;min-height:170px;} .inspector-empty-icon{font-size:32px;opacity:.58;} .inspect-top{display:flex;gap:12px;align-items:center;} .inspect-icon{display:flex;align-items:center;justify-content:center;width:56px;height:56px;flex-shrink:0;background:#38343a;border:1px solid #78674c;border-radius:7px;font-size:34px;} .inspect-name{font-family:'Playfair Display',Georgia,serif;font-size:21px;color:#eee8dc;line-height:1.15;} .inspect-type{font-size:10px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-top:5px;} .inspect-description{font-size:11px;color:#acb0ad;margin:12px 0;} .inspect-breakdown{display:flex;flex-direction:column;gap:5px;border-top:1px solid #414344;padding-top:10px;} .inspect-line{display:flex;justify-content:space-between;gap:15px;font-size:11px;color:#afb3b2;} .inspect-line strong{color:#e4dcd1;} .inspect-line.positive strong{color:#a7d1b1;} .inspect-line.negative strong{color:#e39c92;} .inspect-total{display:flex;justify-content:space-between;margin-top:9px;padding:10px 0;border-top:1px solid #44484a;font-size:12px;font-weight:800;} .inspect-total strong{color:var(--gold);font-size:16px;} .inspect-risk{font-size:11px;margin-top:8px;color:#d9afa7;} .inspect-risk span{color:#b4b4ae;} .inspect-button{margin-top:12px;width:100%;padding:10px;border:1px solid #9b7e60;background:rgba(159,115,76,.13);color:#e4c799;border-radius:4px;font-size:11px;font-weight:800;letter-spacing:.7px;} .inspect-button:hover{background:rgba(159,115,76,.26);} .ledger-panel{margin-top:17px;padding:20px 23px;} .ledger-head{margin-bottom:10px;} .ledger-stats{font-size:11px;color:#a6a6a3;} .ledger-entries{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 25px;} .ledger-row{display:flex;gap:12px;align-items:baseline;font-size:11px;line-height:1.45;color:#a5a8a7;border-top:1px solid rgba(255,255,255,.045);padding-top:7px;} .ledger-row:first-child{color:#ede3d4;} .ledger-row.good{color:#afd4b8;} .ledger-row.bad{color:#db9790;} .ledger-night{color:#8e8c88;white-space:nowrap;font-size:10px;font-weight:800;} .footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:26px 0 40px;color:#747b80;font-size:9px;font-weight:800;letter-spacing:1.2px;} .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,16px);border:1px solid #96665e;border-radius:5px;background:#3b292c;color:#f2d9d3;padding:12px 19px;max-width:min(440px,90vw);font-size:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;z-index:100;text-align:center;} .toast.show{opacity:1;transform:translate(-50%,0);} .modal{background:#20252b;color:#e7e3d8;padding:0;border:1px solid #807057;border-radius:11px;box-shadow:0 30px 100px #000b;max-width:min(520px,calc(100% - 32px));max-height:calc(100% - 30px);overflow:auto;} .modal::backdrop{background:rgba(6,10,13,.84);backdrop-filter:blur(4px);} .modal-inner{padding:30px;} .modal h2{font-size:34px;line-height:1.16;color:var(--cream);margin:9px 0 15px;} .modal h2 em{color:var(--gold);} .modal p,.modal li{font-size:12px;line-height:1.7;color:#c1c1ba;} .modal li{margin-bottom:8px;padding-left:4px;} .modal ol{padding-left:21px;} .modal strong{color:var(--cream);} .help-note{background:#2e3032;border-left:2px solid var(--gold);padding:11px 13px;} .button-primary.wide{width:100%;margin-top:12px;justify-content:center;} .ending{text-align:center;} .end-symbol{font-size:63px;margin:2px 0 10px;} .end-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:24px 0 12px;} .end-stat{background:#2a2e33;border:1px solid #414448;padding:15px 8px;border-radius:6px;} .end-stat strong{display:block;font-size:23px;color:var(--gold);} .end-stat span{font-size:10px;color:#aab0b1;letter-spacing:.8px;text-transform:uppercase;}
+@media (min-width:1100px){.slot{aspect-ratio:1.1/1;}.relic-art{font-size:35px;}.relic-name{font-size:11px;}}
+@media (max-width:900px){.game-layout{grid-template-columns:minmax(0,1fr);}.sidebar{display:grid;grid-template-columns:1fr 1fr;align-items:start;}.score-block{padding:17px;}.buyer-bar:after{display:none;}.cabinet-panel{padding:17px;}.slot{aspect-ratio:1.15/1;}.relic-name{font-size:11px;}}
+@media (max-width:640px){.shell{width:calc(100% - 26px);}.site-header{height:auto;min-height:60px;}.brand{font-size:9px;letter-spacing:.7px;}.brand-slash{padding:0 4px;}.top-actions{gap:0;}.text-button{font-size:10px;padding:7px 8px;}.text-button.reset{padding-right:0;}.headline{padding:27px 0;}.headline .eyebrow{font-size:9px;letter-spacing:1.2px;}.headline h1{font-size:clamp(36px,9.8vw,55px);letter-spacing:-1.7px;}.title-star{font-size:16px;top:-16px;left:4px;}.headline p{font-size:12px;}.scoreboard{grid-template-columns:repeat(2,minmax(0,1fr));}.score-block{padding:11px 15px;border-right:1px solid #34383c;border-bottom:1px solid #34383c;}.score-block:nth-child(2){border-right:0;}.score-block:nth-child(3),.score-block:nth-child(4){border-bottom:0;}.score-label{font-size:9px;}.score-number{font-size:23px;}.score-sub{font-size:10px;}.buyer-bar{padding:13px;gap:10px;flex-wrap:wrap;}.buyer-avatar{min-width:54px;height:54px;font-size:30px;}.buyer-intro h2{font-size:20px;}.buyer-intro .eyebrow{font-size:8px;letter-spacing:1.2px;}.buyer-intro p{font-size:10px;}.buyer-offer{width:100%;min-width:0;padding:11px 0 0;border-left:0;border-top:1px solid #3c4143;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;text-align:left;}.buyer-offer-label{font-size:9px;}.buyer-cat{font-size:11px;margin:0;}.next-buyer{font-size:10px;margin:0;}.cabinet-panel{padding:12px;}.section-header h2{font-size:20px;}.small-help{font-size:9px;max-width:125px;}.cabinet-frame{padding:7px;}.cabinet-grid{padding:5px;gap:4px;}.slot{aspect-ratio:1/1.23;padding:8px 2px 17px;}.relic-art{font-size:clamp(19px,6.8vw,30px);margin-bottom:3px;}.relic-name{font-size:9px;line-height:1.1;}.relic-value{font-size:9px;margin-top:2px;}.relic-curse{font-size:8px;right:2px;top:2px;}.relic-buyer{font-size:7px;padding:0 2px;}.lot-toggle{font-size:8px;height:17px;}.cabinet-actions{flex-direction:column;align-items:flex-start;gap:9px;}.auction-area{flex-direction:column;align-items:stretch;padding:13px;gap:10px;}.auction-buttons{min-width:0;}.auction-total{font-size:29px;}.auction-price{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;}.auction-price .eyebrow{width:100%;}.lot-bonuses{max-width:180px;text-align:right;}.sidebar{grid-template-columns:minmax(0,1fr);gap:12px;}.ledger-panel{padding:15px;}.ledger-entries{grid-template-columns:1fr;}.footer{flex-direction:column;text-align:center;padding:22px 0;gap:6px;}.modal-inner{padding:22px;}.modal h2{font-size:28px;}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}}
+
+</style>
+<meta name="robots" content="noindex, nofollow"></head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="shell">
+    <div id="previewWarning" role="alert" style="margin-top:16px;padding:16px;border-radius:9px;border:2px solid #d0a668;background:#3a3026;color:#fff0d7;line-height:1.6;font-size:14px;">
+      <strong style="display:block;font-size:16px;color:#ffde9e;">Preview only — game controls aren't running</strong>
+      Your current viewer is blocking JavaScript. The relics below are a static preview, so the buttons won't work here. To play, download this HTML file and open it in a full browser (Safari or Chrome). On iPhone, the in-app file preview may not support playable HTML; a hosted web version would solve that.
+    </div>
+    <header class="site-header">
+      <div class="brand"><span class="brand-icon">✦</span> PLUTO NIGHT LABS <span class="brand-slash">/</span> PLAYTEST 01</div>
+      <div class="top-actions"><button class="text-button" id="helpBtn" type="button">? &nbsp;How to play</button><button class="text-button reset" id="newRunBtn" type="button">↺ &nbsp;New run</button></div>
+    </header>
+    <section class="headline">
+      <div class="eyebrow"><span class="blink-dot"></span> THE AFTERHOURS AUCTION HOUSE · EST. 1896</div>
+      <h1>Going, Going, <em>Ghoul!</em><span class="title-star">✳</span></h1>
+      <p>Arrange cursed antiques. Woo dreadful buyers. Sell before your stock eats itself.</p>
+    </section>
+    <section class="scoreboard" aria-label="Run status">
+      <div class="score-block"><div class="score-label">YOUR CASH</div><div class="score-number money" id="cashVal">£65</div><div class="score-sub" id="cashSub">Try to leave with some</div></div>
+      <div class="score-block"><div class="score-label">TONIGHT'S DUES</div><div class="score-number" id="duesVal">£22</div><div class="score-sub" id="duesSub">Paid at end of night</div></div>
+      <div class="score-block"><div class="score-label">THE HAUNTING</div><div class="score-number haunted" id="hauntVal">12<span>%</span></div><div class="haunt-bar"><span id="hauntFill"></span></div></div>
+      <div class="score-block score-round"><div class="score-label">NIGHT</div><div class="score-number"><span id="nightVal">01</span><span class="score-of">/08</span></div><div class="pips" id="roundPips"></div></div>
+    </section>
+    <section class="buyer-bar" aria-label="Tonight's buyer">
+      <div class="buyer-avatar" id="buyerIcon" aria-hidden="true">🎩</div>
+      <div class="buyer-intro"><div class="eyebrow gold">TONIGHT'S DISTINGUISHED PATRON</div><h2 id="buyerName">The Curator</h2><p id="buyerTone">A collector of things best left buried.</p></div>
+      <div class="buyer-offer"><div class="buyer-offer-label">PAYING A PREMIUM FOR</div><div class="buyer-cat" id="buyerCategory">✦ ANTIQUES <span>+50%</span></div><div class="next-buyer" id="nextBuyer">Next: The Countess</div></div>
+    </section>
+    <main class="game-layout">
+      <section class="cabinet-panel panel" aria-labelledby="cabinetTitle">
+        <div class="section-header"><div><div class="eyebrow muted">THE MERCHANDISE</div><h2 id="cabinetTitle">Your Cabinet <span class="small-count" id="cabinetCount">3/16</span></h2></div><div class="small-help">Tap to inspect <span class="tiny-divider">·</span> Tap empty space to move</div></div>
+        <div class="cabinet-frame"><div class="wood-corner tl"></div><div class="wood-corner tr"></div><div class="wood-corner bl"></div><div class="wood-corner br"></div><div id="cabinetGrid" class="cabinet-grid" role="group" aria-label="4 by 4 relic cabinet">
+<div class="slot empty" data-pos="0"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="1"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="2"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="3"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="4"><span class="slot-ghost">✦</span></div>
+<div class="slot occupied" data-pos="5"><span class="relic-art" aria-hidden="true">🪞</span><span class="relic-name">Moon Mirror</span><span class="relic-value">£29</span><span class="lot-toggle" aria-hidden="true">+ LOT</span></div>
+<div class="slot occupied" data-pos="6"><span class="relic-art" aria-hidden="true">💎</span><span class="relic-name">Blood Ruby</span><span class="relic-value">£29</span><span class="lot-toggle" aria-hidden="true">+ LOT</span></div>
+<div class="slot empty" data-pos="7"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="8"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="9"><span class="slot-ghost">✦</span></div>
+<div class="slot occupied" data-pos="10"><span class="relic-art" aria-hidden="true">🖼️</span><span class="relic-name">Vampire Portrait</span><span class="relic-value">£31</span><span class="lot-toggle" aria-hidden="true">+ LOT</span></div>
+<div class="slot empty" data-pos="11"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="12"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="13"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="14"><span class="slot-ghost">✦</span></div>
+<div class="slot empty" data-pos="15"><span class="slot-ghost">✦</span></div>
+</div></div>
+        <div class="cabinet-actions"><div class="action-hint"><span class="action-hint-mark">✧</span><span id="actionHint">Tag relics with their LOT button to sell them together. Their neighbours still give bonuses.</span></div><div class="mini-actions"><button class="tiny-btn" type="button" id="tagAllBtn">Tag all</button><button class="tiny-btn" type="button" id="clearTagsBtn">Clear tags</button></div></div>
+        <section class="auction-area" aria-label="Auction controls"><div class="auction-price"><div class="eyebrow muted">CURRENT LOT VALUE</div><div class="auction-total" id="lotTotal">£0</div><div class="lot-bonuses" id="lotBonuses">Select relics to see their offer</div></div><div class="auction-buttons"><button class="button-primary" type="button" id="sellBtn">SELL TAGGED LOT <span>↗</span></button><button class="button-secondary" type="button" id="nextBtn">END NIGHT <span id="nextCost">· PAY £22</span> →</button></div></section>
+        <div class="night-warning" id="nightWarning" aria-live="polite"></div>
+      </section>
+      <aside class="sidebar">
+        <section class="panel market-panel" aria-labelledby="marketTitle"><div class="section-header"><div><div class="eyebrow muted">UNCLE MORT'S BACK ROOM</div><h2 id="marketTitle">Fresh Oddities <span class="small-count" id="marketLimit">0/2 bought</span></h2></div></div><div id="marketItems" class="market-items"></div><p class="market-note">Two purchases per night. New stock arrives tomorrow.</p></section>
+        <section class="panel inspector-panel" aria-labelledby="inspectorTitle"><div class="section-header"><div><div class="eyebrow muted">APPRAISER'S NOTES</div><h2 id="inspectorTitle">Relic Details</h2></div></div><div id="inspector" aria-live="polite"></div></section>
+      </aside>
+    </main>
+    <section class="ledger-panel panel"><div class="section-header ledger-head"><div><div class="eyebrow muted">OFFICIAL RECORDS · MOSTLY ACCURATE</div><h2>Night Ledger</h2></div><span class="ledger-stats" id="statsText">0 sold · 0 shattered</span></div><div class="ledger-entries" id="ledger"></div></section>
+    <footer class="footer"><span>PLUTO NIGHT LABS <span class="brand-slash">✳</span> SYSTEMS BEFORE SPECTACLE</span><span>V0.1 · OFFLINE BROWSER PLAYTEST · NO SAVE SERVER</span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="helpDialog" class="modal"><div class="modal-inner"><div class="eyebrow gold">A VERY SHORT INSTRUCTION MANUAL</div><h2>Make a killing.<br><em>Not literally.</em></h2><p>You have <strong>eight nights</strong> to survive the auction house's ever-growing dues. Buy oddities, arrange them in your cabinet, and sell them to whoever visits tonight.</p><ol><li><strong>BUY</strong> up to two relics from the Back Room each night. Relics arrive in the first empty space.</li><li><strong>ARRANGE</strong> your relics: select one, then tap an empty slot to move it. Neighbours and positions increase their value.</li><li><strong>TAG</strong> the relics you want in tonight's auction using the small <strong>+ LOT</strong> label. Relics you keep can still boost the ones you sell.</li><li><strong>SELL</strong> one lot per night. Each buyer pays <strong>50% more</strong> for their preferred relic type. Two matching relics earn a £12 collection bonus.</li><li><strong>END NIGHT</strong> to pay your dues. Unsold items may become cursed and eventually shatter. Every relic shows its individual curse risk when inspected.</li></ol><p class="help-note">Tip: A clever cabinet can be more valuable than a full one. Look for combinations, and keep an eye on tomorrow's buyer.</p><button class="button-primary wide" type="button" id="closeHelp">LET'S MAKE A TERRIBLE DECISION →</button></div></dialog>
+  <dialog id="endDialog" class="modal"><div class="modal-inner ending"><div class="end-symbol" id="endIcon">👻</div><div class="eyebrow gold" id="endEyebrow">AUCTION CLOSED</div><h2 id="endTitle">Eight nights survived.</h2><p id="endText"></p><div class="end-stats" id="endStats"></div><button type="button" class="button-primary wide" id="restartBtn">ANOTHER EIGHT NIGHTS →</button></div></dialog>
+  <script>
+/* Going, Going, Ghoul! — deterministic, DOM-independent prototype engine. */
+(function (root, factory) {
+  const game = factory();
+  if (typeof module === 'object' && module.exports) module.exports = game;
+  root.GhoulGame = game;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  const GRID = 16;
+  const MAX_ROUND = 8;
+  const BUY_LIMIT = 2;
+  const RELICS = [
+    { id:'moon-mirror', name:'Moon Mirror', icon:'🪞', category:'antique', base:19, cost:16, short:'Adjacent relics gain +£8.', effect:'Reflects +£8 onto every orthogonally adjacent relic. Its power still works while unsold.' },
+    { id:'vampire-portrait', name:'Vampire Portrait', icon:'🖼️', category:'blood', base:19, cost:17, short:'+£12 beside another blood relic.', effect:'Gains +£12 when orthogonally adjacent to a blood relic.' },
+    { id:'mourning-urn', name:'Mourning Urn', icon:'🏺', category:'antique', base:20, cost:19, short:'Relics below it gain +£7.', effect:'Adds +£7 to every relic directly below it in the same column.' },
+    { id:'blood-ruby', name:'Blood Ruby', icon:'💎', category:'blood', base:15, cost:13, short:'+£6 per adjacent blood relic.', effect:'Gains +£6 for each orthogonally adjacent blood relic.' },
+    { id:'mourning-candle', name:'Mourning Candle', icon:'🕯️', category:'occult', base:13, cost:11, short:'+£7 per adjacent cursed relic.', effect:'Gains +£7 for every adjacent relic with at least one curse mark.' },
+    { id:'cat-idol', name:'Cat Idol', icon:'🐈', category:'antique', base:16, cost:14, short:'+£15 in a corner.', effect:'Gains +£15 when placed in one of the cabinet’s four corners.' },
+    { id:'haunted-clock', name:'Haunted Clock', icon:'🕰️', category:'antique', base:18, cost:17, short:'+£6 for each night survived.', effect:'Gains +£6 for every night you keep it (maximum +£24), but risks accumulating curses.' },
+    { id:'gremlin-bell', name:'Gremlin Bell', icon:'🔔', category:'occult', base:13, cost:12, short:'Neighbours +£6, but +12% haunt risk.', effect:'Adjacent relics gain +£6 but face an extra 12% chance to gain a curse at nightfall.' },
+    { id:'witch-book', name:'Witch’s Ledger', icon:'📕', category:'occult', base:18, cost:16, short:'+£10 beside an occult relic.', effect:'Gains +£10 when beside an occult relic.' },
+    { id:'crown-of-ashes', name:'Crown of Ashes', icon:'👑', category:'blood', base:20, cost:19, short:'+£6 per adjacent relic.', effect:'Gains +£6 for every orthogonally adjacent relic.' },
+    { id:'skeleton-key', name:'Skeleton Key', icon:'🗝️', category:'occult', base:13, cost:12, short:'Adjacent antiques gain +£9.', effect:'Gives every adjacent antique an extra +£9.' },
+    { id:'silver-locket', name:'Silver Locket', icon:'📿', category:'blood', base:17, cost:15, short:'+£14 when not beside anything.', effect:'Gains +£14 if none of its four orthogonal neighbours is occupied.' },
+  ];
+  const RELIC_BY_ID = Object.fromEntries(RELICS.map(r => [r.id, r]));
+  const BUYERS = [
+    { id:'curator', name:'The Curator', icon:'🎩', category:'antique', tone:'A collector of things best left buried.', special:'Antiques pay 50% extra.' },
+    { id:'countess', name:'The Countess', icon:'🧛', category:'blood', tone:'Will pay handsomely for something sinister.', special:'Blood relics pay 50% extra.' },
+    { id:'occultist', name:'The Occultist', icon:'🔮', category:'occult', tone:'Willing to overlook minor hauntings.', special:'Occult relics pay 50% extra.' },
+  ];
+  function copy(obj) { return JSON.parse(JSON.stringify(obj)); }
+  function rand(s) { s.rng = (Math.imul(1664525, s.rng) + 1013904223) >>> 0; return s.rng / 4294967296; }
+  function inGrid(pos) { return Number.isInteger(pos) && pos >= 0 && pos < GRID; }
+  function neighbors(pos) {
+    const r = Math.floor(pos / 4), c = pos % 4;
+    return [[r-1,c],[r+1,c],[r,c-1],[r,c+1]]
+      .filter(([rr,cc]) => rr>=0 && rr<4 && cc>=0 && cc<4)
+      .map(([rr,cc]) => rr*4+cc);
+  }
+  function relicAt(s, pos) { return s.items.find(x => x.pos === pos) || null; }
+  function getRelic(s, uid) { return s.items.find(x => x.uid === uid) || null; }
+  function buyer(s, offset=0) { return BUYERS[(s.round - 1 + offset) % BUYERS.length]; }
+  function due(round) { return 22 + (round-1)*5 + Math.floor(((round-1)*(round-1))/5); }
+  function pushLog(s, msg, type='info') { s.log.unshift({night:s.round, message:msg, type}); if(s.log.length>24) s.log.pop(); }
+  function nextOffers(s) {
+    if (s.round === 1) return ['mourning-urn','cat-idol','witch-book'].map((id,i)=>({id, key:`${s.round}-${i}`, bought:false}));
+    const options = RELICS.map(x=>x.id);
+    const picked=[];
+    while (picked.length < 3) { const i=Math.floor(rand(s)*options.length); picked.push(options.splice(i,1)[0]); }
+    return picked.map((id,i)=>({id,key:`${s.round}-${i}`,bought:false}));
+  }
+  function create(seed=1537) {
+    const s={ seed:seed>>>0, rng:seed>>>0, round:1, cash:65, haunt:12,
+      items:[
+        {uid:1,id:'moon-mirror',pos:5,curse:0,age:0},
+        {uid:2,id:'blood-ruby',pos:6,curse:0,age:0},
+        {uid:3,id:'vampire-portrait',pos:10,curse:0,age:0},
+      ], nextUid:4, market:[], tags:[], bought:0, soldThisRound:false,
+      status:'playing', log:[], stats:{earned:0,spent:0,sold:0,shattered:0,lots:0,bestLot:0},
+    };
+    s.market=nextOffers(s);
+    pushLog(s,'Welcome to the auction house. Eight nights. One escalating debt.','info');
+    pushLog(s,'The Moon Mirror boosts adjacent relics; the Ruby and Portrait are already neighbours.','tip');
+    return s;
+  }
+  function assertPlaying(s) { if(s.status!=='playing') return 'This run has ended. Start a new run.'; return null; }
+  function move(s, uid, target) {
+    const error=assertPlaying(s); if(error) return error;
+    if (!inGrid(target)) return 'Choose a valid cabinet slot.';
+    const item=getRelic(s,uid); if(!item) return 'This relic is missing.';
+    const other=relicAt(s,target);
+    if(other && other.uid!==uid) other.pos=item.pos;
+    item.pos=target; return null;
+  }
+  function toggleTag(s,uid) {
+    const error=assertPlaying(s); if(error) return error;
+    if(s.soldThisRound) return 'This night’s auction has already finished.';
+    if(!getRelic(s,uid)) return 'Relic not found.';
+    const i=s.tags.indexOf(uid);
+    if(i>=0) s.tags.splice(i,1); else s.tags.push(uid);
+    return null;
+  }
+  function tagAll(s) {
+    const error=assertPlaying(s); if(error) return error;
+    if(s.soldThisRound) return 'This night’s auction has already finished.';
+    s.tags=s.items.map(x=>x.uid); return null;
+  }
+  function untagAll(s) { s.tags=[]; }
+  function buy(s,key) {
+    const error=assertPlaying(s); if(error) return error;
+    if(s.soldThisRound) return 'The market closes after your auction.';
+    if(s.bought>=BUY_LIMIT) return 'You can only purchase two relics per night.';
+    const offer=s.market.find(x=>x.key===key); if(!offer || offer.bought) return 'That offer is no longer available.';
+    const empty=Array.from({length:GRID},(_,i)=>i).find(i=>!relicAt(s,i));
+    if(empty===undefined) return 'Your cabinet is full. Sell some relics first.';
+    const rel=RELIC_BY_ID[offer.id];
+    if(s.cash < rel.cost) return 'Not enough coins to purchase this relic.';
+    s.cash-=rel.cost; s.stats.spent+=rel.cost;
+    const item={uid:s.nextUid++,id:rel.id,pos:empty,curse:0,age:0};
+    s.items.push(item); s.bought++; offer.bought=true;
+    pushLog(s,`Purchased ${rel.name} for £${rel.cost}.`);
+    return null;
+  }
+  function add(breakdown,label,value) { if(value) breakdown.push({label,value}); }
+  function appraisal(s,uid) {
+    const item=getRelic(s,uid); if(!item) return null;
+    const rel=RELIC_BY_ID[item.id];
+    const adjacent=neighbors(item.pos).map(p=>relicAt(s,p)).filter(Boolean);
+    const b=[{label:'Relic value',value:rel.base}];
+    if(rel.id==='vampire-portrait' && adjacent.some(x=>RELIC_BY_ID[x.id].category==='blood')) add(b,'Blood companion',12);
+    if(rel.id==='blood-ruby') add(b,'Blood neighbours',adjacent.filter(x=>RELIC_BY_ID[x.id].category==='blood').length*6);
+    if(rel.id==='mourning-candle') add(b,'Cursed neighbours',adjacent.filter(x=>x.curse>0).length*7);
+    if(rel.id==='cat-idol' && [0,3,12,15].includes(item.pos)) add(b,'Corner position',15);
+    if(rel.id==='haunted-clock') add(b,'Years of waiting',Math.min(4,item.age)*6);
+    if(rel.id==='witch-book' && adjacent.some(x=>RELIC_BY_ID[x.id].category==='occult')) add(b,'Occult neighbour',10);
+    if(rel.id==='crown-of-ashes') add(b,'Surrounding relics',adjacent.length*6);
+    if(rel.id==='silver-locket' && adjacent.length===0) add(b,'Solitary locket',14);
+    if(rel.id==='gremlin-bell') add(b,'Ringing audience',adjacent.length*3);
+    for(const n of adjacent) {
+      if(n.id==='moon-mirror') add(b,'Moon Mirror',8);
+      if(n.id==='gremlin-bell') add(b,'Gremlin Bell',6);
+      if(n.id==='skeleton-key' && rel.category==='antique') add(b,'Skeleton Key',9);
+    }
+    for(const n of s.items) {
+      if(n.id==='mourning-urn' && n.pos%4===item.pos%4 && n.pos<item.pos) add(b,'Mourning Urn',7);
+    }
+    add(b,'Curse damage',-(item.curse*5));
+    const subtotal=Math.max(1,b.reduce((sum,x)=>sum+x.value,0));
+    const match=rel.category===buyer(s).category;
+    const amount=match?Math.round(subtotal*1.5):subtotal;
+    return {uid,rel,item,breakdown:b,subtotal,match,amount,category:rel.category};
+  }
+  function lot(s,ids=s.tags) {
+    const rows=ids.map(uid=>appraisal(s,uid)).filter(Boolean);
+    const matched=rows.filter(r=>r.match).length;
+    const synergyBonus=matched>=2 ? 12 : 0;
+    const varietyBonus=rows.length>=3 && new Set(rows.map(r=>r.category)).size===3 ? 10 : 0;
+    const total=rows.reduce((sum,r)=>sum+r.amount,0)+synergyBonus+varietyBonus;
+    return {rows,matched,synergyBonus,varietyBonus,total};
+  }
+  function sell(s) {
+    const error=assertPlaying(s); if(error) return error;
+    if(s.soldThisRound) return 'Only one auction is allowed per night.';
+    if(!s.tags.length) return 'Tag at least one relic for auction.';
+    const sale=lot(s);
+    s.cash+=sale.total;
+    s.stats.earned+=sale.total; s.stats.sold+=sale.rows.length; s.stats.lots++;
+    s.stats.bestLot=Math.max(s.stats.bestLot,sale.total);
+    const soldSet=new Set(s.tags);
+    s.items=s.items.filter(item=>!soldSet.has(item.uid));
+    s.tags=[]; s.soldThisRound=true;
+    s.haunt=Math.max(8,s.haunt-Math.min(12,sale.rows.length*3));
+    pushLog(s,`SOLD! ${sale.rows.length} relic${sale.rows.length===1?'':'s'} fetched £${sale.total}.`,'good');
+    if(sale.synergyBonus) pushLog(s,'The buyer paid a £12 collection bonus for two favourites.','good');
+    if(sale.varietyBonus) pushLog(s,'Mixed-category collection bonus: +£10.','good');
+    return null;
+  }
+  function risk(s,uid) {
+    const item=getRelic(s,uid); if(!item) return null;
+    const isBellNext=neighbors(item.pos).some(p=>relicAt(s,p)?.id==='gremlin-bell');
+    const chance=Math.min(0.90,0.10 + s.haunt/200 + item.curse*0.14 + (isBellNext?0.12:0));
+    return Math.round(chance*100);
+  }
+  function endNight(s) {
+    const error=assertPlaying(s); if(error) return error;
+    const payment=due(s.round);
+    if(s.cash < payment) {
+      s.status='bankrupt';
+      pushLog(s,`The debt collectors arrived. Needed £${payment}, had £${s.cash}.`,'bad');
+      return null;
+    }
+    s.cash-=payment;
+    pushLog(s,`Paid £${payment} in auction house dues.`, 'info');
+    if(s.round===MAX_ROUND) {
+      s.status='won';
+      pushLog(s,`All eight nights survived with £${s.cash} in the safe!`,'good');
+      return null;
+    }
+    const shattered=[];const cursed=[];
+    for (const item of [...s.items]) {
+      const chance=risk(s,item.uid)/100;
+      item.age++;
+      if(rand(s)<chance) {
+        item.curse++;
+        if(item.curse>=3) {
+          s.items=s.items.filter(x=>x.uid!==item.uid);
+          s.stats.shattered++;
+          shattered.push(RELIC_BY_ID[item.id].name);
+        } else cursed.push(RELIC_BY_ID[item.id].name);
+      }
+    }
+    if(cursed.length) pushLog(s,`The haunting marked: ${cursed.join(', ')}.`,'bad');
+    if(shattered.length) pushLog(s,`SHATTERED overnight: ${shattered.join(', ')}!`,'bad');
+    if(!cursed.length && !shattered.length && s.items.length) pushLog(s,'Your unsold relics survived another night.','good');
+    s.haunt=Math.min(90,s.haunt+10+Math.floor(s.items.length/3)*2);
+    s.round++;
+    s.bought=0;s.soldThisRound=false;s.tags=[];s.market=nextOffers(s);
+    pushLog(s,`Night ${s.round}: ${buyer(s).name} arrives. Debt due: £${due(s.round)}.`,'info');
+    return null;
+  }
+  return {RELICS,RELIC_BY_ID,BUYERS,GRID,MAX_ROUND,BUY_LIMIT,create,buyer,due,neighbors,relicAt,getRelic,
+    move,toggleTag,tagAll,untagAll,buy,appraisal,lot,sell,risk,endNight,copy};
+});
+
+</script>
+<script>
+(function () {
+  'use strict';
+  const G = window.GhoulGame;
+  const $ = (id) => document.getElementById(id);
+  const money = (n) => `£${Math.round(n).toLocaleString('en-GB')}`;
+  const category = (x) => x[0].toUpperCase() + x.slice(1);
+  const SAVE_KEY = 'pluto-ghoul-playtest-v01';
+  let selected = null;
+  let s = restore() || G.create(1537);
+  let toastTimer;
+
+  function restore() {
+    try {
+      const raw = localStorage.getItem(SAVE_KEY);
+      if (!raw) return null;
+      const stored = JSON.parse(raw);
+      return stored?.round >= 1 && stored?.round <= 8 && Array.isArray(stored.items) && Array.isArray(stored.market) && Array.isArray(stored.tags) ? stored : null;
+    } catch (_) { return null; }
+  }
+  function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(s)); } catch (_) { /* file:// private modes */ } }
+  function escapeHtml(value) { return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function notify(message) {
+    if (!message) return;
+    $('toast').textContent = message;
+    $('toast').classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => $('toast').classList.remove('show'), 3300);
+  }
+  function run(action, message) {
+    const err = action();
+    if (err) notify(err);
+    else { persist(); if (message) notify(message); }
+    render();
+    if(s.status !== 'playing') displayEnd();
+  }
+  function readSelection() {
+    if (selected !== null && !G.getRelic(s, selected)) selected = null;
+  }
+  function render() {
+    readSelection();
+    const b=G.buyer(s);
+    $('cashVal').textContent=money(s.cash);
+    $('duesVal').textContent=money(G.due(s.round));
+    $('duesSub').textContent=`Night ${s.round} settlement`;
+    $('cashSub').textContent=s.cash < G.due(s.round) ? `${money(G.due(s.round)-s.cash)} short of the dues` : `${money(s.cash-G.due(s.round))} after tonight's dues`;
+    $('hauntVal').innerHTML=`${s.haunt}<span>%</span>`;
+    $('hauntFill').style.width=`${s.haunt}%`;
+    $('nightVal').textContent=String(s.round).padStart(2,'0');
+    $('roundPips').innerHTML=Array.from({length:8},(_,i)=>`<span class="${i<s.round-1?'done':i===s.round-1?'current':''}"></span>`).join('');
+    $('buyerIcon').textContent=b.icon;
+    $('buyerName').textContent=b.name;
+    $('buyerTone').textContent=b.tone;
+    $('buyerCategory').innerHTML=`✦ ${b.category.toUpperCase()} RELICS <span>+50%</span>`;
+    $('nextBuyer').textContent=s.round===8?'Final night — last chance to sell':`Next: ${G.buyer(s,1).name} (${category(G.buyer(s,1).category)})`;
+    $('cabinetCount').textContent=`${s.items.length}/16`;
+    renderCabinet();
+    renderMarket();
+    renderInspector();
+    renderAuction();
+    renderLog();
+    $('tagAllBtn').disabled=s.soldThisRound || !s.items.length || s.status!=='playing';
+    $('clearTagsBtn').disabled=s.soldThisRound || !s.tags.length || s.status!=='playing';
+  }
+  function renderCabinet() {
+    const grid=$('cabinetGrid');
+    grid.innerHTML=Array.from({length:G.GRID},(_,pos)=>{
+      const i=G.relicAt(s,pos);
+      if(!i) return `<div class="slot empty" role="button" tabindex="0" data-pos="${pos}" aria-label="Empty cabinet slot ${pos+1}"><span class="slot-ghost">✦</span></div>`;
+      const rel=G.RELIC_BY_ID[i.id];
+      const app=G.appraisal(s,i.uid);
+      const tag=s.tags.includes(i.uid);
+      const match=rel.category===G.buyer(s).category;
+      return `<div class="slot occupied ${selected===i.uid?'selected':''} ${tag?'tagged':''}" role="button" tabindex="0" draggable="${s.status==='playing'}" data-pos="${pos}" data-uid="${i.uid}" aria-label="${escapeHtml(rel.name)}, appraised ${money(app.amount)}, ${i.curse} curse marks, ${tag?'tagged for sale':'not tagged'}">
+        ${match?'<span class="relic-buyer">+50%</span>':''}
+        ${i.curse?`<span class="relic-curse" title="Curse marks">${'✴'.repeat(i.curse)}</span>`:''}
+        <span class="relic-art" aria-hidden="true">${rel.icon}</span><span class="relic-name">${escapeHtml(rel.name)}</span><span class="relic-value">${money(app.amount)}</span>
+        <button class="lot-toggle" type="button" data-tag="${i.uid}" ${s.soldThisRound?'disabled':''} aria-label="${tag?'Remove':'Add'} ${escapeHtml(rel.name)} ${tag?'from':'to'} auction lot">${tag?'✓ IN LOT':'+ LOT'}</button>
+      </div>`;
+    }).join('');
+    $('actionHint').textContent= selected != null ? `Selected ${G.RELIC_BY_ID[G.getRelic(s,selected).id].name}. Tap an empty space to move it, or tag it for auction. Drag to swap on desktop.` : 'Tag relics with + LOT to auction them. Unsold neighbours still boost the items you sell.';
+  }
+  function renderMarket() {
+    $('marketLimit').textContent=`${s.bought}/2 bought`;
+    $('marketItems').innerHTML=s.market.map(offer=>{
+      const r=G.RELIC_BY_ID[offer.id];
+      const can=s.cash>=r.cost && s.bought<2 && !s.soldThisRound && s.items.length<16 && s.status==='playing';
+      return `<div class="offer ${offer.bought?'bought':''}"><div class="offer-icon" aria-hidden="true">${r.icon}</div><div class="offer-info"><div class="offer-title">${escapeHtml(r.name)}</div><div class="offer-category">${r.category} · value ${money(r.base)}</div><div class="offer-desc">${escapeHtml(r.short)}</div></div><button class="offer-buy" type="button" data-buy="${offer.key}" ${can&&!offer.bought?'':'disabled'}>${offer.bought?'SOLD':money(r.cost)}</button></div>`;
+    }).join('');
+    $('marketItems').querySelectorAll('[data-buy]').forEach(btn=>btn.addEventListener('click',()=>{
+      const offer=s.market.find(x=>x.key===btn.dataset.buy);
+      if(!offer) return;
+      run(()=>G.buy(s,btn.dataset.buy), `Added ${G.RELIC_BY_ID[offer.id].name} to your cabinet.`);
+    }));
+  }
+  function renderInspector() {
+    const root=$('inspector');
+    if(selected===null){root.innerHTML='<div class="inspector-empty"><div class="inspector-empty-icon">✧</div><div>Select a relic to see how its value is calculated, its special effect, and its curse risk.</div></div>';return;}
+    const item=G.getRelic(s,selected);
+    if(!item) return;
+    const appraisal=G.appraisal(s,selected);const rel=appraisal.rel;
+    const risk=G.risk(s,selected);
+    const tag=s.tags.includes(selected);
+    root.innerHTML=`<div class="inspect-top"><div class="inspect-icon">${rel.icon}</div><div><div class="inspect-name">${escapeHtml(rel.name)}</div><div class="inspect-type">${rel.category} ${appraisal.match?'· tonight’s favourite':''}</div></div></div><p class="inspect-description">${escapeHtml(rel.effect)}</p>
+      <div class="inspect-breakdown">${appraisal.breakdown.map(b=>`<div class="inspect-line ${b.value>0&&b.label!=='Relic value'?'positive':b.value<0?'negative':''}"><span>${escapeHtml(b.label)}</span><strong>${b.value>=0?'+':''}${money(b.value).replace('£-','-£')}</strong></div>`).join('')}
+      ${appraisal.match?`<div class="inspect-line positive"><span>Buyer premium (+50%)</span><strong>+${money(appraisal.amount-appraisal.subtotal)}</strong></div>`:''}</div>
+      <div class="inspect-total"><span>Tonight’s appraisal</span><strong>${money(appraisal.amount)}</strong></div>
+      <div class="inspect-risk">✴ ${item.curse}/3 curse marks · ${risk}% risk tonight <span>(if unsold)</span></div>
+      <button type="button" class="inspect-button" id="inspectorTag" ${s.soldThisRound?'disabled':''}>${tag?'REMOVE FROM AUCTION LOT':'＋ TAG FOR TONIGHT’S AUCTION'}</button>`;
+    $('inspectorTag').addEventListener('click',()=>run(()=>G.toggleTag(s,selected)));
+  }
+  function renderAuction() {
+    const lot=G.lot(s);
+    $('lotTotal').textContent=money(lot.total);
+    const bonuses=[];
+    if(lot.rows.length)bonuses.push(`${lot.rows.length} relic${lot.rows.length===1?'':'s'} tagged`);
+    if(lot.synergyBonus)bonuses.push('+£12 collector bonus');
+    if(lot.varietyBonus)bonuses.push('+£10 variety bonus');
+    $('lotBonuses').textContent=bonuses.join(' · ') || 'Tag relics to see tonight’s offer';
+    $('sellBtn').disabled=s.soldThisRound || !s.tags.length || s.status!=='playing';
+    $('sellBtn').innerHTML=s.soldThisRound?'SOLD FOR TONIGHT ✓':`SELL TAGGED LOT <span>↗</span>`;
+    $('nextCost').textContent=`· PAY ${money(G.due(s.round))}`;
+    $('nextBtn').disabled=s.status!=='playing';
+    $('nextBtn').innerHTML=`${s.round===8?'FINISH RUN':'END NIGHT'} <span>· PAY ${money(G.due(s.round))}</span> →`;
+    const gap=G.due(s.round)-s.cash;
+    $('nightWarning').textContent=s.status!=='playing'?'Run concluded. Start another to experiment again.' : gap>0 ? `⚠ You are ${money(gap)} short of tonight's dues. ${s.soldThisRound?'No auctions remaining.':'Consider selling a lot.'}` : s.soldThisRound ? 'Auction complete. Pay your dues to advance.' : 'Your dues are paid at the end of each night.';
+  }
+  function renderLog() {
+    $('statsText').textContent=`${s.stats.sold} sold · ${s.stats.shattered} shattered · ${s.stats.lots} auction${s.stats.lots===1?'':'s'}`;
+    $('ledger').innerHTML=s.log.slice(0,8).map(e=>`<div class="ledger-row ${e.type}"><span class="ledger-night">N${String(e.night).padStart(2,'0')}</span><span>${escapeHtml(e.message)}</span></div>`).join('');
+  }
+  function displayEnd() {
+    $('endIcon').textContent=s.status==='won'?'🏆':'☠️';
+    $('endEyebrow').textContent=s.status==='won'?'THE BAILIFF HAS BEEN DEFEATED':'THE BAILIFF HAS ARRIVED';
+    $('endTitle').textContent=s.status==='won'?'You survived all eight nights.':'The auction house is repossessed.';
+    $('endText').textContent=s.status==='won'?`You kept the doors open and have ${money(s.cash)} left in the safe. The haunted inventory is someone else's problem now.`:`Night ${s.round} demanded ${money(G.due(s.round))} in dues, but you only had ${money(s.cash)}. There is, regrettably, no ghostly overdraft.`;
+    $('endStats').innerHTML=[['Cash left',money(s.cash)],['Total sales',money(s.stats.earned)],['Relics sold',s.stats.sold],['Relics shattered',s.stats.shattered]].map(([name,value])=>`<div class="end-stat"><strong>${value}</strong><span>${name}</span></div>`).join('');
+    if(!$('endDialog').open)$('endDialog').showModal();
+  }
+  $('cabinetGrid').addEventListener('click',event=>{
+    const tagBtn=event.target.closest('[data-tag]');
+    if(tagBtn) {event.stopPropagation();run(()=>G.toggleTag(s,Number(tagBtn.dataset.tag)));return;}
+    const slot=event.target.closest('[data-pos]');if(!slot||s.status!=='playing')return;
+    const pos=Number(slot.dataset.pos);const item=G.relicAt(s,pos);
+    if(item){selected=item.uid;render();return;}
+    if(selected!=null) run(()=>G.move(s,selected,pos));
+  });
+  $('cabinetGrid').addEventListener('keydown',e=>{
+    if(e.target.closest('[data-tag]'))return;
+    if(e.key==='Enter'||e.key===' '){const tile=e.target.closest('[data-pos]');if(tile){e.preventDefault();tile.click();}}
+  });
+  $('cabinetGrid').addEventListener('dragstart',event=>{
+    const slot=event.target.closest('[data-uid]');
+    if(!slot || s.status!=='playing')return;
+    event.dataTransfer.setData('text/plain',slot.dataset.uid);
+    event.dataTransfer.effectAllowed='move';
+  });
+  $('cabinetGrid').addEventListener('dragover',event=>{
+    const slot=event.target.closest('[data-pos]');if(!slot)return;
+    event.preventDefault();event.dataTransfer.dropEffect='move';slot.classList.add('dragover');
+  });
+  $('cabinetGrid').addEventListener('dragleave',event=>{
+    const slot=event.target.closest('[data-pos]');if(slot)slot.classList.remove('dragover');
+  });
+  $('cabinetGrid').addEventListener('drop',event=>{
+    const slot=event.target.closest('[data-pos]');if(!slot)return;
+    event.preventDefault();const uid=Number(event.dataTransfer.getData('text/plain'));
+    if(G.getRelic(s,uid)){selected=uid;run(()=>G.move(s,uid,Number(slot.dataset.pos)));}
+  });
+  $('tagAllBtn').addEventListener('click',()=>run(()=>G.tagAll(s)));
+  $('clearTagsBtn').addEventListener('click',()=>{G.untagAll(s);persist();render();});
+  $('sellBtn').addEventListener('click',()=>{
+    const preview=G.lot(s);
+    if(!preview.rows.length) return notify('Tag at least one relic first.');
+    run(()=>G.sell(s),`SOLD! ${preview.rows.length} relics earned ${money(preview.total)}.`);
+  });
+  $('nextBtn').addEventListener('click',()=>{
+    if(s.cash<G.due(s.round)) {
+      if(!window.confirm(`You are ${money(G.due(s.round)-s.cash)} short. End the night and lose this run?`))return;
+    }
+    run(()=>G.endNight(s));
+  });
+  function newRun(skipConfirm=false) {
+    if(!skipConfirm && s.status==='playing' && !window.confirm('Discard your current auction run and start again?'))return;
+    const newSeed=(Math.floor(Math.random()*4294967295)>>>0);
+    s=G.create(newSeed);selected=null;persist();render();
+    if($('endDialog').open)$('endDialog').close();
+    notify('A fresh nightmare awaits.');
+  }
+  $('newRunBtn').addEventListener('click',()=>newRun());
+  $('restartBtn').addEventListener('click',()=>newRun(true));
+  $('helpBtn').addEventListener('click',()=>$('helpDialog').showModal());
+  $('closeHelp').addEventListener('click',()=>$('helpDialog').close());
+  for (const id of ['helpDialog','endDialog']) $(id).addEventListener('click',e=>{if(e.target===$(id))$(id).close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape' && selected!==null && !$('helpDialog').open&&!$('endDialog').open){selected=null;render();}});
+  render();
+  $('previewWarning').style.display = 'none';
+  if(s.status !== 'playing')displayEnd();
+  else {
+    try {
+      if(!localStorage.getItem('pluto-ghoul-seen-guide')) {
+        $('helpDialog').showModal();localStorage.setItem('pluto-ghoul-seen-guide','yes');
+      }
+    } catch (_) { /* storage may be blocked on local files */ }
+  }
+})();
+
+</script>
+</body>
+</html>
