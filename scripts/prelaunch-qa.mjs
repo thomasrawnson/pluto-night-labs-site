@@ -46,12 +46,15 @@ async function inspect({ name, route, viewport }) {
 
 await inspect({ name: 'home-mobile-390x844', route: '/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'home-desktop-1440x900', route: '/', viewport: { width: 1440, height: 900 } });
+await inspect({ name: 'products-mobile-390x844', route: '/products/', viewport: { width: 390, height: 844 } });
+await inspect({ name: 'products-desktop-1440x900', route: '/products/', viewport: { width: 1440, height: 900 } });
+await inspect({ name: 'lab-mobile-390x844', route: '/lab/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'contact-desktop-1440x900', route: '/contact/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: { width: 1440, height: 900 } });
 
 const linkContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const linkPage = await linkContext.newPage();
-for (const route of ['/', '/contact/', '/privacy/']) {
+for (const route of ['/', '/products/', '/lab/', '/contact/', '/privacy/']) {
   await linkPage.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
   const hrefs = await linkPage.locator('a[href]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href')).filter(Boolean))]);
   for (const href of hrefs) {
@@ -65,6 +68,32 @@ for (const route of ['/', '/contact/', '/privacy/']) {
       if (!exists) failures.push(`${route}: missing anchor ${href}`);
     }
   }
+}
+// Guard the public product catalogue and Lab lineup against accidental regressions.
+await linkPage.goto(`${baseURL}/products/`, { waitUntil: 'networkidle' });
+const listedProducts = await linkPage.locator('.catalog-card h3').allTextContents();
+for (const product of ['ShelfPick', 'UsageGrid', 'DevPip']) {
+  if (!listedProducts.includes(product)) failures.push(`/products/: missing ${product}`);
+}
+
+await linkPage.goto(`${baseURL}/lab/`, { waitUntil: 'networkidle' });
+const listedGames = await linkPage.locator('.game-card h3').allTextContents();
+for (const game of ['Going, Going, Ghoul!', 'Gladiator Mayhem', 'Tiny Heist Planner']) {
+  if (!listedGames.includes(game)) failures.push(`/lab/: missing ${game}`);
+}
+for (const removed of ['End of the World', 'How Much?!']) {
+  if (listedGames.includes(removed)) failures.push(`/lab/: retired listing remains: ${removed}`);
+}
+if (listedGames.length !== 8) failures.push(`/lab/: expected 8 experiments, found ${listedGames.length}`);
+const gladiatorLink = await linkPage.locator('#gladiator-mayhem a.play-button').count();
+if (gladiatorLink) failures.push('/lab/: Gladiator Mayhem must not claim a playable build');
+for (const slug of ['going-going-ghoul', 'tiny-heist-planner']) {
+  const href = await linkPage.locator(`#${slug} a.play-button`).getAttribute('href');
+  if (href !== `/playtests/${slug}/`) failures.push(`/lab/: incorrect playtest path for ${slug}: ${href}`);
+}
+await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
+if (await linkPage.locator('h3').filter({ hasText: 'End of the World' }).count()) {
+  failures.push('/: retired End of the World feature remains');
 }
 await linkContext.close();
 
