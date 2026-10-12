@@ -99,6 +99,27 @@ const featured = await linkPage.locator('#featured .product-card').count();
 if (featured !== 3) failures.push(`/: expected 3 featured projects, found ${featured}`);
 if (await linkPage.locator('#featured .devpip-card').count()) failures.push('/: DevPip should not be a featured homepage product');
 if (!await linkPage.locator('#featured .night-card').count()) failures.push('/: missing Night Parcel Office featured card');
+if (!await linkPage.locator('.studio-mark').getByText('PLUTO NIGHT LABS').count()) failures.push('/: studio strip still has abbreviated branding');
+for (const width of [320, 390]) {
+  await linkPage.setViewportSize({ width, height: 844 });
+  await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
+  for (const selector of ['.shelfpick-card', '.usage-card', '.night-card']) {
+    const metrics = await linkPage.locator(selector).evaluate((card) => {
+      const visual = card.querySelector('.game-visual, .usage-visual, .night-visual');
+      const copy = card.querySelector('.product-content');
+      const link = card.querySelector('.feature-card-link');
+      if (!visual || !copy || !link) return null;
+      const imageBox = visual.getBoundingClientRect();
+      const copyBox = copy.getBoundingClientRect();
+      const linkBox = link.getBoundingClientRect();
+      return { visualTop: imageBox.top, contentBottom: copyBox.bottom, linkBottom: linkBox.bottom };
+    });
+    if (!metrics || metrics.visualTop + 1 < Math.max(metrics.contentBottom, metrics.linkBottom)) {
+      failures.push(`/: artwork overlaps copy at ${width}px in ${selector}: ${JSON.stringify(metrics)}`);
+    }
+  }
+}
+await linkPage.setViewportSize({ width: 1440, height: 900 });
 const homepageGames = await linkPage.locator('#games .lab-card h3').allTextContents();
 for (const game of ['Personal Effects', 'Anomaly Lab', 'Going, Going, Ghoul!']) {
   if (!homepageGames.includes(game)) failures.push(`/: missing featured game ${game}`);
