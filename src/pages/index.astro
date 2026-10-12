@@ -131,6 +131,7 @@ const principles = [
           </div>
         </article>
       </div>
+      <a class="section-more-link" href="/products/">Explore all products <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
@@ -200,26 +201,49 @@ const principles = [
           </div>
         </article>
 
-        <article class="lab-card world-card">
+        <article class="lab-card">
           <div class="lab-art">
-            <span class="lab-status"><i aria-hidden="true"></i> In development</span>
-            <div class="art-scene world-scene" aria-hidden="true">
-              <span class="sun"></span>
-              <span class="meteor meteor-one"></span><span class="meteor meteor-two"></span>
-              <div class="forecast"><small>EXTINCTION EVENT</small><strong>04 · 16:30</strong><i></i></div>
-              <div class="horizon"><span></span><span></span><span></span><span></span><span></span></div>
-              <div class="world-grid"></div>
-            </div>
-            <img class="lab-screenshot world-screenshot" src="/images/lab/end-of-the-world-gameplay.png" alt="End of the World disaster management gameplay" width="1440" height="900" loading="lazy" decoding="async" />
+            <span class="lab-status"><i aria-hidden="true"></i> Playable preview</span>
+            <img class="lab-screenshot concept-cover" src="/lab/going-going-ghoul.svg" alt="Illustrated vintage auction poster for Going, Going, Ghoul!" width="1200" height="675" loading="lazy" decoding="async" />
           </div>
           <div class="lab-copy">
-            <p class="lab-category">Experimental game</p>
-            <h3>End of the World</h3>
-            <p class="lab-hook">The apocalypse is scheduled. Please plan accordingly.</p>
-            <p class="lab-description">A turn-based disaster-management game about keeping a tiny community alive while increasingly ridiculous catastrophes pile up.</p>
+            <p class="lab-category">Auction strategy</p>
+            <h3>Going, Going, Ghoul!</h3>
+            <p class="lab-hook">One more bid. One more terrible idea.</p>
+            <p class="lab-description">Auction cursed antiques to peculiar buyers. Spot valuable combinations and decide when to sell.</p>
+            <a class="lab-feature-link" href="/lab/#going-going-ghoul">See the experiment <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="lab-card">
+          <div class="lab-art">
+            <span class="lab-status"><i aria-hidden="true"></i> In development</span>
+            <img class="lab-screenshot concept-cover" src="/lab/gladiator-mayhem.svg" alt="Chunky pixel-art concept poster for Gladiator Mayhem" width="1200" height="675" loading="lazy" decoding="async" />
+          </div>
+          <div class="lab-copy">
+            <p class="lab-category">Arena auto-battler</p>
+            <h3>Gladiator Mayhem</h3>
+            <p class="lab-hook">Recruit your fighters. Let mayhem decide.</p>
+            <p class="lab-description">Assemble ridiculous gladiator teams and watch the arena turn carefully laid plans into chaos.</p>
+            <a class="lab-feature-link" href="/lab/#gladiator-mayhem">See the experiment <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="lab-card">
+          <div class="lab-art">
+            <span class="lab-status"><i aria-hidden="true"></i> Playable preview</span>
+            <img class="lab-screenshot concept-cover" src="/lab/tiny-heist-planner.svg" alt="Blueprint-style concept poster for Tiny Heist Planner" width="1200" height="675" loading="lazy" decoding="async" />
+          </div>
+          <div class="lab-copy">
+            <p class="lab-category">Heist planning</p>
+            <h3>Tiny Heist Planner</h3>
+            <p class="lab-hook">The plan is perfect. The crew is not.</p>
+            <p class="lab-description">Choose a crew, plot a route and watch your supposedly foolproof robbery unfold.</p>
+            <a class="lab-feature-link" href="/lab/#tiny-heist-planner">See the experiment <span aria-hidden="true">↗</span></a>
           </div>
         </article>
       </div>
+      <a class="section-more-link lab-more-link" href="/lab/">All experiments and playtests <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
@@ -358,6 +382,9 @@ const principles = [
   .terminal-lines span { width: 79%; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #9d70ce 0 14%, #515365 14%); }
   .terminal-lines span:nth-child(2) { width: 58%; background: linear-gradient(90deg, #76b68c 0 9%, #515365 9%); } .terminal-lines span:nth-child(3) { width: 68%; }
 
+  .section-more-link { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; margin-top: 26px; border-bottom: 1px solid rgba(255,122,95,.5); color: var(--accent-soft); font-size: .9rem; font-weight: 750; }
+  .section-more-link:hover { color: var(--text); }
+  .lab-more-link { margin-top: 36px; }
   .lab { position: relative; padding: 124px 0 140px; overflow: hidden; background: radial-gradient(circle at 50% 0, rgba(78,88,139,.1), transparent 37%), linear-gradient(180deg, #0b0e18, #0d1120); border-top: 1px solid rgba(255,255,255,.055); }
   .lab::before { content: ''; position: absolute; width: 760px; height: 210px; left: 50%; top: -138px; border: 1px solid rgba(255,255,255,.08); border-radius: 50%; transform: translateX(-50%); }
   .lab-stars { position: absolute; inset: 0; opacity: .18; background-image: radial-gradient(circle, #fff 0 .7px, transparent 1px); background-size: 97px 91px; background-position: 38px 21px; mask-image: linear-gradient(#000, transparent 62%); }
@@ -377,7 +404,9 @@ const principles = [
   .art-scene { position: absolute; z-index: 1; inset: 0; overflow: hidden; }
   .lab-screenshot { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
   .department-screenshot, .dice-screenshot { object-position: center; }
-  .world-screenshot { object-position: center 38%; }
+  .concept-cover { object-position: center; }
+  .lab-feature-link { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); color: #ffb49b; font-size: .82rem; font-weight: 750; }
+  .lab-feature-link:hover { color: #ffe1d3; }
   .lab-copy { display: flex; flex: 1; flex-direction: column; padding: 27px 28px 29px; }
   .lab-category { margin: 0 0 10px; color: #9fa4b5; font-size: .64rem; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
   .lab-card h3 { margin: 0; font-size: clamp(1.65rem, 2.1vw, 2.15rem); line-height: 1; letter-spacing: -.045em; }
@@ -406,17 +435,6 @@ const principles = [
   .rune { position: absolute; z-index: 3; color: #d1b6ee; text-shadow: 0 0 12px rgba(190,139,238,.65); }
   .rune-one { left: 17%; top: 35%; } .rune-two { right: 18%; top: 28%; font-size: 1.2rem; } .rune-three { right: 22%; bottom: 20%; color: var(--accent); font-size: 1.4rem; }
 
-  .world-scene { background: radial-gradient(circle at 72% 18%, rgba(232,127,82,.24), transparent 26%), linear-gradient(180deg, #25263b 0%, #212738 48%, #111a25 100%); }
-  .sun { position: absolute; width: 35%; aspect-ratio: 1; right: 4%; top: -22%; border-radius: 50%; background: radial-gradient(circle, #e9b486, #b86656 58%, rgba(132,61,75,.3) 70%, transparent 72%); box-shadow: 0 0 35px rgba(222,111,83,.18); }
-  .meteor { position: absolute; width: 7px; height: 7px; border-radius: 50%; background: #ff9b7f; box-shadow: 0 0 12px rgba(255,122,95,.8); transform: rotate(-34deg); }
-  .meteor::before { content: ''; position: absolute; width: 72px; height: 1px; right: 4px; top: 3px; background: linear-gradient(90deg, transparent, rgba(255,183,145,.7)); }
-  .meteor-one { right: 17%; top: 25%; } .meteor-two { right: 42%; top: 14%; transform: scale(.6) rotate(-34deg); opacity: .62; }
-  .forecast { position: absolute; z-index: 2; left: 7%; top: 34%; display: grid; width: 45%; padding: 12px 14px; border: 1px solid rgba(255,255,255,.17); border-radius: 9px; background: rgba(10,14,24,.68); backdrop-filter: blur(7px); box-shadow: 0 12px 30px rgba(0,0,0,.22); }
-  .forecast small { color: #e88c76; font-size: .43rem; font-weight: 800; letter-spacing: .14em; } .forecast strong { margin-top: 4px; font: 700 .82rem ui-monospace, monospace; } .forecast i { width: 68%; height: 3px; margin-top: 9px; background: linear-gradient(90deg, var(--accent) 58%, rgba(255,255,255,.12) 58%); }
-  .horizon { position: absolute; z-index: 1; left: 0; right: 0; bottom: 13%; display: flex; align-items: end; gap: 3px; height: 28%; padding: 0 5%; border-bottom: 2px solid #5f7180; }
-  .horizon span { width: 13%; height: 38%; background: #111822; clip-path: polygon(0 28%, 24% 28%, 24% 0, 78% 0, 78% 20%, 100% 20%, 100% 100%, 0 100%); }
-  .horizon span:nth-child(2) { height: 67%; width: 17%; } .horizon span:nth-child(3) { height: 45%; } .horizon span:nth-child(4) { height: 82%; width: 18%; } .horizon span:nth-child(5) { height: 53%; width: 20%; }
-  .world-grid { position: absolute; left: -10%; right: -10%; bottom: -29%; height: 43%; border-top: 1px solid rgba(125,160,180,.33); background-image: linear-gradient(rgba(119,156,178,.17) 1px, transparent 1px), linear-gradient(90deg, rgba(119,156,178,.17) 1px, transparent 1px); background-size: 28px 16px; transform: perspective(130px) rotateX(52deg); }
 
   .about { position: relative; padding: 150px 0; background: radial-gradient(circle at 12% 52%, rgba(103,94,117,.12), transparent 30%), linear-gradient(180deg, #0e1220, #0b0f1a); border-block: 1px solid rgba(255,255,255,.08); overflow: hidden; }
   .about::after { content: ''; position: absolute; width: 860px; height: 260px; right: -400px; bottom: -40px; border: 1px solid rgba(255,255,255,.055); border-radius: 50%; transform: rotate(18deg); pointer-events: none; }

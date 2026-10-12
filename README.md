@@ -34,6 +34,8 @@ To validate the configuration without deploying:
 npx wrangler deploy --dry-run
 ```
 
-Astro generates `/`, `/contact`, and `/privacy` as static routes. Wrangler's default HTML handling serves the generated directory index files at those URLs.
+Astro generates `/`, `/products`, `/lab`, `/contact`, and `/privacy` as static routes. Wrangler's default HTML handling serves the generated directory index files at those URLs.
 
 Social profile URLs are configured centrally in `src/config.ts`; empty values are not rendered.
+
+Product cards are maintained in `src/pages/products.astro`; experimental games and links are listed in `src/pages/lab.astro`. The homepage features selected games. New SVG covers under `public/lab/` are concept illustrations, not gameplay captures. Never label unavailable prototypes as playable.
