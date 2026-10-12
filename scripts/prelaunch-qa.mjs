@@ -45,6 +45,7 @@ async function inspect({ name, route, viewport }) {
 }
 
 await inspect({ name: 'home-mobile-390x844', route: '/', viewport: { width: 390, height: 844 } });
+await inspect({ name: 'home-mobile-320x680', route: '/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'home-desktop-1440x900', route: '/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'products-mobile-390x844', route: '/products/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'products-desktop-1440x900', route: '/products/', viewport: { width: 1440, height: 900 } });
@@ -92,6 +93,19 @@ for (const slug of ['going-going-ghoul', 'tiny-heist-planner']) {
   if (href !== `/playtests/${slug}/`) failures.push(`/lab/: incorrect playtest path for ${slug}: ${href}`);
 }
 await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
+const headline = await linkPage.locator('h1').textContent();
+if (!headline?.includes('Useful apps.') || !headline?.includes('Strange games.')) failures.push('/: missing app-and-game studio identity');
+const featured = await linkPage.locator('#featured .product-card').count();
+if (featured !== 3) failures.push(`/: expected 3 featured projects, found ${featured}`);
+if (await linkPage.locator('#featured .devpip-card').count()) failures.push('/: DevPip should not be a featured homepage product');
+if (!await linkPage.locator('#featured .night-card').count()) failures.push('/: missing Night Parcel Office featured card');
+const homepageGames = await linkPage.locator('#games .lab-card h3').allTextContents();
+for (const game of ['Personal Effects', 'Anomaly Lab', 'Going, Going, Ghoul!']) {
+  if (!homepageGames.includes(game)) failures.push(`/: missing featured game ${game}`);
+}
+if (homepageGames.length !== 3) failures.push(`/: expected exactly 3 prominent homepage games, found ${homepageGames.length}`);
+if (!await linkPage.locator('.more-lab-links a[href="/lab/#tiny-heist-planner"]').count()) failures.push('/: missing Tiny Heist Planner secondary link');
+if (!await linkPage.locator('.more-lab-links a[href="/lab/#gladiator-mayhem"]').count()) failures.push('/: missing Gladiator Mayhem secondary link');
 if (await linkPage.locator('h3').filter({ hasText: 'End of the World' }).count()) {
   failures.push('/: retired End of the World feature remains');
 }

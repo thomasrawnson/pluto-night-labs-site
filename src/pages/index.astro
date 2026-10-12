@@ -2,12 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site } from '../config';
 
-const principles = [
-  { title: 'Independent', text: 'A UK software studio', icon: 'spark' },
-  { title: 'Useful & Fun', text: 'Practical tools and playful products', icon: 'smile' },
-  { title: 'Built with Care', text: 'Thoughtful, focused development', icon: 'diamond' },
-  { title: 'For Real People', text: 'Solving everyday problems', icon: 'people' },
-];
+
+
 ---
 
 <BaseLayout>
@@ -16,11 +12,11 @@ const principles = [
     <div class="shell hero-grid">
       <div class="hero-copy">
         <p class="kicker"><span></span> Independent software studio</p>
-        <h1>Small software.<br />Useful ideas.<br /><em>Built with curiosity.</em></h1>
-        <p class="intro">Pluto Night Labs is an independent UK software studio building useful apps, developer tools and playful digital products.</p>
+        <h1>Useful apps.<br />Strange games.<br /><em>Built with curiosity.</em></h1>
+        <p class="intro">Pluto Night Labs is an independent UK studio creating practical apps, experimental games and occasionally questionable ideas. We build things we'd want to use — or play.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#products">See our products <span aria-hidden="true">↓</span></a>
-          <a class="button button-secondary" href="#contact">Contact us</a>
+          <a class="button button-primary" href="#featured">Explore our products <span aria-hidden="true">↓</span></a>
+          <a class="button button-secondary" href="#games">Play our games <span aria-hidden="true">↓</span></a>
         </div>
       </div>
       <div class="orbit-scene" aria-hidden="true">
@@ -35,26 +31,20 @@ const principles = [
     </div>
   </section>
 
-  <section class="principles" aria-label="Our principles">
-    <div class="shell principle-grid">
-      {principles.map((item) => (
-        <article class="principle">
-          <svg viewBox="0 0 32 32" aria-hidden="true">
-            {item.icon === 'spark' && <><path d="M16 3v7m0 12v7M3 16h7m12 0h7"/><circle cx="16" cy="16" r="4"/></>}
-            {item.icon === 'smile' && <><circle cx="16" cy="16" r="11"/><path d="M11 18c1.5 3 8.5 3 10 0M12 13h.01M20 13h.01"/></>}
-            {item.icon === 'diamond' && <><path d="M16 3 28 16 16 29 4 16 16 3Z"/><path d="m10 16 4 4 8-9"/></>}
-            {item.icon === 'people' && <><circle cx="12" cy="11" r="4"/><circle cx="22" cy="13" r="3"/><path d="M4 27c.6-6 3-9 8-9s7.4 3 8 9m0-7c4 0 6.3 2.3 7 7"/></>}
-          </svg>
-          <div><h2>{item.title}</h2><p>{item.text}</p></div>
-        </article>
-      ))}
+  <section class="studio-strip" aria-label="About the studio">
+    <div class="shell studio-strip-inner">
+      <span class="studio-mark" aria-hidden="true">P//NL</span>
+      <div>
+        <h2>Independent by design. Curious by nature.</h2>
+        <p>We're a small independent studio making software that solves problems and games that create interesting ones.</p>
+      </div>
     </div>
   </section>
 
-  <section class="products" id="products">
+  <section class="products" id="featured" aria-labelledby="featured-title">
     <div class="shell">
-      <p class="eyebrow">Our products</p>
-      <div class="section-heading"><h2 class="section-title">What we're building</h2></div>
+      <p class="eyebrow">Featured projects</p>
+      <div class="section-heading"><h2 class="section-title" id="featured-title">Useful tools. Unusual worlds.</h2><p class="section-intro">Two practical apps and one deeply suspicious night shift.</p></div>
       <div class="product-grid">
         <article class="product-card shelfpick-card">
           <div class="product-content">
@@ -62,6 +52,7 @@ const principles = [
             <p class="product-label">ShelfPick</p>
             <h3>Spend less time choosing.<br />More time playing.</h3>
             <p class="product-description">A smarter companion for board game collections, recommendations and game nights.</p>
+            <a class="feature-card-link" href="/products/#shelfpick">Explore ShelfPick <span aria-hidden="true">↗</span></a>
           </div>
           <div class="game-visual" aria-hidden="true">
             <div class="card-stack"><span></span><span></span><span></span></div>
@@ -82,6 +73,7 @@ const principles = [
             <p class="product-label">UsageGrid</p>
             <h3>Your AI coding usage,<br />at a glance.</h3>
             <p class="product-description">A lightweight macOS menu-bar utility for keeping track of developer-tool usage.</p>
+            <a class="feature-card-link" href="/products/#usagegrid">Explore UsageGrid <span aria-hidden="true">↗</span></a>
           </div>
           <div class="usage-visual" aria-hidden="true">
             <div class="usage-window">
@@ -97,153 +89,88 @@ const principles = [
           </div>
         </article>
 
-        <article class="product-card devpip-card">
+        <article class="product-card night-card">
           <div class="product-content">
-            <span class="status"><i></i> In development</span>
-            <p class="product-label">Developer companion</p>
-            <h3>DevPip</h3>
-            <p class="product-description">A friendly macOS companion that keeps an eye on your project, Git state and CI so you can spot what needs attention at a glance.</p>
-            <span class="product-availability">More details coming soon</span>
+            <span class="status"><i></i> Prototype in development</span>
+            <p class="product-label">Featured game</p>
+            <h3>Night Parcel<br />Office</h3>
+            <p class="product-description">The night shift is not going to plan. Sort suspicious parcels, follow changing regulations and try to survive another shift.</p>
+            <a class="feature-card-link" href="/lab/#night-parcel-office">Explore the game <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="devpip-visual" aria-hidden="true">
-            <div class="devpip-window">
-              <div class="devpip-titlebar">
-                <span class="traffic-lights"><i></i><i></i><i></i></span>
-                <b>DevPip</b>
-                <span class="window-state">Watching</span>
-              </div>
-              <div class="devpip-body">
-                <div class="pip-sidebar">
-                  <span class="pip-avatar"><i></i><i></i><b>›_</b></span>
-                  <small>PIP</small>
-                </div>
-                <div class="project-panel">
-                  <div class="project-head"><span><i></i> pluto-night-labs</span><b>main</b></div>
-                  <div class="project-states">
-                    <span><i class="state-good"></i><small>GIT</small><b>Clean</b></span>
-                    <span><i class="state-good"></i><small>CI</small><b>Passing</b></span>
-                    <span><i class="state-warn"></i><small>TODO</small><b>2 items</b></span>
-                  </div>
-                  <div class="terminal-lines"><span></span><span></span><span></span></div>
-                </div>
-              </div>
-            </div>
+          <div class="night-visual">
+            <img src="/lab/night-parcel-office.png" alt="Night Parcel Office sorting-desk gameplay screenshot" loading="lazy" width="1200" height="675" />
+            <span>From the playable prototype</span>
           </div>
         </article>
       </div>
-      <a class="section-more-link" href="/products/">Explore all products <span aria-hidden="true">→</span></a>
+      <a class="section-more-link" href="/products/">View the product catalogue <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
-  <section class="lab" aria-labelledby="lab-title">
+  <section class="lab" id="games" aria-labelledby="games-title">
     <div class="lab-stars" aria-hidden="true"></div>
     <div class="shell lab-shell">
       <div class="lab-heading">
         <div>
-          <p class="lab-eyebrow"><span>Pluto Night Labs</span><i aria-hidden="true">//</i> Experiments</p>
-          <h2 class="section-title" id="lab-title">Currently in the Lab</h2>
+          <p class="lab-eyebrow"><span>Pluto Night Labs</span><i aria-hidden="true">//</i> Games</p>
+          <h2 class="section-title" id="games-title">Small games.<br />Terrible decisions.</h2>
         </div>
-        <p>Small games, strange experiments and new ideas currently being built at Pluto Night Labs.</p>
+        <p>Unusual little games built around interesting systems, questionable choices and the consequences of getting things wrong.</p>
       </div>
 
       <div class="lab-grid">
-        <article class="lab-card department-card">
+        <article class="lab-card">
           <div class="lab-art">
-            <span class="lab-status"><i aria-hidden="true"></i> In development</span>
-            <div class="art-scene department-scene" aria-hidden="true">
-              <div class="dept-sign"><small>DEPARTMENT</small><strong>21</strong></div>
-              <div class="case-file">
-                <span class="file-tab">FORM 21-B</span>
-                <div class="file-row"><i></i><i></i><i></i></div>
-                <div class="file-row short"><i></i><i></i></div>
-                <b>DECEASED</b>
-              </div>
-              <div class="quota-ticket"><small>SHIFT QUOTA</small><strong>07 / 21</strong></div>
-            </div>
-            <img class="lab-screenshot department-screenshot" src="/images/lab/department-21-gameplay.png" alt="Department 21 Document Dice gameplay" width="1280" height="720" loading="lazy" decoding="async" />
+            <span class="lab-status"><i aria-hidden="true"></i> Playable prototype</span>
+            <img class="lab-screenshot" src="/lab/personal-effects.png" alt="Personal Effects suitcase-packing gameplay screenshot" width="1200" height="675" loading="lazy" decoding="async" />
           </div>
           <div class="lab-copy">
-            <p class="lab-category">Experimental game</p>
-            <h3>Department 21</h3>
-            <p class="lab-hook">Process the dead. Meet your quota. Try not to upset management.</p>
-            <p class="lab-description">A darkly comic afterlife bureaucracy game about impossible paperwork, questionable decisions and surviving another shift.</p>
-          </div>
-        </article>
-
-        <article class="lab-card dice-card">
-          <div class="lab-art">
-            <span class="lab-status"><i aria-hidden="true"></i> In development</span>
-            <div class="art-scene dice-scene" aria-hidden="true">
-              <span class="rune rune-one">✦</span><span class="rune rune-two">◈</span><span class="rune rune-three">+</span>
-              <svg class="d20" viewBox="0 0 180 180">
-                <defs>
-                  <linearGradient id="d20-face" x1="18%" y1="10%" x2="85%" y2="90%">
-                    <stop offset="0" stop-color="#a188cb" />
-                    <stop offset="1" stop-color="#493e72" />
-                  </linearGradient>
-                </defs>
-                <path d="m90 10 67 49-25 79H48L23 59Z" fill="url(#d20-face)" />
-                <g fill="none" stroke="#d9ccf2" stroke-opacity=".55" stroke-width="2">
-                  <path d="m90 10-42 128 109-79H23l109 79Z" />
-                  <path d="m23 59 67 101 67-101M48 138 90 10l42 128" />
-                </g>
-                <text x="90" y="105" text-anchor="middle">20</text>
-              </svg>
-              <span class="cult-orbit"></span>
-            </div>
-            <img class="lab-screenshot dice-screenshot" src="/images/lab/dice-cult-gameplay.png" alt="Dice Cult ritual combat gameplay" width="1280" height="720" loading="lazy" decoding="async" />
-          </div>
-          <div class="lab-copy">
-            <p class="lab-category">Experimental game</p>
-            <h3>Dice Cult</h3>
-            <p class="lab-hook">Worship the roll. Accept the mutation.</p>
-            <p class="lab-description">A chaotic action roguelite where devotion to a giant D20 reshapes your powers, your body and your chances of survival.</p>
+            <p class="lab-category">Packing puzzle</p>
+            <h3>Personal Effects</h3>
+            <p class="lab-hook">One suitcase. A lifetime of baggage.</p>
+            <p class="lab-description">Pack a stranger's final belongings while following the rules and confronting the choices they left behind.</p>
+            <a class="lab-feature-link" href="/lab/#personal-effects">Explore prototype <span aria-hidden="true">↗</span></a>
           </div>
         </article>
 
         <article class="lab-card">
           <div class="lab-art">
-            <span class="lab-status"><i aria-hidden="true"></i> Playable preview</span>
-            <img class="lab-screenshot concept-cover" src="/lab/going-going-ghoul.svg" alt="Illustrated vintage auction poster for Going, Going, Ghoul!" width="1200" height="675" loading="lazy" decoding="async" />
+            <span class="lab-status"><i aria-hidden="true"></i> Playable prototype</span>
+            <img class="lab-screenshot" src="/lab/anomaly-lab.png" alt="Anomaly Lab strange-specimen inspection gameplay screenshot" width="1200" height="675" loading="lazy" decoding="async" />
           </div>
           <div class="lab-copy">
-            <p class="lab-category">Auction strategy</p>
+            <p class="lab-category">Logic &amp; deduction</p>
+            <h3>Anomaly Lab</h3>
+            <p class="lab-hook">The rules are hidden. The specimens aren't helping.</p>
+            <p class="lab-description">Test unusual specimens, discover the logic and work out which experiments belong where.</p>
+            <a class="lab-feature-link" href="/lab/#anomaly-lab">Explore prototype <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="lab-card">
+          <div class="lab-art">
+            <span class="lab-status"><i aria-hidden="true"></i> Early playtest</span>
+            <img class="lab-screenshot" src="/lab/going-going-ghoul.svg" alt="Illustrated concept cover for Going, Going, Ghoul!" width="1200" height="675" loading="lazy" decoding="async" />
+            <span class="art-disclaimer">Concept artwork</span>
+          </div>
+          <div class="lab-copy">
+            <p class="lab-category">Cursed antique auction</p>
             <h3>Going, Going, Ghoul!</h3>
             <p class="lab-hook">One more bid. One more terrible idea.</p>
-            <p class="lab-description">Auction cursed antiques to peculiar buyers. Spot valuable combinations and decide when to sell.</p>
-            <a class="lab-feature-link" href="/lab/#going-going-ghoul">See the experiment <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="lab-card">
-          <div class="lab-art">
-            <span class="lab-status"><i aria-hidden="true"></i> In development</span>
-            <img class="lab-screenshot concept-cover" src="/lab/gladiator-mayhem.svg" alt="Chunky pixel-art concept poster for Gladiator Mayhem" width="1200" height="675" loading="lazy" decoding="async" />
-          </div>
-          <div class="lab-copy">
-            <p class="lab-category">Arena auto-battler</p>
-            <h3>Gladiator Mayhem</h3>
-            <p class="lab-hook">Recruit your fighters. Let mayhem decide.</p>
-            <p class="lab-description">Assemble ridiculous gladiator teams and watch the arena turn carefully laid plans into chaos.</p>
-            <a class="lab-feature-link" href="/lab/#gladiator-mayhem">See the experiment <span aria-hidden="true">↗</span></a>
-          </div>
-        </article>
-
-        <article class="lab-card">
-          <div class="lab-art">
-            <span class="lab-status"><i aria-hidden="true"></i> Playable preview</span>
-            <img class="lab-screenshot concept-cover" src="/lab/tiny-heist-planner.svg" alt="Blueprint-style concept poster for Tiny Heist Planner" width="1200" height="675" loading="lazy" decoding="async" />
-          </div>
-          <div class="lab-copy">
-            <p class="lab-category">Heist planning</p>
-            <h3>Tiny Heist Planner</h3>
-            <p class="lab-hook">The plan is perfect. The crew is not.</p>
-            <p class="lab-description">Choose a crew, plot a route and watch your supposedly foolproof robbery unfold.</p>
-            <a class="lab-feature-link" href="/lab/#tiny-heist-planner">See the experiment <span aria-hidden="true">↗</span></a>
+            <p class="lab-description">Auction cursed antiques, find combinations and sell at exactly the wrong moment.</p>
+            <a class="lab-feature-link" href="/playtests/going-going-ghoul/">Play early prototype <span aria-hidden="true">↗</span></a>
           </div>
         </article>
       </div>
-      <a class="section-more-link lab-more-link" href="/lab/">All experiments and playtests <span aria-hidden="true">→</span></a>
+
+      <div class="more-lab">
+        <div class="more-lab-copy"><span>ALSO ON THE WORKBENCH</span><p>More ideas taking shape</p></div>
+        <div class="more-lab-links">
+          <a href="/lab/#tiny-heist-planner">Tiny Heist Planner <span aria-hidden="true">↗</span></a>
+          <a href="/lab/#gladiator-mayhem">Gladiator Mayhem <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <a class="section-more-link lab-more-link" href="/lab/">Explore all games &amp; prototypes <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
@@ -252,10 +179,10 @@ const principles = [
       <div class="about-orbit" aria-hidden="true"><span></span><i></i></div>
       <div class="about-copy">
         <p class="eyebrow">About Pluto Night Labs</p>
-        <h2 class="section-title">A small studio with big curiosity.</h2>
+        <h2 class="section-title">Curiosity is part of the job.</h2>
         <div class="about-text">
-          <p>Pluto Night Labs Ltd is an independent software studio based in the UK. We build focused products that solve everyday problems — and occasionally things that are simply fun to make.</p>
-          <p>We believe in useful tools, thoughtful design and a bit of playfulness. Whether it's productivity, hobbies or games, we're here to turn ideas into great software.</p>
+          <p>Pluto Night Labs Ltd is an independent UK software and game studio. We make focused tools for real problems and playful experiments built around surprising ideas.</p>
+          <p>Whether it's board-game nights, development workflows or a deeply questionable night shift, we care about thoughtful systems, distinctive design and making things enjoyable to use.</p>
         </div>
       </div>
     </div>
@@ -300,19 +227,19 @@ const principles = [
   .orbit-two span { position: absolute; width: 5px; height: 5px; right: 5%; top: 30%; border-radius: 50%; background: var(--text); }
   .coordinate { position: absolute; right: 2%; bottom: 14%; color: var(--dim); font: 600 .62rem/1.7 ui-monospace, monospace; letter-spacing: .12em; }
 
-  .principles { position: relative; z-index: 2; padding: 30px 0; background: linear-gradient(90deg, #0d111d, #101521 50%, #0d111d); border-block: 1px solid rgba(255,255,255,.11); box-shadow: 0 16px 45px rgba(0,0,0,.18); }
-  .principle-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .principle { display: flex; gap: 16px; min-height: 70px; align-items: center; padding: 5px 25px; border-right: 1px solid var(--line); }
-  .principle:first-child { padding-left: 0; } .principle:last-child { border: 0; }
-  .principle svg { width: 29px; flex: 0 0 auto; fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-  .principle h2 { margin: 0 0 5px; font-size: .88rem; } .principle p { margin: 0; color: var(--dim); font-size: .72rem; line-height: 1.45; }
+  .studio-strip { position: relative; z-index: 2; padding: 36px 0; border-block: 1px solid rgba(255,255,255,.11); background: linear-gradient(90deg, #0d111d, #111623 50%, #0d111d); }
+  .studio-strip-inner { display: flex; align-items: center; gap: clamp(20px, 5vw, 70px); }
+  .studio-mark { flex: 0 0 auto; color: var(--accent-soft); font: 800 1.2rem ui-monospace, monospace; letter-spacing: .13em; }
+  .studio-strip h2 { margin: 0 0 5px; font-size: clamp(1rem, 2vw, 1.22rem); letter-spacing: -.02em; }
+  .studio-strip p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.6; }
 
   .products { position: relative; padding: 140px 0 150px; overflow: hidden; background: radial-gradient(circle at 10% 35%, rgba(54,66,105,.11), transparent 31%), radial-gradient(circle at 90% 74%, rgba(255,122,95,.055), transparent 26%), linear-gradient(180deg, #090c16, #0b0e18); }
   .products::before { content: ''; position: absolute; width: 720px; height: 250px; left: -330px; top: 90px; border: 1px solid rgba(255,255,255,.055); border-radius: 50%; transform: rotate(-18deg); pointer-events: none; }
   .products > :global(.shell) { position: relative; z-index: 1; }
-  .section-heading { margin-bottom: 60px; }
+  .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 42px; }
+  .section-intro { max-width: 320px; margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.65; }
   .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-  .product-card { position: relative; min-height: 650px; border: 1px solid rgba(255,255,255,.12); border-radius: 30px; overflow: hidden; background: var(--surface); box-shadow: 0 30px 70px rgba(0,0,0,.29), inset 0 1px rgba(255,255,255,.035); }
+  .product-card { position: relative; min-height: 590px; border: 1px solid rgba(255,255,255,.12); border-radius: 30px; overflow: hidden; background: var(--surface); box-shadow: 0 30px 70px rgba(0,0,0,.29), inset 0 1px rgba(255,255,255,.035); }
   .product-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(135deg, rgba(255,255,255,.055), transparent 32%, transparent 70%, rgba(0,0,0,.09)); }
   .product-card::after { content: ''; position: absolute; width: 250px; height: 250px; right: -150px; bottom: -150px; border: 1px solid rgba(255,255,255,.08); border-radius: 50%; pointer-events: none; }
   .product-content { position: relative; z-index: 2; padding: 40px 38px 25px; }
@@ -320,7 +247,9 @@ const principles = [
   .status i { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
   .product-label { margin: 36px 0 13px; color: var(--accent); font-size: .72rem; font-weight: 850; letter-spacing: .18em; text-transform: uppercase; }
   .product-card h3 { margin: 0; font-size: clamp(2rem, 2.6vw, 2.75rem); line-height: 1; letter-spacing: -.05em; }
-  .product-description { max-width: 450px; margin: 22px 0 0; color: var(--muted); line-height: 1.65; }
+  .product-description { max-width: 450px; margin: 18px 0 0; color: var(--muted); line-height: 1.6; }
+  .feature-card-link { display: inline-flex; gap: 12px; align-items: center; min-height: 44px; margin-top: 16px; border-bottom: 1px solid rgba(255,122,95,.5); color: #ffb49b; font-size: .82rem; font-weight: 750; }
+  .feature-card-link:hover { color: var(--text); }
   .shelfpick-card { background: radial-gradient(circle at 76% 82%, rgba(242,142,83,.22), transparent 40%), linear-gradient(155deg, #191b27, #12151f 65%); }
   .game-visual { position: absolute; inset: 55% 0 0; perspective: 900px; }
   .card-stack { position: absolute; z-index: 0; width: 26%; height: 42%; right: 7%; top: 4%; transform: rotate(14deg); }
@@ -346,41 +275,10 @@ const principles = [
   .bar, .usage-row div { overflow: hidden; background: rgba(255,255,255,.08); border-radius: 999px; } .bar { height: 7px; margin: 11px 0 24px; } .bar i, .usage-row div i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), #f4aa7d); border-radius: inherit; }
   .usage-row { display: grid; grid-template-columns: 48px 1fr 32px; gap: 10px; align-items: center; margin: 12px 0; color: #a8abb9; font-size: .58rem; } .usage-row div { height: 4px; } .usage-row b { text-align: right; color: #d9dae0; font-weight: 600; }
 
-  .product-availability { display: inline-flex; align-items: center; gap: 7px; margin-top: 20px; color: #a9a5b5; font-size: .66rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
-  .product-availability::before { content: ''; width: 16px; height: 1px; background: #9c78d3; }
-  .devpip-card { background: radial-gradient(circle at 71% 76%, rgba(126,88,182,.24), transparent 43%), linear-gradient(155deg, #181729, #10131f 68%); }
-  .devpip-card .product-label { color: #bb91ef; }
-  .devpip-card .status i { background: #aa7be1; box-shadow: 0 0 10px #8f61c7; }
-  .devpip-visual { position: absolute; inset: 55% 0 0; display: grid; place-items: start center; perspective: 900px; }
-  .devpip-window { width: 82%; min-width: 290px; overflow: hidden; border: 1px solid rgba(213,190,239,.2); border-radius: 17px; color: #dcd9e3; background: rgba(20,20,34,.96); box-shadow: 0 34px 65px rgba(0,0,0,.48), 18px 22px 45px rgba(86,57,127,.16); transform: rotate(-2deg); }
-  .devpip-titlebar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.045); font-size: .62rem; }
-  .devpip-titlebar > b { font-size: .66rem; letter-spacing: .03em; }
-  .traffic-lights { display: flex; gap: 5px; }
-  .traffic-lights i { width: 6px; height: 6px; border-radius: 50%; background: #ff735f; }
-  .traffic-lights i:nth-child(2) { background: #d5a35b; } .traffic-lights i:nth-child(3) { background: #75aa83; }
-  .window-state { justify-self: end; color: #9f92b7; font-size: .5rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
-  .devpip-body { display: grid; grid-template-columns: 31% 1fr; min-height: 174px; }
-  .pip-sidebar { display: grid; place-items: center; align-content: center; gap: 9px; border-right: 1px solid rgba(255,255,255,.075); background: linear-gradient(180deg, rgba(161,112,216,.08), rgba(255,255,255,.01)); }
-  .pip-sidebar small { color: #8e839e; font-size: .43rem; font-weight: 800; letter-spacing: .18em; }
-  .pip-avatar { position: relative; display: grid; place-items: center; width: 60px; height: 60px; border: 1px solid rgba(216,193,242,.24); border-radius: 19px 19px 24px 24px; background: linear-gradient(150deg, #8c63bb, #47375f); box-shadow: inset 0 1px rgba(255,255,255,.17), 0 12px 24px rgba(0,0,0,.25); }
-  .pip-avatar::before { content: ''; position: absolute; width: 9px; height: 6px; left: 11px; top: -5px; border-radius: 6px 6px 0 0; background: #9d78c8; transform: rotate(-18deg); }
-  .pip-avatar i { position: absolute; top: 19px; width: 5px; height: 5px; border-radius: 50%; background: #f3edf7; box-shadow: 0 0 7px rgba(255,255,255,.4); }
-  .pip-avatar i:first-child { left: 16px; } .pip-avatar i:nth-child(2) { right: 16px; }
-  .pip-avatar b { margin-top: 18px; color: #e9ddf4; font: 700 .7rem ui-monospace, monospace; }
-  .project-panel { padding: 17px 16px; }
-  .project-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 11px; border-bottom: 1px solid rgba(255,255,255,.075); font-size: .54rem; }
-  .project-head span { display: flex; align-items: center; gap: 6px; }
-  .project-head span i { width: 6px; height: 6px; border-radius: 2px; background: #a478d2; }
-  .project-head b { padding: 3px 6px; border-radius: 999px; color: #c3aed8; background: rgba(164,120,210,.12); font: 600 .47rem ui-monospace, monospace; }
-  .project-states { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 13px 0; }
-  .project-states > span { position: relative; display: grid; gap: 2px; min-width: 0; padding: 8px 7px; border: 1px solid rgba(255,255,255,.065); border-radius: 7px; background: rgba(255,255,255,.025); }
-  .project-states i { position: absolute; width: 5px; height: 5px; right: 6px; top: 7px; border-radius: 50%; }
-  .state-good { background: #77bf91; box-shadow: 0 0 7px rgba(119,191,145,.45); } .state-warn { background: #df9d64; }
-  .project-states small { color: #77798a; font-size: .37rem; font-weight: 800; letter-spacing: .08em; }
-  .project-states b { overflow: hidden; color: #cbc8d1; font-size: .46rem; text-overflow: ellipsis; white-space: nowrap; }
-  .terminal-lines { display: grid; gap: 7px; padding: 10px 11px; border-radius: 7px; background: #0d1018; }
-  .terminal-lines span { width: 79%; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #9d70ce 0 14%, #515365 14%); }
-  .terminal-lines span:nth-child(2) { width: 58%; background: linear-gradient(90deg, #76b68c 0 9%, #515365 9%); } .terminal-lines span:nth-child(3) { width: 68%; }
+  .night-card { background: radial-gradient(circle at 55% 75%, rgba(197,136,72,.19), transparent 50%), linear-gradient(155deg, #1b2026, #111621 68%); }
+  .night-visual { position: absolute; inset: 54% 0 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; padding: 10px 18px 20px; }
+  .night-visual img { display: block; width: 100%; max-height: calc(100% - 27px); border: 1px solid rgba(255,255,255,.15); border-radius: 13px; object-fit: contain; background: #0d1015; box-shadow: 0 22px 40px rgba(0,0,0,.35); }
+  .night-visual span { color: #979da3; font: 600 .66rem ui-monospace, monospace; letter-spacing: .04em; }
 
   .section-more-link { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; margin-top: 26px; border-bottom: 1px solid rgba(255,122,95,.5); color: var(--accent-soft); font-size: .9rem; font-weight: 750; }
   .section-more-link:hover { color: var(--text); }
@@ -410,31 +308,16 @@ const principles = [
   .lab-copy { display: flex; flex: 1; flex-direction: column; padding: 27px 28px 29px; }
   .lab-category { margin: 0 0 10px; color: #9fa4b5; font-size: .64rem; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
   .lab-card h3 { margin: 0; font-size: clamp(1.65rem, 2.1vw, 2.15rem); line-height: 1; letter-spacing: -.045em; }
-  .lab-hook { min-height: 3.2em; margin: 18px 0 13px; color: #e8e5e0; font-size: 1rem; font-weight: 720; line-height: 1.5; }
-  .lab-description { margin: 0; color: #969bab; font-size: .86rem; line-height: 1.68; }
+  .lab-hook { min-height: 2.8em; margin: 16px 0 12px; color: #e8e5e0; font-size: 1rem; font-weight: 720; line-height: 1.5; }
+  .lab-description { margin: 0 0 18px; color: #969bab; font-size: .86rem; line-height: 1.68; }
 
-  .department-scene { background: radial-gradient(circle at 83% 15%, rgba(189,152,85,.16), transparent 28%), linear-gradient(145deg, #182024, #10161b 74%); }
-  .department-scene::before { content: ''; position: absolute; inset: 0; opacity: .22; background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 25px 25px; }
-  .dept-sign { position: absolute; left: 8%; bottom: 12%; display: grid; width: 35%; padding: 12px 14px; border-left: 2px solid #d7b06e; color: #dbd6c8; background: rgba(5,8,10,.35); transform: rotate(-3deg); }
-  .dept-sign small { font-size: .43rem; letter-spacing: .21em; }
-  .dept-sign strong { margin-top: -3px; color: #d7b06e; font: 800 2.4rem/1 ui-monospace, monospace; }
-  .case-file { position: absolute; width: 45%; height: 61%; right: 9%; top: 20%; padding: 23px 18px 12px; border: 1px solid rgba(255,255,255,.25); border-radius: 4px; color: #24251f; background: linear-gradient(155deg, #d2cfb9, #8f927f); box-shadow: -14px 18px 28px rgba(0,0,0,.33); transform: rotate(7deg); }
-  .file-tab { position: absolute; left: 11px; top: -12px; padding: 5px 9px; background: #b5b29f; font: 700 .42rem ui-monospace, monospace; letter-spacing: .1em; }
-  .file-row { display: grid; grid-template-columns: .3fr 1fr .5fr; gap: 5px; margin-bottom: 10px; }
-  .file-row.short { grid-template-columns: .7fr 1fr; }
-  .file-row i { height: 4px; background: rgba(35,39,37,.38); }
-  .case-file b { position: absolute; right: 12px; bottom: 14px; padding: 5px 7px; border: 2px solid rgba(119,48,42,.7); color: rgba(119,48,42,.78); font: 800 .54rem ui-monospace, monospace; letter-spacing: .1em; transform: rotate(-9deg); }
-  .quota-ticket { position: absolute; right: 4%; bottom: 7%; display: grid; padding: 8px 10px; border: 1px solid rgba(215,176,110,.36); color: #d7b06e; background: rgba(8,12,13,.86); box-shadow: 0 8px 18px rgba(0,0,0,.28); transform: rotate(-4deg); }
-  .quota-ticket small { font-size: .38rem; letter-spacing: .15em; } .quota-ticket strong { font: 700 .72rem ui-monospace, monospace; }
-
-  .dice-scene { display: grid; place-items: center; background: radial-gradient(circle at 50% 48%, rgba(129,91,182,.32), transparent 35%), linear-gradient(150deg, #19162a, #10121f 78%); }
-  .dice-scene::before { content: ''; position: absolute; width: 58%; aspect-ratio: 1; border: 1px solid rgba(204,181,240,.18); border-radius: 50%; box-shadow: 0 0 0 24px rgba(170,132,218,.035), 0 0 45px rgba(114,73,164,.22); }
-  .d20 { position: relative; z-index: 2; width: 47%; filter: drop-shadow(0 18px 22px rgba(0,0,0,.4)); transform: rotate(-3deg); }
-  .d20 text { fill: #f0e9fa; font: 800 31px ui-monospace, monospace; }
-  .cult-orbit { position: absolute; z-index: 1; width: 78%; height: 24%; border: 1px solid rgba(229,214,246,.2); border-radius: 50%; transform: rotate(-16deg); }
-  .rune { position: absolute; z-index: 3; color: #d1b6ee; text-shadow: 0 0 12px rgba(190,139,238,.65); }
-  .rune-one { left: 17%; top: 35%; } .rune-two { right: 18%; top: 28%; font-size: 1.2rem; } .rune-three { right: 22%; bottom: 20%; color: var(--accent); font-size: 1.4rem; }
-
+  .art-disclaimer { position: absolute; right: 11px; bottom: 11px; z-index: 5; padding: 6px 9px; background: rgba(8,11,20,.8); color: #d1c8b5; border-radius: 6px; font: 700 .6rem ui-monospace, monospace; }
+  .more-lab { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; margin-top: 22px; padding: 24px 28px; border: 1px solid rgba(255,255,255,.105); border-radius: 17px; background: rgba(20,25,39,.85); }
+  .more-lab-copy > span { color: var(--accent-soft); font: 700 .62rem ui-monospace, monospace; letter-spacing: .16em; }
+  .more-lab-copy > p { margin: 7px 0 0; color: var(--text); font-weight: 750; }
+  .more-lab-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .more-lab-links a { display: inline-flex; align-items: center; gap: 14px; min-height: 44px; padding: 10px 14px; border: 1px solid rgba(255,255,255,.18); border-radius: 10px; color: #e6e4e1; font-size: .83rem; font-weight: 700; }
+  .more-lab-links a:hover { border-color: var(--accent); color: var(--accent-soft); }
 
   .about { position: relative; padding: 150px 0; background: radial-gradient(circle at 12% 52%, rgba(103,94,117,.12), transparent 30%), linear-gradient(180deg, #0e1220, #0b0f1a); border-block: 1px solid rgba(255,255,255,.08); overflow: hidden; }
   .about::after { content: ''; position: absolute; width: 860px; height: 260px; right: -400px; bottom: -40px; border: 1px solid rgba(255,255,255,.055); border-radius: 50%; transform: rotate(18deg); pointer-events: none; }
@@ -458,37 +341,39 @@ const principles = [
     .hero { min-height: auto; padding-top: 90px; }
     .hero-grid { grid-template-columns: 1fr; }
     .orbit-scene { width: min(620px, 100%); min-width: 0; margin: -30px auto -80px; opacity: .82; }
-    .principle-grid { grid-template-columns: 1fr 1fr; }
-    .principle { padding: 18px 25px; border-bottom: 1px solid var(--line); }
-    .principle:nth-child(2) { border-right: 0; } .principle:nth-child(3), .principle:nth-child(4) { border-bottom: 0; } .principle:nth-child(3) { padding-left: 0; }
+    .section-heading { align-items: start; flex-direction: column; gap: 13px; }
+    .section-intro { max-width: 500px; }
     .product-grid { grid-template-columns: 1fr; }
-    .product-card { min-height: 620px; }
+    .product-card { min-height: 555px; }
     .lab-heading { grid-template-columns: 1fr; gap: 24px; }
     .lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .world-card { grid-column: 1 / -1; width: calc(50% - 10px); justify-self: center; }
     .about-grid { grid-template-columns: 1fr; gap: 80px; } .about-orbit { width: min(320px, 70vw); }
     .contact-panel { grid-template-columns: 1fr; padding: 55px; }
   }
   @media (min-width: 941px) and (max-width: 1100px) {
     .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .devpip-card { grid-column: 1 / -1; width: calc(50% - 10px); justify-self: center; }
+    .product-card:last-child { grid-column: 1 / -1; width: calc(50% - 10px); justify-self: center; }
   }
   @media (max-width: 600px) {
     .hero { padding-top: 60px; }
     h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
     .orbit-scene { margin-top: -10px; }
     .coordinate { display: none; }
-    .principle-grid { grid-template-columns: 1fr; }
-    .principle, .principle:nth-child(3) { padding: 16px 0; border-right: 0; border-bottom: 1px solid var(--line); } .principle:last-child { border-bottom: 0; }
+    .studio-strip-inner { align-items: start; gap: 14px; }
+    .studio-mark { font-size: .9rem; }
+    .studio-strip p { font-size: .82rem; }
     .products, .lab, .about { padding: 100px 0; }
     .section-heading { margin-bottom: 40px; }
-    .product-card { min-height: 590px; border-radius: 23px; }
+    .product-card { min-height: 515px; border-radius: 23px; }
     .product-content { padding: 32px 26px 20px; }
     .product-card h3 { font-size: 2.25rem; }
     .game-visual { top: 58%; }
     .usage-window { min-width: 0; width: 84%; }
+    .night-visual { inset: 51% 0 0; }
+    .more-lab { padding: 20px; }
+    .more-lab-links { width: 100%; }
+    .more-lab-links a { flex: 1; justify-content: space-between; min-width: 0; }
     .lab-grid { grid-template-columns: 1fr; gap: 18px; }
-    .world-card { grid-column: auto; width: auto; }
     .lab-heading { margin-bottom: 38px; }
     .lab-heading > p { font-size: .93rem; }
     .lab-card { border-radius: 22px; }
@@ -498,5 +383,16 @@ const principles = [
     .contact { padding: 75px 0; }
     .contact-panel { padding: 38px 26px; border-radius: 23px; gap: 38px; }
     .contact-actions .button { width: 100%; font-size: .78rem; }
+  }
+  @media (max-width: 360px) {
+    .studio-strip-inner { display: block; }
+    .studio-mark { display: block; margin-bottom: 12px; }
+    .product-content { padding: 28px 21px 16px; }
+    .product-card { min-height: 525px; }
+    .product-card h3 { font-size: 2.05rem; }
+    .product-label { margin-top: 20px; }
+    .night-visual { inset: 54% 0 0; }
+    .lab-copy { padding: 23px 20px 24px; }
+    .more-lab-links { flex-direction: column; }
   }
 </style>
