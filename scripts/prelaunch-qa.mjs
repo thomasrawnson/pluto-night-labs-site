@@ -99,34 +99,34 @@ const featured = await linkPage.locator('#featured .product-card').count();
 if (featured !== 3) failures.push(`/: expected 3 featured projects, found ${featured}`);
 if (await linkPage.locator('#featured .devpip-card').count()) failures.push('/: DevPip should not be a featured homepage product');
 if (!await linkPage.locator('#featured .night-card').count()) failures.push('/: missing Night Parcel Office featured card');
-if (!await linkPage.locator('.studio-mark').getByText('PLUTO NIGHT LABS').count()) failures.push('/: studio strip still has abbreviated branding');
+if (!await linkPage.locator('.telemetry').getByText('PLUTO NIGHT LABS').count()) failures.push('/: telemetry identity missing');
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
   await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
   for (const selector of ['.shelfpick-card', '.usage-card', '.night-card']) {
-    const metrics = await linkPage.locator(selector).evaluate((card) => {
-      const visual = card.querySelector('.game-visual, .usage-visual, .night-visual');
+    const metrics = await linkPage.locator(selector).evaluate(card => {
+      const visual = card.querySelector('.project-art');
       const copy = card.querySelector('.product-content');
-      const link = card.querySelector('.feature-card-link');
-      if (!visual || !copy || !link) return null;
+      if (!visual || !copy) return null;
       const imageBox = visual.getBoundingClientRect();
       const copyBox = copy.getBoundingClientRect();
-      const linkBox = link.getBoundingClientRect();
-      return { visualTop: imageBox.top, contentBottom: copyBox.bottom, linkBottom: linkBox.bottom };
+      return { image: { left:imageBox.left,right:imageBox.right,top:imageBox.top,bottom:imageBox.bottom },
+        copy: { left:copyBox.left,right:copyBox.right,top:copyBox.top,bottom:copyBox.bottom } };
     });
-    if (!metrics || metrics.visualTop + 1 < Math.max(metrics.contentBottom, metrics.linkBottom)) {
-      failures.push(`/: artwork overlaps copy at ${width}px in ${selector}: ${JSON.stringify(metrics)}`);
-    }
+    const overlap = metrics && metrics.image.left < metrics.copy.right - 1 && metrics.copy.left < metrics.image.right - 1 &&
+      metrics.image.top < metrics.copy.bottom - 1 && metrics.copy.top < metrics.image.bottom - 1;
+    if (!metrics || overlap) failures.push(`/: artwork overlaps copy at ${width}px in ${selector}: ${JSON.stringify(metrics)}`);
   }
 }
 await linkPage.setViewportSize({ width: 1440, height: 900 });
-const homepageGames = await linkPage.locator('#games .lab-card h3').allTextContents();
+const homepageGames = await linkPage.locator('#games .game-row .game-copy strong').allTextContents();
 for (const game of ['Personal Effects', 'Anomaly Lab', 'Going, Going, Ghoul!']) {
   if (!homepageGames.includes(game)) failures.push(`/: missing featured game ${game}`);
 }
-if (homepageGames.length !== 3) failures.push(`/: expected exactly 3 prominent homepage games, found ${homepageGames.length}`);
-if (!await linkPage.locator('.more-lab-links a[href="/lab/#tiny-heist-planner"]').count()) failures.push('/: missing Tiny Heist Planner secondary link');
-if (!await linkPage.locator('.more-lab-links a[href="/lab/#gladiator-mayhem"]').count()) failures.push('/: missing Gladiator Mayhem secondary link');
+if (homepageGames.length !== 3) failures.push(`/: expected exactly 3 homepage games, found ${homepageGames.length}`);
+if (!await linkPage.locator('.other-games a[href="/lab/#tiny-heist-planner"]').count()) failures.push('/: missing Tiny Heist Planner secondary link');
+if (!await linkPage.locator('.other-games a[href="/lab/#gladiator-mayhem"]').count()) failures.push('/: missing Gladiator Mayhem secondary link');
+if (!await linkPage.locator('.moon').count()) failures.push('/: orbital interaction controls absent');
 if (await linkPage.locator('h3').filter({ hasText: 'End of the World' }).count()) {
   failures.push('/: retired End of the World feature remains');
 }
