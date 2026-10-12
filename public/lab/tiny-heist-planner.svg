@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="t d">
+<title id="t">Tiny Heist Planner — blueprint concept cover</title><desc id="d">A technical floor plan showing a crew route to a vault.</desc>
+<defs><pattern id="grid" width="35" height="35" patternUnits="userSpaceOnUse"><path d="M35 0H0V35" fill="none" stroke="#8fc8c6" stroke-width="1" opacity=".17"/></pattern></defs>
+<rect width="1200" height="675" fill="#112d3f"/><rect width="1200" height="675" fill="url(#grid)"/><rect x="46" y="43" width="1108" height="589" fill="none" stroke="#8ec8d1" opacity=".65" stroke-width="3"/>
+<text x="88" y="108" font-family="monospace" font-size="22" letter-spacing="6" fill="#a9d5d8">BLUEPRINT CAPER / FILE 001</text>
+<text x="88" y="198" font-family="monospace" font-size="73" font-weight="800" fill="#e0ece2">TINY HEIST</text><text x="88" y="276" font-family="monospace" font-size="73" font-weight="800" fill="#d8b77c">PLANNER</text>
+<text x="88" y="326" font-family="monospace" font-size="22" fill="#a9d5d8">RECRUIT · ROUTE · REPLAY</text>
+<g fill="none" stroke="#b3d3d3" stroke-width="8" stroke-linejoin="miter"><path d="M610 135H1090V548H610Z"/><path d="M610 315H904V135M745 315V548M904 315V548M610 438H745M904 438H1090"/><path d="M745 237h-40m40 164h-40m199 33h38"/></g>
+<g fill="#122c3b" stroke="#d0e0d7" stroke-width="5"><rect x="960" y="360" width="95" height="110" rx="4"/><circle cx="1007" cy="417" r="23"/><circle cx="1007" cy="417" r="8"/><rect x="668" y="364" width="40" height="42"/></g>
+<path d="M650 506L650 456L807 456L807 376L1007 376" fill="none" stroke="#f2b779" stroke-width="8" stroke-dasharray="15 10"/>
+<g fill="#efbd7a" stroke="#102c3d" stroke-width="7"><circle cx="650" cy="506" r="20"/><circle cx="807" cy="456" r="16"/><circle cx="1007" cy="376" r="17"/></g>
+<text x="622" y="580" font-family="monospace" font-size="19" fill="#a9d5d8">ENTRY</text><text x="953" y="523" font-family="monospace" font-size="19" fill="#f2bc7f">TARGET: VAULT</text>
+<rect x="88" y="455" width="409" height="109" fill="#17384b" stroke="#79b8c0" stroke-width="2"/>
+<text x="116" y="499" font-family="monospace" font-size="22" fill="#d9e6e0">CREW: 03  /  ALARMS: 02</text><text x="116" y="538" font-family="monospace" font-size="21" fill="#f2bc7f">CONFIDENCE: QUESTIONABLE</text>
+<text x="88" y="611" font-family="monospace" font-size="17" letter-spacing="3" fill="#a6ccd0">CONCEPT COVER · EARLY PLAYTEST</text>
+</svg>

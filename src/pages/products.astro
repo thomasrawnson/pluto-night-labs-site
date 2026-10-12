@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const products = [
+  {
+    id: 'shelfpick',
+    number: '01',
+    category: 'Board games · Web app',
+    name: 'ShelfPick',
+    tagline: 'Your collection. A better game night.',
+    description: 'Bring your board games together, discover what fits your group and make choosing what to play the easy part of the evening.',
+    highlights: ['Board game collection', 'Game discovery', 'Game-night choices'],
+    status: 'Coming soon',
+    inquiry: 'ShelfPick',
+  },
+  {
+    id: 'usagegrid',
+    number: '02',
+    category: 'Developer tools · macOS',
+    name: 'UsageGrid',
+    tagline: 'Keep your coding-tool usage in sight.',
+    description: 'A lightweight Mac menu-bar companion for seeing AI coding-tool usage at a glance, with refresh controls, history and useful alerts.',
+    highlights: ['Menu-bar overview', 'Usage history', 'Helpful alerts'],
+    status: 'In development',
+    inquiry: 'UsageGrid',
+  },
+  {
+    id: 'devpip',
+    number: '03',
+    category: 'Developer tools · macOS',
+    name: 'DevPip',
+    tagline: 'A tiny companion for your projects.',
+    description: 'Stay closer to your repositories with Git status, GitHub CI and dependency alerts in a friendly menu-bar companion.',
+    highlights: ['Repository status', 'GitHub CI visibility', 'Dependency alerts'],
+    status: 'In development',
+    inquiry: 'DevPip',
+  },
+];
+---
+
+<BaseLayout
+  title="Products | Pluto Night Labs"
+  description="Discover ShelfPick, UsageGrid and DevPip: thoughtful apps and developer utilities from Pluto Night Labs."
+>
+  <div class="products-page">
+    <section class="products-hero shell">
+      <p class="eyebrow">Pluto Night Labs // Products</p>
+      <h1>Small tools.<br /><em>Useful by design.</em></h1>
+      <p>Tools for board-game nights, developer workflows and the everyday details that deserve better software. Built independently, one focused product at a time.</p>
+      <a href="#product-list" class="button button-primary">Explore the products <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="catalog shell" id="product-list" aria-labelledby="products-heading">
+      <div class="catalog-heading">
+        <h2 id="products-heading">What we're building</h2>
+        <p>These products are still in development. We’ll add public availability and purchase links when each one is ready.</p>
+      </div>
+      <div class="catalog-list">
+        {products.map((product) => (
+          <article class="catalog-card" id={product.id}>
+            <div class="catalog-main">
+              <div class="catalog-meta">
+                <span class="catalog-number">{product.number} / 03</span>
+                <span class="catalog-status">{product.status}</span>
+              </div>
+              <p class="catalog-category">{product.category}</p>
+              <h3>{product.name}</h3>
+              <p class="catalog-tagline">{product.tagline}</p>
+              <p class="catalog-description">{product.description}</p>
+              <ul class="highlights">
+                {product.highlights.map((highlight) => <li>{highlight}</li>)}
+              </ul>
+              <a class="catalog-link" href={`mailto:hello@plutonightlabs.com?subject=${encodeURIComponent(product.inquiry + ' enquiry')}`}>Ask about {product.name} <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class={`catalog-art art-${product.id}`} aria-hidden="true">
+              {product.id === 'shelfpick' && <div class="shelf-graphic"><span class="shelf-die">⚄</span><span class="shelf-card one"></span><span class="shelf-card two"></span><span class="shelf-card three"></span><b>TONIGHT'S PICK</b></div>}
+              {product.id === 'usagegrid' && <div class="usage-graphic"><small>THIS WEEK</small><strong>68%</strong><span class="meter"><i></i></span><div class="graph-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>}
+              {product.id === 'devpip' && <div class="pip-graphic"><span class="pip-face">›_</span><strong>main <i>✓</i></strong><small>GIT • CI • DEPENDENCIES</small></div>}
+              <span class="concept-note">Product illustration · Not a live screenshot</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="lab-promo shell">
+      <div>
+        <p class="eyebrow">Something less sensible?</p>
+        <h2>We also make games.</h2>
+        <p>See playable experiments, odd little systems and prototypes still learning what they want to be.</p>
+      </div>
+      <a href="/lab/" class="button button-secondary">Visit the Lab <span aria-hidden="true">→</span></a>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .products-page { padding-bottom: 7rem; background: radial-gradient(circle at 78% 11%, rgba(114,92,166,.16), transparent 31%), linear-gradient(180deg,#090c16,#0e1322 55%,#090c16); }
+  .products-hero { padding-top: clamp(5rem, 10vw, 9rem); padding-bottom: 7rem; }
+  .products-hero h1 { margin: 0; font-size: clamp(3.5rem, 8vw, 7.25rem); line-height: .98; letter-spacing: -.065em; }
+  .products-hero h1 em { color: #ffb198; font-style: normal; }
+  .products-hero > p:not(.eyebrow) { max-width: 650px; margin: 2rem 0; color: var(--muted); font-size: clamp(1rem, 1.8vw, 1.2rem); line-height: 1.7; }
+  .catalog-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line-strong); }
+  .catalog-heading h2 { margin: 0; font-size: clamp(2rem, 3vw, 3.2rem); letter-spacing: -.05em; }
+  .catalog-heading p { max-width: 390px; margin: 0; color: var(--dim); font-size: .88rem; line-height: 1.6; }
+  .catalog-list { display: grid; gap: 1.5rem; }
+  .catalog-card { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); overflow: hidden; border: 1px solid var(--line-strong); border-radius: 25px; background: #141927; }
+  .catalog-main { padding: clamp(2rem, 4vw, 3.4rem); }
+  .catalog-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center; font: 700 .72rem ui-monospace, monospace; letter-spacing: .08em; }
+  .catalog-number { color: #747d90; }
+  .catalog-status { padding: .45rem .75rem; border: 1px solid rgba(255,177,152,.33); border-radius: 999px; color: #ffc1ac; text-transform: uppercase; font-size: .66rem; }
+  .catalog-category { margin: 2.5rem 0 .55rem; color: #a6a3b8; text-transform: uppercase; letter-spacing: .15em; font-size: .7rem; font-weight: 800; }
+  .catalog-main h3 { margin: 0; font-size: clamp(2.7rem, 5vw, 4.2rem); letter-spacing: -.06em; }
+  .catalog-tagline { margin: .55rem 0; font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 650; }
+  .catalog-description { max-width: 530px; margin: 1.3rem 0 1.5rem; color: var(--muted); line-height: 1.75; }
+  .highlights { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: 0 0 2.5rem; list-style: none; }
+  .highlights li { padding: .55rem .75rem; border: 1px solid var(--line-strong); border-radius: 7px; color: #cac9d1; font-size: .72rem; }
+  .catalog-link { display: inline-flex; align-items: center; gap: 1rem; min-height: 44px; border-bottom: 1px solid var(--accent); color: #ffb49b; font-weight: 750; }
+  .catalog-link:hover { color: var(--text); }
+  .catalog-art { position: relative; display: grid; place-items: center; min-height: 440px; overflow: hidden; border-left: 1px solid var(--line); }
+  .art-shelfpick { background: radial-gradient(circle at 55% 45%,rgba(239,162,100,.25),transparent 45%),linear-gradient(135deg,#292e3e,#141a28); }
+  .art-usagegrid { background: radial-gradient(circle at 55% 45%,rgba(100,120,229,.28),transparent 52%),linear-gradient(135deg,#1b233d,#111627); }
+  .art-devpip { background: radial-gradient(circle at 55% 45%,rgba(165,109,222,.25),transparent 52%),linear-gradient(135deg,#221d38,#111625); }
+  .concept-note { position: absolute; bottom: 1rem; left: 1rem; color: #a3a6b4; font: 600 .62rem ui-monospace, monospace; }
+  .shelf-graphic { position: relative; width: 235px; height: 200px; transform: rotate(-7deg); }
+  .shelf-card { position: absolute; width: 125px; height: 170px; top: 10px; left: 65px; border: 2px solid #b39c81; border-radius: 12px; background: #54656a; box-shadow: 0 18px 35px #090c1688; }
+  .shelf-card.one { transform: rotate(-19deg) translateX(-33px); background: #b96757; }
+  .shelf-card.two { transform: rotate(15deg) translateX(30px); background: #c3aa75; }
+  .shelf-card.three { display: grid; place-items: center; }
+  .shelf-die { position: absolute; z-index: 3; left: 115px; top: 75px; color: #f2ece3; font-size: 4rem; text-shadow: 0 6px 15px #0008; }
+  .shelf-graphic b { position: absolute; z-index: 3; right: -14px; bottom: -12px; padding: 11px 15px; background: #eee5d4; color: #403b33; font-size: .64rem; letter-spacing: .15em; white-space: nowrap; transform: rotate(7deg); }
+  .usage-graphic, .pip-graphic { width: min(78%, 350px); padding: 1.6rem; border: 1px solid #ffffff30; border-radius: 18px; background: #141b30; box-shadow: 0 30px 60px #070a15aa; transform: rotate(3deg); }
+  .usage-graphic small { display: block; color: #a8aac3; font: 700 .72rem ui-monospace, monospace; letter-spacing: .15em; }
+  .usage-graphic strong { display: block; margin: .6rem 0 1.2rem; font-size: 3.5rem; letter-spacing: -.05em; }
+  .meter { display: block; overflow: hidden; height: 11px; border-radius: 30px; background: #ffffff20; }
+  .meter i { display: block; width: 68%; height: 100%; border-radius: inherit; background: #ffa77c; }
+  .graph-bars { display: flex; align-items: end; gap: .5rem; height: 96px; margin-top: 2rem; }
+  .graph-bars i { flex: 1; height: 36%; border-radius: 5px 5px 0 0; background: #696bad; }
+  .graph-bars i:nth-child(2) { height: 68%; } .graph-bars i:nth-child(3) { height: 54%; } .graph-bars i:nth-child(4) { height: 86%; } .graph-bars i:nth-child(5) { height: 46%; } .graph-bars i:nth-child(6) { height: 72%; } .graph-bars i:nth-child(7) { height: 61%; }
+  .pip-graphic { display: grid; justify-items: center; gap: 1.4rem; background: #1b1a2b; transform: rotate(-3deg); }
+  .pip-face { display: grid; place-items: center; width: 120px; height: 120px; border: 2px solid #d7bbff44; border-radius: 30px; background: linear-gradient(135deg,#8e68b9,#41365c); color: #fff; font: 800 2.6rem ui-monospace, monospace; }
+  .pip-graphic strong { display: flex; justify-content: space-between; width: 100%; padding: .85rem; border-radius: 8px; background: #0f1521; font: 700 .9rem ui-monospace, monospace; }
+  .pip-graphic strong i { color: #7fcca4; font-style: normal; }
+  .pip-graphic small { color: #9b91b5; font: 700 .66rem ui-monospace, monospace; letter-spacing: .12em; }
+  .lab-promo { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-top: 5rem; padding: 3rem; border: 1px solid var(--line-strong); border-radius: 25px; background: linear-gradient(120deg,#1b2133,#141927); }
+  .lab-promo h2 { margin: 0 0 1rem; font-size: clamp(1.9rem, 4vw, 3rem); letter-spacing: -.045em; }
+  .lab-promo p:not(.eyebrow) { max-width: 560px; margin: 0; color: var(--muted); line-height: 1.7; }
+  @media (max-width: 750px) { .catalog-heading { display: block; } .catalog-heading p { margin-top: 1rem; } .catalog-card { grid-template-columns: 1fr; } .catalog-art { min-height: 340px; border-left: none; border-top: 1px solid var(--line); } .lab-promo { align-items: start; flex-direction: column; padding: 2rem; } }
+  @media (max-width: 420px) { .products-hero { padding-bottom: 4rem; } .catalog-main { padding: 1.5rem; } .catalog-main h3 { font-size: 2.6rem; } .catalog-art { min-height: 270px; } .shelf-graphic { transform: scale(.78) rotate(-7deg); } .usage-graphic, .pip-graphic { width: 80%; padding: 1.2rem; } }
+</style>

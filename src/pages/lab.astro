@@ -3,6 +3,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const games = [
   {
+    title: 'Going, Going, Ghoul!',
+    description:
+      'Auction cursed antiques to peculiar buyers. Spot valuable combinations and decide when to sell.',
+    tags: ['Auction','Strategy','Cursed antiques'],
+    url: '/playtests/going-going-ghoul/',
+    image: '/lab/going-going-ghoul.svg',
+    imageAlt: 'Illustrated vintage auction poster for Going, Going, Ghoul!',
+    status: 'New playtest',
+  },
+  {
+    title: 'Gladiator Mayhem',
+    description:
+      'Assemble ridiculous gladiator teams and watch the arena turn carefully laid plans into chaos.',
+    tags: ['Auto-battler','Arena','Pixel art'],
+    url: null,
+    image: '/lab/gladiator-mayhem.svg',
+    imageAlt: 'Chunky pixel-art concept poster for Gladiator Mayhem',
+    status: 'In development',
+  },
+  {
+    title: 'Tiny Heist Planner',
+    description:
+      'Choose a crew, plot a route and watch your supposedly foolproof robbery unfold.',
+    tags: ['Heist','Planning','Simulation'],
+    url: '/playtests/tiny-heist-planner/',
+    image: '/lab/tiny-heist-planner.svg',
+    imageAlt: 'Blueprint-style concept poster for Tiny Heist Planner',
+    status: 'New playtest',
+  },
+  {
     title: 'Personal Effects',
     description:
       "Pack a stranger's final belongings into one suitcase while obeying the increasingly particular requests they left behind.",
@@ -11,15 +41,6 @@ const games = [
     image: '/lab/personal-effects.png',
     imageAlt: 'Personal Effects suitcase-packing game screenshot',
     status: 'New',
-  },
-  {
-    title: 'End of the World',
-    description:
-      'Manage a tiny apocalypse shelter, weigh up impossible choices and decide who gets through the door.',
-    tags: ['Management', 'Decisions', '5–10 min'],
-    url: 'https://end-of-the-world.pages.dev',
-    image: '/lab/end-of-the-world.png',
-    imageAlt: 'End of the World apocalypse shelter game screenshot',
   },
   {
     title: 'Processing the Dead',
@@ -57,15 +78,6 @@ const games = [
     image: '/lab/night-parcel-office.png',
     imageAlt: 'Night Parcel Office late-night sorting game screenshot',
   },
-  {
-    title: 'How Much?!',
-    description:
-      'Guess bizarre prices and discover just how badly calibrated your sense of money really is.',
-    tags: ['Quiz', 'Prices', 'Quick Play'],
-    url: 'https://how-much-live.pages.dev',
-    image: '/lab/how-much.png',
-    imageAlt: 'How Much price-guessing quiz game screenshot',
-  },
 ];
 ---
 
@@ -90,7 +102,7 @@ const games = [
 
       <div class="hero-note">
         <span class="pulse"></span>
-        All experiments currently open to human testing
+        Playable experiments and work-in-progress previews
       </div>
     </section>
 
@@ -101,13 +113,13 @@ const games = [
           <h2 id="games-heading">Pick something to play.</h2>
         </div>
 
-        <span class="experiment-count">{games.length} LIVE</span>
+        <span class="experiment-count">{games.length} EXPERIMENTS</span>
       </div>
 
       <div class="game-grid">
         {
           games.map((game, index) => (
-            <article class="game-card">
+            <article class="game-card" id={game.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '')}>
               <div class="card-top">
                 <div class="game-number">
                   EXP-{String(index + 1).padStart(2, '0')}
@@ -128,16 +140,20 @@ const games = [
                   {game.tags.map((tag) => <span>{tag}</span>)}
                 </div>
 
-                <a
-                  class="play-button"
-                  href={game.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Play ${game.title} prototype`}
-                >
-                  <span>Play prototype</span>
-                  <span class="arrow" aria-hidden="true">↗</span>
-                </a>
+                {game.url ? (
+                  <a
+                    class="play-button"
+                    href={game.url}
+                    target={game.url.startsWith('http') ? '_blank' : undefined}
+                    rel={game.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    aria-label={`Play ${game.title} prototype`}
+                  >
+                    <span>Play prototype</span>
+                    <span class="arrow" aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <div class="availability-note">Playable preview in development</div>
+                )}
               </div>
             </article>
           ))
@@ -480,6 +496,8 @@ const games = [
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
+
+  .availability-note { padding-top: 1rem; border-top: 1px solid var(--border); color: #aaa6ae; font-size: .86rem; font-weight: 650; }
 
   .play-button {
     display: flex;
