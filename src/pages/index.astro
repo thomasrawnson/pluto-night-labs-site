@@ -33,7 +33,7 @@ import { site } from '../config';
 
   <section class="studio-strip" aria-label="About the studio">
     <div class="shell studio-strip-inner">
-      <span class="studio-mark" aria-hidden="true">P//NL</span>
+      <span class="studio-mark" aria-hidden="true">PLUTO NIGHT LABS</span>
       <div>
         <h2>Independent by design. Curious by nature.</h2>
         <p>We're a small independent studio making software that solves problems and games that create interesting ones.</p>
@@ -360,16 +360,22 @@ import { site } from '../config';
     .orbit-scene { margin-top: -10px; }
     .coordinate { display: none; }
     .studio-strip-inner { align-items: start; gap: 14px; }
-    .studio-mark { font-size: .9rem; }
+    .studio-mark { font-size: .72rem; white-space: nowrap; }
     .studio-strip p { font-size: .82rem; }
     .products, .lab, .about { padding: 100px 0; }
     .section-heading { margin-bottom: 40px; }
-    .product-card { min-height: 515px; border-radius: 23px; }
+    /* Mobile cards use document flow so long copy never overlaps artwork. */
+    .product-card { display: flex; flex-direction: column; min-height: 0; border-radius: 23px; }
+    .product-content { flex: 0 0 auto; }
+    .game-visual, .usage-visual, .night-visual { position: relative; inset: auto; flex: 0 0 auto; }
+    .game-visual { height: 265px; width: 100%; margin-top: 5px; }
+    .usage-visual { height: 285px; margin-top: 8px; align-items: center; overflow: hidden; }
+    .night-visual { height: auto; min-height: 0; padding: 16px 20px 20px; }
+    .night-visual img { width: 100%; max-height: none; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
+    .night-visual span { text-align: center; }
     .product-content { padding: 32px 26px 20px; }
     .product-card h3 { font-size: 2.25rem; }
-    .game-visual { top: 58%; }
     .usage-window { min-width: 0; width: 84%; }
-    .night-visual { inset: 51% 0 0; }
     .more-lab { padding: 20px; }
     .more-lab-links { width: 100%; }
     .more-lab-links a { flex: 1; justify-content: space-between; min-width: 0; }
@@ -388,10 +394,10 @@ import { site } from '../config';
     .studio-strip-inner { display: block; }
     .studio-mark { display: block; margin-bottom: 12px; }
     .product-content { padding: 28px 21px 16px; }
-    .product-card { min-height: 525px; }
+    .product-card { min-height: 0; }
     .product-card h3 { font-size: 2.05rem; }
     .product-label { margin-top: 20px; }
-    .night-visual { inset: 54% 0 0; }
+    .night-visual { padding-inline: 14px; }
     .lab-copy { padding: 23px 20px 24px; }
     .more-lab-links { flex-direction: column; }
   }
