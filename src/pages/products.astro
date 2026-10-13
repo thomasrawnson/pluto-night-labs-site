@@ -12,6 +12,7 @@ const products = [
     highlights: ['Board game collection', 'Game discovery', 'Game-night choices'],
     status: 'Coming soon',
     inquiry: 'ShelfPick',
+    details: '/products/shelfpick/',
   },
   {
     id: 'usagegrid',
@@ -23,6 +24,7 @@ const products = [
     highlights: ['Menu-bar overview', 'Usage history', 'Helpful alerts'],
     status: 'In development',
     inquiry: 'UsageGrid',
+    details: '/products/usagegrid/',
   },
   {
     id: 'devpip',
@@ -34,6 +36,7 @@ const products = [
     highlights: ['Repository status', 'GitHub CI visibility', 'Dependency alerts'],
     status: 'In development',
     inquiry: 'DevPip',
+    details: null,
   },
 ];
 ---
@@ -70,13 +73,17 @@ const products = [
               <ul class="highlights">
                 {product.highlights.map((highlight) => <li>{highlight}</li>)}
               </ul>
-              <a class="catalog-link" href={`mailto:hello@plutonightlabs.com?subject=${encodeURIComponent(product.inquiry + ' enquiry')}`}>Ask about {product.name} <span aria-hidden="true">↗</span></a>
+              {product.details ? (
+                <a class="catalog-link" href={product.details}>Explore {product.name} <span aria-hidden="true">→</span></a>
+              ) : (
+                <a class="catalog-link" href={`mailto:hello@plutonightlabs.com?subject=${encodeURIComponent(product.inquiry + ' enquiry')}`}>Ask about {product.name} <span aria-hidden="true">↗</span></a>
+              )}
             </div>
             <div class={`catalog-art art-${product.id}`} aria-hidden="true">
               {product.id === 'shelfpick' && <div class="shelf-graphic"><span class="shelf-die">⚄</span><span class="shelf-card one"></span><span class="shelf-card two"></span><span class="shelf-card three"></span><b>TONIGHT'S PICK</b></div>}
               {product.id === 'usagegrid' && <div class="usage-graphic"><small>THIS WEEK</small><strong>68%</strong><span class="meter"><i></i></span><div class="graph-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>}
               {product.id === 'devpip' && <div class="pip-graphic"><span class="pip-face">›_</span><strong>main <i>✓</i></strong><small>GIT • CI • DEPENDENCIES</small></div>}
-              <span class="concept-note">Product illustration · Not a live screenshot</span>
+              <span class="concept-note">Concept illustration · Not a product screenshot</span>
             </div>
           </article>
         ))}
