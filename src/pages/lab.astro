@@ -3,6 +3,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const games = [
   {
+    title: 'Night Parcel Office',
+    description:
+      'Work the final sorting desk for suspicious late-night parcels. Follow the regulations. Try not to make things worse.',
+    tags: ['Sorting', 'Rules', '5 min'],
+    url: 'https://night-parcel-office.pages.dev',
+    image: '/lab/night-parcel-office.png',
+    imageAlt: 'Night Parcel Office late-night sorting game screenshot',
+  },
+  {
+    title: 'Personal Effects',
+    description:
+      "Pack a stranger's final belongings into one suitcase while obeying the increasingly particular requests they left behind.",
+    tags: ['Puzzle', 'Packing', '5–10 min'],
+    url: 'https://personal-effects.pages.dev',
+    image: '/lab/personal-effects.png',
+    imageAlt: 'Personal Effects suitcase-packing game screenshot',
+  },
+  {
+    title: 'Anomaly Lab',
+    description:
+      'Inspect strange specimens, learn the rules and decide what should — and absolutely should not — leave the lab.',
+    tags: ['Logic', 'Deduction', '5 min'],
+    url: 'https://anomaly-lab.pages.dev',
+    image: '/lab/anomaly-lab.png',
+    imageAlt: 'Anomaly Lab specimen inspection game screenshot',
+  },
+  {
     title: 'Going, Going, Ghoul!',
     description:
       'Auction cursed antiques to peculiar buyers. Spot valuable combinations and decide when to sell.',
@@ -10,7 +37,15 @@ const games = [
     url: '/playtests/going-going-ghoul/',
     image: '/lab/going-going-ghoul.svg',
     imageAlt: 'Illustrated vintage auction poster for Going, Going, Ghoul!',
-    status: 'New playtest',
+  },
+  {
+    title: 'Tiny Heist Planner',
+    description:
+      'Choose a crew, plot a route and watch your supposedly foolproof robbery unfold.',
+    tags: ['Heist','Planning','Simulation'],
+    url: '/playtests/tiny-heist-planner/',
+    image: '/lab/tiny-heist-planner.svg',
+    imageAlt: 'Blueprint-style concept poster for Tiny Heist Planner',
   },
   {
     title: 'Gladiator Mayhem',
@@ -23,24 +58,13 @@ const games = [
     status: 'In development',
   },
   {
-    title: 'Tiny Heist Planner',
+    title: 'Dungeon Care Home',
     description:
-      'Choose a crew, plot a route and watch your supposedly foolproof robbery unfold.',
-    tags: ['Heist','Planning','Simulation'],
-    url: '/playtests/tiny-heist-planner/',
-    image: '/lab/tiny-heist-planner.svg',
-    imageAlt: 'Blueprint-style concept poster for Tiny Heist Planner',
-    status: 'New playtest',
-  },
-  {
-    title: 'Personal Effects',
-    description:
-      "Pack a stranger's final belongings into one suitcase while obeying the increasingly particular requests they left behind.",
-    tags: ['Puzzle', 'Packing', '5–10 min'],
-    url: 'https://personal-effects.pages.dev',
-    image: '/lab/personal-effects.png',
-    imageAlt: 'Personal Effects suitcase-packing game screenshot',
-    status: 'New',
+      'Retired monsters defend bingo night from irritating level-one adventurers. Tea and mobility scooters included.',
+    tags: ['Tower Defence', 'Strategy', 'Comedy'],
+    url: 'https://dungeon-care-home.pages.dev',
+    image: '/lab/dungeon-care-home.png',
+    imageAlt: 'Dungeon Care Home monster tower defence game screenshot',
   },
   {
     title: 'Processing the Dead',
@@ -51,33 +75,6 @@ const games = [
     image: '/lab/processing-the-dead.png',
     imageAlt: 'Processing the Dead afterlife management game screenshot',
   },
-  {
-    title: 'Anomaly Lab',
-    description:
-      'Inspect strange specimens, learn the rules and decide what should — and absolutely should not — leave the lab.',
-    tags: ['Logic', 'Deduction', '5 min'],
-    url: 'https://anomaly-lab.pages.dev',
-    image: '/lab/anomaly-lab.png',
-    imageAlt: 'Anomaly Lab specimen inspection game screenshot',
-  },
-  {
-    title: 'Dungeon Care Home',
-    description:
-      'Retired monsters defend bingo night from irritating level-one adventurers. Tea and mobility scooters included.',
-    tags: ['Tower Defence', 'Strategy', 'Comedy'],
-    url: 'https://dungeon-care-home.pages.dev',
-    image: '/lab/dungeon-care-home.png',
-    imageAlt: 'Dungeon Care Home monster tower defence game screenshot',
-  },
-  {
-    title: 'Night Parcel Office',
-    description:
-      'Work the final sorting desk for suspicious late-night parcels. Follow the regulations. Try not to make things worse.',
-    tags: ['Sorting', 'Rules', '5 min'],
-    url: 'https://night-parcel-office.pages.dev',
-    image: '/lab/night-parcel-office.png',
-    imageAlt: 'Night Parcel Office late-night sorting game screenshot',
-  },
 ];
 ---
 
@@ -85,7 +82,7 @@ const games = [
   title="The Lab | Pluto Night Labs"
   description="Playable game prototypes and experiments from Pluto Night Labs."
 >
-  <main class="lab-page">
+  <div class="lab-page">
     <section class="hero">
       <div class="eyebrow">
         <span class="eyebrow-dot"></span>
@@ -96,13 +93,13 @@ const games = [
 
       <p class="hero-copy">
         Small games, strange ideas and experiments from Pluto Night Labs.
-        These are playable prototypes — some may become full games, some may
-        remain questionable workplace incidents.
+        Try the playable builds, explore the work in progress and help us
+        decide which questionable ideas deserve another shift.
       </p>
 
       <div class="hero-note">
         <span class="pulse"></span>
-        Playable experiments and work-in-progress previews
+        {games.filter((game) => Boolean(game.url)).length} playable builds · {games.filter((game) => !game.url).length} in development
       </div>
     </section>
 
@@ -110,7 +107,7 @@ const games = [
       <div class="section-heading">
         <div>
           <p class="section-kicker">CURRENT EXPERIMENTS</p>
-          <h2 id="games-heading">Pick something to play.</h2>
+          <h2 id="games-heading">Explore the experiments.</h2>
         </div>
 
         <span class="experiment-count">{games.length} EXPERIMENTS</span>
@@ -130,6 +127,7 @@ const games = [
 
               <div class="game-art">
                 <img src={game.image} alt={game.imageAlt} loading="lazy" />
+                {game.image.endsWith('.svg') && <span class="art-caption">Concept illustration</span>}
               </div>
 
               <div class="card-content">
@@ -210,7 +208,7 @@ const games = [
         </button>
 
         <p class="form-note">
-          This opens your email app. Nothing is submitted automatically.
+          Opens your email app with your feedback pre-filled. No message is sent until you choose to send it.
         </p>
       </form>
     </section>
@@ -223,7 +221,7 @@ const games = [
       </p>
       <span>PLUTO NIGHT LABS</span>
     </section>
-  </main>
+  </div>
 </BaseLayout>
 
 <script>
@@ -819,4 +817,11 @@ const games = [
     .feedback-section { border-radius: 7px; }
   }
 
+  .art-caption {
+    position:absolute; z-index:3; right:.6rem; bottom:.6rem;
+    padding:.35rem .5rem; border:1px solid rgba(255,255,255,.2);
+    border-radius:3px; background:rgba(9,14,18,.88);
+    color:#e0d5c4; font:600 .63rem ui-monospace,monospace;
+  }
+  :global(html) { scroll-padding-top:100px; }
 </style>
