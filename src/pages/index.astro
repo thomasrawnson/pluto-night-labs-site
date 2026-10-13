@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../config';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
 ---
 
-<BaseLayout title="Pluto Night Labs — Useful apps. Strange games." description="Pluto Night Labs is an independent UK studio creating practical apps and unusual experimental games. Explore tools and playable prototypes.">
+<BaseLayout title="Pluto Night Labs — Useful apps. Strange games." description="Pluto Night Labs is an independent UK studio creating practical apps and unusual experimental games. Explore tools and playable prototypes." newsletter>
   <section class="hero" id="home">
     <div class="shell hero-grid">
       <div class="hero-copy">
@@ -87,28 +87,12 @@ import { site } from '../config';
     <a class="join-link" href="/playtests/join/">Want to test future games? Request a playtest invite →</a>
   </section>
 
-  <section class="updates shell" id="updates" aria-labelledby="updates-title">
-    <div class="updates-copy">
-      <p class="updates-kicker">POSTCARDS FROM PLUTO</p>
-      <h2 id="updates-title">A little strange news from the lab.</h2>
-      <p>Occasional notes on new games, playtests, beta opportunities and launches. Only when there's something worth sharing.</p>
-    </div>
-    <div class="updates-action">
-      {site.newsletterUrl.startsWith('https://') ? (
-        <a class="updates-button" href={site.newsletterUrl} rel="noopener noreferrer" target="_blank">
-          Join the experiment <span aria-hidden="true">↗</span>
-        </a>
-      ) : (
-        <span class="updates-pending">Email updates coming soon</span>
-      )}
-      <p>No spam. Unsubscribe whenever you like. <a href="/privacy/">Privacy details</a></p>
-    </div>
-  </section>
-
   <section class="about-compact shell" id="about">
     <p>Small studio. Big curiosity.</p>
     <a href="/contact/">Have an idea? Get in touch ↗</a>
   </section>
+
+  <NewsletterSignup />
 </BaseLayout>
 
 <script>
@@ -303,30 +287,4 @@ import { site } from '../config';
     .product-card,.product-card:hover { transform:none; box-shadow:3px 3px 0 rgba(121,92,69,.28); }
     .section-label,.all-games,.other-games { font-size:.71rem; }
   }
-
-  /* A small tactile studio-news section; MailerLite share URL enables the CTA. */
-  .updates {
-    display:flex; align-items:center; justify-content:space-between; gap:2rem;
-    margin-block:2.3rem 1rem; padding-block:1.6rem;
-    border-block:1px solid rgba(255,255,255,.17);
-  }
-  .updates-kicker { margin:0 0 .65rem; color:#ffb78d; font:700 .72rem ui-monospace,monospace; letter-spacing:.09em; }
-  .updates h2 { margin:0 0 .6rem; font:700 clamp(1.45rem,2.6vw,2rem) Georgia,"Iowan Old Style",serif; letter-spacing:-.018em; }
-  .updates-copy > p:last-child { max-width:540px; margin:0; color:#c3c7c4; line-height:1.6; font-size:.88rem; }
-  .updates-action { flex:0 0 auto; max-width:360px; }
-  .updates-button,.updates-pending {
-    display:inline-flex; justify-content:center; align-items:center; gap:1rem; min-height:47px; padding:.75rem 1rem;
-    border:1px solid rgba(255,167,117,.6); border-radius:5px;
-    background:#29251d; color:#ffd2af; font-size:.84rem; font-weight:750;
-  }
-  .updates-button:hover { background:#393024; }
-  .updates-pending { border-color:#657071; color:#c9c8c2; background:#121b1c; }
-  .updates-action p { margin:.7rem 0 0; color:#c3c9c7; font-size:.76rem; line-height:1.45; }
-  .updates-action p a { color:#ffe0ca; text-decoration:underline; text-underline-offset:3px; }
-  @media(max-width:780px) {
-    .updates { flex-direction:column; align-items:stretch; gap:1.2rem; }
-    .updates-action { max-width:none; }
-    .updates-button,.updates-pending { width:100%; }
-  }
-
 </style>
