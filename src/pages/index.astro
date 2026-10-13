@@ -140,7 +140,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   :global(main) { background-color: #090e12; background-image: radial-gradient(circle at 57% 9%, rgba(205,112,55,.07),transparent 26%),radial-gradient(rgba(215,227,215,.10) .5px,transparent .7px); background-size: auto, 67px 71px; }
   .hero { padding: 62px 0 33px; }
   .hero-grid { display:grid; grid-template-columns: 1fr 1fr; align-items:center; gap: 30px; min-height: 435px; }
-  .eyebrow,.section-label,.section-count,.all-games,.scope-hint,.scope-readout,.project-kind,.other-games { font-family: ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em; }
+  .eyebrow,.section-label,.section-count,.scope-hint,.scope-readout,.project-kind { font-family: ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em; }
   .eyebrow { margin:0 0 22px; font-size:.7rem; font-weight:700; }
   h1 { margin:0; font-size:clamp(2.7rem,4.8vw,5rem); line-height:1.04; letter-spacing:-.058em; font-weight:780; }
   h1 em { color:#fa8961; font-style:normal; white-space:nowrap; }
@@ -171,12 +171,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .moon-three { right:17%; bottom:24%; width:15px; height:15px; background:#ffad67; border-color:#ffc496; box-shadow:0 0 17px #e87c43; transform:rotate(var(--offset,0deg)) translateX(15px); }
   .scope-hint { position:absolute; right:0; bottom:4%; color:#9e9996; font-size:.6rem; line-height:1.6; }
   .scope-readout { position:absolute; left:3%; bottom:4%; color:#8d9f91; font-size:.58rem; }
-  .featured,.games { padding-top:39px; }
+  .featured { padding-top:39px; }
   .section-head { display:flex; align-items:center; gap:19px; margin-bottom:19px; }
   .section-label { margin:0; flex-shrink:0; font-size:.72rem; color:#e7e1db; }
   .section-label::before { content:''; display:inline-block; width:19px; height:2px; margin:0 13px 3px 0; background:#ff8c61; }
   .section-rule { height:1px; background:rgba(255,255,255,.13); flex:1; }
-  .section-count,.all-games { font-size:.66rem; color:#a6a8aa; }
+  .section-count { font-size:.66rem; color:#a6a8aa; }
   .all-games:hover { color:#ff9871; }
   .product-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
   .product-card { position:relative; min-width:0; display:flex; flex-direction:column; border:1px solid rgba(255,255,255,.17); border-radius:6px; overflow:hidden; background:#0a1014; transition:border-color .15s ease; }
@@ -206,7 +206,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .product-content p { margin:0; color:#b6b8bb; font-size:.85rem; line-height:1.55; }
   .project-kind { display:flex; align-items:center; gap:9px; margin-top:13px; color:#75e08b; font-size:.64rem; }
   .project-kind i { width:7px; height:7px; border-radius:50%; background:currentColor; }.game-kind { color:#ff9267; }
-  .round-link,.game-arrow { flex-shrink:0; display:grid; place-items:center; width:37px; height:37px; border:1px solid #828386; border-radius:50%; font-size:1.25rem; }
+  .round-link { flex-shrink:0; display:grid; place-items:center; width:37px; height:37px; border:1px solid #828386; border-radius:50%; font-size:1.25rem; }
   .round-link:hover { background:#ff986f; color:#111; border-color:#ff986f; }
   .games { padding:clamp(2rem,4vw,3rem) 0 2rem; }
   .game-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
@@ -245,13 +245,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   .tester-action:hover { background:#ffceac; }
   @media(max-width:920px) { .hero-grid { grid-template-columns:1fr; }.orbit-scene { max-width:450px; }.product-grid { gap:12px; }.game-grid { grid-template-columns:1fr; gap:12px; }.product-content { padding:15px; }.project-art { height:155px; }.product-content h2 { font-size:1.1rem; } }
-  @media(max-width:660px) { .hero { padding-top:46px; }.hero-grid { gap:3px; }.hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }.hero h1 em { white-space:normal; }.orbit-scene { max-width:360px; } { font-size:.57rem; }-center { display:none; }-right { width:100%; }.product-grid { grid-template-columns:1fr; }.product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }.project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }.box-stack { transform:scale(.72) rotate(-6deg); width:110%; }.meeple { display:none; }.mini-window { transform:scale(.67); min-width:150px; }.parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }.product-content { min-height:145px; }.section-head { gap:8px; }.section-label { font-size:.65rem; }.game-row { border-bottom:1px solid #ffffff12; }.other-games { align-items:start; }.other-games span { width:100%; } }
-  @media(max-width:360px) { .product-card { grid-template-columns:100px minmax(0,1fr); }.product-content { padding:12px; }.product-content p { font-size:.78rem; }.hero-actions .button { font-size:.75rem; padding-inline:14px; }.game-art { width:66px; height:66px; flex-basis:66px; }.game-arrow { display:none; } }
+  @media(max-width:660px) {
+    .hero { padding-top:46px; }
+    .hero-grid { gap:3px; }
+    .hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }
+    .hero h1 em { white-space:normal; }
+    .orbit-scene { max-width:360px; }
+    .product-grid { grid-template-columns:1fr; }
+    .product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }
+    .project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }
+    .box-stack { transform:scale(.72) rotate(-6deg); width:110%; }
+    .meeple { display:none; }
+    .mini-window { transform:scale(.67); min-width:150px; }
+    .parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }
+    .product-content { min-height:145px; }
+    .section-head { gap:8px; }
+    .section-label { font-size:.65rem; }
+  }
+  @media(max-width:360px) {
+    .product-card { grid-template-columns:100px minmax(0,1fr); }
+    .product-content { padding:12px; }
+    .product-content p { font-size:.78rem; }
+    .hero-actions .button { font-size:.75rem; padding-inline:14px; }
+  }
   @media(prefers-reduced-motion:reduce){ .moon,.pluto { transition:none; transform:none; } }
   @media(max-width:660px) { .project-kind { font-size:.58rem; letter-spacing:.07em; } }
-  .scope-hint,.scope-readout,.section-count,.all-games,.other-games { color:#b9bfc1; }
+  .scope-hint,.scope-readout,.section-count { color:#b9bfc1; }
   .moon:focus-visible { outline:3px solid #fff5e8; outline-offset:5px; }
-  @media(max-width:660px) { .join-link { font-size:.83rem; } }
 
   /* Real gameplay sits on tactile printed cards, with the existing brand palette. */
   .night-card .project-art {
@@ -288,7 +308,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .product-card:nth-child(3) { box-shadow:5px 5px 0 rgba(130,91,72,.24); }
   .product-card:hover { transform:translateY(-2px) rotate(-.25deg); }
   .section-count,.scope-readout,.scope-hint { font-size:.7rem; color:#bfc5c1; }
-  .game-copy small { font-size:.82rem; color:#c0c6c3; }
   @media(max-width:660px) {
     .hero-copy h1 { letter-spacing:-.03em; }
     .product-card,.product-card:hover { transform:none; box-shadow:3px 3px 0 rgba(121,92,69,.28); }
