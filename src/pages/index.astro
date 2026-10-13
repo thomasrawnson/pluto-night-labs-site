@@ -60,7 +60,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </article>
       <article class="product-card night-card">
         <div class="project-art parcel-art" aria-hidden="true">
-          <div class="parcel-shadow"></div><div class="parcel-box"><span class="parcel-tape"></span><b>NPO</b><small>NIGHT PARCEL OFFICE</small><span class="parcel-barcode">▥▥▥▥▥▥▥▥</span></div>
+          <div class="shot-print">
+            <img class="gameplay-photo" src="/images/games/night-parcel-office/featured.webp" data-fallback="/lab/night-parcel-office.png" alt="" width="800" height="500" loading="lazy" decoding="async" />
+          </div>
         </div>
         <div class="product-content">
           <div><h2>Night Parcel Office</h2><p>Sort. Follow the rules.<br />Survive the shift.</p><span class="project-kind game-kind"><i></i> PLAYABLE · GAME</span></div>
@@ -74,15 +76,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-head"><p class="section-label" id="games-title">MORE FROM THE LAB</p><span class="section-rule"></span><a class="all-games" href="/lab/">ALL EXPERIMENTS ↗</a></div>
     <div class="game-grid">
       <a class="game-row" href="/lab/#personal-effects">
-        <span class="game-art effects-art" aria-hidden="true">P.E.<small>FINAL TRANSIT</small></span>
+        <span class="game-art effects-art" aria-hidden="true"><img src="/images/games/personal-effects/featured.webp" data-fallback="/lab/personal-effects.png" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
         <span class="game-copy"><strong>Personal Effects</strong><small>Pack what matters.</small></span><span class="game-arrow">→</span>
       </a>
       <a class="game-row" href="/lab/#anomaly-lab">
-        <span class="game-art anomaly-art" aria-hidden="true"><span class="specimen">?</span></span>
+        <span class="game-art anomaly-art" aria-hidden="true"><img src="/images/games/anomaly-lab/featured.webp" data-fallback="/lab/anomaly-lab.png" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
         <span class="game-copy"><strong>Anomaly Lab</strong><small>Find the hidden rule.</small></span><span class="game-arrow">→</span>
       </a>
       <a class="game-row" href="/playtests/going-going-ghoul/">
-        <span class="game-art ghoul-art" aria-hidden="true"><span>SOLD?</span></span>
+        <span class="game-art ghoul-art" aria-hidden="true"><img src="/images/games/going-going-ghoul/featured.webp" data-fallback="/lab/going-going-ghoul.svg" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
         <span class="game-copy"><strong>Going, Going, Ghoul!</strong><small>Cursed auctions.</small></span><span class="game-arrow">→</span>
       </a>
     </div>
@@ -97,6 +99,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <script>
+  document.querySelectorAll<HTMLImageElement>('img[data-fallback]').forEach((img) => {
+    const useFallback = () => {
+      const fallback = img.dataset.fallback;
+      if (fallback && !img.src.endsWith(fallback)) img.src = fallback;
+    };
+    img.addEventListener('error', useFallback, { once: true });
+    if (img.complete && img.naturalWidth === 0) useFallback();
+  });
   const moons = document.querySelectorAll<HTMLButtonElement>('.moon');
   const readout = document.getElementById('scope-readout');
   const scene = document.getElementById('orbit-scene');
@@ -221,4 +231,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .scope-hint,.scope-readout,.section-count,.all-games,.other-games { color:#b9bfc1; }
   .moon:focus-visible { outline:3px solid #fff5e8; outline-offset:5px; }
   @media(max-width:660px) { .join-link { font-size:.83rem; } }
+
+  /* Real gameplay sits on tactile printed cards, with the existing brand palette. */
+  .night-card .project-art {
+    background:radial-gradient(ellipse at 55% 65%,rgba(177,120,70,.19),transparent 68%), #19201c;
+  }
+  .shot-print {
+    display:block;
+    width:78%;
+    max-width:280px;
+    aspect-ratio:8/5;
+    padding:5px;
+    border:1px solid #ad9368;
+    border-radius:2px;
+    background:#d4b88c;
+    transform:rotate(-1.2deg);
+    box-shadow:8px 9px 0 #070c0e;
+  }
+  .gameplay-photo {
+    display:block;width:100%;height:100%;object-fit:cover;
+    object-position:center;border-radius:1px;
+  }
+  .game-row .game-art {
+    padding:4px;
+    overflow:hidden;
+    background:#c1aa83;
+    border:1px solid #c1a57c;
+    border-radius:3px;
+    transform:rotate(-2deg);
+    box-shadow:4px 4px 0 rgba(0,0,0,.57);
+  }
+  .game-row:nth-child(2) .game-art { transform:rotate(1deg); }
+  .game-row:nth-child(3) .game-art { transform:rotate(-.8deg); }
+  .game-row .game-art img {
+    display:block;width:100%;height:100%;object-fit:cover;object-position:center;
+    border-radius:1px;
+  }
+  @media(max-width:660px) {
+    .night-card .shot-print { width:89%;padding:3px;box-shadow:4px 5px 0 #070c0e; }
+    .game-row .game-art { transform:none; }
+  }
 </style>
