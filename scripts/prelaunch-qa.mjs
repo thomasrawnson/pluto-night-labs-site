@@ -131,6 +131,23 @@ for (const removed of ['End of the World', 'How Much?!']) {
   if (listedGames.includes(removed)) failures.push(`/lab/: retired listing remains: ${removed}`);
 }
 if (listedGames.length !== 8) failures.push(`/lab/: expected 8 experiments, found ${listedGames.length}`);
+
+const selectedScreenshotSlugs = ['night-parcel-office', 'personal-effects', 'anomaly-lab', 'going-going-ghoul', 'tiny-heist-planner'];
+for (const slug of selectedScreenshotSlugs) {
+  const selector = `#${slug} .game-art img`;
+  const media = await linkPage.locator(selector).evaluate((img) => ({
+    src: img.getAttribute('src'),
+    fallback: img.getAttribute('data-fallback'),
+    loaded: img.complete && img.naturalWidth > 0,
+  }));
+  if (media.src !== `/images/games/${slug}/featured.webp`) {
+    failures.push(`/lab/: screenshot path mismatch for ${slug}: ${media.src}`);
+  }
+  const asset = await linkPage.request.get(`${baseURL}/images/games/${slug}/featured.webp`);
+  if (!asset.ok()) failures.push(`/lab/: screenshot asset missing for ${slug} (${asset.status()})`);
+  if (!media.loaded) failures.push(`/lab/: media failed to load for ${slug}`);
+}
+
 const flagshipOrder = ['Night Parcel Office', 'Personal Effects', 'Anomaly Lab'];
 if (JSON.stringify(listedGames.slice(0,3)) !== JSON.stringify(flagshipOrder)) {
   failures.push(`/lab/: flagship ordering changed: ${listedGames.slice(0,3).join(', ')}`);
@@ -152,6 +169,14 @@ const featured = await linkPage.locator('#featured .product-card').count();
 if (featured !== 3) failures.push(`/: expected 3 featured projects, found ${featured}`);
 if (await linkPage.locator('#featured .devpip-card').count()) failures.push('/: DevPip should not be a featured homepage product');
 if (!await linkPage.locator('#featured .night-card').count()) failures.push('/: missing Night Parcel Office featured card');
+if (!await linkPage.locator('#featured .night-card .shot-print img[src="/images/games/night-parcel-office/featured.webp"]').count()) {
+  failures.push('/: Night Parcel Office must use approved gameplay screenshot');
+}
+for (const slug of ['personal-effects', 'anomaly-lab', 'going-going-ghoul']) {
+  if (!await linkPage.locator(`#games .game-row img[src="/images/games/${slug}/featured.webp"]`).count()) {
+    failures.push(`/: missing homepage screenshot for ${slug}`);
+  }
+}
 if (!await linkPage.locator('.telemetry').getByText('PLUTO NIGHT LABS').count()) failures.push('/: telemetry identity missing');
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
