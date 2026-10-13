@@ -7,11 +7,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="shell hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">Independent UK studio</p>
-        <h1>Useful apps.<br />Strange games.<br /><em>Built with curiosity.</em></h1>
+        <h1>Useful apps.<br /><span class="hero-playful">Strange games.</span><br /><em>Built with curiosity.</em></h1>
         <p class="intro">An independent UK studio creating practical software and experimental games.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#featured">Explore our work <span aria-hidden="true">→</span></a>
-          <a class="button button-secondary" href="#games">Play the games</a>
+          <a class="button button-primary" href="#games">Play the games <span aria-hidden="true">→</span></a>
+          <a class="button button-secondary" href="#featured">Explore apps</a>
         </div>
       </div>
       <div class="orbit-scene" id="orbit-scene" aria-label="Interactive Pluto orbital display">
@@ -24,17 +24,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <button class="moon moon-one" type="button" aria-label="Move the first moon into a new orbit"></button>
         <button class="moon moon-two" type="button" aria-label="Move the second moon into a new orbit"></button>
         <button class="moon moon-three" type="button" aria-label="Move the third moon into a new orbit"></button>
-        <p class="scope-hint">TAP A MOON<br />TO CHANGE ORBIT</p>
-        <p class="scope-readout" id="scope-readout" aria-live="polite">ORBIT // STABLE</p>
+        <p class="scope-hint">TAP A MOON<br />TO MOVE IT</p>
+        <p class="scope-readout" id="scope-readout" aria-live="polite">Orbit steady</p>
       </div>
     </div>
   </section>
-
-  <div class="telemetry shell" aria-label="Studio information">
-    <div class="telemetry-left"><span class="status-light" aria-hidden="true"></span><span>PLUTO NIGHT LABS</span><span class="slash">//</span><span>SYSTEMS: NOMINAL</span></div>
-    <span class="telemetry-center">INDEPENDENT UK STUDIO</span>
-    <span class="telemetry-right">APPS FOR REAL LIFE. GAMES FOR ELSEWHERE.</span>
-  </div>
 
   <section class="featured shell" id="featured" aria-labelledby="featured-title">
     <div class="section-head"><p class="section-label" id="featured-title">FEATURED PROJECTS</p><span class="section-rule"></span><span class="section-count">// 03</span></div>
@@ -115,7 +109,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     moon.addEventListener('click', () => {
       angles[index] = (angles[index] + 74) % 360;
       moon.style.setProperty('--offset', angles[index] + 'deg');
-      if (readout) readout.textContent = 'MOON ' + (index + 1) + ' // ORBIT UPDATED';
+      if (readout) readout.textContent = 'Moon ' + (index + 1) + ' moved';
     });
   });
   // Small motion-only response; no scrolling interception or global custom cursor.
@@ -270,5 +264,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   @media(max-width:660px) {
     .night-card .shot-print { width:89%;padding:3px;box-shadow:4px 5px 0 #070c0e; }
     .game-row .game-art { transform:none; }
+  }
+
+  /* Indie polish: a characterful headline, tactile cards and readable labels. */
+  .hero-copy h1 { letter-spacing:-.037em; }
+  .hero-playful { font-family:Georgia,"Iowan Old Style",serif; font-weight:700; font-style:italic; letter-spacing:-.023em; }
+  .hero { padding-bottom:23px; }
+  .featured { padding-top:28px; }
+  .product-card { box-shadow:5px 5px 0 rgba(123,86,56,.24); }
+  .product-card:nth-child(2) { box-shadow:5px 5px 0 rgba(74,101,92,.24); }
+  .product-card:nth-child(3) { box-shadow:5px 5px 0 rgba(130,91,72,.24); }
+  .product-card:hover { transform:translateY(-2px) rotate(-.25deg); }
+  .section-label,.all-games,.other-games { font-size:.76rem; color:#c5c9c7; }
+  .section-count,.scope-readout,.scope-hint { font-size:.7rem; color:#bfc5c1; }
+  .other-games { letter-spacing:.07em; }
+  .game-copy small { font-size:.82rem; color:#c0c6c3; }
+  @media(max-width:660px) {
+    .hero-copy h1 { letter-spacing:-.03em; }
+    .product-card,.product-card:hover { transform:none; box-shadow:3px 3px 0 rgba(121,92,69,.28); }
+    .section-label,.all-games,.other-games { font-size:.71rem; }
   }
 </style>
