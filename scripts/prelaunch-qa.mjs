@@ -54,6 +54,7 @@ await inspect({ name: 'shelfpick-mobile-320x680', route: '/products/shelfpick/',
 await inspect({ name: 'usagegrid-mobile-390x844', route: '/products/usagegrid/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'lab-mobile-320x680', route: '/lab/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'lab-mobile-390x844', route: '/lab/', viewport: { width: 390, height: 844 } });
+await inspect({ name: 'lab-desktop-1440x900', route: '/lab/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'playtest-invite-mobile-320x680', route: '/playtests/join/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'contact-desktop-1440x900', route: '/contact/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: { width: 1440, height: 900 } });
@@ -156,6 +157,19 @@ if (await linkPage.locator('#main-content main').count()) failures.push('/lab/: 
 if (!await linkPage.getByRole('heading', { name: 'Explore the experiments.' }).count()) failures.push('/lab/: exploratory heading missing');
 if (!await linkPage.locator('#gladiator-mayhem .new-badge').count()) failures.push('/lab/: missing in-development state');
 if (await linkPage.locator('.art-caption').count() !== 3) failures.push('/lab/: concept artwork not labelled');
+// Release check: run with REQUIRE_GAME_CLIPS=1 after video files are committed.
+if (process.env.REQUIRE_GAME_CLIPS === '1') {
+  for (const [slug, title] of [['personal-effects','Personal Effects'], ['anomaly-lab','Anomaly Lab']]) {
+    const video = linkPage.locator(`#${slug} video`);
+    if (!await video.count()) failures.push(`/lab/: gameplay clip missing for ${title}`);
+    else {
+      const src = await video.locator('source').getAttribute('src');
+      const response = await linkPage.request.get(new URL(src, baseURL).href);
+      if (!response.ok()) failures.push(`/lab/: video HTTP ${response.status()} for ${title}`);
+      if (await video.getAttribute('autoplay') !== null) failures.push(`/lab/: video must not autoplay for ${title}`);
+    }
+  }
+}
 const gladiatorLink = await linkPage.locator('#gladiator-mayhem a.play-button').count();
 if (gladiatorLink) failures.push('/lab/: Gladiator Mayhem must not claim a playable build');
 for (const slug of ['going-going-ghoul', 'tiny-heist-planner']) {
@@ -177,7 +191,8 @@ for (const slug of ['personal-effects', 'anomaly-lab', 'going-going-ghoul']) {
     failures.push(`/: missing homepage screenshot for ${slug}`);
   }
 }
-if (!await linkPage.locator('.telemetry').getByText('PLUTO NIGHT LABS').count()) failures.push('/: telemetry identity missing');
+if (!await linkPage.locator('.site-header .brand').count()) failures.push('/: studio brand missing from navigation');
+if (await linkPage.locator('.telemetry').count()) failures.push('/: redundant status strip remains on homepage');
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
   await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
