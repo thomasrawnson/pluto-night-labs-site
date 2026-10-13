@@ -181,6 +181,20 @@ for (const slug of ['personal-effects', 'anomaly-lab', 'going-going-ghoul']) {
 }
 if (!await linkPage.locator('.site-header .brand').count()) failures.push('/: studio brand missing from navigation');
 if (await linkPage.locator('.telemetry').count()) failures.push('/: redundant status strip remains on homepage');
+
+if (!await linkPage.getByRole('heading', { name: 'A little strange news from the lab.' }).count()) {
+  failures.push('/: newsletter section missing');
+}
+const mailerLink = linkPage.locator('#updates a.updates-button');
+if (await mailerLink.count()) {
+  const href = await mailerLink.getAttribute('href');
+  if (!href?.startsWith('https://')) failures.push('/: MailerLite signup must link to a verified HTTPS page');
+} else if (!await linkPage.locator('#updates .updates-pending').count()) {
+  failures.push('/: newsletter must show a truthful pending state when signup is not configured');
+}
+if (!await linkPage.locator('#updates a[href="/privacy/"]').count()) {
+  failures.push('/: newsletter privacy link missing');
+}
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
   await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
