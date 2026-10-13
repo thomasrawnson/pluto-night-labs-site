@@ -738,4 +738,85 @@ const games = [
       transition: none;
     }
   }
+
+
+  /* Night Lab surface: mirrors the minimal homepage's charcoal, dots and accents. */
+  :global(body) { background: #090e12; }
+  :global(#main-content) {
+    background-color: #090e12;
+    background-image:
+      radial-gradient(circle at 57% 9%, rgba(205,112,55,.07), transparent 26%),
+      radial-gradient(rgba(215,227,215,.10) .5px, transparent .7px);
+    background-size: auto, 67px 71px;
+  }
+
+  /* A compact hero brings the first experiments into view sooner. */
+  .lab-page {
+    --orange: #ff9169;
+    --cream: #f4efe7;
+    --muted: #b6b8bb;
+    --panel: #0a1014;
+    --panel-light: #11191b;
+    --border: rgba(255,255,255,.16);
+    width: min(calc(100% - 40px), var(--shell));
+    max-width: var(--shell);
+    padding: 3rem 0 3.5rem;
+  }
+  .hero { max-width: 780px; padding: 0 0 2.6rem; }
+  .eyebrow { margin-bottom: 1rem; font-weight: 700; }
+  .eyebrow-dot, .pulse { box-shadow: 0 0 9px rgba(255,145,105,.35); }
+  h1 { font-size: clamp(3.6rem, 7.2vw, 6.2rem); line-height: 1; }
+  .hero-copy {
+    margin-top: 1.15rem;
+    color: #c0c2c6;
+    font-size: clamp(.98rem, 1.6vw, 1.12rem);
+    line-height: 1.6;
+  }
+  .hero-note {
+    max-width: 100%;
+    margin-top: 1.25rem;
+    padding: .55rem .85rem;
+    border-radius: 5px;
+    color: #a8adb0;
+    line-height: 1.5;
+  }
+  .games-section { padding: .4rem 0 5rem; }
+  .section-heading { padding-bottom: 1.15rem; margin-bottom: 1.35rem; }
+  .section-heading h2, .feedback-copy h2 { font-size: clamp(1.8rem, 3.5vw, 2.7rem); }
+  .section-kicker::before {
+    content: '';
+    display: inline-block;
+    width: 17px;
+    height: 2px;
+    margin: 0 10px 3px 0;
+    background: currentColor;
+  }
+  .game-card {
+    border-radius: 7px;
+    background: var(--panel);
+  }
+  .game-card:hover {
+    border-color: rgba(255,145,105,.5);
+    background: #10171b;
+  }
+  .new-badge { border-radius: 3px; }
+  .game-art { background: #10171b; }
+  .game-art img { border-radius: 4px; }
+  .tags span { border-radius: 3px; color: #a6aaad; }
+  .feedback-section { border-radius: 7px; background: var(--panel); }
+  .feedback-form select, .feedback-form textarea { border-radius: 5px; }
+  .feedback-button { border-radius: 5px; }
+  @media (max-width: 620px) {
+    .lab-page {
+      width: min(calc(100% - 28px), var(--shell));
+      padding: 2rem 0;
+    }
+    .hero { padding: 0 0 2rem; }
+    h1 { font-size: clamp(3.3rem, 15vw, 4.5rem); }
+    .hero-copy { margin-top: 1rem; font-size: .97rem; }
+    .section-heading { align-items: flex-start; gap: .6rem; }
+    .experiment-count { margin-top: 1rem; font-size: .62rem; white-space: nowrap; }
+    .feedback-section { border-radius: 7px; }
+  }
+
 </style>
