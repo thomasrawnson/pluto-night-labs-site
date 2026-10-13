@@ -157,19 +157,7 @@ if (await linkPage.locator('#main-content main').count()) failures.push('/lab/: 
 if (!await linkPage.getByRole('heading', { name: 'Explore the experiments.' }).count()) failures.push('/lab/: exploratory heading missing');
 if (!await linkPage.locator('#gladiator-mayhem .new-badge').count()) failures.push('/lab/: missing in-development state');
 if (await linkPage.locator('.art-caption').count() !== 3) failures.push('/lab/: concept artwork not labelled');
-// Release check: run with REQUIRE_GAME_CLIPS=1 after video files are committed.
-if (process.env.REQUIRE_GAME_CLIPS === '1') {
-  for (const [slug, title] of [['personal-effects','Personal Effects'], ['anomaly-lab','Anomaly Lab']]) {
-    const video = linkPage.locator(`#${slug} video`);
-    if (!await video.count()) failures.push(`/lab/: gameplay clip missing for ${title}`);
-    else {
-      const src = await video.locator('source').getAttribute('src');
-      const response = await linkPage.request.get(new URL(src, baseURL).href);
-      if (!response.ok()) failures.push(`/lab/: video HTTP ${response.status()} for ${title}`);
-      if (await video.getAttribute('autoplay') !== null) failures.push(`/lab/: video must not autoplay for ${title}`);
-    }
-  }
-}
+if (await linkPage.locator('.clip-details, video').count()) failures.push('/lab/: videos should not appear while recordings are paused');
 const gladiatorLink = await linkPage.locator('#gladiator-mayhem a.play-button').count();
 if (gladiatorLink) failures.push('/lab/: Gladiator Mayhem must not claim a playable build');
 for (const slug of ['going-going-ghoul', 'tiny-heist-planner']) {
