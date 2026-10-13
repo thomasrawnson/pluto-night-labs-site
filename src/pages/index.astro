@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
 ---
 
-<BaseLayout title="Pluto Night Labs — Useful apps. Strange games." description="Pluto Night Labs is an independent UK studio creating practical apps and unusual experimental games. Explore tools and playable prototypes.">
+<BaseLayout title="Pluto Night Labs — Useful apps. Strange games." description="Pluto Night Labs is an independent UK studio creating practical apps and unusual experimental games. Explore tools and playable prototypes." newsletter>
   <section class="hero" id="home">
     <div class="shell hero-grid">
       <div class="hero-copy">
@@ -90,6 +91,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p>Small studio. Big curiosity.</p>
     <a href="/contact/">Have an idea? Get in touch ↗</a>
   </section>
+
+  <NewsletterSignup />
 </BaseLayout>
 
 <script>
