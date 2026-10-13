@@ -8,8 +8,9 @@ const games = [
       'Work the final sorting desk for suspicious late-night parcels. Follow the regulations. Try not to make things worse.',
     tags: ['Sorting', 'Rules', '5 min'],
     url: 'https://night-parcel-office.pages.dev',
-    image: '/lab/night-parcel-office.png',
-    imageAlt: 'Night Parcel Office late-night sorting game screenshot',
+    image: '/images/games/night-parcel-office/featured.webp',
+    fallbackImage: '/lab/night-parcel-office.png',
+    imageAlt: 'Actual Night Parcel Office gameplay showing a parcel routing decision, paperwork and regulations',
   },
   {
     title: 'Personal Effects',
@@ -17,8 +18,9 @@ const games = [
       "Pack a stranger's final belongings into one suitcase while obeying the increasingly particular requests they left behind.",
     tags: ['Puzzle', 'Packing', '5–10 min'],
     url: 'https://personal-effects.pages.dev',
-    image: '/lab/personal-effects.png',
-    imageAlt: 'Personal Effects suitcase-packing game screenshot',
+    image: '/images/games/personal-effects/featured.webp',
+    fallbackImage: '/lab/personal-effects.png',
+    imageAlt: 'Actual Personal Effects gameplay showing a suitcase packed with the Magician's belongings',
   },
   {
     title: 'Anomaly Lab',
@@ -26,8 +28,9 @@ const games = [
       'Inspect strange specimens, learn the rules and decide what should — and absolutely should not — leave the lab.',
     tags: ['Logic', 'Deduction', '5 min'],
     url: 'https://anomaly-lab.pages.dev',
-    image: '/lab/anomaly-lab.png',
-    imageAlt: 'Anomaly Lab specimen inspection game screenshot',
+    image: '/images/games/anomaly-lab/featured.webp',
+    fallbackImage: '/lab/anomaly-lab.png',
+    imageAlt: 'Actual Anomaly Lab gameplay showing the specimen-selection board',
   },
   {
     title: 'Going, Going, Ghoul!',
@@ -35,8 +38,9 @@ const games = [
       'Auction cursed antiques to peculiar buyers. Spot valuable combinations and decide when to sell.',
     tags: ['Auction','Strategy','Cursed antiques'],
     url: '/playtests/going-going-ghoul/',
-    image: '/lab/going-going-ghoul.svg',
-    imageAlt: 'Illustrated vintage auction poster for Going, Going, Ghoul!',
+    image: '/images/games/going-going-ghoul/featured.webp',
+    fallbackImage: '/lab/going-going-ghoul.svg',
+    imageAlt: 'Actual Going, Going, Ghoul! gameplay showing cursed antiques in the auction cabinet',
   },
   {
     title: 'Tiny Heist Planner',
@@ -44,8 +48,9 @@ const games = [
       'Choose a crew, plot a route and watch your supposedly foolproof robbery unfold.',
     tags: ['Heist','Planning','Simulation'],
     url: '/playtests/tiny-heist-planner/',
-    image: '/lab/tiny-heist-planner.svg',
-    imageAlt: 'Blueprint-style concept poster for Tiny Heist Planner',
+    image: '/images/games/tiny-heist-planner/featured.webp',
+    fallbackImage: '/lab/tiny-heist-planner.svg',
+    imageAlt: 'Actual Tiny Heist Planner gameplay showing guards, loot and a heist blueprint',
   },
   {
     title: 'Gladiator Mayhem',
@@ -116,7 +121,7 @@ const games = [
       <div class="game-grid">
         {
           games.map((game, index) => (
-            <article class="game-card" id={game.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '')}>
+            <article class={`game-card game-${game.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '')}`} id={game.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-$/, '')}>
               <div class="card-top">
                 <div class="game-number">
                   EXP-{String(index + 1).padStart(2, '0')}
@@ -126,7 +131,7 @@ const games = [
               </div>
 
               <div class="game-art">
-                <img src={game.image} alt={game.imageAlt} loading="lazy" />
+                <img src={game.image} alt={game.imageAlt} data-fallback={game.fallbackImage} width="800" height="500" loading="lazy" decoding="async" />
                 {game.image.endsWith('.svg') && <span class="art-caption">Concept illustration</span>}
               </div>
 
@@ -233,6 +238,16 @@ const games = [
 </BaseLayout>
 
 <script>
+  // Keep working preview imagery while the curated screenshot pack is being uploaded.
+  document.querySelectorAll<HTMLImageElement>('img[data-fallback]').forEach((img) => {
+    const useFallback = () => {
+      const fallback = img.dataset.fallback;
+      if (fallback && !img.src.endsWith(fallback)) img.src = fallback;
+    };
+    img.addEventListener('error', useFallback, { once: true });
+    if (img.complete && img.naturalWidth === 0) useFallback();
+  });
+
   const form = document.querySelector<HTMLFormElement>('#feedback-form');
 
   form?.addEventListener('submit', (event) => {
@@ -839,4 +854,64 @@ const games = [
   .experiment-count { color:#b6bbbf; }
   .tags span,.game-number { color:#b4b8bd; }
   @media(max-width:620px) { .testing-invite { padding:1.35rem; }.testing-invite a { width:100%; text-align:center; } }
+
+  /* Gameplay-first cards: real screenshots presented as slightly imperfect game-box labels. */
+  .game-grid {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+  .game-card {
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    border-radius:7px;
+    background:#141914;
+    border-color:rgba(221,197,151,.3);
+    box-shadow: 6px 7px 0 rgba(0,0,0,.48);
+  }
+  .game-card:nth-child(3n+2) { background:#171c1c; }
+  .game-card:nth-child(3n) { background:#1b1817; }
+  .game-art {
+    width:calc(100% - 18px);
+    min-height:0;
+    aspect-ratio: 8 / 5;
+    margin:9px auto 0;
+    padding:6px;
+    border:1px solid #a99675;
+    border-radius:3px;
+    background:#d4b890;
+    overflow:hidden;
+    transform:rotate(-.6deg);
+    box-shadow: 4px 5px 0 rgba(0,0,0,.32);
+  }
+  .game-card:nth-child(even) .game-art { transform:rotate(.55deg); }
+  .game-art img {
+    width:100%;height:100%;object-fit:cover;object-position:center;
+    border-radius:1px;
+  }
+  .card-top { top:1.2rem;left:1.1rem;right:1.1rem; }
+  .game-number { padding:.22rem .35rem; background:rgba(6,10,9,.84); color:#eee4d1; border-radius:2px; }
+  .new-badge { box-shadow: 2px 2px 0 rgba(0,0,0,.45); }
+  .card-content { flex:1; padding:1.45rem 1.4rem 1.2rem; }
+  .card-content h3 { font-size:clamp(1.28rem,2vw,1.62rem);line-height:1.14; }
+  .card-content p { font-size:.91rem;line-height:1.58; }
+  .art-caption { bottom:1rem;right:1rem; }
+  @media (max-width:1050px) {
+    .game-grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:1.3rem; }
+  }
+  @media (max-width:700px) {
+    .game-grid { grid-template-columns:minmax(0,1fr);gap:1.35rem; }
+    .game-card { display:flex; }
+    .game-art {
+      aspect-ratio:8/5;
+      width:calc(100% - 18px);
+      min-height:0;
+      border:1px solid #a99675;
+      padding:6px;
+    }
+    .card-content { padding:1.2rem 1.25rem 1.35rem; }
+    .game-art img { object-fit:cover; }
+    .game-card:hover { transform:none; }
+  }
 </style>
