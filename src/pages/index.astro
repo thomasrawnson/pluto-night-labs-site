@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../config';
 ---
 
 <BaseLayout title="Pluto Night Labs — Useful apps. Strange games." description="Pluto Night Labs is an independent UK studio creating practical apps and unusual experimental games. Explore tools and playable prototypes.">
@@ -68,46 +67,40 @@ import { site } from '../config';
   </section>
 
   <section class="games shell" id="games" aria-labelledby="games-title">
-    <div class="section-head"><p class="section-label" id="games-title">PLAYABLE EXPERIMENTS</p><span class="section-rule"></span><a class="all-games" href="/lab/">ALL EXPERIMENTS ↗</a></div>
+    <div class="section-head">
+      <h2 class="games-title" id="games-title">More strange games</h2>
+      <span class="section-rule" aria-hidden="true"></span>
+    </div>
     <div class="game-grid">
-      <a class="game-row" href="/lab/#personal-effects">
-        <span class="game-art effects-art" aria-hidden="true"><img src="/images/games/personal-effects/featured.webp" data-fallback="/lab/personal-effects.png" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
-        <span class="game-copy"><strong>Personal Effects</strong><small>Pack what matters.</small></span><span class="game-arrow">→</span>
+      <a class="game-row" href="/lab/#personal-effects" aria-label="Explore Personal Effects in the Lab">
+        <span class="game-art effects-art" aria-hidden="true">
+          <img src="/images/games/personal-effects/featured.webp" data-fallback="/lab/personal-effects.png" alt="" width="800" height="500" loading="lazy" decoding="async" />
+        </span>
+        <span class="game-copy"><strong>Personal Effects</strong><small>Pack what matters.</small></span>
       </a>
-      <a class="game-row" href="/lab/#anomaly-lab">
-        <span class="game-art anomaly-art" aria-hidden="true"><img src="/images/games/anomaly-lab/featured.webp" data-fallback="/lab/anomaly-lab.png" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
-        <span class="game-copy"><strong>Anomaly Lab</strong><small>Find the hidden rule.</small></span><span class="game-arrow">→</span>
+      <a class="game-row" href="/lab/#anomaly-lab" aria-label="Explore Anomaly Lab in the Lab">
+        <span class="game-art anomaly-art" aria-hidden="true">
+          <img src="/images/games/anomaly-lab/featured.webp" data-fallback="/lab/anomaly-lab.png" alt="" width="800" height="500" loading="lazy" decoding="async" />
+        </span>
+        <span class="game-copy"><strong>Anomaly Lab</strong><small>Find the hidden rule.</small></span>
       </a>
-      <a class="game-row" href="/playtests/going-going-ghoul/">
-        <span class="game-art ghoul-art" aria-hidden="true"><img src="/images/games/going-going-ghoul/featured.webp" data-fallback="/lab/going-going-ghoul.svg" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
-        <span class="game-copy"><strong>Going, Going, Ghoul!</strong><small>Cursed auctions.</small></span><span class="game-arrow">→</span>
+      <a class="game-row" href="/playtests/going-going-ghoul/" aria-label="Play Going, Going, Ghoul! prototype">
+        <span class="game-art ghoul-art" aria-hidden="true">
+          <img src="/images/games/going-going-ghoul/featured.webp" data-fallback="/lab/going-going-ghoul.svg" alt="" width="800" height="500" loading="lazy" decoding="async" />
+        </span>
+        <span class="game-copy"><strong>Going, Going, Ghoul!</strong><small>Cursed auctions.</small></span>
       </a>
     </div>
-    <div class="other-games"><span>ALSO IN THE LAB</span><a href="/lab/#tiny-heist-planner">View Tiny Heist Planner →</a><a href="/lab/#gladiator-mayhem">See Gladiator Mayhem →</a></div>
-    <a class="join-link" href="/playtests/join/">Want to test future games? Request a playtest invite →</a>
+    <a class="explore-all" href="/lab/">Explore all experiments <span aria-hidden="true">→</span></a>
   </section>
 
-  <section class="updates shell" id="updates" aria-labelledby="updates-title">
-    <div class="updates-copy">
-      <p class="updates-kicker">POSTCARDS FROM PLUTO</p>
-      <h2 id="updates-title">A little strange news from the lab.</h2>
-      <p>Occasional notes on new games, playtests, beta opportunities and launches. Only when there's something worth sharing.</p>
+  <section class="tester-strip shell" aria-labelledby="tester-title">
+    <div class="tester-copy">
+      <p class="tester-eyebrow">Help shape the next game</p>
+      <h2 id="tester-title">Help test our strange ideas.</h2>
+      <p>Play early builds. Break things. Tell us what went wrong.</p>
     </div>
-    <div class="updates-action">
-      {site.newsletterUrl.startsWith('https://') ? (
-        <a class="updates-button" href={site.newsletterUrl} rel="noopener noreferrer" target="_blank">
-          Join the experiment <span aria-hidden="true">↗</span>
-        </a>
-      ) : (
-        <span class="updates-pending">Email updates coming soon</span>
-      )}
-      <p>No spam. Unsubscribe whenever you like. <a href="/privacy/">Privacy details</a></p>
-    </div>
-  </section>
-
-  <section class="about-compact shell" id="about">
-    <p>Small studio. Big curiosity.</p>
-    <a href="/contact/">Have an idea? Get in touch ↗</a>
+    <a class="tester-action" href="/playtests/join/">Become a playtester <span aria-hidden="true">→</span></a>
   </section>
 </BaseLayout>
 
@@ -147,7 +140,7 @@ import { site } from '../config';
   :global(main) { background-color: #090e12; background-image: radial-gradient(circle at 57% 9%, rgba(205,112,55,.07),transparent 26%),radial-gradient(rgba(215,227,215,.10) .5px,transparent .7px); background-size: auto, 67px 71px; }
   .hero { padding: 62px 0 33px; }
   .hero-grid { display:grid; grid-template-columns: 1fr 1fr; align-items:center; gap: 30px; min-height: 435px; }
-  .eyebrow,.section-label,.section-count,.all-games,.telemetry,.scope-hint,.scope-readout,.project-kind,.other-games { font-family: ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em; }
+  .eyebrow,.section-label,.section-count,.scope-hint,.scope-readout,.project-kind { font-family: ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em; }
   .eyebrow { margin:0 0 22px; font-size:.7rem; font-weight:700; }
   h1 { margin:0; font-size:clamp(2.7rem,4.8vw,5rem); line-height:1.04; letter-spacing:-.058em; font-weight:780; }
   h1 em { color:#fa8961; font-style:normal; white-space:nowrap; }
@@ -178,16 +171,12 @@ import { site } from '../config';
   .moon-three { right:17%; bottom:24%; width:15px; height:15px; background:#ffad67; border-color:#ffc496; box-shadow:0 0 17px #e87c43; transform:rotate(var(--offset,0deg)) translateX(15px); }
   .scope-hint { position:absolute; right:0; bottom:4%; color:#9e9996; font-size:.6rem; line-height:1.6; }
   .scope-readout { position:absolute; left:3%; bottom:4%; color:#8d9f91; font-size:.58rem; }
-  .telemetry { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; padding-block:14px; border-block:1px solid rgba(255,255,255,.16); color:#8ddb9b; font-size:.63rem; }
-  .telemetry-left { display:flex; align-items:center; flex-wrap:wrap; gap:13px; }
-  .status-light { width:7px; height:7px; border-radius:50%; background:#70dc87; box-shadow:0 0 8px rgba(111,220,132,.4); }
-  .slash { color:#56745c; }.telemetry-center,.telemetry-right { color:#a8aab0; }
-  .featured,.games { padding-top:39px; }
+  .featured { padding-top:39px; }
   .section-head { display:flex; align-items:center; gap:19px; margin-bottom:19px; }
   .section-label { margin:0; flex-shrink:0; font-size:.72rem; color:#e7e1db; }
   .section-label::before { content:''; display:inline-block; width:19px; height:2px; margin:0 13px 3px 0; background:#ff8c61; }
   .section-rule { height:1px; background:rgba(255,255,255,.13); flex:1; }
-  .section-count,.all-games { font-size:.66rem; color:#a6a8aa; }
+  .section-count { font-size:.66rem; color:#a6a8aa; }
   .all-games:hover { color:#ff9871; }
   .product-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
   .product-card { position:relative; min-width:0; display:flex; flex-direction:column; border:1px solid rgba(255,255,255,.17); border-radius:6px; overflow:hidden; background:#0a1014; transition:border-color .15s ease; }
@@ -217,33 +206,72 @@ import { site } from '../config';
   .product-content p { margin:0; color:#b6b8bb; font-size:.85rem; line-height:1.55; }
   .project-kind { display:flex; align-items:center; gap:9px; margin-top:13px; color:#75e08b; font-size:.64rem; }
   .project-kind i { width:7px; height:7px; border-radius:50%; background:currentColor; }.game-kind { color:#ff9267; }
-  .round-link,.game-arrow { flex-shrink:0; display:grid; place-items:center; width:37px; height:37px; border:1px solid #828386; border-radius:50%; font-size:1.25rem; }
+  .round-link { flex-shrink:0; display:grid; place-items:center; width:37px; height:37px; border:1px solid #828386; border-radius:50%; font-size:1.25rem; }
   .round-link:hover { background:#ff986f; color:#111; border-color:#ff986f; }
-  .games { padding-bottom:32px; }
-  .game-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:23px; }
-  .game-row { display:flex; align-items:center; min-width:0; gap:13px; padding-block:5px; }
-  .game-row:hover strong { color:#ffa681; }
-  .game-art { width:85px; height:85px; flex:0 0 85px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.15); border-radius:6px; font-family:Georgia,serif; }
-  .effects-art { background:#302922; color:#e1bc91; font-size:1.5rem; font-weight:bold; }.effects-art small { display:block; margin-top:-31px; font:700 .39rem ui-monospace,monospace; }
-  .anomaly-art { background:#122821; }.specimen { width:39px; height:50px; display:grid; place-items:center; border:2px solid #4bbd86; border-radius:12px; color:#8de5ad; font-size:2rem; background:#175339; box-shadow:0 0 13px #237d4d77; }
-  .ghoul-art { background:#302118; }.ghoul-art span { padding:8px 6px; border:2px solid #bd9467; transform:rotate(-12deg); color:#e9bc83; font:800 .8rem ui-monospace,monospace; }
-  .game-copy { flex:1; min-width:0; }.game-copy strong { display:block; font-size:.85rem; }.game-copy small { display:block; margin-top:8px; color:#a9adb0; font-size:.77rem; }
-  .game-arrow { width:29px; height:29px; font-size:1rem; }
-  .other-games { display:flex; align-items:center; flex-wrap:wrap; gap:18px; margin-top:26px; border-top:1px solid #ffffff18; padding-top:17px; color:#a7adae; font-size:.6rem; }
-  .other-games a { color:#e4dfda; }.other-games a:hover { color:#ff9a70; }
-  .join-link { display:inline-flex; align-items:center; min-height:48px; margin:19px 0 0; color:#ffd0b5; font-weight:750; font-size:.9rem; text-decoration:underline; text-underline-offset:5px; }
-  .join-link:hover { color:#fff0e7; }
-  .about-compact { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; border-top:1px solid #ffffff1b; padding-block:20px 34px; color:#aab0b3; font-size:.8rem; }
-  .about-compact p { margin:0; }.about-compact a { color:#e6a58b; }
+  .games { padding:clamp(2rem,4vw,3rem) 0 2rem; }
+  .game-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+  .game-row {
+    display:flex; flex-direction:column; min-width:0; padding:0; gap:0;
+    border:1px solid rgba(255,255,255,.18); border-radius:6px;
+    background:#101717; box-shadow:5px 5px 0 rgba(116,86,64,.25);
+    transition:transform .18s ease,border-color .18s ease;
+  }
+  .game-row:nth-child(2) { background:#11201d; box-shadow:5px 5px 0 rgba(81,112,93,.25); }
+  .game-row:nth-child(3) { background:#211b18; box-shadow:5px 5px 0 rgba(157,108,66,.25); }
+  .game-row:hover,.game-row:focus-visible { border-color:#edb08b; transform:translateY(-2px); }
+  .game-art { display:block; width:100%; height:auto; aspect-ratio:8/5; overflow:hidden; border-bottom:1px solid rgba(255,255,255,.15); }
+  .game-copy { display:flex; flex-direction:column; gap:7px; padding:17px 18px 19px; }
+  .game-copy strong { display:block; color:#f4efe7; font-size:1.04rem; letter-spacing:-.01em; }
+  .game-copy small { display:block; color:#c3c9c5; font-size:.86rem; line-height:1.45; }
+  .games-title { margin:0; flex-shrink:0; font:700 clamp(1.5rem,2.5vw,2rem) Georgia,"Iowan Old Style",serif; letter-spacing:-.02em; }
+  .explore-all {
+    display:table; margin:25px 0 0 auto; min-height:44px; padding:11px 0;
+    color:#ffc7a6; border-bottom:1px solid #ffad7a; font-size:.94rem; font-weight:750;
+  }
+  .explore-all span { margin-left:.75rem; }
+  .explore-all:hover { color:#fff2e8; }
+  .tester-strip {
+    display:flex; align-items:center; justify-content:space-between; gap:30px;
+    margin-block:18px 40px; padding-block:28px;
+    border-top:1px solid rgba(255,255,255,.2);
+  }
+  .tester-eyebrow { margin:0 0 9px; color:#ffba92; font-size:.76rem; font-weight:750; }
+  .tester-copy h2 { margin:0 0 7px; font:700 clamp(1.4rem,2.4vw,1.9rem) Georgia,"Iowan Old Style",serif; }
+  .tester-copy p:last-child { margin:0; color:#c4c9c7; font-size:.91rem; line-height:1.6; }
+  .tester-action {
+    display:inline-flex; align-items:center; justify-content:center; gap:13px;
+    flex:0 0 auto; min-height:48px; padding:11px 19px; border:1px solid #c78e68;
+    border-radius:5px; color:#1e140d; background:#ffb17f; font-weight:800; font-size:.88rem;
+  }
+  .tester-action:hover { background:#ffceac; }
   @media(max-width:920px) { .hero-grid { grid-template-columns:1fr; }.orbit-scene { max-width:450px; }.product-grid { gap:12px; }.game-grid { grid-template-columns:1fr; gap:12px; }.product-content { padding:15px; }.project-art { height:155px; }.product-content h2 { font-size:1.1rem; } }
-  @media(max-width:660px) { .hero { padding-top:46px; }.hero-grid { gap:3px; }.hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }.hero h1 em { white-space:normal; }.orbit-scene { max-width:360px; }.telemetry { font-size:.57rem; }.telemetry-center { display:none; }.telemetry-right { width:100%; }.product-grid { grid-template-columns:1fr; }.product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }.project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }.box-stack { transform:scale(.72) rotate(-6deg); width:110%; }.meeple { display:none; }.mini-window { transform:scale(.67); min-width:150px; }.parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }.product-content { min-height:145px; }.section-head { gap:8px; }.section-label { font-size:.65rem; }.game-row { border-bottom:1px solid #ffffff12; }.other-games { align-items:start; }.other-games span { width:100%; } }
-  @media(max-width:360px) { .product-card { grid-template-columns:100px minmax(0,1fr); }.product-content { padding:12px; }.product-content p { font-size:.78rem; }.hero-actions .button { font-size:.75rem; padding-inline:14px; }.game-art { width:66px; height:66px; flex-basis:66px; }.game-arrow { display:none; } }
+  @media(max-width:660px) {
+    .hero { padding-top:46px; }
+    .hero-grid { gap:3px; }
+    .hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }
+    .hero h1 em { white-space:normal; }
+    .orbit-scene { max-width:360px; }
+    .product-grid { grid-template-columns:1fr; }
+    .product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }
+    .project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }
+    .box-stack { transform:scale(.72) rotate(-6deg); width:110%; }
+    .meeple { display:none; }
+    .mini-window { transform:scale(.67); min-width:150px; }
+    .parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }
+    .product-content { min-height:145px; }
+    .section-head { gap:8px; }
+    .section-label { font-size:.65rem; }
+  }
+  @media(max-width:360px) {
+    .product-card { grid-template-columns:100px minmax(0,1fr); }
+    .product-content { padding:12px; }
+    .product-content p { font-size:.78rem; }
+    .hero-actions .button { font-size:.75rem; padding-inline:14px; }
+  }
   @media(prefers-reduced-motion:reduce){ .moon,.pluto { transition:none; transform:none; } }
   @media(max-width:660px) { .project-kind { font-size:.58rem; letter-spacing:.07em; } }
-  .telemetry { color:#b4edbf; }
-  .scope-hint,.scope-readout,.section-count,.all-games,.other-games { color:#b9bfc1; }
+  .scope-hint,.scope-readout,.section-count { color:#b9bfc1; }
   .moon:focus-visible { outline:3px solid #fff5e8; outline-offset:5px; }
-  @media(max-width:660px) { .join-link { font-size:.83rem; } }
 
   /* Real gameplay sits on tactile printed cards, with the existing brand palette. */
   .night-card .project-art {
@@ -265,21 +293,6 @@ import { site } from '../config';
     display:block;width:100%;height:100%;object-fit:cover;
     object-position:center;border-radius:1px;
   }
-  .game-row .game-art {
-    padding:4px;
-    overflow:hidden;
-    background:#c1aa83;
-    border:1px solid #c1a57c;
-    border-radius:3px;
-    transform:rotate(-2deg);
-    box-shadow:4px 4px 0 rgba(0,0,0,.57);
-  }
-  .game-row:nth-child(2) .game-art { transform:rotate(1deg); }
-  .game-row:nth-child(3) .game-art { transform:rotate(-.8deg); }
-  .game-row .game-art img {
-    display:block;width:100%;height:100%;object-fit:cover;object-position:center;
-    border-radius:1px;
-  }
   @media(max-width:660px) {
     .night-card .shot-print { width:89%;padding:3px;box-shadow:4px 5px 0 #070c0e; }
     .game-row .game-art { transform:none; }
@@ -294,39 +307,41 @@ import { site } from '../config';
   .product-card:nth-child(2) { box-shadow:5px 5px 0 rgba(74,101,92,.24); }
   .product-card:nth-child(3) { box-shadow:5px 5px 0 rgba(130,91,72,.24); }
   .product-card:hover { transform:translateY(-2px) rotate(-.25deg); }
-  .section-label,.all-games,.other-games { font-size:.76rem; color:#c5c9c7; }
   .section-count,.scope-readout,.scope-hint { font-size:.7rem; color:#bfc5c1; }
-  .other-games { letter-spacing:.07em; }
-  .game-copy small { font-size:.82rem; color:#c0c6c3; }
   @media(max-width:660px) {
     .hero-copy h1 { letter-spacing:-.03em; }
     .product-card,.product-card:hover { transform:none; box-shadow:3px 3px 0 rgba(121,92,69,.28); }
-    .section-label,.all-games,.other-games { font-size:.71rem; }
-  }
+    }
 
-  /* A small tactile studio-news section; MailerLite share URL enables the CTA. */
-  .updates {
-    display:flex; align-items:center; justify-content:space-between; gap:2rem;
-    margin-block:2.3rem 1rem; padding-block:1.6rem;
-    border-block:1px solid rgba(255,255,255,.17);
-  }
-  .updates-kicker { margin:0 0 .65rem; color:#ffb78d; font:700 .72rem ui-monospace,monospace; letter-spacing:.09em; }
-  .updates h2 { margin:0 0 .6rem; font:700 clamp(1.45rem,2.6vw,2rem) Georgia,"Iowan Old Style",serif; letter-spacing:-.018em; }
-  .updates-copy > p:last-child { max-width:540px; margin:0; color:#c3c7c4; line-height:1.6; font-size:.88rem; }
-  .updates-action { flex:0 0 auto; max-width:360px; }
-  .updates-button,.updates-pending {
-    display:inline-flex; justify-content:center; align-items:center; gap:1rem; min-height:47px; padding:.75rem 1rem;
-    border:1px solid rgba(255,167,117,.6); border-radius:5px;
-    background:#29251d; color:#ffd2af; font-size:.84rem; font-weight:750;
-  }
-  .updates-button:hover { background:#393024; }
-  .updates-pending { border-color:#657071; color:#c9c8c2; background:#121b1c; }
-  .updates-action p { margin:.7rem 0 0; color:#c3c9c7; font-size:.76rem; line-height:1.45; }
-  .updates-action p a { color:#ffe0ca; text-decoration:underline; text-underline-offset:3px; }
-  @media(max-width:780px) {
-    .updates { flex-direction:column; align-items:stretch; gap:1.2rem; }
-    .updates-action { max-width:none; }
-    .updates-button,.updates-pending { width:100%; }
-  }
 
+  /* Keep the printed-screenshot presentation while using larger whole-card links. */
+  .game-row .game-art {
+    width:calc(100% - 22px); height:auto; flex:0 0 auto; aspect-ratio:8/5;
+    margin:11px 11px 0; padding:5px; border:1px solid #c1a57c;
+    border-radius:3px; background:#c1aa83;
+    box-shadow:4px 4px 0 rgba(0,0,0,.49);
+  }
+  .game-row .game-art img { display:block; width:100%; height:100%; object-fit:cover; border-radius:1px; }
+  .game-row:nth-child(2) .game-art { transform:rotate(.5deg); }
+  .game-row:nth-child(3) .game-art { transform:rotate(-.4deg); }
+  .game-copy small { color:#c6cdca; font-size:.86rem; }
+  @media(max-width:1020px) {
+    .game-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  }
+  @media(max-width:660px) {
+    .game-grid { grid-template-columns:1fr; gap:17px; }
+    .game-row,.game-row:hover { transform:none; box-shadow:3px 3px 0 rgba(121,92,69,.25); }
+    .game-row .game-art,.game-row:nth-child(2) .game-art,.game-row:nth-child(3) .game-art {
+      transform:none; width:calc(100% - 20px); height:auto; flex-basis:auto; margin:10px 10px 0;
+    }
+    .game-copy { padding:15px 17px 17px; }
+    .game-copy strong { font-size:1.06rem; }
+    .games-title { font-size:1.65rem; }
+    .tester-strip { flex-direction:column; align-items:stretch; gap:17px; }
+    .tester-action { width:100%; }
+    .explore-all { margin-top:21px; }
+  }
+  @media(prefers-reduced-motion:reduce) {
+    .game-row,.game-row:hover { transition:none; transform:none; }
+  }
 </style>

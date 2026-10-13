@@ -182,18 +182,32 @@ for (const slug of ['personal-effects', 'anomaly-lab', 'going-going-ghoul']) {
 if (!await linkPage.locator('.site-header .brand').count()) failures.push('/: studio brand missing from navigation');
 if (await linkPage.locator('.telemetry').count()) failures.push('/: redundant status strip remains on homepage');
 
-if (!await linkPage.getByRole('heading', { name: 'A little strange news from the lab.' }).count()) {
-  failures.push('/: newsletter section missing');
+// WEB-11: one clear games action, one playtest invitation, no inactive email CTA.
+if (await linkPage.locator('#updates, .updates-pending, .other-games, .about-compact').count()) {
+  failures.push('/: inactive newsletter or duplicate homepage sections still rendered');
 }
-const mailerLink = linkPage.locator('#updates a.updates-button');
-if (await mailerLink.count()) {
-  const href = await mailerLink.getAttribute('href');
-  if (!href?.startsWith('https://')) failures.push('/: MailerLite signup must link to a verified HTTPS page');
-} else if (!await linkPage.locator('#updates .updates-pending').count()) {
-  failures.push('/: newsletter must show a truthful pending state when signup is not configured');
+if (!await linkPage.getByRole('heading', { name: 'More strange games', level: 2 }).count()) {
+  failures.push('/: missing compact games section heading');
 }
-if (!await linkPage.locator('#updates a[href="/privacy/"]').count()) {
-  failures.push('/: newsletter privacy link missing');
+const labCards = linkPage.locator('#games .game-row');
+if (await labCards.count() !== 3) failures.push('/: expected exactly three clickable preview cards');
+if (!await linkPage.locator('#games .explore-all[href="/lab/"]').count()) {
+  failures.push('/: single Explore all experiments link missing');
+}
+if (await linkPage.locator('#games .game-arrow').count()) {
+  failures.push('/: individual game arrow badges should be removed');
+}
+if (!await linkPage.getByRole('heading', { name: 'Help test our strange ideas.', level: 2 }).count()) {
+  failures.push('/: missing playtester invitation');
+}
+if (!await linkPage.locator('.tester-action[href="/playtests/join/"]').count()) {
+  failures.push('/: playtester invitation must link to existing signup request page');
+}
+if (!await linkPage.locator('footer#about').count()) {
+  failures.push('/: footer About anchor missing');
+}
+if (await linkPage.locator('footer .footer-reach p').count()) {
+  failures.push('/: redundant footer marketing line still present');
 }
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
@@ -214,13 +228,21 @@ for (const width of [320, 390]) {
   }
 }
 await linkPage.setViewportSize({ width: 1440, height: 900 });
+for (const width of [320, 390, 1440]) {
+  await linkPage.setViewportSize({ width, height: 900 });
+  await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
+  const imageBoxes = await linkPage.locator('#games .game-row .game-art').evaluateAll(nodes =>
+    nodes.map(node => ({ left:node.getBoundingClientRect().left, right:node.getBoundingClientRect().right, width:node.getBoundingClientRect().width }))
+  );
+  if (imageBoxes.length !== 3 || imageBoxes.some(b => b.left < -1 || b.right > width + 1 || b.width < 120)) {
+    failures.push(`/: game previews overflow or shrink excessively at ${width}px: ${JSON.stringify(imageBoxes)}`);
+  }
+}
 const homepageGames = await linkPage.locator('#games .game-row .game-copy strong').allTextContents();
 for (const game of ['Personal Effects', 'Anomaly Lab', 'Going, Going, Ghoul!']) {
   if (!homepageGames.includes(game)) failures.push(`/: missing featured game ${game}`);
 }
 if (homepageGames.length !== 3) failures.push(`/: expected exactly 3 homepage games, found ${homepageGames.length}`);
-if (!await linkPage.locator('.other-games a[href="/lab/#tiny-heist-planner"]').count()) failures.push('/: missing Tiny Heist Planner secondary link');
-if (!await linkPage.locator('.other-games a[href="/lab/#gladiator-mayhem"]').count()) failures.push('/: missing Gladiator Mayhem secondary link');
 if (!await linkPage.locator('.moon').count()) failures.push('/: orbital interaction controls absent');
 const orbitalArcs = await linkPage.locator('.orbit-front').evaluateAll(nodes => nodes.map(node => {
   const rect = node.getBoundingClientRect();

@@ -4,16 +4,14 @@ import { site, socialLabels } from '../config';
 const socialEntries = Object.entries(site.socials) as Array<[keyof typeof site.socials, string]>;
 const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
 ---
-<footer class="night-footer">
+<footer class="night-footer" id="about">
   <div class="shell footer-top">
     <div class="footer-studio">
       <a href="/#home" class="footer-brand"><OrbitMark size={34} /><strong>PLUTO NIGHT LABS</strong></a>
-      <p>Small studio. Strange ideas.<br />Made in Cambridgeshire, UK.</p>
+      <p>Independent games &amp; software studio.<br />Cambridgeshire, UK.</p>
     </div>
     <div class="footer-reach">
-      <span>Say hello</span>
       <a href={`mailto:${site.supportEmail}`}>{site.supportEmail} ↗</a>
-      <p>Useful apps, unusual games and a little curiosity.</p>
     </div>
   </div>
   <div class="shell footer-bottom">
@@ -43,7 +41,6 @@ const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
     margin:.75rem 0 0; color:#c1c5c3; font-size:.84rem; line-height:1.65;
   }
   .footer-reach { text-align:right; }
-  .footer-reach > span { display:block; color:#ebbb94; margin:0 0 .5rem; font:700 .76rem Georgia,serif; }
   .footer-reach a { display:inline-block; min-height:35px; color:#f4e6dd; font-size:.91rem; font-weight:700; overflow-wrap:anywhere; }
   .footer-reach a:hover,.footer-bottom a:hover { color:#ffb48b; }
   .footer-bottom {
