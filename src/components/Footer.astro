@@ -5,26 +5,57 @@ const socialEntries = Object.entries(site.socials) as Array<[keyof typeof site.s
 const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
 ---
 <footer class="night-footer">
-  <div class="shell footer-panel">
-    <div class="footer-identity"><a href="/#home" class="footer-brand"><OrbitMark size={34} /><strong>PLUTO NIGHT LABS</strong></a><p>Independent software &amp; games studio<br />Cambridgeshire, UK</p></div>
-    <div class="footer-motto"><span>OBSERVE<br />BUILD<br />PLAY<br />REPEAT</span><p>SAME SKY.<br />DIFFERENT IDEAS.</p></div>
-    <div class="footer-comms"><span class="foot-label">ESTABLISH COMMS</span><a href={`mailto:${site.supportEmail}`}>{site.supportEmail} ↗</a><div class="nominal"><i></i> SYSTEMS NOMINAL</div></div>
+  <div class="shell footer-top">
+    <div class="footer-studio">
+      <a href="/#home" class="footer-brand"><OrbitMark size={34} /><strong>PLUTO NIGHT LABS</strong></a>
+      <p>Small studio. Strange ideas.<br />Made in Cambridgeshire, UK.</p>
+    </div>
+    <div class="footer-reach">
+      <span>Say hello</span>
+      <a href={`mailto:${site.supportEmail}`}>{site.supportEmail} ↗</a>
+      <p>Useful apps, unusual games and a little curiosity.</p>
+    </div>
   </div>
-  <div class="shell footer-bottom"><span>© 2026 PLUTO NIGHT LABS LTD · REGISTERED IN ENGLAND &amp; WALES</span><nav aria-label="Footer navigation"><a href="/products/">Products</a><a href="/lab/">The Lab</a><a href="/privacy/">Privacy</a><a href="/contact/">Contact</a>{configuredSocials.map(([network,url]) => <a href={url} rel="me noopener" target="_blank">{socialLabels[network]}</a>)}</nav></div>
+  <div class="shell footer-bottom">
+    <span>© 2026 Pluto Night Labs Ltd · Registered in England &amp; Wales</span>
+    <nav aria-label="Footer navigation">
+      <a href="/products/">Products</a>
+      <a href="/lab/">The Lab</a>
+      {site.newsletterUrl.startsWith('https://') && <a href={site.newsletterUrl} rel="noopener noreferrer" target="_blank">Email updates</a>}
+      <a href="/privacy/">Privacy</a>
+      <a href="/contact/">Contact</a>
+      {configuredSocials.map(([network,url]) => <a href={url} rel="me noopener" target="_blank">{socialLabels[network]}</a>)}
+    </nav>
+  </div>
 </footer>
 <style>
- .night-footer { margin-top:15px; padding:32px 0 24px; border-top:1px solid #ffffff23; background:#080d10; background-image:radial-gradient(circle at 24% 100%,rgba(183,114,66,.11),transparent 38%),radial-gradient(#ffffff12 .5px,transparent 1px); background-size:auto,83px 73px; }
- .footer-panel { display:grid; grid-template-columns:1fr 1fr 1fr; gap:27px; padding:27px; border:1px solid #ffffff27; border-radius:6px; background:rgba(9,14,16,.65); }
- .footer-identity,.footer-motto,.footer-comms { min-width:0; }
- .footer-brand { display:flex; align-items:center; gap:12px; letter-spacing:.15em; font-size:.8rem; }
- .footer-identity p { color:#abb0b3; line-height:1.6; font-size:.78rem; margin:13px 0 0; }
- .footer-motto { display:flex; align-items:start; gap:25px; border-inline:1px solid #ffffff20; padding-inline:24px; }
- .footer-motto span,.footer-motto p,.foot-label,.nominal,.footer-bottom { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.13em; font-size:.64rem; }
- .footer-motto span { color:#a1abb0; line-height:1.9; }.footer-motto p { color:#e0cabb; line-height:1.8; margin:17px 0 0; }
- .footer-comms { display:grid; align-content:start; gap:11px; }.foot-label { color:#979ea3; }.footer-comms a { color:#ede2da; font-size:.78rem; overflow-wrap:anywhere; }.footer-comms a:hover { color:#ff9871; }
- .nominal { display:flex; gap:8px; align-items:center; color:#83d596; margin-top:10px; }.nominal i { width:7px; height:7px; border-radius:50%; background:currentColor; box-shadow:0 0 9px #80d79466; }
- .footer-bottom { display:flex; justify-content:space-between; flex-wrap:wrap; align-items:center; gap:15px; padding-top:22px; color:#888f93; line-height:1.8; }
- .footer-bottom nav { display:flex; flex-wrap:wrap; gap:18px; }.footer-bottom a:hover { color:#ff9871; }
- @media(max-width:750px) { .footer-panel { grid-template-columns:1fr 1fr; }.footer-motto { border-right:0; }.footer-comms { grid-column:1/-1; border-top:1px solid #ffffff18; padding-top:19px; }.footer-bottom { display:block; }.footer-bottom nav { margin-top:16px; } }
- @media(max-width:430px) { .footer-panel { grid-template-columns:1fr; padding:19px; }.footer-motto { border:0; border-top:1px solid #ffffff18; padding:17px 0 0; }.footer-comms { grid-column:auto; }.footer-brand { font-size:.72rem; } }
+  .night-footer {
+    margin-top:15px; padding:32px 0 24px; border-top:1px solid rgba(255,255,255,.17);
+    background:radial-gradient(circle at 20% 100%,rgba(183,114,66,.08),transparent 40%),#080d10;
+  }
+  .footer-top {
+    display:flex; justify-content:space-between; align-items:flex-start;
+    gap:2rem; padding:1.4rem 0 1.9rem;
+  }
+  .footer-brand { display:inline-flex; align-items:center; gap:12px; letter-spacing:.12em; font-size:.81rem; font-weight:800; }
+  .footer-brand strong { font-weight:800; }
+  .footer-studio p,.footer-reach p {
+    margin:.75rem 0 0; color:#c1c5c3; font-size:.84rem; line-height:1.65;
+  }
+  .footer-reach { text-align:right; }
+  .footer-reach > span { display:block; color:#ebbb94; margin:0 0 .5rem; font:700 .76rem Georgia,serif; }
+  .footer-reach a { display:inline-block; min-height:35px; color:#f4e6dd; font-size:.91rem; font-weight:700; overflow-wrap:anywhere; }
+  .footer-reach a:hover,.footer-bottom a:hover { color:#ffb48b; }
+  .footer-bottom {
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.3rem;
+    border-top:1px solid rgba(255,255,255,.13); padding-top:1.4rem;
+    color:#b1b6b5; font-size:.78rem; line-height:1.6;
+  }
+  .footer-bottom nav { display:flex; flex-wrap:wrap; gap:.6rem 1.25rem; }
+  .footer-bottom nav a { min-height:35px; display:inline-flex; align-items:center; color:#d1d5d1; }
+  @media(max-width:650px) {
+    .footer-top { flex-direction:column; gap:1.4rem; }
+    .footer-reach { text-align:left; }
+    .footer-bottom { align-items:flex-start; }
+  }
 </style>

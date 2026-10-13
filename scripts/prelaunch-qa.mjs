@@ -54,6 +54,7 @@ await inspect({ name: 'shelfpick-mobile-320x680', route: '/products/shelfpick/',
 await inspect({ name: 'usagegrid-mobile-390x844', route: '/products/usagegrid/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'lab-mobile-320x680', route: '/lab/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'lab-mobile-390x844', route: '/lab/', viewport: { width: 390, height: 844 } });
+await inspect({ name: 'lab-desktop-1440x900', route: '/lab/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'playtest-invite-mobile-320x680', route: '/playtests/join/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'contact-desktop-1440x900', route: '/contact/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: { width: 1440, height: 900 } });
@@ -156,6 +157,7 @@ if (await linkPage.locator('#main-content main').count()) failures.push('/lab/: 
 if (!await linkPage.getByRole('heading', { name: 'Explore the experiments.' }).count()) failures.push('/lab/: exploratory heading missing');
 if (!await linkPage.locator('#gladiator-mayhem .new-badge').count()) failures.push('/lab/: missing in-development state');
 if (await linkPage.locator('.art-caption').count() !== 3) failures.push('/lab/: concept artwork not labelled');
+if (await linkPage.locator('.clip-details, video').count()) failures.push('/lab/: videos should not appear while recordings are paused');
 const gladiatorLink = await linkPage.locator('#gladiator-mayhem a.play-button').count();
 if (gladiatorLink) failures.push('/lab/: Gladiator Mayhem must not claim a playable build');
 for (const slug of ['going-going-ghoul', 'tiny-heist-planner']) {
@@ -177,7 +179,22 @@ for (const slug of ['personal-effects', 'anomaly-lab', 'going-going-ghoul']) {
     failures.push(`/: missing homepage screenshot for ${slug}`);
   }
 }
-if (!await linkPage.locator('.telemetry').getByText('PLUTO NIGHT LABS').count()) failures.push('/: telemetry identity missing');
+if (!await linkPage.locator('.site-header .brand').count()) failures.push('/: studio brand missing from navigation');
+if (await linkPage.locator('.telemetry').count()) failures.push('/: redundant status strip remains on homepage');
+
+if (!await linkPage.getByRole('heading', { name: 'A little strange news from the lab.' }).count()) {
+  failures.push('/: newsletter section missing');
+}
+const mailerLink = linkPage.locator('#updates a.updates-button');
+if (await mailerLink.count()) {
+  const href = await mailerLink.getAttribute('href');
+  if (!href?.startsWith('https://')) failures.push('/: MailerLite signup must link to a verified HTTPS page');
+} else if (!await linkPage.locator('#updates .updates-pending').count()) {
+  failures.push('/: newsletter must show a truthful pending state when signup is not configured');
+}
+if (!await linkPage.locator('#updates a[href="/privacy/"]').count()) {
+  failures.push('/: newsletter privacy link missing');
+}
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
   await linkPage.goto(baseURL, { waitUntil: 'networkidle' });

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config';
 ---
 
 <BaseLayout title="Pluto Night Labs — Useful apps. Strange games." description="Pluto Night Labs is an independent UK studio creating practical apps and unusual experimental games. Explore tools and playable prototypes.">
@@ -7,11 +8,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="shell hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">Independent UK studio</p>
-        <h1>Useful apps.<br />Strange games.<br /><em>Built with curiosity.</em></h1>
+        <h1>Useful apps.<br /><span class="hero-playful">Strange games.</span><br /><em>Built with curiosity.</em></h1>
         <p class="intro">An independent UK studio creating practical software and experimental games.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#featured">Explore our work <span aria-hidden="true">→</span></a>
-          <a class="button button-secondary" href="#games">Play the games</a>
+          <a class="button button-primary" href="#games">Play the games <span aria-hidden="true">→</span></a>
+          <a class="button button-secondary" href="#featured">Explore apps</a>
         </div>
       </div>
       <div class="orbit-scene" id="orbit-scene" aria-label="Interactive Pluto orbital display">
@@ -24,20 +25,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <button class="moon moon-one" type="button" aria-label="Move the first moon into a new orbit"></button>
         <button class="moon moon-two" type="button" aria-label="Move the second moon into a new orbit"></button>
         <button class="moon moon-three" type="button" aria-label="Move the third moon into a new orbit"></button>
-        <p class="scope-hint">TAP A MOON<br />TO CHANGE ORBIT</p>
-        <p class="scope-readout" id="scope-readout" aria-live="polite">ORBIT // STABLE</p>
+        <p class="scope-hint">TAP A MOON<br />TO MOVE IT</p>
+        <p class="scope-readout" id="scope-readout" aria-live="polite">Orbit steady</p>
       </div>
     </div>
   </section>
 
-  <div class="telemetry shell" aria-label="Studio information">
-    <div class="telemetry-left"><span class="status-light" aria-hidden="true"></span><span>PLUTO NIGHT LABS</span><span class="slash">//</span><span>SYSTEMS: NOMINAL</span></div>
-    <span class="telemetry-center">INDEPENDENT UK STUDIO</span>
-    <span class="telemetry-right">APPS FOR REAL LIFE. GAMES FOR ELSEWHERE.</span>
-  </div>
-
   <section class="featured shell" id="featured" aria-labelledby="featured-title">
-    <div class="section-head"><p class="section-label" id="featured-title">FEATURED PROJECTS</p><span class="section-rule"></span><span class="section-count">// 03</span></div>
+    <div class="section-head"><p class="section-label" id="featured-title">FEATURED PROJECTS</p><span class="section-rule"></span><span class="section-count">THREE CURRENT PROJECTS</span></div>
     <div class="product-grid">
       <article class="product-card shelfpick-card">
         <div class="project-art shelfpick-art" aria-hidden="true">
@@ -73,7 +68,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <section class="games shell" id="games" aria-labelledby="games-title">
-    <div class="section-head"><p class="section-label" id="games-title">MORE FROM THE LAB</p><span class="section-rule"></span><a class="all-games" href="/lab/">ALL EXPERIMENTS ↗</a></div>
+    <div class="section-head"><p class="section-label" id="games-title">PLAYABLE EXPERIMENTS</p><span class="section-rule"></span><a class="all-games" href="/lab/">ALL EXPERIMENTS ↗</a></div>
     <div class="game-grid">
       <a class="game-row" href="/lab/#personal-effects">
         <span class="game-art effects-art" aria-hidden="true"><img src="/images/games/personal-effects/featured.webp" data-fallback="/lab/personal-effects.png" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
@@ -88,8 +83,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span class="game-copy"><strong>Going, Going, Ghoul!</strong><small>Cursed auctions.</small></span><span class="game-arrow">→</span>
       </a>
     </div>
-    <div class="other-games"><span>ALSO EXPERIMENTING WITH</span><a href="/lab/#tiny-heist-planner">View Tiny Heist Planner →</a><a href="/lab/#gladiator-mayhem">See Gladiator Mayhem →</a></div>
+    <div class="other-games"><span>ALSO IN THE LAB</span><a href="/lab/#tiny-heist-planner">View Tiny Heist Planner →</a><a href="/lab/#gladiator-mayhem">See Gladiator Mayhem →</a></div>
     <a class="join-link" href="/playtests/join/">Want to test future games? Request a playtest invite →</a>
+  </section>
+
+  <section class="updates shell" id="updates" aria-labelledby="updates-title">
+    <div class="updates-copy">
+      <p class="updates-kicker">POSTCARDS FROM PLUTO</p>
+      <h2 id="updates-title">A little strange news from the lab.</h2>
+      <p>Occasional notes on new games, playtests, beta opportunities and launches. Only when there's something worth sharing.</p>
+    </div>
+    <div class="updates-action">
+      {site.newsletterUrl.startsWith('https://') ? (
+        <a class="updates-button" href={site.newsletterUrl} rel="noopener noreferrer" target="_blank">
+          Join the experiment <span aria-hidden="true">↗</span>
+        </a>
+      ) : (
+        <span class="updates-pending">Email updates coming soon</span>
+      )}
+      <p>No spam. Unsubscribe whenever you like. <a href="/privacy/">Privacy details</a></p>
+    </div>
   </section>
 
   <section class="about-compact shell" id="about">
@@ -115,7 +128,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     moon.addEventListener('click', () => {
       angles[index] = (angles[index] + 74) % 360;
       moon.style.setProperty('--offset', angles[index] + 'deg');
-      if (readout) readout.textContent = 'MOON ' + (index + 1) + ' // ORBIT UPDATED';
+      if (readout) readout.textContent = 'Moon ' + (index + 1) + ' moved';
     });
   });
   // Small motion-only response; no scrolling interception or global custom cursor.
@@ -271,4 +284,49 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .night-card .shot-print { width:89%;padding:3px;box-shadow:4px 5px 0 #070c0e; }
     .game-row .game-art { transform:none; }
   }
+
+  /* Indie polish: a characterful headline, tactile cards and readable labels. */
+  .hero-copy h1 { letter-spacing:-.037em; }
+  .hero-playful { font-family:Georgia,"Iowan Old Style",serif; font-weight:700; font-style:italic; letter-spacing:-.023em; }
+  .hero { padding-bottom:23px; }
+  .featured { padding-top:28px; }
+  .product-card { box-shadow:5px 5px 0 rgba(123,86,56,.24); }
+  .product-card:nth-child(2) { box-shadow:5px 5px 0 rgba(74,101,92,.24); }
+  .product-card:nth-child(3) { box-shadow:5px 5px 0 rgba(130,91,72,.24); }
+  .product-card:hover { transform:translateY(-2px) rotate(-.25deg); }
+  .section-label,.all-games,.other-games { font-size:.76rem; color:#c5c9c7; }
+  .section-count,.scope-readout,.scope-hint { font-size:.7rem; color:#bfc5c1; }
+  .other-games { letter-spacing:.07em; }
+  .game-copy small { font-size:.82rem; color:#c0c6c3; }
+  @media(max-width:660px) {
+    .hero-copy h1 { letter-spacing:-.03em; }
+    .product-card,.product-card:hover { transform:none; box-shadow:3px 3px 0 rgba(121,92,69,.28); }
+    .section-label,.all-games,.other-games { font-size:.71rem; }
+  }
+
+  /* A small tactile studio-news section; MailerLite share URL enables the CTA. */
+  .updates {
+    display:flex; align-items:center; justify-content:space-between; gap:2rem;
+    margin-block:2.3rem 1rem; padding-block:1.6rem;
+    border-block:1px solid rgba(255,255,255,.17);
+  }
+  .updates-kicker { margin:0 0 .65rem; color:#ffb78d; font:700 .72rem ui-monospace,monospace; letter-spacing:.09em; }
+  .updates h2 { margin:0 0 .6rem; font:700 clamp(1.45rem,2.6vw,2rem) Georgia,"Iowan Old Style",serif; letter-spacing:-.018em; }
+  .updates-copy > p:last-child { max-width:540px; margin:0; color:#c3c7c4; line-height:1.6; font-size:.88rem; }
+  .updates-action { flex:0 0 auto; max-width:360px; }
+  .updates-button,.updates-pending {
+    display:inline-flex; justify-content:center; align-items:center; gap:1rem; min-height:47px; padding:.75rem 1rem;
+    border:1px solid rgba(255,167,117,.6); border-radius:5px;
+    background:#29251d; color:#ffd2af; font-size:.84rem; font-weight:750;
+  }
+  .updates-button:hover { background:#393024; }
+  .updates-pending { border-color:#657071; color:#c9c8c2; background:#121b1c; }
+  .updates-action p { margin:.7rem 0 0; color:#c3c9c7; font-size:.76rem; line-height:1.45; }
+  .updates-action p a { color:#ffe0ca; text-decoration:underline; text-underline-offset:3px; }
+  @media(max-width:780px) {
+    .updates { flex-direction:column; align-items:stretch; gap:1.2rem; }
+    .updates-action { max-width:none; }
+    .updates-button,.updates-pending { width:100%; }
+  }
+
 </style>
