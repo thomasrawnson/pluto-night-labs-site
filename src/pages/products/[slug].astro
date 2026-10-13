@@ -13,7 +13,8 @@ interface Product {
   image: 'shelfpick' | 'usagegrid';
   enquiry: string;
 }
-const entries: Record<string, Product> = {
+export function getStaticPaths() {
+  const entries: Record<string, Product> = {
   shelfpick: {
     name: 'ShelfPick', category: 'BOARD GAMES / WEB APP',
     tagline: 'Discover your next favourite game.',
@@ -41,7 +42,6 @@ const entries: Record<string, Product> = {
     image: 'usagegrid', enquiry: 'UsageGrid launch interest',
   },
 };
-export function getStaticPaths() {
   return Object.entries(entries).map(([slug, product]) => ({ params: { slug }, props: { product } }));
 }
 const { product } = Astro.props as { product: Product };
