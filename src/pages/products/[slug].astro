@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Feature { title: string; description: string }
+interface Product {
+  name: string;
+  category: string;
+  tagline: string;
+  summary: string;
+  intro: string;
+  status: string;
+  features: Feature[];
+  image: 'shelfpick' | 'usagegrid';
+  enquiry: string;
+}
+const entries: Record<string, Product> = {
+  shelfpick: {
+    name: 'ShelfPick', category: 'BOARD GAMES / WEB APP',
+    tagline: 'Discover your next favourite game.',
+    summary: 'Organise your board-game collection, explore new games and make choosing what to play a little easier.',
+    intro: 'Made for people who love board games but spend too long deciding which one to play. ShelfPick brings your collection, discovery and game-night decisions together in one place.',
+    status: 'Preparing for launch',
+    features: [
+      { title: 'Keep your collection together', description: 'Bring the games you own into a single place, ready to browse.' },
+      { title: 'Discover something new', description: 'Explore board games and recommendations without endless searching.' },
+      { title: 'Make game night easier', description: 'Find a starting point for the next session, whether you have a pair or a larger group.' },
+    ],
+    image: 'shelfpick', enquiry: 'ShelfPick beta interest',
+  },
+  usagegrid: {
+    name: 'UsageGrid', category: 'DEVELOPER UTILITY / MACOS',
+    tagline: 'AI coding usage, at a glance.',
+    summary: 'Keep track of supported AI coding-tool usage through a lightweight macOS menu-bar utility.',
+    intro: 'UsageGrid brings your coding usage closer to the tools you already work in. Check the essentials, spot approaching limits and review history without another distracting dashboard.',
+    status: 'In development',
+    features: [
+      { title: 'Check from the menu bar', description: 'See supported coding-tool usage without breaking your workflow.' },
+      { title: 'Know when limits are near', description: 'Use refresh controls and alerts to keep an eye on your available usage.' },
+      { title: 'Look back at your history', description: 'View usage trends and pick a visual theme that fits your desktop.' },
+    ],
+    image: 'usagegrid', enquiry: 'UsageGrid launch interest',
+  },
+};
+export function getStaticPaths() {
+  return Object.entries(entries).map(([slug, product]) => ({ params: { slug }, props: { product } }));
+}
+const { product } = Astro.props as { product: Product };
+---
+<BaseLayout title={`${product.name} | Pluto Night Labs`} description={product.summary}>
+  <div class="detail-page">
+    <section class="shell detail-hero">
+      <a class="back-link" href="/products/">← All products</a>
+      <p class="eyebrow">{product.category}</p>
+      <h1>{product.name}</h1>
+      <p class="tagline">{product.tagline}</p>
+      <p class="summary">{product.summary}</p>
+      <div class="detail-actions">
+        <span class="status-label">STATUS // {product.status}</span>
+        <a class="button button-primary" href={`mailto:hello@plutonightlabs.com?subject=${encodeURIComponent(product.enquiry)}`}>Ask about {product.image === 'shelfpick' ? 'beta testing' : 'launch updates'} <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="email-note">Opens an email draft; this isn't an automatic mailing-list subscription.</p>
+    </section>
+
+    <section class="shell detail-body" aria-labelledby="features-heading">
+      <div class="detail-copy">
+        <p class="eyebrow">A closer look</p>
+        <h2 id="features-heading">Built for how you use it.</h2>
+        <p class="intro">{product.intro}</p>
+        <div class="features">
+          {product.features.map((feature,index) => (
+            <article class="feature">
+              <span class="feature-number">{String(index+1).padStart(2,'0')}</span>
+              <div><h3>{feature.title}</h3><p>{feature.description}</p></div>
+            </article>
+          ))}
+        </div>
+      </div>
+      <figure class="detail-art">
+        {product.image === 'shelfpick' ? (
+          <img src="https://raw.githubusercontent.com/thomasrawnson/shelfpick/main/docs/screenshots/sp-beta-02/beta-1440-dark.png" alt="ShelfPick interface shown in a development screenshot captured during its beta." width="1440" height="900" loading="lazy" decoding="async" />
+        ) : (
+          <div class="usage-concept" aria-hidden="true">
+            <div class="usage-window">
+              <span class="window-title">USAGEGRID <i>●</i></span>
+              <strong>68%</strong><span class="meter"><span></span></span>
+              <div class="bar-chart"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <span class="window-footer">AI CODING USAGE / MENU BAR</span>
+            </div>
+          </div>
+        )}
+        <figcaption>{product.image === 'shelfpick' ? 'ShelfPick development screenshot — appearance may change before launch.' : 'UsageGrid concept illustration — not an application screenshot or live usage data.'}</figcaption>
+      </figure>
+    </section>
+
+    <nav class="shell bottom-nav" aria-label="More from Pluto Night Labs">
+      <span>Explore more</span>
+      <a href="/products/">Other products →</a>
+      <a href="/lab/">Playable game prototypes ↗</a>
+    </nav>
+  </div>
+</BaseLayout>
+<style>
+  :global(body) { background:#090e12; }
+  :global(#main-content) { background-color:#090e12; background-image:radial-gradient(circle at 57% 9%,rgba(205,112,55,.07),transparent 26%),radial-gradient(rgba(215,227,215,.10) .5px,transparent .7px); background-size:auto,67px 71px; }
+  .detail-page { padding:3rem 0 5rem; }
+  .back-link { display:inline-flex; min-height:44px; align-items:center; color:#c0c2c6; font:700 .72rem ui-monospace,monospace; letter-spacing:.1em; }
+  .back-link:hover { color:#ff9169; }
+  .detail-hero { padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.17); }
+  .detail-hero .eyebrow { margin:1.2rem 0 .85rem; color:#ff9169; }
+  h1 { margin:0; font-size:clamp(3.4rem,8vw,6.5rem); letter-spacing:-.07em; line-height:1.03; }
+  .tagline { margin:.5rem 0 1.1rem; font-size:clamp(1.35rem,2.9vw,2.1rem); font-weight:700; color:#e8d5c4; }
+  .summary { max-width:730px; color:#bfc4c5; font-size:1.1rem; line-height:1.7; }
+  .detail-actions { display:flex; align-items:center; flex-wrap:wrap; gap:1.5rem; margin-top:1.65rem; }
+  .status-label { color:#a7d7ad; font:700 .67rem ui-monospace,monospace; letter-spacing:.1em; }
+  .detail-actions .button { min-height:46px; border-radius:7px; background:#ff9169; background-image:none; box-shadow:none; font-size:.84rem; }
+  .detail-actions .button span { margin-left:.75rem; }
+  .email-note { margin:.8rem 0 0; color:#acb2b3; font-size:.76rem; line-height:1.5; }
+  .detail-body { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.08fr); gap:clamp(2rem,5vw,5rem); padding-top:3rem; }
+  .detail-copy .eyebrow { color:#ff9169; }
+  h2 { margin:0; font-size:clamp(1.8rem,3vw,2.6rem); letter-spacing:-.05em; line-height:1.16; }
+  .intro { margin:1rem 0 2rem; max-width:580px; line-height:1.7; color:#b6bdbe; }
+  .features { border-top:1px solid rgba(255,255,255,.16); }
+  .feature { display:grid; grid-template-columns:32px minmax(0,1fr); gap:1.2rem; padding:1.3rem 0; border-bottom:1px solid rgba(255,255,255,.14); }
+  .feature-number { font:750 .7rem ui-monospace,monospace; color:#ff9169; padding-top:.25rem; }
+  .feature h3 { margin:0 0 .5rem; font-size:1.04rem; }
+  .feature p { margin:0; line-height:1.6; color:#b5b9bc; font-size:.87rem; }
+  .detail-art { align-self:start; min-width:0; margin:0; padding:1rem; border:1px solid rgba(255,255,255,.16); border-radius:7px; background:#0a1014; }
+  .detail-art img { display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); border-radius:4px; }
+  figcaption { margin:1rem .3rem .2rem; color:#aab0b3; font:.69rem ui-monospace,monospace; line-height:1.5; }
+  .usage-concept { display:grid; place-items:center; min-height:355px; background:radial-gradient(ellipse at 52% 73%,rgba(80,93,82,.25),transparent 55%),#11191b; }
+  .usage-window { width:78%; max-width:340px; padding:1.4rem; border:3px solid #45574c; border-radius:12px; background:#13201d; box-shadow:9px 18px 29px #0008; }
+  .window-title { display:block; color:#dda776; font:800 .74rem ui-monospace,monospace; letter-spacing:.14em; }
+  .window-title i { float:right; color:#82e0a7; font-style:normal; }
+  .usage-window strong { display:block; margin:1.3rem 0 .8rem; font:800 3rem ui-monospace,monospace; }
+  .meter { display:block; height:10px; background:#33423c; border-radius:5px; overflow:hidden; }
+  .meter span { display:block; width:68%; height:100%; background:#ff9868; }
+  .bar-chart { display:flex; align-items:end; gap:8px; height:85px; margin-top:1.5rem; }
+  .bar-chart i { flex:1; height:37%; background:#df9b68; }
+  .bar-chart i:nth-child(2){height:72%}.bar-chart i:nth-child(3){height:50%}.bar-chart i:nth-child(4){height:94%}.bar-chart i:nth-child(5){height:62%}.bar-chart i:nth-child(6){height:81%}
+  .window-footer { display:block; margin-top:1rem; color:#b0b9b4; font:600 .58rem ui-monospace,monospace; letter-spacing:.08em; }
+  .bottom-nav { display:flex; flex-wrap:wrap; gap:1.25rem; border-top:1px solid rgba(255,255,255,.16); margin-top:3rem; padding-top:2rem; color:#adb2b4; font-size:.84rem; }
+  .bottom-nav a { color:#ffc29a; text-decoration:underline; text-underline-offset:5px; }
+  @media(max-width:850px) { .detail-body { grid-template-columns:1fr; }.detail-art { max-width:650px; } }
+  @media(max-width:560px) { .detail-page { padding-top:1.5rem; }.detail-hero { padding-bottom:2rem; }.detail-body { padding-top:2rem; }.usage-concept { min-height:285px; }.usage-window { width:90%; padding:1.1rem; } }
+</style>
