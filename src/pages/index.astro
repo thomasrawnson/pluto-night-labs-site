@@ -45,8 +45,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="meeple"></span>
         </div>
         <div class="product-content">
-          <div><h2>ShelfPick</h2><p>Discover your next<br />favourite game.</p><span class="project-kind"><i></i> APP · COMING SOON</span></div>
-          <a class="round-link" href="/products/#shelfpick" aria-label="Explore ShelfPick">→</a>
+          <div><h2>ShelfPick</h2><p>Discover your next<br />favourite game.</p><span class="project-kind"><i></i> IN PROGRESS · APP</span></div>
+          <a class="round-link" href="/products/shelfpick/" aria-label="See ShelfPick features">→</a>
         </div>
       </article>
       <article class="product-card usage-card">
@@ -54,8 +54,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="mini-window"><div class="mini-title">USAGEGRID <span>●</span></div><div class="mini-chart"><i style="height:30%"></i><i style="height:54%"></i><i style="height:42%"></i><i style="height:72%"></i><i style="height:58%"></i><i style="height:90%"></i><i style="height:65%"></i><i style="height:78%"></i></div><div class="mini-footer">TODAY 46% &nbsp; WEEK 68%</div></div>
         </div>
         <div class="product-content">
-          <div><h2>UsageGrid</h2><p>Your AI coding usage,<br />at a glance.</p><span class="project-kind"><i></i> APP · IN DEVELOPMENT</span></div>
-          <a class="round-link" href="/products/#usagegrid" aria-label="Explore UsageGrid">→</a>
+          <div><h2>UsageGrid</h2><p>Your AI coding usage,<br />at a glance.</p><span class="project-kind"><i></i> IN PROGRESS · APP</span></div>
+          <a class="round-link" href="/products/usagegrid/" aria-label="See UsageGrid features">→</a>
         </div>
       </article>
       <article class="product-card night-card">
@@ -63,8 +63,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="parcel-shadow"></div><div class="parcel-box"><span class="parcel-tape"></span><b>NPO</b><small>NIGHT PARCEL OFFICE</small><span class="parcel-barcode">▥▥▥▥▥▥▥▥</span></div>
         </div>
         <div class="product-content">
-          <div><h2>Night Parcel Office</h2><p>Sort. Follow the rules.<br />Survive the shift.</p><span class="project-kind game-kind"><i></i> GAME · PLAYABLE PROTOTYPE</span></div>
-          <a class="round-link" href="/lab/#night-parcel-office" aria-label="Explore Night Parcel Office">→</a>
+          <div><h2>Night Parcel Office</h2><p>Sort. Follow the rules.<br />Survive the shift.</p><span class="project-kind game-kind"><i></i> PLAYABLE · GAME</span></div>
+          <a class="round-link" href="/lab/#night-parcel-office" aria-label="View Night Parcel Office prototype">→</a>
         </div>
       </article>
     </div>
@@ -86,7 +86,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <span class="game-copy"><strong>Going, Going, Ghoul!</strong><small>Cursed auctions.</small></span><span class="game-arrow">→</span>
       </a>
     </div>
-    <div class="other-games"><span>ALSO EXPERIMENTING WITH</span><a href="/lab/#tiny-heist-planner">Tiny Heist Planner ↗</a><a href="/lab/#gladiator-mayhem">Gladiator Mayhem ↗</a></div>
+    <div class="other-games"><span>ALSO EXPERIMENTING WITH</span><a href="/lab/#tiny-heist-planner">View Tiny Heist Planner →</a><a href="/lab/#gladiator-mayhem">See Gladiator Mayhem →</a></div>
+    <a class="join-link" href="/playtests/join/">Want to test future games? Request a playtest invite →</a>
   </section>
 
   <section class="about-compact shell" id="about">
@@ -166,7 +167,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .section-count,.all-games { font-size:.66rem; color:#a6a8aa; }
   .all-games:hover { color:#ff9871; }
   .product-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
-  .product-card { min-width:0; display:flex; flex-direction:column; border:1px solid rgba(255,255,255,.17); border-radius:6px; overflow:hidden; background:#0a1014; transition:border-color .15s ease; }
+  .product-card { position:relative; min-width:0; display:flex; flex-direction:column; border:1px solid rgba(255,255,255,.17); border-radius:6px; overflow:hidden; background:#0a1014; transition:border-color .15s ease; }
+  .round-link::after { content:''; position:absolute; inset:0; }
+  .product-card:focus-within { border-color:#ff9169; }
   .product-card:hover { border-color:rgba(255,153,109,.55); }
   .project-art { position:relative; display:grid; place-items:center; height:178px; overflow:hidden; background:#10171b; border-bottom:1px solid rgba(255,255,255,.09); }
   .shelfpick-art { background:radial-gradient(ellipse at 52% 76%,#4d3931,#181b1c 74%); }
@@ -205,6 +208,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .game-arrow { width:29px; height:29px; font-size:1rem; }
   .other-games { display:flex; align-items:center; flex-wrap:wrap; gap:18px; margin-top:26px; border-top:1px solid #ffffff18; padding-top:17px; color:#a7adae; font-size:.6rem; }
   .other-games a { color:#e4dfda; }.other-games a:hover { color:#ff9a70; }
+  .join-link { display:inline-flex; align-items:center; min-height:48px; margin:19px 0 0; color:#ffd0b5; font-weight:750; font-size:.9rem; text-decoration:underline; text-underline-offset:5px; }
+  .join-link:hover { color:#fff0e7; }
   .about-compact { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; border-top:1px solid #ffffff1b; padding-block:20px 34px; color:#aab0b3; font-size:.8rem; }
   .about-compact p { margin:0; }.about-compact a { color:#e6a58b; }
   @media(max-width:920px) { .hero-grid { grid-template-columns:1fr; }.orbit-scene { max-width:450px; }.product-grid { gap:12px; }.game-grid { grid-template-columns:1fr; gap:12px; }.product-content { padding:15px; }.project-art { height:155px; }.product-content h2 { font-size:1.1rem; } }
@@ -212,4 +217,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   @media(max-width:360px) { .product-card { grid-template-columns:100px minmax(0,1fr); }.product-content { padding:12px; }.product-content p { font-size:.78rem; }.hero-actions .button { font-size:.75rem; padding-inline:14px; }.game-art { width:66px; height:66px; flex-basis:66px; }.game-arrow { display:none; } }
   @media(prefers-reduced-motion:reduce){ .moon,.pluto { transition:none; transform:none; } }
   @media(max-width:660px) { .project-kind { font-size:.58rem; letter-spacing:.07em; } }
+  .telemetry { color:#b4edbf; }
+  .scope-hint,.scope-readout,.section-count,.all-games,.other-games { color:#b9bfc1; }
+  .moon:focus-visible { outline:3px solid #fff5e8; outline-offset:5px; }
+  @media(max-width:660px) { .join-link { font-size:.83rem; } }
 </style>

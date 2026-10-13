@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Request a Playtest Invitation | Pluto Night Labs" description="Request early Pluto Night Labs game playtest invitations and choose the kinds of games you want to test.">
+  <section class="shell invite-page">
+    <a class="back" href="/lab/">← Back to The Lab</a>
+    <p class="eyebrow">HUMAN TESTING DIVISION</p>
+    <h1>Help us make<br/><em>strange games.</em></h1>
+    <p class="lede">Interested in testing new prototypes? Tell us which kinds of games you enjoy. We'll prepare an email you can send to request an invitation.</p>
+    <div class="intro-note" role="note">This is an <strong>email invitation request</strong>, not an automated signup. We won't collect or store anything until you send the email. Invitations are not guaranteed.</div>
+    <form id="invite-request" class="invite-form">
+      <fieldset>
+        <legend>What would you like to test?</legend>
+        <label><input type="checkbox" name="interest" value="Puzzle and deduction" /> Puzzle &amp; deduction</label>
+        <label><input type="checkbox" name="interest" value="Strategy and simulation" /> Strategy &amp; simulation</label>
+        <label><input type="checkbox" name="interest" value="Story-driven and unusual" /> Story-driven &amp; unusual games</label>
+        <label><input type="checkbox" name="interest" value="Anything" /> Surprise me with anything</label>
+      </fieldset>
+      <label class="email-label" for="email">Your email address</label>
+      <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+      <label class="consent"><input id="consent" type="checkbox" required /><span>I agree to be contacted about early Pluto Night Labs playtests. I understand I can withdraw my request by emailing hello@plutonightlabs.com with “Stop playtest invites”.</span></label>
+      <p class="privacy-note">Read our <a href="/privacy/">privacy information</a>. We won't send unrelated newsletters.</p>
+      <button type="submit">Prepare invitation email →</button>
+      <p id="request-feedback" class="feedback" role="status" aria-live="polite"></p>
+    </form>
+    <p class="small">When you're ready, your email app will open with your preferences and consent statement pre-filled. Sending the message is your decision.</p>
+  </section>
+</BaseLayout>
+<script>
+  document.querySelector<HTMLFormElement>('#invite-request')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    if (!form.reportValidity()) return;
+    const email = (form.querySelector<HTMLInputElement>('#email')?.value ?? '').trim();
+    const interests = Array.from(form.querySelectorAll<HTMLInputElement>('input[name="interest"]:checked')).map(x => x.value);
+    const body = ['Playtest invitation request', '', 'Email: ' + email, 'Interests: ' + (interests.join(', ') || 'Any'), '', 'I agree to receive Pluto Night Labs playtest invitations and understand I can withdraw at any time.', '', 'Sent by choice from the Pluto Night Labs website.'].join('\n');
+    const status = form.querySelector<HTMLElement>('#request-feedback');
+    if (status) status.textContent = 'Your email app should open. Please send the message there to request an invite.';
+    window.location.href = 'mailto:hello@plutonightlabs.com?subject=' + encodeURIComponent('Playtest invitation request') + '&body=' + encodeURIComponent(body);
+  });
+</script>
+<style>
+  :global(body) { background:#090e12; }
+  :global(#main-content) { background-color:#090e12;background-image:radial-gradient(circle at 57% 9%,rgba(205,112,55,.07),transparent 26%),radial-gradient(rgba(215,227,215,.10) .5px,transparent .7px);background-size:auto,67px 71px; }
+  .invite-page { padding:3rem 0 5rem; max-width:900px; }
+  .back { display:inline-flex; min-height:44px; align-items:center; color:#bfc8c9; font-size:.83rem; }
+  .invite-page .eyebrow { margin-top:1.3rem; color:#ff9169; }
+  h1 { margin:0; font-size:clamp(3rem,7vw,5.5rem); letter-spacing:-.065em; line-height:1.04; }
+  h1 em { color:#ff9169; font-style:normal; }
+  .lede { max-width:680px; font-size:1.08rem; color:#bfc5c6; line-height:1.7; }
+  .intro-note { margin:1.5rem 0; padding:1rem 1.2rem; border-left:3px solid #ff9169; background:#121a1d; color:#e2ddd5; line-height:1.65; }
+  .invite-form { display:grid; gap:1rem; max-width:660px; padding:1.5rem; border:1px solid #ffffff30; border-radius:8px; background:#0a1014; }
+  fieldset { border:0; padding:0; margin:0; display:grid; gap:.8rem; }
+  legend { margin-bottom:1rem; font-weight:750; }
+  fieldset label,.consent { display:flex; gap:.7rem; align-items:flex-start; font-size:.91rem; color:#d5d7d5; line-height:1.55; }
+  input[type="checkbox"] { width:19px; height:19px; flex-shrink:0; accent-color:#ff9169; }
+  .email-label { margin-top:.8rem; font-weight:750; }
+  input[type="email"] { width:100%; min-height:46px; padding:.8rem; border:1px solid #849093; border-radius:5px; background:#121b1f; color:#fff; font:inherit; }
+  .consent { margin-top:.5rem; }
+  .privacy-note,.small,.feedback { color:#bfc5c7; font-size:.82rem; line-height:1.6; }
+  .privacy-note a { color:#ffc5a3; text-decoration:underline; }
+  button { min-height:48px; border:0; border-radius:6px; background:#ff9169; color:#17120f; font:750 .94rem inherit; cursor:pointer; }
+  button:hover { filter:brightness(1.1); }
+  .small { max-width:660px; }
+  @media(max-width:420px) { .invite-page { padding:1.5rem 0 3rem; }.invite-form { padding:1rem; } }
+</style>

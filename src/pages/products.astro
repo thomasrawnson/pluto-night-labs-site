@@ -10,7 +10,7 @@ const products = [
     tagline: 'Your collection. A better game night.',
     description: 'Bring your board games together, discover what fits your group and make choosing what to play the easy part of the evening.',
     highlights: ['Board game collection', 'Game discovery', 'Game-night choices'],
-    status: 'Coming soon',
+    status: 'In progress',
     inquiry: 'ShelfPick',
     details: '/products/shelfpick/',
   },
@@ -22,7 +22,7 @@ const products = [
     tagline: 'Keep your coding-tool usage in sight.',
     description: 'A lightweight Mac menu-bar companion for seeing AI coding-tool usage at a glance, with refresh controls, history and useful alerts.',
     highlights: ['Menu-bar overview', 'Usage history', 'Helpful alerts'],
-    status: 'In development',
+    status: 'In progress',
     inquiry: 'UsageGrid',
     details: '/products/usagegrid/',
   },
@@ -34,7 +34,7 @@ const products = [
     tagline: 'A tiny companion for your projects.',
     description: 'Stay closer to your repositories with Git status, GitHub CI and dependency alerts in a friendly menu-bar companion.',
     highlights: ['Repository status', 'GitHub CI visibility', 'Dependency alerts'],
-    status: 'In development',
+    status: 'In progress',
     inquiry: 'DevPip',
     details: null,
   },
@@ -74,7 +74,7 @@ const products = [
                 {product.highlights.map((highlight) => <li>{highlight}</li>)}
               </ul>
               {product.details ? (
-                <a class="catalog-link" href={product.details}>Explore {product.name} <span aria-hidden="true">→</span></a>
+                <a class="catalog-link" href={product.details}>See {product.name} features <span aria-hidden="true">→</span></a>
               ) : (
                 <a class="catalog-link" href={`mailto:hello@plutonightlabs.com?subject=${encodeURIComponent(product.inquiry + ' enquiry')}`}>Ask about {product.name} <span aria-hidden="true">↗</span></a>
               )}
@@ -285,4 +285,7 @@ const products = [
     .catalog-art { min-height: 245px; }
   }
 
+  .catalog-number { color:#b0b6b8; }
+  .catalog-status { color:#ffd0b4; }
+  .concept-note { color:#bbc0c2; }
 </style>

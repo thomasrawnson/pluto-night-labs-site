@@ -54,12 +54,13 @@ await inspect({ name: 'shelfpick-mobile-320x680', route: '/products/shelfpick/',
 await inspect({ name: 'usagegrid-mobile-390x844', route: '/products/usagegrid/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'lab-mobile-320x680', route: '/lab/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'lab-mobile-390x844', route: '/lab/', viewport: { width: 390, height: 844 } });
+await inspect({ name: 'playtest-invite-mobile-320x680', route: '/playtests/join/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'contact-desktop-1440x900', route: '/contact/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: { width: 1440, height: 900 } });
 
 const linkContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const linkPage = await linkContext.newPage();
-for (const route of ['/', '/products/', '/products/shelfpick/', '/products/usagegrid/', '/lab/', '/contact/', '/privacy/']) {
+for (const route of ['/', '/products/', '/products/shelfpick/', '/products/usagegrid/', '/lab/', '/playtests/join/', '/contact/', '/privacy/']) {
   await linkPage.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
   const hrefs = await linkPage.locator('a[href]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href')).filter(Boolean))]);
   for (const href of hrefs) {
