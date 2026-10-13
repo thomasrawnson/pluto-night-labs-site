@@ -47,8 +47,10 @@ async function inspect({ name, route, viewport }) {
 await inspect({ name: 'home-mobile-390x844', route: '/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'home-mobile-320x680', route: '/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'home-desktop-1440x900', route: '/', viewport: { width: 1440, height: 900 } });
+await inspect({ name: 'products-mobile-320x680', route: '/products/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'products-mobile-390x844', route: '/products/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'products-desktop-1440x900', route: '/products/', viewport: { width: 1440, height: 900 } });
+await inspect({ name: 'lab-mobile-320x680', route: '/lab/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'lab-mobile-390x844', route: '/lab/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'contact-desktop-1440x900', route: '/contact/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: { width: 1440, height: 900 } });
@@ -70,6 +72,34 @@ for (const route of ['/', '/products/', '/lab/', '/contact/', '/privacy/']) {
     }
   }
 }
+// The three pages must share the minimal homepage background and avoid excessive hero whitespace.
+const designMetrics = {};
+for (const route of ['/', '/lab/', '/products/']) {
+  await linkPage.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
+  designMetrics[route] = await linkPage.evaluate(() => {
+    const page = document.querySelector('#main-content');
+    const hero = document.querySelector('h1');
+    const header = document.querySelector('.site-header');
+    const surface = page ? getComputedStyle(page) : null;
+    return {
+      background: surface?.backgroundColor ?? '',
+      texture: surface?.backgroundImage ?? '',
+      heroTopGap: hero && header ? hero.getBoundingClientRect().top - header.getBoundingClientRect().bottom : null,
+    };
+  });
+}
+for (const route of ['/lab/', '/products/']) {
+  if (designMetrics[route].background !== designMetrics['/'].background) {
+    failures.push(`${route}: background colour does not match homepage`);
+  }
+  if (!designMetrics[route].texture.includes('radial-gradient')) {
+    failures.push(`${route}: minimal homepage dot texture missing`);
+  }
+  if (designMetrics[route].heroTopGap === null || designMetrics[route].heroTopGap > 160) {
+    failures.push(`${route}: hero too far from header: ${JSON.stringify(designMetrics[route].heroTopGap)}px`);
+  }
+}
+
 // Guard the public product catalogue and Lab lineup against accidental regressions.
 await linkPage.goto(`${baseURL}/products/`, { waitUntil: 'networkidle' });
 const listedProducts = await linkPage.locator('.catalog-card h3').allTextContents();
@@ -99,34 +129,34 @@ const featured = await linkPage.locator('#featured .product-card').count();
 if (featured !== 3) failures.push(`/: expected 3 featured projects, found ${featured}`);
 if (await linkPage.locator('#featured .devpip-card').count()) failures.push('/: DevPip should not be a featured homepage product');
 if (!await linkPage.locator('#featured .night-card').count()) failures.push('/: missing Night Parcel Office featured card');
-if (!await linkPage.locator('.studio-mark').getByText('PLUTO NIGHT LABS').count()) failures.push('/: studio strip still has abbreviated branding');
+if (!await linkPage.locator('.telemetry').getByText('PLUTO NIGHT LABS').count()) failures.push('/: telemetry identity missing');
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
   await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
   for (const selector of ['.shelfpick-card', '.usage-card', '.night-card']) {
-    const metrics = await linkPage.locator(selector).evaluate((card) => {
-      const visual = card.querySelector('.game-visual, .usage-visual, .night-visual');
+    const metrics = await linkPage.locator(selector).evaluate(card => {
+      const visual = card.querySelector('.project-art');
       const copy = card.querySelector('.product-content');
-      const link = card.querySelector('.feature-card-link');
-      if (!visual || !copy || !link) return null;
+      if (!visual || !copy) return null;
       const imageBox = visual.getBoundingClientRect();
       const copyBox = copy.getBoundingClientRect();
-      const linkBox = link.getBoundingClientRect();
-      return { visualTop: imageBox.top, contentBottom: copyBox.bottom, linkBottom: linkBox.bottom };
+      return { image: { left:imageBox.left,right:imageBox.right,top:imageBox.top,bottom:imageBox.bottom },
+        copy: { left:copyBox.left,right:copyBox.right,top:copyBox.top,bottom:copyBox.bottom } };
     });
-    if (!metrics || metrics.visualTop + 1 < Math.max(metrics.contentBottom, metrics.linkBottom)) {
-      failures.push(`/: artwork overlaps copy at ${width}px in ${selector}: ${JSON.stringify(metrics)}`);
-    }
+    const overlap = metrics && metrics.image.left < metrics.copy.right - 1 && metrics.copy.left < metrics.image.right - 1 &&
+      metrics.image.top < metrics.copy.bottom - 1 && metrics.copy.top < metrics.image.bottom - 1;
+    if (!metrics || overlap) failures.push(`/: artwork overlaps copy at ${width}px in ${selector}: ${JSON.stringify(metrics)}`);
   }
 }
 await linkPage.setViewportSize({ width: 1440, height: 900 });
-const homepageGames = await linkPage.locator('#games .lab-card h3').allTextContents();
+const homepageGames = await linkPage.locator('#games .game-row .game-copy strong').allTextContents();
 for (const game of ['Personal Effects', 'Anomaly Lab', 'Going, Going, Ghoul!']) {
   if (!homepageGames.includes(game)) failures.push(`/: missing featured game ${game}`);
 }
-if (homepageGames.length !== 3) failures.push(`/: expected exactly 3 prominent homepage games, found ${homepageGames.length}`);
-if (!await linkPage.locator('.more-lab-links a[href="/lab/#tiny-heist-planner"]').count()) failures.push('/: missing Tiny Heist Planner secondary link');
-if (!await linkPage.locator('.more-lab-links a[href="/lab/#gladiator-mayhem"]').count()) failures.push('/: missing Gladiator Mayhem secondary link');
+if (homepageGames.length !== 3) failures.push(`/: expected exactly 3 homepage games, found ${homepageGames.length}`);
+if (!await linkPage.locator('.other-games a[href="/lab/#tiny-heist-planner"]').count()) failures.push('/: missing Tiny Heist Planner secondary link');
+if (!await linkPage.locator('.other-games a[href="/lab/#gladiator-mayhem"]').count()) failures.push('/: missing Gladiator Mayhem secondary link');
+if (!await linkPage.locator('.moon').count()) failures.push('/: orbital interaction controls absent');
 if (await linkPage.locator('h3').filter({ hasText: 'End of the World' }).count()) {
   failures.push('/: retired End of the World feature remains');
 }
