@@ -50,6 +50,8 @@ await inspect({ name: 'home-desktop-1440x900', route: '/', viewport: { width: 14
 await inspect({ name: 'products-mobile-320x680', route: '/products/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'products-mobile-390x844', route: '/products/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'products-desktop-1440x900', route: '/products/', viewport: { width: 1440, height: 900 } });
+await inspect({ name: 'shelfpick-mobile-320x680', route: '/products/shelfpick/', viewport: { width: 320, height: 680 } });
+await inspect({ name: 'usagegrid-mobile-390x844', route: '/products/usagegrid/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'lab-mobile-320x680', route: '/lab/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'lab-mobile-390x844', route: '/lab/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'contact-desktop-1440x900', route: '/contact/', viewport: { width: 1440, height: 900 } });
@@ -57,7 +59,7 @@ await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: 
 
 const linkContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const linkPage = await linkContext.newPage();
-for (const route of ['/', '/products/', '/lab/', '/contact/', '/privacy/']) {
+for (const route of ['/', '/products/', '/products/shelfpick/', '/products/usagegrid/', '/lab/', '/contact/', '/privacy/']) {
   await linkPage.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
   const hrefs = await linkPage.locator('a[href]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href')).filter(Boolean))]);
   for (const href of hrefs) {
@@ -106,6 +108,18 @@ const listedProducts = await linkPage.locator('.catalog-card h3').allTextContent
 for (const product of ['ShelfPick', 'UsageGrid', 'DevPip']) {
   if (!listedProducts.includes(product)) failures.push(`/products/: missing ${product}`);
 }
+for (const slug of ['shelfpick', 'usagegrid']) {
+  const target = await linkPage.locator(`#${slug} .catalog-link`).getAttribute('href');
+  if (target !== `/products/${slug}/`) failures.push(`/products/: missing detail link for ${slug}`);
+}
+for (const slug of ['shelfpick', 'usagegrid']) {
+  await linkPage.goto(`${baseURL}/products/${slug}/`, { waitUntil: 'networkidle' });
+  if (!await linkPage.getByRole('heading', { name: slug === 'shelfpick' ? 'ShelfPick' : 'UsageGrid', level:1 }).count()) {
+    failures.push(`/products/${slug}/: expected product detail heading`);
+  }
+  if (!await linkPage.locator('.feature').count()) failures.push(`/products/${slug}/: features missing`);
+}
+
 
 await linkPage.goto(`${baseURL}/lab/`, { waitUntil: 'networkidle' });
 const listedGames = await linkPage.locator('.game-card h3').allTextContents();
@@ -116,6 +130,14 @@ for (const removed of ['End of the World', 'How Much?!']) {
   if (listedGames.includes(removed)) failures.push(`/lab/: retired listing remains: ${removed}`);
 }
 if (listedGames.length !== 8) failures.push(`/lab/: expected 8 experiments, found ${listedGames.length}`);
+const flagshipOrder = ['Night Parcel Office', 'Personal Effects', 'Anomaly Lab'];
+if (JSON.stringify(listedGames.slice(0,3)) !== JSON.stringify(flagshipOrder)) {
+  failures.push(`/lab/: flagship ordering changed: ${listedGames.slice(0,3).join(', ')}`);
+}
+if (await linkPage.locator('#main-content main').count()) failures.push('/lab/: nested main landmark is not allowed');
+if (!await linkPage.getByRole('heading', { name: 'Explore the experiments.' }).count()) failures.push('/lab/: exploratory heading missing');
+if (!await linkPage.locator('#gladiator-mayhem .new-badge').count()) failures.push('/lab/: missing in-development state');
+if (await linkPage.locator('.art-caption').count() !== 3) failures.push('/lab/: concept artwork not labelled');
 const gladiatorLink = await linkPage.locator('#gladiator-mayhem a.play-button').count();
 if (gladiatorLink) failures.push('/lab/: Gladiator Mayhem must not claim a playable build');
 for (const slug of ['going-going-ghoul', 'tiny-heist-planner']) {
@@ -157,6 +179,14 @@ if (homepageGames.length !== 3) failures.push(`/: expected exactly 3 homepage ga
 if (!await linkPage.locator('.other-games a[href="/lab/#tiny-heist-planner"]').count()) failures.push('/: missing Tiny Heist Planner secondary link');
 if (!await linkPage.locator('.other-games a[href="/lab/#gladiator-mayhem"]').count()) failures.push('/: missing Gladiator Mayhem secondary link');
 if (!await linkPage.locator('.moon').count()) failures.push('/: orbital interaction controls absent');
+const orbitalArcs = await linkPage.locator('.orbit-front').evaluateAll(nodes => nodes.map(node => {
+  const rect = node.getBoundingClientRect();
+  const style = getComputedStyle(node);
+  return { width: rect.width, height: rect.height, bottomBorder: style.borderBottomColor };
+}));
+if (orbitalArcs.length !== 2 || orbitalArcs.some(a => a.width < 100 || a.height < 60 || !a.bottomBorder)) {
+  failures.push(`/: foreground orbit arcs missing: ${JSON.stringify(orbitalArcs)}`);
+}
 if (await linkPage.locator('h3').filter({ hasText: 'End of the World' }).count()) {
   failures.push('/: retired End of the World feature remains');
 }
