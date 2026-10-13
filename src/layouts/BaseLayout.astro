@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = 'Pluto Night Labs — Small software. Useful ideas.',
-  description = 'Pluto Night Labs is an independent UK software studio building useful apps, developer tools and playful digital products.',
+  title = 'Pluto Night Labs — Useful apps. Strange games.',
+  description = 'Pluto Night Labs is an independent UK software and games studio making practical apps, developer tools and unusual experimental games.',
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, site.url);
 const socialImageURL = new URL('/images/pluto-night-labs-social.png', site.url);
@@ -23,7 +23,7 @@ const socialImageURL = new URL('/images/pluto-night-labs-social.png', site.url);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#090c16" />
+    <meta name="theme-color" content="#090e12" />
     <meta name="color-scheme" content="dark" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
