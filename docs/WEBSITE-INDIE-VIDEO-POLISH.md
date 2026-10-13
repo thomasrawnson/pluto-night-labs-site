@@ -1,38 +1,25 @@
-# Indie homepage polish and real gameplay clips
+# Indie polish and MailerLite newsletter integration
 
-## Scope
+## Decisions (13 October 2026)
+- The owner's genuine Personal Effects and Anomaly Lab recordings are **on hold**. Their binary files and all playback controls have been removed from this PR branch, not simply hidden.
+- Keep five real screenshot-based game cards; preserve all existing playable prototype links.
+- Keep selective tactile card shadows, brighter small text, a retro serif headline accent and "Play the games" as the primary hero action.
+- Remove overly repetitive technical labels without changing the core Pluto orbit artwork.
 
-- The homepage keeps the current Pluto interactive artwork, three featured projects and three small Lab previews.
-- Replace the redundant "SYSTEMS: NOMINAL" telemetry strip with breathing room; keep one atmospheric orbital readout.
-- Relax headline tracking and use a warm retro serif for only "Strange games."
-- Add restrained physical offset shadows to featured cards and make small labels easier to read.
-- Make **Play the games** the main hero action.
+## MailerLite: ready for final connection
+The new homepage "Postcards from Pluto" section currently displays a truthful **Email updates coming soon** message. It does **not** collect emails or claim MailerLite is connected.
 
-## Footage
+To make it live:
+1. In MailerLite, go to **Forms → Embedded forms → Overview** for the Pluto Night Labs form.
+2. Copy the **Share URL** (HTTPS) and give it to the website owner/developer.
+3. Set `site.newsletterUrl` in `src/config.ts` to that exact verified URL, on this preview branch.
+4. Confirm MailerLite uses the correct `Pluto Night Labs – Newsletter` subscriber group and that double opt-in, sender email and business correspondence address are configured properly. These account settings are **not** configured by this repository.
+5. Test a real subscribe → confirmation → unsubscribe cycle using a test email, then review the preview and privacy copy.
 
-Two short **actual game recordings** have been reviewed and prepared from the owner's October 13 phone uploads. The original recordings are not modified, and no new scenes are fabricated.
+We deliberately prefer a hosted MailerLite signup link over loading MailerLite's universal JavaScript across every page. This keeps the existing no-on-site-tracking posture intact while still using the actual service. A different embed design requires the real embed snippet and an explicit privacy review.
 
-```
-public/videos/games/personal-effects/preview.mp4  # approx 7.5 seconds, ~264KB, silent
-public/videos/games/anomaly-lab/preview.mp4        # approx 6.8 seconds, ~71KB, silent
-```
-
-These MP4s are distributed separately in `pluto-gameplay-clips.zip` and are **not included in this draft branch until the owner commits them**. The Lab page checks for their existence during the Astro build and displays the Watch control only when a clip is present. Do not merge until both files are added and the final preview is reviewed.
-
-Night Parcel Office remains a static gameplay screenshot because the supplied videos were Personal Effects and Anomaly Lab; the two Anomaly Lab video uploads were exact duplicates. A Night Parcel Office clip should not be claimed until the owner supplies a recording of that game.
-
-## Experience rules
-
-- No autoplay or automatic movement, including on hover.
-- Native video controls and `playsinline` on mobile, with `preload="none"`.
-- The existing WebP gameplay screenshot remains the static poster and fallback.
-- Real game footage is identified as such. Do not use generated artwork to impersonate real footage.
-- Preserve 320px and 390px readability, focus indicators, all gameplay links and reduced-motion preferences.
-
-## Release checks
-
-1. Copy both MP4 files into the paths above and commit them to the same preview branch.
-2. Run `npm run build`.
-3. Start the site locally, then run `REQUIRE_GAME_CLIPS=1 npm run qa:prelaunch`.
-4. Review the Cloudflare preview at desktop and mobile widths, especially Safari's native playback controls.
-5. Merge only after owner visual approval.
+## QA gates
+- Cloudflare preview build must pass.
+- Check homepage at 320px, 390px and desktop; verify no video elements/Watch buttons, no unconfigured "Join" link and correct privacy link.
+- Once `newsletterUrl` is set, test that link points to the actual MailerLite hosted form. Never invent MailerLite form IDs or signup URLs.
+- Live site remains unchanged until owner approval and PR merge.
