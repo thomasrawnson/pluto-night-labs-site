@@ -47,8 +47,10 @@ async function inspect({ name, route, viewport }) {
 await inspect({ name: 'home-mobile-390x844', route: '/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'home-mobile-320x680', route: '/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'home-desktop-1440x900', route: '/', viewport: { width: 1440, height: 900 } });
+await inspect({ name: 'products-mobile-320x680', route: '/products/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'products-mobile-390x844', route: '/products/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'products-desktop-1440x900', route: '/products/', viewport: { width: 1440, height: 900 } });
+await inspect({ name: 'lab-mobile-320x680', route: '/lab/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'lab-mobile-390x844', route: '/lab/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'contact-desktop-1440x900', route: '/contact/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: { width: 1440, height: 900 } });
@@ -70,6 +72,34 @@ for (const route of ['/', '/products/', '/lab/', '/contact/', '/privacy/']) {
     }
   }
 }
+// The three pages must share the minimal homepage background and avoid excessive hero whitespace.
+const designMetrics = {};
+for (const route of ['/', '/lab/', '/products/']) {
+  await linkPage.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
+  designMetrics[route] = await linkPage.evaluate(() => {
+    const page = document.querySelector('#main-content');
+    const hero = document.querySelector('h1');
+    const header = document.querySelector('.site-header');
+    const surface = page ? getComputedStyle(page) : null;
+    return {
+      background: surface?.backgroundColor ?? '',
+      texture: surface?.backgroundImage ?? '',
+      heroTopGap: hero && header ? hero.getBoundingClientRect().top - header.getBoundingClientRect().bottom : null,
+    };
+  });
+}
+for (const route of ['/lab/', '/products/']) {
+  if (designMetrics[route].background !== designMetrics['/'].background) {
+    failures.push(`${route}: background colour does not match homepage`);
+  }
+  if (!designMetrics[route].texture.includes('radial-gradient')) {
+    failures.push(`${route}: minimal homepage dot texture missing`);
+  }
+  if (designMetrics[route].heroTopGap === null || designMetrics[route].heroTopGap > 160) {
+    failures.push(`${route}: hero too far from header: ${JSON.stringify(designMetrics[route].heroTopGap)}px`);
+  }
+}
+
 // Guard the public product catalogue and Lab lineup against accidental regressions.
 await linkPage.goto(`${baseURL}/products/`, { waitUntil: 'networkidle' });
 const listedProducts = await linkPage.locator('.catalog-card h3').allTextContents();
