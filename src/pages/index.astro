@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout>
+<BaseLayout title="Pluto Night Labs — Useful apps. Strange games." description="Pluto Night Labs is an independent UK studio creating practical apps and unusual experimental games. Explore tools and playable prototypes.">
   <section class="hero" id="home">
     <div class="shell hero-grid">
       <div class="hero-copy">
@@ -17,8 +17,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="orbit-scene" id="orbit-scene" aria-label="Interactive Pluto orbital display">
         <div class="scope-line scope-x"></div><div class="scope-line scope-y"></div>
         <div class="scope-ring ring-one"></div><div class="scope-ring ring-two"></div>
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="orbit orbit-one" aria-hidden="true"></div><div class="orbit orbit-two" aria-hidden="true"></div>
         <div class="pluto" aria-hidden="true"></div>
+        <div class="orbit-front orbit-front-one" aria-hidden="true"></div>
+        <div class="orbit-front orbit-front-two" aria-hidden="true"></div>
         <button class="moon moon-one" type="button" aria-label="Move the first moon into a new orbit"></button>
         <button class="moon moon-two" type="button" aria-label="Move the second moon into a new orbit"></button>
         <button class="moon moon-three" type="button" aria-label="Move the third moon into a new orbit"></button>
@@ -43,7 +45,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="meeple"></span>
         </div>
         <div class="product-content">
-          <div><h2>ShelfPick</h2><p>Discover your next<br />favourite game.</p><span class="project-kind"><i></i> APP</span></div>
+          <div><h2>ShelfPick</h2><p>Discover your next<br />favourite game.</p><span class="project-kind"><i></i> APP · COMING SOON</span></div>
           <a class="round-link" href="/products/#shelfpick" aria-label="Explore ShelfPick">→</a>
         </div>
       </article>
@@ -52,7 +54,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="mini-window"><div class="mini-title">USAGEGRID <span>●</span></div><div class="mini-chart"><i style="height:30%"></i><i style="height:54%"></i><i style="height:42%"></i><i style="height:72%"></i><i style="height:58%"></i><i style="height:90%"></i><i style="height:65%"></i><i style="height:78%"></i></div><div class="mini-footer">TODAY 46% &nbsp; WEEK 68%</div></div>
         </div>
         <div class="product-content">
-          <div><h2>UsageGrid</h2><p>Your AI coding usage,<br />at a glance.</p><span class="project-kind"><i></i> APP</span></div>
+          <div><h2>UsageGrid</h2><p>Your AI coding usage,<br />at a glance.</p><span class="project-kind"><i></i> APP · IN DEVELOPMENT</span></div>
           <a class="round-link" href="/products/#usagegrid" aria-label="Explore UsageGrid">→</a>
         </div>
       </article>
@@ -61,7 +63,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="parcel-shadow"></div><div class="parcel-box"><span class="parcel-tape"></span><b>NPO</b><small>NIGHT PARCEL OFFICE</small><span class="parcel-barcode">▥▥▥▥▥▥▥▥</span></div>
         </div>
         <div class="product-content">
-          <div><h2>Night Parcel Office</h2><p>Sort. Follow the rules.<br />Survive the shift.</p><span class="project-kind game-kind"><i></i> GAME</span></div>
+          <div><h2>Night Parcel Office</h2><p>Sort. Follow the rules.<br />Survive the shift.</p><span class="project-kind game-kind"><i></i> GAME · PLAYABLE PROTOTYPE</span></div>
           <a class="round-link" href="/lab/#night-parcel-office" aria-label="Explore Night Parcel Office">→</a>
         </div>
       </article>
@@ -136,9 +138,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .ring-one { width:88%; }.ring-two { width:62%; border-style:dashed; opacity:.7; }
   .scope-line { position:absolute; background:rgba(233,156,100,.18); pointer-events:none; }
   .scope-x { left:3%; right:3%; height:1px; top:50%; }.scope-y { width:1px; top:5%; bottom:5%; left:50%; }
-  .orbit { position:absolute; border:1px solid rgba(250,151,91,.50); border-radius:50%; left:5%; top:33%; width:90%; height:36%; transform:rotate(-24deg); pointer-events:none; }
-  .orbit-two { transform:rotate(52deg); opacity:.35; }
-  .pluto { position:absolute; width:45%; aspect-ratio:1; left:27.5%; top:26%; border-radius:50%; background:radial-gradient(ellipse at 25% 27%, #f1c29a 0, #b67b58 14%, #534443 35%, #1d2228 62%, #0b1118 80%); box-shadow:inset -30px -16px 38px #070b10, 0 0 35px rgba(235,138,73,.1); transform:translateX(calc(var(--pointer-x) * 7px)); pointer-events:none; }
+  /* Centred, complete orbit ellipses; lower front arcs pass in front of Pluto. */
+  .orbit, .orbit-front { position:absolute; left:50%; top:50%; width:90%; height:48%; border-radius:50%; pointer-events:none; transform-origin:center; }
+  .orbit { z-index:0; border:1px solid rgba(250,151,91,.5); }
+  .orbit-one,.orbit-front-one { transform:translate(-50%,-50%) rotate(-24deg); }
+  .orbit-two,.orbit-front-two { width:77%; height:47%; transform:translate(-50%,-50%) rotate(57deg); }
+  .orbit-two { opacity:.7; border-color:rgba(250,151,91,.46); }
+  .orbit-front { z-index:2; border:1px solid transparent; border-bottom-color:rgba(250,151,91,.62); }
+  .orbit-front-two { border-bottom-color:rgba(250,151,91,.48); }
+  .pluto { z-index:1; position:absolute; width:45%; aspect-ratio:1; left:27.5%; top:26%; border-radius:50%; background:radial-gradient(ellipse at 25% 27%, #f1c29a 0, #b67b58 14%, #534443 35%, #1d2228 62%, #0b1118 80%); box-shadow:inset -30px -16px 38px #070b10, 0 0 35px rgba(235,138,73,.1); transform:translateX(calc(var(--pointer-x) * 7px)); pointer-events:none; }
   .moon { position:absolute; z-index:2; width:22px; height:22px; border:1px solid #a69488; border-radius:50%; background:radial-gradient(circle at 30% 24%,#e6d0b1,#5b5c63 65%,#111820); box-shadow:0 0 12px #000; cursor:pointer; transition:transform .25s ease, box-shadow .2s ease; }
   .moon:hover,.moon:focus-visible { box-shadow:0 0 0 5px rgba(255,143,90,.13),0 0 20px rgba(255,143,90,.4); }
   .moon-one { left:10%; top:62%; transform:rotate(var(--offset,0deg)) translateX(15px); }
@@ -203,4 +211,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   @media(max-width:660px) { .hero { padding-top:46px; }.hero-grid { gap:3px; }.hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }.hero h1 em { white-space:normal; }.orbit-scene { max-width:360px; }.telemetry { font-size:.57rem; }.telemetry-center { display:none; }.telemetry-right { width:100%; }.product-grid { grid-template-columns:1fr; }.product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }.project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }.box-stack { transform:scale(.72) rotate(-6deg); width:110%; }.meeple { display:none; }.mini-window { transform:scale(.67); min-width:150px; }.parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }.product-content { min-height:145px; }.section-head { gap:8px; }.section-label { font-size:.65rem; }.game-row { border-bottom:1px solid #ffffff12; }.other-games { align-items:start; }.other-games span { width:100%; } }
   @media(max-width:360px) { .product-card { grid-template-columns:100px minmax(0,1fr); }.product-content { padding:12px; }.product-content p { font-size:.78rem; }.hero-actions .button { font-size:.75rem; padding-inline:14px; }.game-art { width:66px; height:66px; flex-basis:66px; }.game-arrow { display:none; } }
   @media(prefers-reduced-motion:reduce){ .moon,.pluto { transition:none; transform:none; } }
+  @media(max-width:660px) { .project-kind { font-size:.58rem; letter-spacing:.07em; } }
 </style>
