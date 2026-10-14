@@ -1,0 +1,93 @@
+<section class="newsletter" aria-label="Newsletter signup">
+  <div class="shell newsletter-panel">
+    <div class="newsletter-form">
+      <p class="newsletter-kicker" aria-hidden="true">// INCOMING TRANSMISSION</p>
+      <div class="ml-embedded" data-form="TQKBpq"></div>
+      <p class="newsletter-privacy">Double opt-in. Unsubscribe any time. <a href="/privacy/">Privacy policy</a>.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter {
+    padding: 20px 0 42px;
+  }
+  .newsletter-panel {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 540px;
+    padding: clamp(25px, 4vw, 46px);
+    overflow: hidden;
+    border: 1px solid rgba(126, 224, 144, .28);
+    border-radius: 6px;
+    background:
+      linear-gradient(rgba(118, 222, 137, .025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(118, 222, 137, .025) 1px, transparent 1px),
+      radial-gradient(circle at 92% 12%, rgba(103, 215, 124, .09), transparent 34%),
+      #0a1112;
+    background-size: 22px 22px, 22px 22px, auto, auto;
+    box-shadow: 5px 5px 0 rgba(72, 121, 79, .16);
+  }
+  .newsletter-panel::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(255, 255, 255, .05);
+    pointer-events: none;
+  }
+  .newsletter-form {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 520px);
+    min-width: 0;
+  }
+  .newsletter-kicker,
+  .newsletter-privacy {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .newsletter-kicker {
+    margin: 0 0 15px;
+    color: #8ee69f;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+  .newsletter-form {
+    min-height: 435px;
+  }
+  .newsletter-form :global(.ml-embedded) {
+    width: 100%;
+    min-width: 0;
+  }
+  .newsletter-privacy {
+    margin: 13px 0 0;
+    color: #aab3ad;
+    font-size: .67rem;
+    line-height: 1.6;
+    letter-spacing: .035em;
+  }
+  .newsletter-privacy a {
+    color: #ccefd2;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .newsletter-privacy a:hover {
+    color: #fff;
+  }
+  @media (max-width: 720px) {
+    .newsletter {
+      padding-bottom: 30px;
+    }
+    .newsletter-panel {
+      min-height: 675px;
+      padding: 27px 24px;
+    }
+  }
+  @media (max-width: 360px) {
+    .newsletter-panel {
+      min-height: 710px;
+      padding-inline: 19px;
+    }
+  }
+</style>

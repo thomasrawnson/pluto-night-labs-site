@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "night-parcel-office",
+    "src": "4AF55119-3BE6-4EBE-B7AB-6EB90121C50F_1_201_a.jpeg",
+    "crop": [
+      0,
+      525,
+      1076,
+      1198
+    ],
+    "purpose": "Parcel inspection and three routing choices",
+    "relative_path": "public/images/games/night-parcel-office/featured.webp",
+    "size_bytes": 18718,
+    "sha256": "9d993a2c82250559ec04d1db80fa6ac9aef076e6c6e5f0449b40f678fb40675f"
+  },
+  {
+    "slug": "personal-effects",
+    "src": "B2CDE51F-8737-4F3F-9F22-2B544C152C4F_1_201_a.jpeg",
+    "crop": [
+      0,
+      174,
+      1171,
+      906
+    ],
+    "purpose": "Packed magician suitcase with seven belongings",
+    "relative_path": "public/images/games/personal-effects/featured.webp",
+    "size_bytes": 21574,
+    "sha256": "c94a864f69ae75997c984da71c592899f74bf1b48fb0c4e84900cc1c09a11ef7"
+  },
+  {
+    "slug": "anomaly-lab",
+    "src": "806EBBC0-59B4-4FE1-BF01-B132C610F472_1_201_a.jpeg",
+    "crop": [
+      0,
+      155,
+      1076,
+      828
+    ],
+    "purpose": "Four distinct specimens in testing grid",
+    "relative_path": "public/images/games/anomaly-lab/featured.webp",
+    "size_bytes": 11070,
+    "sha256": "1254ab3227bde86d2a8e49636be4da4c5407839df445eec2a50bbb4280cf9d75"
+  },
+  {
+    "slug": "going-going-ghoul",
+    "src": "70DBB087-D992-4DE1-A38C-ECE39A43D15A_1_201_a.jpeg",
+    "crop": [
+      0,
+      130,
+      1084,
+      808
+    ],
+    "purpose": "Cursed relics on the auction cabinet",
+    "relative_path": "public/images/games/going-going-ghoul/featured.webp",
+    "size_bytes": 11098,
+    "sha256": "bbdec850e56e32c941c0f8f73aee227780fd6b30ab61026b78019f2dde5f51e9"
+  },
+  {
+    "slug": "tiny-heist-planner",
+    "src": "594597FD-4F25-4D65-AC23-F5E180E45D62_1_201_a.jpeg",
+    "crop": [
+      0,
+      330,
+      1171,
+      1062
+    ],
+    "purpose": "Blueprint showing guard patrol and loot",
+    "relative_path": "public/images/games/tiny-heist-planner/featured.webp",
+    "size_bytes": 12632,
+    "sha256": "71cf3c7a89a910eff23b3c2e79a877f74d717560eb523a2446d66f34d923f0aa"
+  }
+]

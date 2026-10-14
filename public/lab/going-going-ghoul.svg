@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="t d">
+<title id="t">Going, Going, Ghoul! — illustrated auction poster</title><desc id="d">A spooky vintage auction lot card and antique urn.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#352e30"/><stop offset="1" stop-color="#161d24"/></linearGradient><pattern id="grain" width="17" height="17" patternUnits="userSpaceOnUse"><circle cx="3" cy="5" r="1" fill="#ead5aa" opacity=".14"/></pattern></defs>
+<rect width="1200" height="675" fill="url(#bg)"/><rect width="1200" height="675" fill="url(#grain)"/>
+<rect x="49" y="40" width="1102" height="595" rx="9" fill="none" stroke="#b99765" stroke-width="3"/><rect x="68" y="60" width="1064" height="555" rx="6" fill="none" stroke="#a88d61" opacity=".6"/>
+<text x="105" y="105" font-family="Georgia,serif" font-size="28" fill="#e2c796" letter-spacing="8">PLUTO NIGHT LABS · AUCTION HOUSE</text>
+<text x="105" y="218" font-family="Georgia,serif" font-size="74" font-weight="bold" fill="#f4e3bd">GOING, GOING,</text><text x="105" y="298" font-family="Georgia,serif" font-size="93" font-weight="bold" fill="#e6a973">GHOUL!</text>
+<path d="M105 320H600" stroke="#b99765" stroke-width="3"/><text x="105" y="379" font-family="Georgia,serif" font-size="29" fill="#ead6b4">Curiosities. Curses. Questionable bids.</text>
+<text x="105" y="532" font-family="monospace" font-size="24" letter-spacing="3" fill="#b7a789">LOT 013  /  NO REFUNDS  /  EVER</text>
+<rect x="768" y="143" width="292" height="365" rx="9" fill="#c2af85" opacity=".16" stroke="#d9b980" stroke-width="3" transform="rotate(5 914 325)"/>
+<ellipse cx="910" cy="492" rx="135" ry="30" fill="#0d1219" opacity=".6"/><path d="M876 231Q860 263 878 297L848 414Q860 456 912 455Q963 456 977 412L946 297Q962 259 947 231Z" fill="#75857d" stroke="#d9bd90" stroke-width="9"/><ellipse cx="912" cy="225" rx="60" ry="19" fill="#263a3c" stroke="#d9bd90" stroke-width="10"/>
+<path d="M906 327q-56 -40 -18 -78m35 124q54 -60 13 -105" fill="none" stroke="#c6d4ac" stroke-width="6" opacity=".6"/>
+<path d="M996 363l65 25-17 96-65-25z" fill="#e7d1a0" stroke="#70573c" stroke-width="4"/><text x="995" y="422" font-family="monospace" font-size="22" font-weight="bold" fill="#432e2d" transform="rotate(17 995 422)">£ ???</text>
+<text x="105" y="592" font-family="monospace" font-size="17" fill="#a9987b" letter-spacing="4">CONCEPT COVER · EARLY PLAYTEST</text>
+</svg>
