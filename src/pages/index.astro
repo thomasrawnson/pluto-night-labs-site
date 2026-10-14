@@ -84,12 +84,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
       </a>
     </div>
     <div class="other-games"><span>ALSO IN THE LAB</span><a href="/lab/#tiny-heist-planner">View Tiny Heist Planner →</a><a href="/lab/#gladiator-mayhem">See Gladiator Mayhem →</a></div>
-    <a class="join-link" href="/playtests/join/">Want to test future games? Request a playtest invite →</a>
-  </section>
-
-  <section class="about-compact shell" id="about">
-    <p>Small studio. Big curiosity.</p>
-    <a href="/contact/">Have an idea? Get in touch ↗</a>
+    <a class="join-link" href="#about">Playtest invitations are in the newsletter →</a>
   </section>
 
   <NewsletterSignup />
@@ -217,8 +212,6 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .other-games a { color:#e4dfda; }.other-games a:hover { color:#ff9a70; }
   .join-link { display:inline-flex; align-items:center; min-height:44px; margin:14px 0 0; color:#ffd0b5; font-weight:750; font-size:.9rem; text-decoration:underline; text-underline-offset:5px; }
   .join-link:hover { color:#fff0e7; }
-  .about-compact { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; border-top:1px solid #ffffff1b; padding-block:17px 25px; color:#aab0b3; font-size:.8rem; }
-  .about-compact p { margin:0; }.about-compact a { color:#e6a58b; }
   @media(max-width:920px) { .hero-grid { grid-template-columns:1fr; }.orbit-scene { max-width:450px; }.product-grid { gap:12px; }.game-grid { grid-template-columns:1fr; gap:12px; }.product-content { padding:15px; }.project-art { height:155px; }.product-content h2 { font-size:1.1rem; } }
   @media(max-width:660px) { .hero { padding-top:46px; }.hero-grid { gap:3px; }.hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }.hero h1 em { white-space:normal; }.orbit-scene { max-width:360px; }.telemetry { font-size:.57rem; }.telemetry-center { display:none; }.telemetry-right { width:100%; }.product-grid { grid-template-columns:1fr; }.product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }.project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }.box-stack { transform:scale(.72) rotate(-6deg); width:110%; }.meeple { display:none; }.mini-window { transform:scale(.67); min-width:150px; }.parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }.product-content { min-height:145px; }.section-head { gap:8px; }.section-label { font-size:.65rem; }.game-row { border-bottom:1px solid #ffffff12; }.other-games { align-items:start; }.other-games span { width:100%; } }
   @media(max-width:360px) { .product-card { grid-template-columns:100px minmax(0,1fr); }.product-content { padding:12px; }.product-content p { font-size:.78rem; }.hero-actions .button { font-size:.75rem; padding-inline:14px; }.game-art { width:66px; height:66px; flex-basis:66px; }.game-arrow { display:none; } }

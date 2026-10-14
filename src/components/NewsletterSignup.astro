@@ -1,7 +1,13 @@
-<section class="newsletter" aria-label="Newsletter signup">
+<section class="newsletter" id="about" aria-labelledby="newsletter-title">
   <div class="shell newsletter-panel">
-    <div class="newsletter-form">
+    <div class="newsletter-intro">
       <p class="newsletter-kicker" aria-hidden="true">// INCOMING TRANSMISSION</p>
+      <h2 id="newsletter-title">Join the experiment.</h2>
+      <p>Strange games, questionable experiments and occasional transmissions from Pluto Night Labs.</p>
+      <p>Get early playtest invitations, behind-the-scenes updates and first access to upcoming games.</p>
+      <span>One useful transmission at a time. No spam.</span>
+    </div>
+    <div class="newsletter-form">
       <div class="ml-embedded" data-form="TQKBpq"></div>
       <p class="newsletter-privacy">Double opt-in. Unsubscribe any time. <a href="/privacy/">Privacy policy</a>.</p>
     </div>
@@ -15,7 +21,9 @@
   .newsletter-panel {
     position: relative;
     display: grid;
-    place-items: center;
+    grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr);
+    align-items: center;
+    gap: clamp(34px, 6vw, 78px);
     padding: clamp(22px, 3vw, 34px);
     overflow: hidden;
     border: 1px solid rgba(126, 224, 144, .28);
@@ -35,19 +43,43 @@
     border: 1px solid rgba(255, 255, 255, .05);
     pointer-events: none;
   }
+  .newsletter-intro,
   .newsletter-form {
     position: relative;
     z-index: 1;
-    width: min(100%, 520px);
     min-width: 0;
   }
+  .newsletter-intro { max-width: 470px; padding-left: clamp(2px, 1vw, 14px); }
+  .newsletter-intro h2 {
+    max-width: 430px;
+    margin: 0 0 20px;
+    color: #f3eee6;
+    font: 750 clamp(2.25rem, 4.6vw, 4.5rem)/.96 Georgia, "Iowan Old Style", serif;
+    letter-spacing: -.045em;
+  }
+  .newsletter-intro > p:not(.newsletter-kicker) {
+    max-width: 430px;
+    margin: 0 0 12px;
+    color: #c2c8c4;
+    font-size: .92rem;
+    line-height: 1.65;
+  }
+  .newsletter-intro > span {
+    display: block;
+    margin-top: 22px;
+    color: #d7c6ba;
+    font: 700 .67rem/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .065em;
+    text-transform: uppercase;
+  }
+  .newsletter-form { width: 100%; }
   .newsletter-kicker,
   .newsletter-privacy {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   .newsletter-kicker {
     margin: 0 0 15px;
-    color: #8ee69f;
+    color: #ffad86;
     font-size: .68rem;
     font-weight: 700;
     letter-spacing: .12em;
@@ -56,10 +88,22 @@
     width: 100%;
     min-width: 0;
   }
+  .newsletter-form :global(.ml-form-embedContainer .ml-form-embedWrapper.embedForm) {
+    max-width: none;
+  }
+  .newsletter-form :global(.ml-form-embedBody .ml-form-embedContent) {
+    display: none;
+  }
+  .newsletter-form :global(.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody) {
+    padding: 24px 24px 4px;
+  }
+  .newsletter-form :global(.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form) {
+    margin: 0;
+  }
   .newsletter-privacy {
     margin: 13px 0 0;
     color: #aab3ad;
-    font-size: .67rem;
+    font-size: .72rem;
     line-height: 1.6;
     letter-spacing: .035em;
   }
@@ -76,8 +120,13 @@
       padding: 8px 0 22px;
     }
     .newsletter-panel {
+      grid-template-columns: 1fr;
+      gap: 24px;
       padding: 22px 20px;
     }
+    .newsletter-intro { max-width: none; padding: 0 2px; }
+    .newsletter-intro h2 { margin-bottom: 16px; font-size: clamp(2.35rem, 12vw, 3.4rem); }
+    .newsletter-intro > span { margin-top: 17px; }
   }
   @media (max-width: 360px) {
     .newsletter-panel {
