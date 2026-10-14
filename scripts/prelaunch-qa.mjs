@@ -156,7 +156,14 @@ if (JSON.stringify(listedGames.slice(0,3)) !== JSON.stringify(flagshipOrder)) {
 if (await linkPage.locator('#main-content main').count()) failures.push('/lab/: nested main landmark is not allowed');
 if (!await linkPage.getByRole('heading', { name: 'Explore the experiments.' }).count()) failures.push('/lab/: exploratory heading missing');
 if (!await linkPage.locator('#gladiator-mayhem .new-badge').count()) failures.push('/lab/: missing in-development state');
-if (await linkPage.locator('.art-caption').count() !== 3) failures.push('/lab/: concept artwork not labelled');
+const conceptArtworkCount = await linkPage.locator('.game-art img[src$=".svg"]').count();
+const conceptArtworkLabels = linkPage.locator('.game-art:has(img[src$=".svg"]) .art-caption');
+if (await conceptArtworkLabels.count() !== conceptArtworkCount) {
+  failures.push(`/lab/: expected ${conceptArtworkCount} concept artwork label(s), found ${await conceptArtworkLabels.count()}`);
+}
+for (const label of await conceptArtworkLabels.allTextContents()) {
+  if (label.trim() !== 'Concept illustration') failures.push(`/lab/: unexpected concept artwork label: ${label}`);
+}
 if (await linkPage.locator('.clip-details, video').count()) failures.push('/lab/: videos should not appear while recordings are paused');
 const gladiatorLink = await linkPage.locator('#gladiator-mayhem a.play-button').count();
 if (gladiatorLink) failures.push('/lab/: Gladiator Mayhem must not claim a playable build');
@@ -182,19 +189,23 @@ for (const slug of ['personal-effects', 'anomaly-lab', 'going-going-ghoul']) {
 if (!await linkPage.locator('.site-header .brand').count()) failures.push('/: studio brand missing from navigation');
 if (await linkPage.locator('.telemetry').count()) failures.push('/: redundant status strip remains on homepage');
 
-if (!await linkPage.getByRole('heading', { name: 'A little strange news from the lab.' }).count()) {
+const newsletter = linkPage.locator('section.newsletter');
+if (await newsletter.count() !== 1 || !await newsletter.getByRole('heading', { name: 'Join the experiment.' }).count()) {
   failures.push('/: newsletter section missing');
 }
-const mailerLink = linkPage.locator('#updates a.updates-button');
-if (await mailerLink.count()) {
-  const href = await mailerLink.getAttribute('href');
-  if (!href?.startsWith('https://')) failures.push('/: MailerLite signup must link to a verified HTTPS page');
-} else if (!await linkPage.locator('#updates .updates-pending').count()) {
-  failures.push('/: newsletter must show a truthful pending state when signup is not configured');
+const mailerLiteContainers = newsletter.locator('.ml-embedded');
+if (await mailerLiteContainers.count() !== 1) {
+  failures.push(`/: expected one MailerLite form container, found ${await mailerLiteContainers.count()}`);
+} else if (await mailerLiteContainers.getAttribute('data-form') !== 'TQKBpq') {
+  failures.push(`/: incorrect MailerLite form ID: ${await mailerLiteContainers.getAttribute('data-form')}`);
 }
-if (!await linkPage.locator('#updates a[href="/privacy/"]').count()) {
+if (!await newsletter.locator('a[href="/privacy/"]').count()) {
   failures.push('/: newsletter privacy link missing');
 }
+const mailerLiteLoaderCount = await linkPage.locator('script[src="https://assets.mailerlite.com/js/universal.js"]').count();
+if (mailerLiteLoaderCount !== 1) failures.push(`/: expected one MailerLite loader, found ${mailerLiteLoaderCount}`);
+const aboutIdCount = await linkPage.locator('[id="about"]').count();
+if (aboutIdCount !== 1) failures.push(`/: expected one id="about", found ${aboutIdCount}`);
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
   await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
