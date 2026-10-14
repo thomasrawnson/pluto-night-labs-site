@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../config';
+import NewsletterSignup from '../components/NewsletterSignup.astro';
 ---
 
-<BaseLayout title="Pluto Night Labs — Useful apps. Strange games." description="Pluto Night Labs is an independent UK studio creating practical apps and unusual experimental games. Explore tools and playable prototypes.">
+<BaseLayout title="Pluto Night Labs — Useful apps. Strange games." description="Pluto Night Labs is an independent UK studio creating practical apps and unusual experimental games. Explore tools and playable prototypes." newsletter>
   <section class="hero" id="home">
     <div class="shell hero-grid">
       <div class="hero-copy">
@@ -84,31 +84,10 @@ import { site } from '../config';
       </a>
     </div>
     <div class="other-games"><span>ALSO IN THE LAB</span><a href="/lab/#tiny-heist-planner">View Tiny Heist Planner →</a><a href="/lab/#gladiator-mayhem">See Gladiator Mayhem →</a></div>
-    <a class="join-link" href="/playtests/join/">Want to test future games? Request a playtest invite →</a>
+    <a class="join-link" href="#about">Playtest invitations are in the newsletter →</a>
   </section>
 
-  <section class="updates shell" id="updates" aria-labelledby="updates-title">
-    <div class="updates-copy">
-      <p class="updates-kicker">POSTCARDS FROM PLUTO</p>
-      <h2 id="updates-title">A little strange news from the lab.</h2>
-      <p>Occasional notes on new games, playtests, beta opportunities and launches. Only when there's something worth sharing.</p>
-    </div>
-    <div class="updates-action">
-      {site.newsletterUrl.startsWith('https://') ? (
-        <a class="updates-button" href={site.newsletterUrl} rel="noopener noreferrer" target="_blank">
-          Join the experiment <span aria-hidden="true">↗</span>
-        </a>
-      ) : (
-        <span class="updates-pending">Email updates coming soon</span>
-      )}
-      <p>No spam. Unsubscribe whenever you like. <a href="/privacy/">Privacy details</a></p>
-    </div>
-  </section>
-
-  <section class="about-compact shell" id="about">
-    <p>Small studio. Big curiosity.</p>
-    <a href="/contact/">Have an idea? Get in touch ↗</a>
-  </section>
+  <NewsletterSignup />
 </BaseLayout>
 
 <script>
@@ -219,7 +198,7 @@ import { site } from '../config';
   .project-kind i { width:7px; height:7px; border-radius:50%; background:currentColor; }.game-kind { color:#ff9267; }
   .round-link,.game-arrow { flex-shrink:0; display:grid; place-items:center; width:37px; height:37px; border:1px solid #828386; border-radius:50%; font-size:1.25rem; }
   .round-link:hover { background:#ff986f; color:#111; border-color:#ff986f; }
-  .games { padding-bottom:32px; }
+  .games { padding-bottom:25px; }
   .game-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:23px; }
   .game-row { display:flex; align-items:center; min-width:0; gap:13px; padding-block:5px; }
   .game-row:hover strong { color:#ffa681; }
@@ -231,10 +210,8 @@ import { site } from '../config';
   .game-arrow { width:29px; height:29px; font-size:1rem; }
   .other-games { display:flex; align-items:center; flex-wrap:wrap; gap:18px; margin-top:26px; border-top:1px solid #ffffff18; padding-top:17px; color:#a7adae; font-size:.6rem; }
   .other-games a { color:#e4dfda; }.other-games a:hover { color:#ff9a70; }
-  .join-link { display:inline-flex; align-items:center; min-height:48px; margin:19px 0 0; color:#ffd0b5; font-weight:750; font-size:.9rem; text-decoration:underline; text-underline-offset:5px; }
+  .join-link { display:inline-flex; align-items:center; min-height:44px; margin:14px 0 0; color:#ffd0b5; font-weight:750; font-size:.9rem; text-decoration:underline; text-underline-offset:5px; }
   .join-link:hover { color:#fff0e7; }
-  .about-compact { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; border-top:1px solid #ffffff1b; padding-block:20px 34px; color:#aab0b3; font-size:.8rem; }
-  .about-compact p { margin:0; }.about-compact a { color:#e6a58b; }
   @media(max-width:920px) { .hero-grid { grid-template-columns:1fr; }.orbit-scene { max-width:450px; }.product-grid { gap:12px; }.game-grid { grid-template-columns:1fr; gap:12px; }.product-content { padding:15px; }.project-art { height:155px; }.product-content h2 { font-size:1.1rem; } }
   @media(max-width:660px) { .hero { padding-top:46px; }.hero-grid { gap:3px; }.hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }.hero h1 em { white-space:normal; }.orbit-scene { max-width:360px; }.telemetry { font-size:.57rem; }.telemetry-center { display:none; }.telemetry-right { width:100%; }.product-grid { grid-template-columns:1fr; }.product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }.project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }.box-stack { transform:scale(.72) rotate(-6deg); width:110%; }.meeple { display:none; }.mini-window { transform:scale(.67); min-width:150px; }.parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }.product-content { min-height:145px; }.section-head { gap:8px; }.section-label { font-size:.65rem; }.game-row { border-bottom:1px solid #ffffff12; }.other-games { align-items:start; }.other-games span { width:100%; } }
   @media(max-width:360px) { .product-card { grid-template-columns:100px minmax(0,1fr); }.product-content { padding:12px; }.product-content p { font-size:.78rem; }.hero-actions .button { font-size:.75rem; padding-inline:14px; }.game-art { width:66px; height:66px; flex-basis:66px; }.game-arrow { display:none; } }
@@ -303,30 +280,4 @@ import { site } from '../config';
     .product-card,.product-card:hover { transform:none; box-shadow:3px 3px 0 rgba(121,92,69,.28); }
     .section-label,.all-games,.other-games { font-size:.71rem; }
   }
-
-  /* A small tactile studio-news section; MailerLite share URL enables the CTA. */
-  .updates {
-    display:flex; align-items:center; justify-content:space-between; gap:2rem;
-    margin-block:2.3rem 1rem; padding-block:1.6rem;
-    border-block:1px solid rgba(255,255,255,.17);
-  }
-  .updates-kicker { margin:0 0 .65rem; color:#ffb78d; font:700 .72rem ui-monospace,monospace; letter-spacing:.09em; }
-  .updates h2 { margin:0 0 .6rem; font:700 clamp(1.45rem,2.6vw,2rem) Georgia,"Iowan Old Style",serif; letter-spacing:-.018em; }
-  .updates-copy > p:last-child { max-width:540px; margin:0; color:#c3c7c4; line-height:1.6; font-size:.88rem; }
-  .updates-action { flex:0 0 auto; max-width:360px; }
-  .updates-button,.updates-pending {
-    display:inline-flex; justify-content:center; align-items:center; gap:1rem; min-height:47px; padding:.75rem 1rem;
-    border:1px solid rgba(255,167,117,.6); border-radius:5px;
-    background:#29251d; color:#ffd2af; font-size:.84rem; font-weight:750;
-  }
-  .updates-button:hover { background:#393024; }
-  .updates-pending { border-color:#657071; color:#c9c8c2; background:#121b1c; }
-  .updates-action p { margin:.7rem 0 0; color:#c3c9c7; font-size:.76rem; line-height:1.45; }
-  .updates-action p a { color:#ffe0ca; text-decoration:underline; text-underline-offset:3px; }
-  @media(max-width:780px) {
-    .updates { flex-direction:column; align-items:stretch; gap:1.2rem; }
-    .updates-action { max-width:none; }
-    .updates-button,.updates-pending { width:100%; }
-  }
-
 </style>
