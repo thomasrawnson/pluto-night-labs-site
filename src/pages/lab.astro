@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { existsSync } from 'node:fs';
 
 const games = [
   {
@@ -82,13 +81,6 @@ const games = [
     imageAlt: 'Processing the Dead afterlife management game screenshot',
   },
 ];
-/* Display clips only after approved recordings are installed on this branch. */
-const clipSources: Record<string, string> = Object.fromEntries(
-  [
-    ['Personal Effects', '/videos/games/personal-effects/preview.mp4'],
-    ['Anomaly Lab', '/videos/games/anomaly-lab/preview.mp4'],
-  ].filter(([,url]) => existsSync(`public${url}`))
-);
 ---
 
 <BaseLayout
@@ -150,18 +142,6 @@ const clipSources: Record<string, string> = Object.fromEntries(
                 <div class="tags" aria-label={`${game.title} categories`}>
                   {game.tags.map((tag) => <span>{tag}</span>)}
                 </div>
-
-                {clipSources[game.title] && (
-                  <details class="clip-details">
-                    <summary>Watch recorded gameplay <span aria-hidden="true">▶</span></summary>
-                    <video controls playsinline preload="none" poster={game.image} width="320" height="586"
-                      aria-label={`Recorded gameplay of ${game.title}`}>
-                      <source src={clipSources[game.title]} type="video/mp4" />
-                      Your browser does not support this video format.
-                    </video>
-                    <p>Real mobile gameplay · Sound removed</p>
-                  </details>
-                )}
 
                 {game.url ? (
                   <a
@@ -935,18 +915,5 @@ const clipSources: Record<string, string> = Object.fromEntries(
     .game-card:hover { transform:none; }
   }
 
-  /* User-triggered clips: no autoplay, reduced-motion safe by default. */
-  .clip-details { margin:0 0 1.1rem; border-top:1px dashed rgba(223,172,115,.35); }
-  .clip-details summary {
-    display:flex; align-items:center; justify-content:space-between; cursor:pointer;
-    min-height:46px; padding:.7rem .2rem; color:#eed0ad; font-weight:700; font-size:.88rem;
-    list-style:none;
-  }
-  .clip-details summary::-webkit-details-marker { display:none; }
-  .clip-details summary span { display:grid; place-items:center; width:28px; height:28px; border:1px solid currentColor; border-radius:50%; font-size:.72rem; }
-  .clip-details[open] summary span { transform:rotate(90deg); }
-  .clip-details video { display:block; max-width:100%; width:min(100%,320px); max-height:430px; margin:.3rem auto; background:#0a1014; object-fit:contain; border:1px solid rgba(255,255,255,.17); border-radius:5px; }
-  .clip-details p { margin:.5rem 0 0; color:#c4bfba; font-size:.71rem; }
   .tags span,.game-number,.experiment-count { color:#c0c4c3; }
-  @media(max-width:620px) { .clip-details summary { font-size:.83rem; } }
 </style>
