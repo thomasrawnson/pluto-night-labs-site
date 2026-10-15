@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config';
+const enquiry = (service: string) => `mailto:${site.businessEmail}?subject=${encodeURIComponent(`Project enquiry — ${service}`)}&body=${encodeURIComponent('Business and website:\nWhat would you like to improve?\nWho will use it?\nBudget and preferred timing:\n')}`;
+---
+
+<BaseLayout title="Small business websites & web tools — Pluto Night Labs" description="Focused websites and simple browser tools for small businesses. Clear scope, source-code handover and direct contact with Tom in Cambridgeshire.">
+  <div class="services shell">
+    <section class="intro" aria-labelledby="services-title">
+      <p class="eyebrow">Development services · Cambridgeshire, UK</p>
+      <h1 id="services-title">Small builds.<br /><em>Useful results.</em></h1>
+      <p class="lede">A clear website for your business, or a simple tool that answers a question you keep getting asked. Work directly with Tom at Pluto Night Labs, the independent studio behind the apps and games here.</p>
+      <a class="button button-primary" href="#enquire">Tell me what you need ↗</a>
+      <p class="note">Two focused starting points. Every project gets a written scope and fixed quote before work begins.</p>
+    </section>
+
+    <section aria-labelledby="packages-title">
+      <h2 id="packages-title">What can we build?</h2>
+      <div class="packages">
+        <article>
+          <p class="eyebrow">01 · Get enquiries</p>
+          <h3>A focused business website</h3>
+          <p class="price">Indicative £550 <span>one-off build</span></p>
+          <p>For independent local service businesses that need one clear place to explain their work and invite an enquiry.</p>
+          <h4>Included</h4>
+          <ul>
+            <li>One responsive page, up to six sections: services, service area, about, supplied work photos, FAQs and contact.</li>
+            <li>Your existing logo, colours and supplied copy, with light editing.</li>
+            <li>Click-to-call and email links, page title, description and social sharing metadata.</li>
+            <li>Keyboard and mobile checks, preview, one consolidated revision round and source-code handover.</li>
+            <li>One deployment to an agreed static host and one domain connection, with your approval.</li>
+          </ul>
+          <p><strong>Boundary:</strong> no shop, booking system, CMS, custom branding, copywriting from scratch, migration or guaranteed search rankings. No contact form or stored customer data.</p>
+          <p><strong>Timing:</strong> typically 2–3 calendar weeks from an agreed start, once content and access are ready.</p>
+          <a class="button button-secondary" href={enquiry('Business website')}>Ask about a website ↗</a>
+        </article>
+        <article>
+          <p class="eyebrow">02 · Answer repeat questions</p>
+          <h3>A simple browser tool</h3>
+          <p class="price">Indicative £750 <span>one-off build</span></p>
+          <p>For a service business with a clear, repeatable calculation: an indicative quote helper, package selector or materials calculator.</p>
+          <h4>Included</h4>
+          <ul>
+            <li>One responsive screen, one workflow, up to eight input fields and one results panel.</li>
+            <li>Up to ten written calculation or decision rules supplied and approved by you.</li>
+            <li>Input validation, a reset control and an email enquiry link. Inputs stay in the browser; nothing is saved.</li>
+            <li>Checks against up to ten agreed examples, mobile and keyboard checks, preview and one consolidated revision round.</li>
+            <li>Source-code handover and one standalone static deployment or link from your existing website.</li>
+          </ul>
+          <p><strong>Boundary:</strong> no accounts, database, payments, live external data, API integrations, regulated advice or business-critical decisions. Embedding in a third-party site is separately scoped.</p>
+          <p><strong>Timing:</strong> typically 3–4 calendar weeks from an agreed start, once rules and examples are ready.</p>
+          <a class="button button-secondary" href={enquiry('Browser tool')}>Ask about a tool ↗</a>
+        </article>
+      </div>
+      <p class="note">Prices are indicative GBP build fees, subject to the agreed scope and final quote. Hosting, domains, paid assets and third-party subscriptions are separate and agreed before purchase.</p>
+    </section>
+
+    <section class="process" aria-labelledby="process-title">
+      <p class="eyebrow">Clear boundaries</p>
+      <h2 id="process-title">A small project, agreed together.</h2>
+      <ol>
+        <li><strong>Check the fit.</strong> Email the problem, your current website and the result you want. A short introductory call can help decide whether either package fits.</li>
+        <li><strong>Agree the build.</strong> We confirm deliverables, price, acceptance checks and a start date in writing. You supply approved content, assets or rules and any necessary access.</li>
+        <li><strong>Review, then hand over.</strong> You review a preview before launch. One revision round covers changes within the agreed scope; extra features need a separate quote.</li>
+      </ol>
+      <p>Projects are scheduled around an existing day job, with one client build at a time. There is no same-day or emergency support. Delivery dates depend on timely feedback; delays are rescheduled together.</p>
+      <p>Handover includes setup notes and 14 calendar days to report defects against the agreed scope. Ongoing content changes, maintenance and new features are separate work.</p>
+    </section>
+
+    <section class="proof" aria-labelledby="proof-title">
+      <p class="eyebrow">Made in the lab</p>
+      <h2 id="proof-title">See how I build.</h2>
+      <p>This website is an Astro build with product pages, mobile layouts and a newsletter integration. <a href="/products/shelfpick/">ShelfPick</a> and <a href="/products/usagegrid/">UsageGrid</a> show the studio’s own software work; the <a href="/lab/">game experiments</a> explore interactive browser interfaces.</p>
+      <p class="note">These are studio projects, including work in progress, rather than client commissions. They demonstrate the work without claiming previous commercial clients.</p>
+    </section>
+
+    <section class="enquiry" id="enquire" aria-labelledby="enquiry-title">
+      <p class="eyebrow">Establish comms</p>
+      <h2 id="enquiry-title">What would make your work easier?</h2>
+      <p>Send your business name, current website (if you have one), the problem, approximate budget and preferred timing. Please leave out passwords and private customer data.</p>
+      <a class="button button-primary" href={enquiry('Small development project')}>Email Tom about a project ↗</a>
+      <p>Or copy: <a href={`mailto:${site.businessEmail}`}>{site.businessEmail}</a></p>
+      <p class="note">An enquiry does not commit you to a project. No promise of extra sales or a particular business outcome.</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  :global(main) { background-color:#090e12; background-image:radial-gradient(circle at 57% 9%,rgba(205,112,55,.07),transparent 26%),radial-gradient(rgba(215,227,215,.10) .5px,transparent .7px); background-size:auto,67px 71px; }
+  .services { padding-block:64px 80px; }
+  section + section { margin-top:64px; }
+  .intro { max-width:780px; }
+  h1 { margin:0; font-size:clamp(2.8rem,6vw,5rem); line-height:1.04; letter-spacing:-.04em; }
+  h1 em { font-family:Georgia,serif; color:#ff9871; }
+  h2 { font-size:clamp(1.65rem,3vw,2.4rem); line-height:1.15; letter-spacing:-.03em; }
+  h3 { margin:12px 0; font-size:1.6rem; line-height:1.15; }
+  h4 { margin-bottom:8px; }
+  p,li { color:#c1c5c3; line-height:1.75; }
+  .lede { font-size:1.12rem; margin-block:24px; }
+  .note { font-size:.88rem; }
+  .packages { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+  article { padding:28px; border:1px solid #ffffff2b; border-radius:6px; background:#0a1014; box-shadow:5px 5px 0 rgba(123,86,56,.24); }
+  article:nth-child(2) { box-shadow:5px 5px 0 rgba(74,101,92,.24); }
+  .price { color:#ffb48b; font-weight:750; font-size:1.3rem; }
+  .price span { font-size:.85rem; color:#c1c5c3; font-weight:400; }
+  ul,ol { padding-left:22px; } li + li { margin-top:10px; }
+  .process,.proof { max-width:850px; }
+  .enquiry { padding:28px; background:#11191b; border:1px solid #ffffff2b; border-radius:6px; }
+  .enquiry p { max-width:750px; }
+  .proof a,.enquiry p a { text-decoration:underline; text-underline-offset:4px; color:#ffd0b5; }
+  .button { border-radius:7px; max-width:100%; white-space:normal; text-align:center; }
+  @media(max-width:760px) { .packages { grid-template-columns:1fr; } .services { padding-top:40px; } article,.enquiry { padding:22px; } section + section { margin-top:44px; } }
+</style>
