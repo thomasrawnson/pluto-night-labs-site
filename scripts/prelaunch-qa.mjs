@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const baseURL = process.env.QA_BASE_URL ?? 'http://127.0.0.1:4321';
 const chromePath = process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const outputDir = path.resolve('docs/screenshots/prelaunch-polish');
+const outputDir = path.resolve(process.env.QA_OUTPUT_DIR ?? 'docs/screenshots/prelaunch-polish');
 const oldSupportEmail = ['help', 'plutonightlabs.com'].join('@');
 const failures = [];
 const results = [];
@@ -155,7 +155,7 @@ if (JSON.stringify(listedGames.slice(0,3)) !== JSON.stringify(flagshipOrder)) {
 }
 if (await linkPage.locator('#main-content main').count()) failures.push('/lab/: nested main landmark is not allowed');
 if (!await linkPage.getByRole('heading', { name: 'Explore the experiments.' }).count()) failures.push('/lab/: exploratory heading missing');
-if (!await linkPage.locator('#gladiator-mayhem .new-badge').count()) failures.push('/lab/: missing in-development state');
+if (await linkPage.locator('#gladiator-mayhem .new-badge').textContent() !== 'Playable') failures.push('/lab/: Gladiator Mayhem must be labelled playable');
 const conceptArtworkCount = await linkPage.locator('.game-art img[src$=".svg"]').count();
 const conceptArtworkLabels = linkPage.locator('.game-art:has(img[src$=".svg"]) .art-caption');
 if (await conceptArtworkLabels.count() !== conceptArtworkCount) {
@@ -165,8 +165,16 @@ for (const label of await conceptArtworkLabels.allTextContents()) {
   if (label.trim() !== 'Concept illustration') failures.push(`/lab/: unexpected concept artwork label: ${label}`);
 }
 if (await linkPage.locator('.clip-details, video').count()) failures.push('/lab/: videos should not appear while recordings are paused');
-const gladiatorLink = await linkPage.locator('#gladiator-mayhem a.play-button').count();
-if (gladiatorLink) failures.push('/lab/: Gladiator Mayhem must not claim a playable build');
+const gladiatorLink = linkPage.locator('#gladiator-mayhem a.play-button');
+if (await gladiatorLink.count() !== 1) {
+  failures.push('/lab/: Gladiator Mayhem play link missing');
+} else {
+  const href = await gladiatorLink.getAttribute('href');
+  const target = await gladiatorLink.getAttribute('target');
+  const rel = await gladiatorLink.getAttribute('rel');
+  if (href !== 'https://gladiator-mayhem.pages.dev') failures.push(`/lab/: incorrect Gladiator Mayhem URL: ${href}`);
+  if (target !== '_blank' || rel !== 'noopener noreferrer') failures.push(`/lab/: Gladiator Mayhem external-link safety missing: target=${target}, rel=${rel}`);
+}
 for (const slug of ['going-going-ghoul', 'tiny-heist-planner']) {
   const href = await linkPage.locator(`#${slug} a.play-button`).getAttribute('href');
   if (href !== `/playtests/${slug}/`) failures.push(`/lab/: incorrect playtest path for ${slug}: ${href}`);

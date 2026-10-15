@@ -55,12 +55,11 @@ const games = [
   {
     title: 'Gladiator Mayhem',
     description:
-      'Assemble ridiculous gladiator teams and watch the arena turn carefully laid plans into chaos.',
-    tags: ['Auto-battler','Arena','Pixel art'],
-    url: null,
+      'Choose three ridiculous actions, arrange their order and watch Barry and Dr Stitch turn the car park into a tactical disaster.',
+    tags: ['Tactics','Card planning','Playable prototype'],
+    url: 'https://gladiator-mayhem.pages.dev',
     image: '/lab/gladiator-mayhem.svg',
     imageAlt: 'Chunky pixel-art concept poster for Gladiator Mayhem',
-    status: 'In progress',
   },
   {
     title: 'Dungeon Care Home',
@@ -127,7 +126,7 @@ const games = [
                   EXP-{String(index + 1).padStart(2, '0')}
                 </div>
 
-                <div class="new-badge">{game.url ? 'Playable' : (game.status ?? 'In progress')}</div>
+                <div class="new-badge">{game.url ? 'Playable' : 'In progress'}</div>
               </div>
 
               <div class="game-art">
