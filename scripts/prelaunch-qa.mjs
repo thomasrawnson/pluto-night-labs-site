@@ -125,15 +125,15 @@ for (const slug of ['shelfpick', 'usagegrid']) {
 
 await linkPage.goto(`${baseURL}/lab/`, { waitUntil: 'networkidle' });
 const listedGames = await linkPage.locator('.game-card h3').allTextContents();
-for (const game of ['Going, Going, Ghoul!', 'Gladiator Mayhem', 'Tiny Heist Planner']) {
+for (const game of ['Personal Effects', 'Gladiator Mayhem', 'Word Lab', "Necromancer's Horde", 'Tiny Heist Planner']) {
   if (!listedGames.includes(game)) failures.push(`/lab/: missing ${game}`);
 }
-for (const removed of ['End of the World', 'How Much?!']) {
+for (const removed of ['Dungeon Care Home', 'Processing the Dead', 'Going, Going, Ghoul!', 'End of the World', 'How Much?!']) {
   if (listedGames.includes(removed)) failures.push(`/lab/: retired listing remains: ${removed}`);
 }
-if (listedGames.length !== 8) failures.push(`/lab/: expected 8 experiments, found ${listedGames.length}`);
+if (listedGames.length !== 7) failures.push(`/lab/: expected 7 experiments, found ${listedGames.length}`);
 
-const selectedScreenshotSlugs = ['night-parcel-office', 'personal-effects', 'anomaly-lab', 'going-going-ghoul', 'tiny-heist-planner'];
+const selectedScreenshotSlugs = ['night-parcel-office', 'personal-effects', 'anomaly-lab', 'tiny-heist-planner'];
 for (const slug of selectedScreenshotSlugs) {
   const selector = `#${slug} .game-art img`;
   const media = await linkPage.locator(selector).evaluate((img) => ({
@@ -149,9 +149,9 @@ for (const slug of selectedScreenshotSlugs) {
   if (!media.loaded) failures.push(`/lab/: media failed to load for ${slug}`);
 }
 
-const flagshipOrder = ['Night Parcel Office', 'Personal Effects', 'Anomaly Lab'];
-if (JSON.stringify(listedGames.slice(0,3)) !== JSON.stringify(flagshipOrder)) {
-  failures.push(`/lab/: flagship ordering changed: ${listedGames.slice(0,3).join(', ')}`);
+const flagshipOrder = ['Personal Effects', 'Gladiator Mayhem', 'Word Lab', "Necromancer's Horde"];
+if (JSON.stringify(listedGames.slice(0,4)) !== JSON.stringify(flagshipOrder)) {
+  failures.push(`/lab/: flagship ordering changed: ${listedGames.slice(0,4).join(', ')}`);
 }
 if (await linkPage.locator('#main-content main').count()) failures.push('/lab/: nested main landmark is not allowed');
 if (!await linkPage.getByRole('heading', { name: 'Explore the experiments.' }).count()) failures.push('/lab/: exploratory heading missing');
@@ -164,6 +164,8 @@ if (await conceptArtworkLabels.count() !== conceptArtworkCount) {
 for (const label of await conceptArtworkLabels.allTextContents()) {
   if (label.trim() !== 'Concept illustration') failures.push(`/lab/: unexpected concept artwork label: ${label}`);
 }
+if (await linkPage.locator('#word-lab .new-badge').textContent() !== 'Playable') failures.push('/lab/: Word Lab must be labelled playable');
+if (await linkPage.locator('#necromancer-s-horde .new-badge').textContent() !== 'In progress') failures.push("/lab/: Necromancer's Horde must be labelled in progress");
 if (await linkPage.locator('.clip-details, video').count()) failures.push('/lab/: videos should not appear while recordings are paused');
 const gladiatorLink = linkPage.locator('#gladiator-mayhem a.play-button');
 if (await gladiatorLink.count() !== 1) {
@@ -175,25 +177,25 @@ if (await gladiatorLink.count() !== 1) {
   if (href !== 'https://gladiator-mayhem.pages.dev') failures.push(`/lab/: incorrect Gladiator Mayhem URL: ${href}`);
   if (target !== '_blank' || rel !== 'noopener noreferrer') failures.push(`/lab/: Gladiator Mayhem external-link safety missing: target=${target}, rel=${rel}`);
 }
-for (const slug of ['going-going-ghoul', 'tiny-heist-planner']) {
+for (const slug of ['tiny-heist-planner']) {
   const href = await linkPage.locator(`#${slug} a.play-button`).getAttribute('href');
   if (href !== `/playtests/${slug}/`) failures.push(`/lab/: incorrect playtest path for ${slug}: ${href}`);
 }
+const wordLabLink = linkPage.locator('#word-lab a.play-button');
+if (await wordLabLink.getAttribute('href') !== 'https://word-lab-cl1.pages.dev/') failures.push('/lab/: incorrect Word Lab URL');
 await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
-const headline = await linkPage.locator('h1').textContent();
+const headline = await linkPage.locator('#main-content .hero-copy h1').textContent();
 if (!headline?.includes('Useful apps.') || !headline?.includes('Strange games.')) failures.push('/: missing app-and-game studio identity');
 const featured = await linkPage.locator('#featured .product-card').count();
 if (featured !== 3) failures.push(`/: expected 3 featured projects, found ${featured}`);
 if (await linkPage.locator('#featured .devpip-card').count()) failures.push('/: DevPip should not be a featured homepage product');
-if (!await linkPage.locator('#featured .night-card').count()) failures.push('/: missing Night Parcel Office featured card');
-if (!await linkPage.locator('#featured .night-card .shot-print img[src="/images/games/night-parcel-office/featured.webp"]').count()) {
-  failures.push('/: Night Parcel Office must use approved gameplay screenshot');
+if (!await linkPage.locator('#featured .effects-card').count()) failures.push('/: missing Personal Effects featured card');
+if (!await linkPage.locator('#featured .effects-card .shot-print img[src="/images/games/personal-effects/featured.webp"]').count()) {
+  failures.push('/: Personal Effects must use approved gameplay screenshot');
 }
-for (const slug of ['personal-effects', 'anomaly-lab', 'going-going-ghoul']) {
-  if (!await linkPage.locator(`#games .game-row img[src="/images/games/${slug}/featured.webp"]`).count()) {
-    failures.push(`/: missing homepage screenshot for ${slug}`);
-  }
-}
+if (!await linkPage.locator('#games .game-row img[src="/images/games/personal-effects/featured.webp"]').count()) failures.push('/: missing Personal Effects homepage screenshot');
+if (!await linkPage.locator('#games .game-row img[src="/lab/gladiator-mayhem.svg"]').count()) failures.push('/: missing Gladiator Mayhem homepage artwork');
+if (!await linkPage.locator('#games .game-row .word-tiles').count()) failures.push('/: missing Word Lab homepage artwork');
 if (!await linkPage.locator('.site-header .brand').count()) failures.push('/: studio brand missing from navigation');
 if (await linkPage.locator('.telemetry').count()) failures.push('/: redundant status strip remains on homepage');
 
@@ -217,7 +219,7 @@ if (aboutIdCount !== 1) failures.push(`/: expected one id="about", found ${about
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
   await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
-  for (const selector of ['.shelfpick-card', '.usage-card', '.night-card']) {
+  for (const selector of ['.shelfpick-card', '.usage-card', '.effects-card']) {
     const metrics = await linkPage.locator(selector).evaluate(card => {
       const visual = card.querySelector('.project-art');
       const copy = card.querySelector('.product-content');
@@ -234,12 +236,11 @@ for (const width of [320, 390]) {
 }
 await linkPage.setViewportSize({ width: 1440, height: 900 });
 const homepageGames = await linkPage.locator('#games .game-row .game-copy strong').allTextContents();
-for (const game of ['Personal Effects', 'Anomaly Lab', 'Going, Going, Ghoul!']) {
+for (const game of ['Personal Effects', 'Gladiator Mayhem', 'Word Lab']) {
   if (!homepageGames.includes(game)) failures.push(`/: missing featured game ${game}`);
 }
 if (homepageGames.length !== 3) failures.push(`/: expected exactly 3 homepage games, found ${homepageGames.length}`);
-if (!await linkPage.locator('.other-games a[href="/lab/#tiny-heist-planner"]').count()) failures.push('/: missing Tiny Heist Planner secondary link');
-if (!await linkPage.locator('.other-games a[href="/lab/#gladiator-mayhem"]').count()) failures.push('/: missing Gladiator Mayhem secondary link');
+if (await linkPage.locator('.other-games').count()) failures.push('/: Also in the Lab section should be removed');
 if (!await linkPage.locator('.moon').count()) failures.push('/: orbital interaction controls absent');
 const orbitalArcs = await linkPage.locator('.orbit-front').evaluateAll(nodes => nodes.map(node => {
   const rect = node.getBoundingClientRect();

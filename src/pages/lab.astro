@@ -3,16 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const games = [
   {
-    title: 'Night Parcel Office',
-    description:
-      'Work the final sorting desk for suspicious late-night parcels. Follow the regulations. Try not to make things worse.',
-    tags: ['Sorting', 'Rules', '5 min'],
-    url: 'https://night-parcel-office.pages.dev',
-    image: '/images/games/night-parcel-office/featured.webp',
-    fallbackImage: '/lab/night-parcel-office.png',
-    imageAlt: 'Actual Night Parcel Office gameplay showing a parcel routing decision, paperwork and regulations',
-  },
-  {
     title: 'Personal Effects',
     description:
       "Pack a stranger's final belongings into one suitcase while obeying the increasingly particular requests they left behind.",
@@ -21,6 +11,42 @@ const games = [
     image: '/images/games/personal-effects/featured.webp',
     fallbackImage: '/lab/personal-effects.png',
     imageAlt: "Actual Personal Effects gameplay showing a suitcase packed with the Magician's belongings",
+  },
+  {
+    title: 'Gladiator Mayhem',
+    description:
+      'Choose three ridiculous actions, arrange their order and watch Barry and Dr Stitch turn the car park into a tactical disaster.',
+    tags: ['Tactics','Card planning','Playable prototype'],
+    url: 'https://gladiator-mayhem.pages.dev',
+    image: '/lab/gladiator-mayhem.svg',
+    imageAlt: 'Chunky pixel-art concept poster for Gladiator Mayhem',
+  },
+  {
+    title: 'Word Lab',
+    description:
+      'Take a quiet daily break with three cosy word games built for quick, satisfying play.',
+    tags: ['Words', 'Daily puzzles', 'Cosy'],
+    url: 'https://word-lab-cl1.pages.dev/',
+    artLabel: 'WORD',
+    artClass: 'word-lab-art',
+  },
+  {
+    title: "Necromancer's Horde",
+    description:
+      'Build an undead army, position your squads and choose a resurrection doctrine before the horde fights for itself.',
+    tags: ['Autobattler', 'Strategy', 'Dark fantasy'],
+    artLabel: 'RISE',
+    artClass: 'horde-art',
+  },
+  {
+    title: 'Night Parcel Office',
+    description:
+      'Work the final sorting desk for suspicious late-night parcels. Follow the regulations. Try not to make things worse.',
+    tags: ['Sorting', 'Rules', '5 min'],
+    url: 'https://night-parcel-office.pages.dev',
+    image: '/images/games/night-parcel-office/featured.webp',
+    fallbackImage: '/lab/night-parcel-office.png',
+    imageAlt: 'Actual Night Parcel Office gameplay showing a parcel routing decision, paperwork and regulations',
   },
   {
     title: 'Anomaly Lab',
@@ -33,16 +59,6 @@ const games = [
     imageAlt: 'Actual Anomaly Lab gameplay showing the specimen-selection board',
   },
   {
-    title: 'Going, Going, Ghoul!',
-    description:
-      'Auction cursed antiques to peculiar buyers. Spot valuable combinations and decide when to sell.',
-    tags: ['Auction','Strategy','Cursed antiques'],
-    url: '/playtests/going-going-ghoul/',
-    image: '/images/games/going-going-ghoul/featured.webp',
-    fallbackImage: '/lab/going-going-ghoul.svg',
-    imageAlt: 'Actual Going, Going, Ghoul! gameplay showing cursed antiques in the auction cabinet',
-  },
-  {
     title: 'Tiny Heist Planner',
     description:
       'Choose a crew, plot a route and watch your supposedly foolproof robbery unfold.',
@@ -51,33 +67,6 @@ const games = [
     image: '/images/games/tiny-heist-planner/featured.webp',
     fallbackImage: '/lab/tiny-heist-planner.svg',
     imageAlt: 'Actual Tiny Heist Planner gameplay showing guards, loot and a heist blueprint',
-  },
-  {
-    title: 'Gladiator Mayhem',
-    description:
-      'Choose three ridiculous actions, arrange their order and watch Barry and Dr Stitch turn the car park into a tactical disaster.',
-    tags: ['Tactics','Card planning','Playable prototype'],
-    url: 'https://gladiator-mayhem.pages.dev',
-    image: '/lab/gladiator-mayhem.svg',
-    imageAlt: 'Chunky pixel-art concept poster for Gladiator Mayhem',
-  },
-  {
-    title: 'Dungeon Care Home',
-    description:
-      'Retired monsters defend bingo night from irritating level-one adventurers. Tea and mobility scooters included.',
-    tags: ['Tower Defence', 'Strategy', 'Comedy'],
-    url: 'https://dungeon-care-home.pages.dev',
-    image: '/lab/dungeon-care-home.png',
-    imageAlt: 'Dungeon Care Home monster tower defence game screenshot',
-  },
-  {
-    title: 'Processing the Dead',
-    description:
-      'Keep the afterlife bureaucracy moving before the queue becomes a supernatural administrative disaster.',
-    tags: ['Idle', 'Management', 'Bureaucracy'],
-    url: 'https://processing-the-dead.pages.dev',
-    image: '/lab/processing-the-dead.png',
-    imageAlt: 'Processing the Dead afterlife management game screenshot',
   },
 ];
 ---
@@ -130,8 +119,16 @@ const games = [
               </div>
 
               <div class="game-art">
-                <img src={game.image} alt={game.imageAlt} data-fallback={game.fallbackImage} width="800" height="500" loading="lazy" decoding="async" />
-                {game.image.endsWith('.svg') && <span class="art-caption">Concept illustration</span>}
+                {game.image ? (
+                  <>
+                    <img src={game.image} alt={game.imageAlt} data-fallback={game.fallbackImage} width="800" height="500" loading="lazy" decoding="async" />
+                    {game.image.endsWith('.svg') && <span class="art-caption">Concept illustration</span>}
+                  </>
+                ) : (
+                  <div class={`generated-art ${game.artClass}`} aria-hidden="true">
+                    <span>{game.artLabel}</span>
+                  </div>
+                )}
               </div>
 
               <div class="card-content">
@@ -478,6 +475,22 @@ const games = [
     border-radius: 8px;
     object-fit: contain;
   }
+
+  .generated-art {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    font: 800 1.2rem ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.16em;
+  }
+
+  .generated-art span { padding: .65rem .75rem; border: 1px solid currentColor; box-shadow: 4px 4px 0 rgba(0,0,0,.45); }
+  .word-lab-art { color: #302719; background: repeating-linear-gradient(90deg,transparent 0 30px,rgba(72,52,29,.12) 30px 31px),linear-gradient(145deg,#dfc584,#947447); }
+  .horde-art { color: #b3d58a; background: radial-gradient(circle at 50% 65%,rgba(99,148,73,.28),transparent 32%),linear-gradient(155deg,#1f2b25,#090d0c 75%); }
 
   .card-content {
     display: flex;

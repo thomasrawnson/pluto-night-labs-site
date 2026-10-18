@@ -53,15 +53,15 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
           <a class="round-link" href="/products/usagegrid/" aria-label="See UsageGrid features">→</a>
         </div>
       </article>
-      <article class="product-card night-card">
-        <div class="project-art parcel-art" aria-hidden="true">
+      <article class="product-card effects-card">
+        <div class="project-art effects-feature-art" aria-hidden="true">
           <div class="shot-print">
-            <img class="gameplay-photo" src="/images/games/night-parcel-office/featured.webp" data-fallback="/lab/night-parcel-office.png" alt="" width="800" height="500" loading="lazy" decoding="async" />
+            <img class="gameplay-photo" src="/images/games/personal-effects/featured.webp" data-fallback="/lab/personal-effects.png" alt="" width="800" height="500" loading="lazy" decoding="async" />
           </div>
         </div>
         <div class="product-content">
-          <div><h2>Night Parcel Office</h2><p>Sort. Follow the rules.<br />Survive the shift.</p><span class="project-kind game-kind"><i></i> PLAYABLE · GAME</span></div>
-          <a class="round-link" href="/lab/#night-parcel-office" aria-label="View Night Parcel Office prototype">→</a>
+          <div><h2>Personal Effects</h2><p>Pack what matters.<br />Leave the rest behind.</p><span class="project-kind game-kind"><i></i> PLAYABLE · GAME</span></div>
+          <a class="round-link" href="https://personal-effects.pages.dev" target="_blank" rel="noopener noreferrer" aria-label="Play Personal Effects prototype">↗</a>
         </div>
       </article>
     </div>
@@ -70,20 +70,19 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   <section class="games shell" id="games" aria-labelledby="games-title">
     <div class="section-head"><p class="section-label" id="games-title">PLAYABLE EXPERIMENTS</p><span class="section-rule"></span><a class="all-games" href="/lab/">ALL EXPERIMENTS ↗</a></div>
     <div class="game-grid">
-      <a class="game-row" href="/lab/#personal-effects">
+      <a class="game-row" href="https://personal-effects.pages.dev" target="_blank" rel="noopener noreferrer">
         <span class="game-art effects-art" aria-hidden="true"><img src="/images/games/personal-effects/featured.webp" data-fallback="/lab/personal-effects.png" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
         <span class="game-copy"><strong>Personal Effects</strong><small>Pack what matters.</small></span><span class="game-arrow">→</span>
       </a>
-      <a class="game-row" href="/lab/#anomaly-lab">
-        <span class="game-art anomaly-art" aria-hidden="true"><img src="/images/games/anomaly-lab/featured.webp" data-fallback="/lab/anomaly-lab.png" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
-        <span class="game-copy"><strong>Anomaly Lab</strong><small>Find the hidden rule.</small></span><span class="game-arrow">→</span>
+      <a class="game-row" href="https://gladiator-mayhem.pages.dev" target="_blank" rel="noopener noreferrer">
+        <span class="game-art gladiator-art" aria-hidden="true"><img src="/lab/gladiator-mayhem.svg" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
+        <span class="game-copy"><strong>Gladiator Mayhem</strong><small>Plan three moves. Watch the chaos.</small></span><span class="game-arrow">↗</span>
       </a>
-      <a class="game-row" href="/playtests/going-going-ghoul/">
-        <span class="game-art ghoul-art" aria-hidden="true"><img src="/images/games/going-going-ghoul/featured.webp" data-fallback="/lab/going-going-ghoul.svg" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
-        <span class="game-copy"><strong>Going, Going, Ghoul!</strong><small>Cursed auctions.</small></span><span class="game-arrow">→</span>
+      <a class="game-row" href="https://word-lab-cl1.pages.dev/" target="_blank" rel="noopener noreferrer">
+        <span class="game-art word-art" aria-hidden="true"><span class="word-tiles"><i>W</i><i>O</i><i>R</i><i>D</i></span></span>
+        <span class="game-copy"><strong>Word Lab</strong><small>Three cosy daily word games.</small></span><span class="game-arrow">↗</span>
       </a>
     </div>
-    <div class="other-games"><span>ALSO IN THE LAB</span><a href="/lab/#tiny-heist-planner">View Tiny Heist Planner →</a><a href="/lab/#gladiator-mayhem">See Gladiator Mayhem →</a></div>
     <a class="join-link" href="#about">Playtest invitations are in the newsletter →</a>
   </section>
 
@@ -126,7 +125,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   :global(main) { background-color: #090e12; background-image: radial-gradient(circle at 57% 9%, rgba(205,112,55,.07),transparent 26%),radial-gradient(rgba(215,227,215,.10) .5px,transparent .7px); background-size: auto, 67px 71px; }
   .hero { padding: 62px 0 33px; }
   .hero-grid { display:grid; grid-template-columns: 1fr 1fr; align-items:center; gap: 30px; min-height: 435px; }
-  .eyebrow,.section-label,.section-count,.all-games,.telemetry,.scope-hint,.scope-readout,.project-kind,.other-games { font-family: ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em; }
+  .eyebrow,.section-label,.section-count,.all-games,.telemetry,.scope-hint,.scope-readout,.project-kind { font-family: ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em; }
   .eyebrow { margin:0 0 22px; font-size:.7rem; font-weight:700; }
   h1 { margin:0; font-size:clamp(2.7rem,4.8vw,5rem); line-height:1.04; letter-spacing:-.058em; font-weight:780; }
   h1 em { color:#fa8961; font-style:normal; white-space:nowrap; }
@@ -208,8 +207,6 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .ghoul-art { background:#302118; }.ghoul-art span { padding:8px 6px; border:2px solid #bd9467; transform:rotate(-12deg); color:#e9bc83; font:800 .8rem ui-monospace,monospace; }
   .game-copy { flex:1; min-width:0; }.game-copy strong { display:block; font-size:.85rem; }.game-copy small { display:block; margin-top:8px; color:#a9adb0; font-size:.77rem; }
   .game-arrow { width:29px; height:29px; font-size:1rem; }
-  .other-games { display:flex; align-items:center; flex-wrap:wrap; gap:18px; margin-top:26px; border-top:1px solid #ffffff18; padding-top:17px; color:#a7adae; font-size:.6rem; }
-  .other-games a { color:#e4dfda; }.other-games a:hover { color:#ff9a70; }
   .join-link { display:inline-flex; align-items:center; min-height:44px; margin:14px 0 0; color:#ffd0b5; font-weight:750; font-size:.9rem; text-decoration:underline; text-underline-offset:5px; }
   .join-link:hover { color:#fff0e7; }
   @media(max-width:920px) { .hero-grid { grid-template-columns:1fr; }.orbit-scene { max-width:450px; }.product-grid { gap:12px; }.game-grid { grid-template-columns:1fr; gap:12px; }.product-content { padding:15px; }.project-art { height:155px; }.product-content h2 { font-size:1.1rem; } }
@@ -218,12 +215,12 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   @media(prefers-reduced-motion:reduce){ .moon,.pluto { transition:none; transform:none; } }
   @media(max-width:660px) { .project-kind { font-size:.58rem; letter-spacing:.07em; } }
   .telemetry { color:#b4edbf; }
-  .scope-hint,.scope-readout,.section-count,.all-games,.other-games { color:#b9bfc1; }
+  .scope-hint,.scope-readout,.section-count,.all-games { color:#b9bfc1; }
   .moon:focus-visible { outline:3px solid #fff5e8; outline-offset:5px; }
   @media(max-width:660px) { .join-link { font-size:.83rem; } }
 
   /* Real gameplay sits on tactile printed cards, with the existing brand palette. */
-  .night-card .project-art {
+  .effects-card .project-art {
     background:radial-gradient(ellipse at 55% 65%,rgba(177,120,70,.19),transparent 68%), #19201c;
   }
   .shot-print {
@@ -258,7 +255,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
     border-radius:1px;
   }
   @media(max-width:660px) {
-    .night-card .shot-print { width:89%;padding:3px;box-shadow:4px 5px 0 #070c0e; }
+    .effects-card .shot-print { width:89%;padding:3px;box-shadow:4px 5px 0 #070c0e; }
     .game-row .game-art { transform:none; }
   }
 
@@ -271,13 +268,15 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .product-card:nth-child(2) { box-shadow:5px 5px 0 rgba(74,101,92,.24); }
   .product-card:nth-child(3) { box-shadow:5px 5px 0 rgba(130,91,72,.24); }
   .product-card:hover { transform:translateY(-2px) rotate(-.25deg); }
-  .section-label,.all-games,.other-games { font-size:.76rem; color:#c5c9c7; }
+  .section-label,.all-games { font-size:.76rem; color:#c5c9c7; }
   .section-count,.scope-readout,.scope-hint { font-size:.7rem; color:#bfc5c1; }
-  .other-games { letter-spacing:.07em; }
+  .word-art { background:radial-gradient(circle at 50% 48%,#56452f,#201d19 72%) !important; }
+  .word-tiles { display:grid;grid-template-columns:repeat(2,24px);gap:4px;transform:rotate(-3deg); }
+  .word-tiles i { display:grid;place-items:center;aspect-ratio:1;border:1px solid #7d6444;border-radius:2px;background:#d7b879;color:#251f18;font:800 .78rem ui-monospace,monospace;font-style:normal;box-shadow:2px 2px 0 #0a0b0c; }
   .game-copy small { font-size:.82rem; color:#c0c6c3; }
   @media(max-width:660px) {
     .hero-copy h1 { letter-spacing:-.03em; }
     .product-card,.product-card:hover { transform:none; box-shadow:3px 3px 0 rgba(121,92,69,.28); }
-    .section-label,.all-games,.other-games { font-size:.71rem; }
+    .section-label,.all-games { font-size:.71rem; }
   }
 </style>
