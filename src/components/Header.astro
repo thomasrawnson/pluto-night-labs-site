@@ -11,6 +11,7 @@ import OrbitMark from './OrbitMark.astro';
     <nav aria-label="Main navigation">
       <a href="/#home">Home</a>
       <a href="/lab">The Lab</a>
+      <a href="/microgames/">Microgames</a>
       <a href="/products/">Products</a>
       <a href="/#about">About</a>
       <a class="contact-link" href="/contact/">Contact</a>
@@ -29,8 +30,11 @@ import OrbitMark from './OrbitMark.astro';
   .contact-link { padding: 10px 17px; border: 1px solid var(--line-strong); border-radius: 999px; }
   @media (max-width: 650px) {
     .site-header { padding: 12px 0; }
+    .nav-shell { display: block; }
+    .brand { width: fit-content; margin-bottom: 5px; }
     .brand span { display: none; }
-    nav { gap: 16px; }
+    nav { gap: 2px 16px; flex-wrap: wrap; }
+    nav a { flex: none; min-height: 40px; }
     nav a:first-child { display: none; }
     .contact-link { padding: 8px 12px; }
   }

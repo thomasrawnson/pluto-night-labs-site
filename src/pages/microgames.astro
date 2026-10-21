@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Set from the verified Cloudflare Pages deployment during MICRO-001C release.
+const collectionURL = 'https://pluto-microgames.pages.dev/';
+---
+
+<BaseLayout
+  title="Microgames | Pluto Night Labs"
+  description="Short, strange games from Pluto Night Labs. Play the early preview of King for 60 Seconds and see what is coming next."
+>
+  <div class="arcade-page">
+    <section class="arcade-hero shell" aria-labelledby="microgames-title">
+      <p class="eyebrow">PLUTO NIGHT LABS / MICROGAMES / EARLY PREVIEW</p>
+      <div class="hero-grid">
+        <div>
+          <h1 id="microgames-title">Small games.<br /><em>Big trouble.</em></h1>
+          <p class="intro">A pocket arcade of quick decisions and odd little disasters. The collection is in early preview, with one game ready to play and more on the way.</p>
+          <a class="button button-primary play-link" href={collectionURL} target="_blank" rel="noopener noreferrer">Play the collection preview <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="arcade-mark" aria-hidden="true"><span>✦ &nbsp; PLUTO NIGHT LABS</span><strong>01</strong><small>ONE MINUTE / MANY MISTAKES</small></div>
+      </div>
+    </section>
+
+    <section class="lineup shell" aria-labelledby="lineup-title">
+      <div class="section-heading"><p class="eyebrow">THE LINEUP</p><span class="section-rule" aria-hidden="true"></span><h2 id="lineup-title">Choose your trouble.</h2></div>
+      <div class="game-grid">
+        <article class="game-card playable">
+          <div class="game-art king-art" aria-hidden="true"><span class="king-crown">♛</span><span class="art-stars">✦ &nbsp; ✧ &nbsp; ✦</span></div>
+          <div class="game-copy"><span class="game-status">01 / PLAYABLE PREVIEW</span><h3>King for 60 Seconds</h3><p>One crown. Three resources. A court full of terrible ideas. Make the call and keep the kingdom standing for one minute.</p><a class="button button-primary" href={collectionURL + 'king/'} target="_blank" rel="noopener noreferrer">Play preview <span aria-hidden="true">↗</span></a></div>
+        </article>
+        <article class="game-card soon-card"><div class="soon-art alien-art" aria-hidden="true">◉</div><div class="game-copy"><span class="game-status">02 / COMING SOON</span><h3>Alien Customs</h3><p>The galaxy's strangest travellers are heading for your inspection desk.</p></div></article>
+        <article class="game-card soon-card"><div class="soon-art tower-art" aria-hidden="true">♜</div><div class="game-copy"><span class="game-status">03 / COMING SOON</span><h3>One Tower, 100 Enemies</h3><p>Defend one stubborn tower against a very long queue of enemies.</p></div></article>
+      </div>
+      <p class="preview-note">Early preview: features, balance and visuals may change after playtesting.</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  :global(html body) { background: #090e12; }
+  :global(main) { background-color: #090e12; background-image: radial-gradient(circle at 57% 9%, rgba(205,112,55,.07), transparent 26%), radial-gradient(rgba(215,227,215,.10) .5px, transparent .7px); background-size: auto, 67px 71px; }
+  .arcade-page { min-height: 80vh; padding: 62px 0 84px; }
+  .arcade-hero { padding-bottom: 64px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(230px, .8fr); gap: 32px; align-items: center; }
+  h1, h2, h3, p { margin-top: 0; }
+  h1 { margin-bottom: 20px; font-size: clamp(2.7rem, 5.6vw, 5.7rem); line-height: 1.03; letter-spacing: -.058em; }
+  h1 em { color: #fa8961; font-style: normal; white-space: nowrap; }
+  .intro { max-width: 550px; color: #c0c2c6; font-size: 1.02rem; line-height: 1.65; }
+  .play-link { margin-top: 17px; }
+  .button { min-height: 46px; border-radius: 7px; font-size: .83rem; }
+  .button-primary { background: #ff9169; background-image: none; box-shadow: none; }
+  .button span { margin-left: 12px; }
+  .arcade-mark { aspect-ratio: 1.12; width: min(100%, 350px); display: grid; place-items: center; justify-self: center; position: relative; border: 1px solid rgba(255,255,255,.17); border-radius: 6px; background: radial-gradient(circle at 50% 42%, rgba(250,151,91,.10), transparent 58%), #0c1318; box-shadow: inset 0 0 0 12px #0c1318, inset 0 0 0 13px rgba(255,255,255,.10); transform: rotate(2deg); }
+  .arcade-mark span { position: absolute; top: 13%; left: 13%; color: #fa8961; font: 700 .7rem ui-monospace, monospace; letter-spacing: .1em; }
+  .arcade-mark strong { color: #f2d0ae; font-family: ui-monospace, monospace; font-size: clamp(7rem, 17vw, 11rem); letter-spacing: -.13em; text-shadow: 4px 5px #79413d; }
+  .arcade-mark small { position: absolute; bottom: 12%; color: #b8b5b0; font: 700 .65rem ui-monospace, monospace; letter-spacing: .1em; }
+  .section-heading { display: flex; align-items: center; gap: 18px; margin-bottom: 25px; }
+  .section-heading .eyebrow { margin: 0; flex: none; }
+  .section-rule { height: 1px; flex: 1; background: rgba(255,255,255,.13); }
+  h2 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.7rem); letter-spacing: -.055em; }
+  .game-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .game-card { overflow: hidden; border: 1px solid rgba(255,255,255,.16); border-radius: 6px; background: #0c1318; }
+  .playable { grid-row: span 2; }
+  .game-art { height: 250px; display: grid; place-items: center; position: relative; }
+  .king-art { background: radial-gradient(circle at 50% 75%, #7e3c55, transparent 40%), linear-gradient(160deg, #5b3149, #24192d 70%); }
+  .king-crown { color: #f5c27b; font-size: 12rem; line-height: 1; text-shadow: 7px 8px #1a0d25; }
+  .art-stars { position: absolute; bottom: 18px; color: #e3a673; letter-spacing: 12px; }
+  .game-copy { padding: clamp(20px, 3vw, 34px); }
+  .game-status { display: inline-block; margin-bottom: 16px; color: #ffae84; font: 700 .7rem ui-monospace, monospace; letter-spacing: .13em; }
+  h3 { margin-bottom: 12px; font-size: clamp(1.55rem, 3vw, 2.25rem); letter-spacing: -.05em; }
+  .game-copy p { max-width: 480px; color: #bfc1c4; line-height: 1.6; }
+  .game-copy .button { margin-top: 9px; }
+  .soon-card { display: grid; grid-template-columns: 135px 1fr; min-height: 194px; }
+  .soon-art { display: grid; place-items: center; font-size: 5rem; }
+  .alien-art { color: #a9e1c9; background: radial-gradient(circle, #284e51, #10232a 70%); }
+  .tower-art { color: #eac49a; background: radial-gradient(circle, #56434a, #20252d 70%); }
+  .preview-note { margin: 27px 0 0; color: #aeb1b5; font-size: .85rem; }
+  @media (max-width: 800px) { .hero-grid { grid-template-columns: 1fr; } .arcade-mark { display: none; } .game-grid { grid-template-columns: 1fr; } .playable { grid-row: auto; } }
+  @media (max-width: 560px) { .section-heading { flex-wrap: wrap; gap: 7px 12px; } .section-rule { min-width: 40%; } .section-heading h2 { width: 100%; } }
+  @media (max-width: 480px) { .arcade-page { padding-top: 46px; } .arcade-hero { padding-bottom: 48px; } h1 { font-size: clamp(2.7rem, 11vw, 3.6rem); } .soon-card { grid-template-columns: 92px 1fr; } .soon-art { font-size: 3.6rem; } .game-copy { padding: 20px; } }
+</style>
