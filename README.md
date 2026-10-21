@@ -34,7 +34,7 @@ To validate the configuration without deploying:
 npx wrangler deploy --dry-run
 ```
 
-Astro generates `/`, `/products`, `/lab`, `/contact`, and `/privacy` as static routes. Wrangler's default HTML handling serves the generated directory index files at those URLs.
+Astro generates `/`, `/products`, `/lab`, `/microgames`, `/contact`, and `/privacy` as static routes. Wrangler's default HTML handling serves the generated directory index files at those URLs.
 
 Social profile URLs are configured centrally in `src/config.ts`; empty values are not rendered.
 
@@ -49,5 +49,7 @@ The product catalogue links to static `/products/shelfpick/` and `/products/usag
 - DevPip remains an enquiry-only product.
 
 The Lab prioritises Personal Effects, Gladiator Mayhem, Word Lab and Necromancer's Horde. Word Lab links to its recorded production Pages URL; Necromancer's Horde is explicitly in development and has no invented play link. The feedback control opens a prefilled email draft. No submission service is configured.
+
+The Microgames page links directly to the early-preview collection at <https://pluto-microgames.pages.dev/>. King for 60 Seconds is the playable preview; Alien Customs and One Tower are Coming Soon.
 
 The homepage uses two centred orbital ellipses with foreground arcs to create a complete path around Pluto. Run `npm run build` and `npm run qa:prelaunch` against a local dev server before merging; Cloudflare preview builds run the Astro build but do not automatically execute browser QA.
