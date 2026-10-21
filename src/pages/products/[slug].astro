@@ -31,13 +31,13 @@ export function getStaticPaths() {
   usagegrid: {
     name: 'UsageGrid', category: 'DEVELOPER UTILITY / MACOS',
     tagline: 'AI coding usage, at a glance.',
-    summary: 'Keep track of supported AI coding-tool usage through a lightweight macOS menu-bar utility.',
-    intro: 'UsageGrid brings your coding usage closer to the tools you already work in. Check the essentials, spot approaching limits and review history without another distracting dashboard.',
-    status: 'In development',
+    summary: 'Free, open-source macOS menu-bar utility for viewing Codex usage, with local history, alerts, six themes and experimental Claude support.',
+    intro: 'See Codex quota information at a glance. Review optional local history, configure alerts and choose from six themes. Experimental Claude support shows passive snapshots and does not independently refresh provider usage. UsageGrid is an independent Pluto Night Labs project.',
+    status: 'Free and open source',
     features: [
-      { title: 'Check from the menu bar', description: 'See supported coding-tool usage without breaking your workflow.' },
-      { title: 'Know when limits are near', description: 'Use refresh controls and alerts to keep an eye on your available usage.' },
-      { title: 'Look back at your history', description: 'View usage trends and pick a visual theme that fits your desktop.' },
+      { title: 'Check from the menu bar', description: 'See Codex usage in a lightweight macOS utility.' },
+      { title: 'Know when limits are near', description: 'Configure threshold and observed-reset alerts.' },
+      { title: 'Look back at your history', description: 'View optional local history and choose from six themes.' },
     ],
     image: 'usagegrid', enquiry: 'UsageGrid launch interest',
   },
@@ -56,9 +56,13 @@ const { product } = Astro.props as { product: Product };
       <p class="summary">{product.summary}</p>
       <div class="detail-actions">
         <span class="status-label">STATUS // {product.status}</span>
-        <a class="button button-primary" href={`mailto:hello@plutonightlabs.com?subject=${encodeURIComponent(product.enquiry)}`}>Ask about {product.image === 'shelfpick' ? 'beta testing' : 'launch updates'} <span aria-hidden="true">↗</span></a>
+        {product.image === 'usagegrid' ? (
+          <a class="button button-primary" href="https://github.com/thomasrawnson/UsageGrid">View source on GitHub <span aria-hidden="true">↗</span></a>
+        ) : (
+          <a class="button button-primary" href={`mailto:hello@plutonightlabs.com?subject=${encodeURIComponent(product.enquiry)}`}>Ask about beta testing <span aria-hidden="true">↗</span></a>
+        )}
       </div>
-      <p class="email-note">Opens an email draft; this isn't an automatic mailing-list subscription.</p>
+      {product.image === 'shelfpick' && <p class="email-note">Opens an email draft; this isn't an automatic mailing-list subscription.</p>}
     </section>
 
     <section class="shell detail-body" aria-labelledby="features-heading">
