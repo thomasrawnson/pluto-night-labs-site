@@ -125,13 +125,13 @@ for (const slug of ['shelfpick', 'usagegrid']) {
 
 await linkPage.goto(`${baseURL}/lab/`, { waitUntil: 'networkidle' });
 const listedGames = await linkPage.locator('.game-card h3').allTextContents();
-for (const game of ['Personal Effects', 'Gladiator Mayhem', 'Word Lab', "Necromancer's Horde", 'Tiny Heist Planner']) {
+for (const game of ['Personal Effects', 'Gladiator Mayhem', 'Word Lab', "Necromancer's Horde", 'Double or Doom', 'Tiny Heist Planner']) {
   if (!listedGames.includes(game)) failures.push(`/lab/: missing ${game}`);
 }
 for (const removed of ['Dungeon Care Home', 'Processing the Dead', 'Going, Going, Ghoul!', 'End of the World', 'How Much?!']) {
   if (listedGames.includes(removed)) failures.push(`/lab/: retired listing remains: ${removed}`);
 }
-if (listedGames.length !== 7) failures.push(`/lab/: expected 7 experiments, found ${listedGames.length}`);
+if (listedGames.length !== 8) failures.push(`/lab/: expected 8 experiments, found ${listedGames.length}`);
 
 const selectedScreenshotSlugs = ['night-parcel-office', 'personal-effects', 'anomaly-lab', 'tiny-heist-planner'];
 for (const slug of selectedScreenshotSlugs) {
@@ -166,6 +166,14 @@ for (const label of await conceptArtworkLabels.allTextContents()) {
 }
 if (await linkPage.locator('#word-lab .new-badge').textContent() !== 'Playable') failures.push('/lab/: Word Lab must be labelled playable');
 if (await linkPage.locator('#necromancer-s-horde .new-badge').textContent() !== 'In progress') failures.push("/lab/: Necromancer's Horde must be labelled in progress");
+const doubleOrDoom = linkPage.locator('#double-or-doom');
+if (await doubleOrDoom.locator('.new-badge').textContent() !== 'Playable Prototype') failures.push('/lab/: Double or Doom status is incorrect');
+if (await doubleOrDoom.locator('.game-subtitle').textContent() !== "Death's Parlour") failures.push('/lab/: Double or Doom subtitle is incorrect');
+if (await doubleOrDoom.locator('.card-content > p:not(.game-subtitle)').textContent() !== 'A dark-fantasy coin-flipping roguelike. Make deadly wagers, manipulate the odds and bargain with Death.') failures.push('/lab/: Double or Doom description is incorrect');
+const doubleOrDoomLink = doubleOrDoom.locator('a.play-button');
+if (await doubleOrDoomLink.getAttribute('href') !== 'https://double-or-doom.pages.dev') failures.push('/lab/: Double or Doom URL is incorrect');
+if (!(await doubleOrDoomLink.textContent())?.includes('Play Now')) failures.push('/lab/: Double or Doom button label is incorrect');
+if (await doubleOrDoomLink.getAttribute('target') !== '_blank' || await doubleOrDoomLink.getAttribute('rel') !== 'noopener noreferrer') failures.push('/lab/: Double or Doom external-link safety missing');
 if (await linkPage.locator('.clip-details, video').count()) failures.push('/lab/: videos should not appear while recordings are paused');
 const gladiatorLink = linkPage.locator('#gladiator-mayhem a.play-button');
 if (await gladiatorLink.count() !== 1) {

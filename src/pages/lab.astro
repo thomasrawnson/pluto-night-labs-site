@@ -39,6 +39,18 @@ const games = [
     artClass: 'horde-art',
   },
   {
+    title: 'Double or Doom',
+    subtitle: "Death's Parlour",
+    description:
+      'A dark-fantasy coin-flipping roguelike. Make deadly wagers, manipulate the odds and bargain with Death.',
+    tags: ['Coin roguelike', 'Dark fantasy', 'Playable prototype'],
+    status: 'Playable Prototype',
+    buttonLabel: 'Play Now',
+    url: 'https://double-or-doom.pages.dev',
+    artLabel: 'DOOM',
+    artClass: 'doom-art',
+  },
+  {
     title: 'Night Parcel Office',
     description:
       'Work the final sorting desk for suspicious late-night parcels. Follow the regulations. Try not to make things worse.',
@@ -115,7 +127,7 @@ const games = [
                   EXP-{String(index + 1).padStart(2, '0')}
                 </div>
 
-                <div class="new-badge">{game.url ? 'Playable' : 'In progress'}</div>
+                <div class="new-badge">{game.status ?? (game.url ? 'Playable' : 'In progress')}</div>
               </div>
 
               <div class="game-art">
@@ -133,6 +145,7 @@ const games = [
 
               <div class="card-content">
                 <h3>{game.title}</h3>
+                {game.subtitle && <p class="game-subtitle">{game.subtitle}</p>}
                 <p>{game.description}</p>
 
                 <div class="tags" aria-label={`${game.title} categories`}>
@@ -147,7 +160,7 @@ const games = [
                     rel={game.url.startsWith('http') ? 'noopener noreferrer' : undefined}
                     aria-label={`Play ${game.title} prototype`}
                   >
-                    <span>Play {game.title}</span>
+                    <span>{game.buttonLabel ?? `Play ${game.title}`}</span>
                     <span class="arrow" aria-hidden="true">↗</span>
                   </a>
                 ) : (
@@ -491,6 +504,7 @@ const games = [
   .generated-art span { padding: .65rem .75rem; border: 1px solid currentColor; box-shadow: 4px 4px 0 rgba(0,0,0,.45); }
   .word-lab-art { color: #302719; background: repeating-linear-gradient(90deg,transparent 0 30px,rgba(72,52,29,.12) 30px 31px),linear-gradient(145deg,#dfc584,#947447); }
   .horde-art { color: #b3d58a; background: radial-gradient(circle at 50% 65%,rgba(99,148,73,.28),transparent 32%),linear-gradient(155deg,#1f2b25,#090d0c 75%); }
+  .doom-art { color: #e8bf5f; background: radial-gradient(circle at 50% 38%,rgba(216,170,77,.2),transparent 18%),repeating-linear-gradient(90deg,transparent 0 18px,rgba(119,65,124,.12) 18px 20px),linear-gradient(155deg,#38203f,#0d0911 78%); }
 
   .card-content {
     display: flex;
@@ -503,6 +517,16 @@ const games = [
     margin: 0;
     font-size: 1.6rem;
     letter-spacing: -0.035em;
+  }
+
+  .card-content .game-subtitle {
+    flex: none;
+    margin: 0.2rem 0 0;
+    color: #e8bf5f;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .card-content p {

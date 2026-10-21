@@ -48,7 +48,7 @@ The product catalogue links to static `/products/shelfpick/` and `/products/usag
 - UsageGrid uses a labelled visual concept. Do not publish private repository screenshots without explicit approval.
 - DevPip remains an enquiry-only product.
 
-The Lab prioritises Personal Effects, Gladiator Mayhem, Word Lab and Necromancer's Horde. Word Lab links to its recorded production Pages URL; Necromancer's Horde is explicitly in development and has no invented play link. The feedback control opens a prefilled email draft. No submission service is configured.
+The Lab preserves Personal Effects, Gladiator Mayhem, Word Lab and Necromancer's Horde as its leading experiments. Double or Doom is listed immediately after them as a playable prototype at its production Pages URL. Word Lab links to its recorded production Pages URL; Necromancer's Horde is explicitly in development and has no invented play link. The feedback control opens a prefilled email draft. No submission service is configured.
 
 The Microgames page links directly to the early-preview collection at <https://pluto-microgames.pages.dev/>. King for 60 Seconds is the playable preview; Alien Customs and One Tower are Coming Soon.
 
