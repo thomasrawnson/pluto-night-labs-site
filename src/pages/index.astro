@@ -86,6 +86,13 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
     <a class="join-link" href="#about">Playtest invitations are in the newsletter →</a>
   </section>
 
+  <section class="services-invite shell" aria-labelledby="services-invite-title">
+    <p class="eyebrow">Work with the studio</p>
+    <h2 id="services-invite-title">A useful website or a small web tool for your business.</h2>
+    <p>Focused builds, a written scope and direct contact with Tom.</p>
+    <a class="button button-secondary" href="/services/">Explore development services →</a>
+  </section>
+
   <NewsletterSignup />
 </BaseLayout>
 
@@ -121,6 +128,9 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
 </script>
 
 <style>
+  .services-invite { margin-block:32px; padding-block:28px; border-block:1px solid #ffffff2b; }
+  .services-invite h2 { max-width:700px; font-size:clamp(1.5rem,3vw,2rem); }
+  .services-invite p:not(.eyebrow) { color:#c1c5c3; line-height:1.7; }
   :global(body) { background: #090e12; }
   :global(main) { background-color: #090e12; background-image: radial-gradient(circle at 57% 9%, rgba(205,112,55,.07),transparent 26%),radial-gradient(rgba(215,227,215,.10) .5px,transparent .7px); background-size: auto, 67px 71px; }
   .hero { padding: 62px 0 33px; }
