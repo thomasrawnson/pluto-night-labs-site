@@ -125,13 +125,17 @@ for (const slug of ['shelfpick', 'usagegrid']) {
 
 await linkPage.goto(`${baseURL}/lab/`, { waitUntil: 'networkidle' });
 const listedGames = await linkPage.locator('.game-card h3').allTextContents();
-for (const game of ['Personal Effects', 'Gladiator Mayhem', 'Word Lab', "Necromancer's Horde", 'Double or Doom', 'Tiny Heist Planner']) {
+for (const game of ['Personal Effects', 'Gladiator Mayhem', 'Word Lab', "Necromancer's Horde", 'Double or Doom', 'Operation Wildfire', 'Tiny Heist Planner']) {
   if (!listedGames.includes(game)) failures.push(`/lab/: missing ${game}`);
 }
 for (const removed of ['Dungeon Care Home', 'Processing the Dead', 'Going, Going, Ghoul!', 'End of the World', 'How Much?!']) {
   if (listedGames.includes(removed)) failures.push(`/lab/: retired listing remains: ${removed}`);
 }
-if (listedGames.length !== 8) failures.push(`/lab/: expected 8 experiments, found ${listedGames.length}`);
+if (listedGames.length !== 9) failures.push(`/lab/: expected 9 experiments, found ${listedGames.length}`);
+const wildfireCard = linkPage.locator('#operation-wildfire');
+if (await wildfireCard.getByRole('link', { name: 'Play Operation Wildfire prototype' }).getAttribute('href') !== 'https://operation-wildfire.pages.dev/') failures.push('/lab/: Operation Wildfire play link missing or incorrect');
+const wildfireImage = wildfireCard.locator('img');
+if (await wildfireImage.getAttribute('src') !== '/lab/operation-wildfire.png' || !await wildfireImage.evaluate(img => img.complete && img.naturalWidth > 0)) failures.push('/lab/: Operation Wildfire gameplay thumbnail missing');
 
 const selectedScreenshotSlugs = ['night-parcel-office', 'personal-effects', 'anomaly-lab', 'tiny-heist-planner'];
 for (const slug of selectedScreenshotSlugs) {
