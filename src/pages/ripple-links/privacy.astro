@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config';
+---
+
+<BaseLayout title="Ripple Links Privacy Policy — Pluto Night Labs" description="Privacy information for Ripple Links, including advertising consent, local game progress and in-app purchases.">
+  <section class="privacy shell">
+    <p class="eyebrow">Ripple Links</p>
+    <h1>Privacy policy</h1>
+    <p class="lede">How privacy works in Ripple Links, a pond puzzle game developed by Pluto Night Labs Ltd.</p>
+    <div class="privacy-copy">
+      <h2>Who is responsible</h2>
+      <p>Pluto Night Labs Ltd develops Ripple Links. For privacy enquiries, contact <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>. Our general website privacy notice is <a href="/privacy/">available separately</a>.</p>
+
+      <h2>Game progress</h2>
+      <p>Ripple Links stores puzzle progress and preferences on your device so you can continue playing and remember your settings. This does not require creating a Ripple Links account. Removing the app or clearing its storage may remove local progress.</p>
+
+      <h2>Advertising</h2>
+      <p>The proposed ad-supported version of Ripple Links uses Google AdMob to display occasional advertisements between puzzles. Google and participating advertising partners may process information such as device identifiers, approximate location inferred from network information, ad interactions, performance information and diagnostics, depending on the advertising configuration and your privacy choices.</p>
+      <p>Where required, the game asks for your advertising privacy choices through Google's User Messaging Platform before requesting ads. If privacy options are available for your region, you can revisit them from the game's Privacy choices control. Declining optional consent does not stop you playing the puzzles; advertisement availability may differ.</p>
+      <p>See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a> and <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">Google's information about advertising policies</a>. Apple's permission to track across other companies' apps and sites, if relevant to the final advertising configuration, is a separate system choice.</p>
+
+      <h2>Remove Ads Forever</h2>
+      <p>Ripple Links offers a one-time, non-consumable Remove Ads Forever purchase through Apple's in-app purchasing system. Apple handles payment and account details. Ripple Links uses StoreKit's verified purchase status to recognise ownership, restore eligible purchases and prevent advertisements for owners; it does not need your full payment card details.</p>
+      <p>For Apple's handling of purchase and account data, see <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple's Privacy Policy</a>.</p>
+
+      <h2>Other information and sharing</h2>
+      <p>If you contact us, we receive the information you choose to provide and use it to respond. The app's hosting or technical service providers, Apple, Google and their relevant partners may process data as needed for the services described above. We do not describe Google or Apple's SDK data processing as anonymous: it may involve personal information.</p>
+
+      <h2>Retention and your choices</h2>
+      <p>Local puzzle progress remains on your device until it is cleared or the app is removed. Advertising and purchase-related data may be retained by Google, Apple or their partners according to their applicable policies. For questions about the purposes, retention or transfer of information processed by advertising partners, contact us using the details below.</p>
+      <p>You can change available advertising choices in the app and manage relevant iOS privacy settings. To ask about access, correction, deletion, consent withdrawal or other applicable privacy rights, contact <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>. We will assess requests under applicable law and explain where third-party providers control their own records.</p>
+
+      <h2>Questions</h2>
+      <p>Email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> with any questions about Ripple Links and privacy.</p>
+      <p class="updated">Last updated: 9 November 2026. This policy will be updated if the final app configuration changes.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .privacy { min-height: 70vh; padding-block: 130px 150px; }
+  h1 { margin: 0; font-size: clamp(3rem, 7vw, 6rem); line-height: 1; letter-spacing: -.055em; }
+  .lede { max-width: 720px; margin: 28px 0 64px; color: var(--muted); font-size: 1.15rem; line-height: 1.65; }
+  .privacy-copy { max-width: 760px; padding-top: 42px; border-top: 1px solid var(--line); }
+  h2 { margin: 36px 0 12px; font-size: 1.24rem; } h2:first-child { margin-top: 0; }
+  .privacy-copy p { color: var(--muted); line-height: 1.8; }
+  .privacy-copy a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .updated { margin-top: 48px; color: var(--dim) !important; font-size: .82rem; }
+  @media (max-width: 600px) { .privacy { padding-block: 110px 90px; } .lede { margin-bottom: 44px; } }
+</style>

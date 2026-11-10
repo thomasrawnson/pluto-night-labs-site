@@ -7,7 +7,7 @@ const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
 <footer class="night-footer">
   <div class="shell footer-top">
     <div class="footer-studio">
-      <a href="/#home" class="footer-brand"><OrbitMark size={34} /><strong>PLUTO NIGHT LABS</strong></a>
+      <a href="/" class="footer-brand"><OrbitMark size={34} /><strong>PLUTO NIGHT LABS</strong></a>
       <p>Small studio. Strange ideas.<br />Made in Cambridgeshire, UK.</p>
     </div>
     <div class="footer-reach">
@@ -17,8 +17,14 @@ const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
     </div>
   </div>
   <div class="shell footer-bottom">
-    <span>© 2026 Pluto Night Labs Ltd · Registered in England &amp; Wales</span>
+    <div class="footer-legal">
+      <span>© 2026 Pluto Night Labs Ltd · Registered in England and Wales · Company no. 17485329</span>
+      <address>Registered office: 128 City Road, London, United Kingdom, EC1V 2NX</address>
+    </div>
     <nav aria-label="Footer navigation">
+      <a href="/software/">Software</a>
+      <a href="/games/">Games</a>
+      <a href="/about/">About</a>
       <a href="/products/">Products</a>
       <a href="/lab/">The Lab</a>
       {site.newsletterUrl.startsWith('https://') && <a href={site.newsletterUrl} rel="noopener noreferrer" target="_blank">Email updates</a>}
@@ -51,6 +57,8 @@ const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
     border-top:1px solid rgba(255,255,255,.13); padding-top:1.15rem;
     color:#b1b6b5; font-size:.78rem; line-height:1.6;
   }
+  .footer-legal { max-width: 580px; }
+  .footer-legal address { font-style: normal; }
   .footer-bottom nav { display:flex; flex-wrap:wrap; gap:.6rem 1.25rem; }
   .footer-bottom nav a { min-height:35px; display:inline-flex; align-items:center; color:#d1d5d1; }
   @media(max-width:650px) {

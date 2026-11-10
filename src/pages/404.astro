@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found | Pluto Night Labs" description="This Pluto Night Labs page could not be found. Return home or explore Software and Games.">
+  <section class="not-found shell" aria-labelledby="not-found-title">
+    <p class="eyebrow">Signal lost / 404</p>
+    <h1 id="not-found-title">This page is<br /><em>out of orbit.</em></h1>
+    <p>We couldn't find the page you were looking for. Try one of these routes back into Pluto Night Labs.</p>
+    <nav aria-label="Where to go next">
+      <a class="button button-primary" href="/">Home <span aria-hidden="true">→</span></a>
+      <a class="button button-secondary" href="/software/">Software <span aria-hidden="true">→</span></a>
+      <a class="button button-secondary" href="/games/">Games <span aria-hidden="true">→</span></a>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(#main-content) { background: radial-gradient(circle at 75% 30%, rgba(255,122,95,.12), transparent 32%), #090e12; }
+  .not-found { min-height: min(690px, 75vh); display: flex; flex-direction: column; justify-content: center; padding-block: 80px 110px; }
+  h1 { margin: 0; font-size: clamp(3.2rem, 8vw, 7rem); line-height: .98; letter-spacing: -.06em; }
+  h1 em { color: var(--accent-soft); font-family: Georgia, serif; font-weight: 400; }
+  .not-found > p:not(.eyebrow) { max-width: 590px; margin: 28px 0 32px; color: var(--muted); font-size: 1.1rem; line-height: 1.7; }
+  nav { display: flex; flex-wrap: wrap; gap: 12px; }
+  nav a { gap: 10px; }
+  @media (max-width: 500px) { .not-found { min-height: 65vh; } nav { flex-direction: column; align-items: stretch; } }
+</style>

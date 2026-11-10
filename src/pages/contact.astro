@@ -11,6 +11,7 @@ import { site } from '../config';
       <p class="lede">Questions about Pluto Night Labs or one of our products? We'd love to hear from you.</p>
       <a class="button button-primary" href={`mailto:${site.supportEmail}`}>{site.supportEmail} <span aria-hidden="true">↗</span></a>
       <p class="business">For business enquiries: <a href={`mailto:${site.businessEmail}`}>{site.businessEmail}</a></p>
+      <p class="newsletter-note">Want studio updates instead? <a href={site.newsletterUrl} target="_blank" rel="noopener noreferrer">Join the Pluto newsletter <span aria-hidden="true">↗</span></a></p>
     </div>
     <div class="contact-orbit" aria-hidden="true">
       <div class="planet"><i></i></div>
@@ -22,11 +23,13 @@ import { site } from '../config';
 <style>
   .contact-page { position: relative; min-height: 72vh; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 70px; padding-block: 120px 150px; overflow: clip; }
   .contact-page::before { content: ''; position: absolute; z-index: -1; width: 620px; height: 620px; right: -250px; top: -120px; border-radius: 50%; background: radial-gradient(circle, rgba(255,122,95,.09), transparent 68%); }
-  h1 { margin: 0; font-size: clamp(3.8rem, 8vw, 7.5rem); line-height: .9; letter-spacing: -.065em; }
+  h1 { margin: 0; font-size: clamp(3.8rem, 8vw, 7.5rem); line-height: .9; letter-spacing: -.035em; }
   .lede { max-width: 620px; margin: 32px 0 38px; color: var(--muted); font-size: 1.15rem; line-height: 1.7; }
   .button span { margin-left: 10px; }
   .business { margin: 18px 0 0; color: var(--dim); font-size: .8rem; }
   .business a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+  .newsletter-note { margin: 22px 0 0; color: var(--muted); font-size: .92rem; line-height: 1.6; }
+  .newsletter-note a { color: #ffd0b5; text-decoration: underline; text-underline-offset: 4px; }
   .contact-orbit { position: relative; aspect-ratio: 1; }
   .planet { position: absolute; width: 42%; aspect-ratio: 1; left: 29%; top: 29%; border-radius: 50%; background: radial-gradient(circle at 34% 28%, #e2d9d2, #8c8790 58%, #454653); box-shadow: inset -22px -18px 32px rgba(8,9,16,.43), 0 0 70px rgba(255,122,95,.08); }
   .planet i { position: absolute; width: 24%; height: 13%; left: 18%; top: 55%; border-radius: 50%; background: rgba(50,50,60,.2); transform: rotate(16deg); }

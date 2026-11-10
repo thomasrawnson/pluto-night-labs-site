@@ -24,9 +24,12 @@ const games = [
   {
     title: 'Word Lab',
     description:
-      'Take a quiet daily break with three cosy word games built for quick, satisfying play.',
-    tags: ['Words', 'Daily puzzles', 'Cosy'],
-    url: 'https://word-lab-cl1.pages.dev/',
+      'Try Distill, Shelf Sort and Chain Reaction: three cosy word-game experiments for a quiet break.',
+    tags: ['Words', 'Three games', 'Playtest'],
+    status: 'Playtest',
+    buttonLabel: 'Open playtest',
+    linkAriaLabel: 'Open Word Lab playtest',
+    url: 'https://wl-m3-04.word-lab-playtest.pages.dev/',
     artLabel: 'WORD',
     artClass: 'word-lab-art',
   },
@@ -169,7 +172,7 @@ const games = [
                     href={game.url}
                     target={game.url.startsWith('http') ? '_blank' : undefined}
                     rel={game.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    aria-label={`Play ${game.title} prototype`}
+                    aria-label={game.linkAriaLabel ?? `Play ${game.title} prototype`}
                   >
                     <span>{game.buttonLabel ?? `Play ${game.title}`}</span>
                     <span class="arrow" aria-hidden="true">↗</span>
@@ -195,7 +198,7 @@ const games = [
     <section class="feedback-section" id="feedback">
       <div class="feedback-copy">
         <p class="section-kicker">TEST SUBJECT DEBRIEF</p>
-        <h2>Something weird happen?</h2>
+        <h2>Something weird happened?</h2>
 
         <p>
           Brilliant. Tell us what worked, what didn't, where you got confused,

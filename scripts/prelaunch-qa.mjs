@@ -46,6 +46,7 @@ async function inspect({ name, route, viewport }) {
 
 await inspect({ name: 'home-mobile-390x844', route: '/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'home-mobile-320x680', route: '/', viewport: { width: 320, height: 680 } });
+await inspect({ name: 'home-tablet-768x900', route: '/', viewport: { width: 768, height: 900 } });
 await inspect({ name: 'home-desktop-1440x900', route: '/', viewport: { width: 1440, height: 900 } });
 await inspect({ name: 'products-mobile-320x680', route: '/products/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'products-mobile-390x844', route: '/products/', viewport: { width: 390, height: 844 } });
@@ -61,7 +62,8 @@ await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: 
 
 const linkContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const linkPage = await linkContext.newPage();
-for (const route of ['/', '/products/', '/products/shelfpick/', '/products/usagegrid/', '/lab/', '/playtests/join/', '/contact/', '/privacy/']) {
+const siteRoutes = ['/', '/about/', '/software/', '/games/', '/products/', '/products/shelfpick/', '/products/usagegrid/', '/lab/', '/playtests/join/', '/contact/', '/privacy/', '/team/', '/microgames/'];
+for (const route of siteRoutes) {
   await linkPage.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
   const hrefs = await linkPage.locator('a[href]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href')).filter(Boolean))]);
   for (const href of hrefs) {
@@ -76,6 +78,19 @@ for (const route of ['/', '/products/', '/products/shelfpick/', '/products/usage
     }
   }
 }
+const providerContext = await browser.newContext();
+const providerPage = await providerContext.newPage();
+const providerRequests = [];
+providerPage.on('request', request => {
+  if (/mailerlite/i.test(request.url())) providerRequests.push(request.url());
+});
+for (const route of siteRoutes) {
+  await providerPage.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
+  const storageKeys = await providerPage.evaluate(() => Object.keys(localStorage));
+  if (storageKeys.includes('ml_guid')) failures.push(`${route}: ml_guid created while browsing Pluto pages`);
+}
+if (providerRequests.length) failures.push(`MailerLite requests before following hosted link: ${providerRequests.join(', ')}`);
+await providerContext.close();
 // The three pages must share the minimal homepage background and avoid excessive hero whitespace.
 const designMetrics = {};
 for (const route of ['/', '/lab/', '/products/']) {
@@ -168,7 +183,7 @@ if (await conceptArtworkLabels.count() !== conceptArtworkCount) {
 for (const label of await conceptArtworkLabels.allTextContents()) {
   if (label.trim() !== 'Concept illustration') failures.push(`/lab/: unexpected concept artwork label: ${label}`);
 }
-if (await linkPage.locator('#word-lab .new-badge').textContent() !== 'Playable') failures.push('/lab/: Word Lab must be labelled playable');
+if (await linkPage.locator('#word-lab .new-badge').textContent() !== 'Playtest') failures.push('/lab/: Word Lab must be labelled playtest');
 if (await linkPage.locator('#necromancer-s-horde .new-badge').textContent() !== 'In progress') failures.push("/lab/: Necromancer's Horde must be labelled in progress");
 const doubleOrDoom = linkPage.locator('#double-or-doom');
 if (await doubleOrDoom.locator('.new-badge').textContent() !== 'Playable Prototype') failures.push('/lab/: Double or Doom status is incorrect');
@@ -194,7 +209,9 @@ for (const slug of ['tiny-heist-planner']) {
   if (href !== `/playtests/${slug}/`) failures.push(`/lab/: incorrect playtest path for ${slug}: ${href}`);
 }
 const wordLabLink = linkPage.locator('#word-lab a.play-button');
-if (await wordLabLink.getAttribute('href') !== 'https://word-lab-cl1.pages.dev/') failures.push('/lab/: incorrect Word Lab URL');
+if (await wordLabLink.getAttribute('href') !== 'https://wl-m3-04.word-lab-playtest.pages.dev/') failures.push('/lab/: incorrect Word Lab playtest URL');
+if (!(await wordLabLink.textContent())?.includes('Open playtest')) failures.push('/lab/: Word Lab playtest action is unclear');
+if (await wordLabLink.getAttribute('aria-label') !== 'Open Word Lab playtest') failures.push('/lab/: Word Lab playtest link lacks a clear accessible name');
 await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
 const headline = await linkPage.locator('#main-content .hero-copy h1').textContent();
 if (!headline?.includes('Useful apps.') || !headline?.includes('Strange games.')) failures.push('/: missing app-and-game studio identity');
@@ -215,17 +232,30 @@ const newsletter = linkPage.locator('section.newsletter');
 if (await newsletter.count() !== 1 || !await newsletter.getByRole('heading', { name: 'Join the experiment.' }).count()) {
   failures.push('/: newsletter section missing');
 }
-const mailerLiteContainers = newsletter.locator('.ml-embedded');
-if (await mailerLiteContainers.count() !== 1) {
-  failures.push(`/: expected one MailerLite form container, found ${await mailerLiteContainers.count()}`);
-} else if (await mailerLiteContainers.getAttribute('data-form') !== 'TQKBpq') {
-  failures.push(`/: incorrect MailerLite form ID: ${await mailerLiteContainers.getAttribute('data-form')}`);
+const hostedNewsletterURL = 'https://preview.mailerlite.io/forms/2708813/201212762701956921/share';
+const newsletterLink = newsletter.getByRole('link', { name: 'Join the Pluto newsletter' });
+if (await newsletterLink.count() !== 1 || await newsletterLink.getAttribute('href') !== hostedNewsletterURL) {
+  failures.push('/: hosted newsletter link missing or incorrect');
+} else if (await newsletterLink.getAttribute('target') !== '_blank' || await newsletterLink.getAttribute('rel') !== 'noopener noreferrer') {
+  failures.push('/: hosted newsletter link must open safely in a new tab');
+}
+if (await newsletter.locator('.ml-embedded, #newsletter-load-choice, #newsletter-load').count()) {
+  failures.push('/: embedded MailerLite form controls remain');
 }
 if (!await newsletter.locator('a[href="/privacy/"]').count()) {
   failures.push('/: newsletter privacy link missing');
 }
-const mailerLiteLoaderCount = await linkPage.locator('script[src="https://assets.mailerlite.com/js/universal.js"]').count();
-if (mailerLiteLoaderCount !== 1) failures.push(`/: expected one MailerLite loader, found ${mailerLiteLoaderCount}`);
+if (await linkPage.locator('script[src*="mailerlite"]').count()) failures.push('/: MailerLite script remains on homepage');
+if (await newsletterLink.count() === 1) {
+  await newsletterLink.focus();
+  if (!await newsletterLink.evaluate(link => document.activeElement === link && getComputedStyle(link).outlineStyle !== 'none')) {
+    failures.push('/: hosted newsletter link lacks visible keyboard focus');
+  }
+  await linkPage.keyboard.press('Tab');
+  if (!await newsletter.locator('a[href="/privacy/"]').evaluate(link => document.activeElement === link)) {
+    failures.push('/: keyboard navigation from newsletter link to privacy link failed');
+  }
+}
 const aboutIdCount = await linkPage.locator('[id="about"]').count();
 if (aboutIdCount !== 1) failures.push(`/: expected one id="about", found ${aboutIdCount}`);
 for (const width of [320, 390]) {

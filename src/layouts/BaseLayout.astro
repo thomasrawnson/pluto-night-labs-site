@@ -7,13 +7,11 @@ import { site } from '../config';
 interface Props {
   title?: string;
   description?: string;
-  newsletter?: boolean;
 }
 
 const {
   title = 'Pluto Night Labs — Useful apps. Strange games.',
   description = 'Pluto Night Labs is an independent UK software and games studio making practical apps, developer tools and unusual experimental games.',
-  newsletter = false,
 } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, site.url);
 const socialImageURL = new URL('/images/pluto-night-labs-social.png', site.url);
@@ -23,7 +21,7 @@ const socialImageURL = new URL('/images/pluto-night-labs-social.png', site.url);
 <html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#090e12" />
     <meta name="color-scheme" content="dark" />
@@ -52,11 +50,5 @@ const socialImageURL = new URL('/images/pluto-night-labs-social.png', site.url);
     <Header />
     <main id="main-content"><slot /></main>
     <Footer />
-    {newsletter && (
-      <script is:inline>
-        (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);};l=d.createElement(e);l.async=1;l.src=u;n=d.getElementsByTagName(e)[0];n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-        ml('account', '2708813');
-      </script>
-    )}
   </body>
 </html>

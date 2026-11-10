@@ -1,23 +1,29 @@
+---
+import { site } from '../config';
+---
+
 <section class="newsletter" id="about" aria-labelledby="newsletter-title">
   <div class="shell newsletter-panel">
     <div class="newsletter-intro">
       <p class="newsletter-kicker" aria-hidden="true">// INCOMING TRANSMISSION</p>
       <h2 id="newsletter-title">Join the experiment.</h2>
-      <p>Strange games, questionable experiments and occasional transmissions from Pluto Night Labs.</p>
-      <p>Get early playtest invitations, behind-the-scenes updates and first access to upcoming games.</p>
+      <p>Updates about Pluto software, strange games and new launches.</p>
+      <p>Get early playtest invitations and behind-the-scenes news from Pluto Night Labs.</p>
       <span>One useful transmission at a time. No spam.</span>
     </div>
-    <div class="newsletter-form">
-      <div class="ml-embedded" data-form="TQKBpq"></div>
-      <p class="newsletter-privacy">Double opt-in. Unsubscribe any time. <a href="/privacy/">Privacy policy</a>.</p>
+    <div class="newsletter-action">
+      <a class="button button-primary hosted-link" href={site.newsletterUrl} target="_blank" rel="noopener noreferrer">
+        Join the Pluto newsletter <span aria-hidden="true">↗</span>
+      </a>
+      <p class="newsletter-privacy">
+        Opens MailerLite’s hosted form in a new tab. Read our <a href="/privacy/">privacy information</a> before subscribing.
+      </p>
     </div>
   </div>
 </section>
 
 <style>
-  .newsletter {
-    padding: 12px 0 28px;
-  }
+  .newsletter { padding: 12px 0 28px; }
   .newsletter-panel {
     position: relative;
     display: grid;
@@ -37,18 +43,13 @@
     box-shadow: 5px 5px 0 rgba(72, 121, 79, .16);
   }
   .newsletter-panel::before {
-    content: '';
     position: absolute;
     inset: 10px;
     border: 1px solid rgba(255, 255, 255, .05);
+    content: '';
     pointer-events: none;
   }
-  .newsletter-intro,
-  .newsletter-form {
-    position: relative;
-    z-index: 1;
-    min-width: 0;
-  }
+  .newsletter-intro, .newsletter-action { position: relative; z-index: 1; min-width: 0; }
   .newsletter-intro { max-width: 470px; padding-left: clamp(2px, 1vw, 14px); }
   .newsletter-intro h2 {
     max-width: 430px;
@@ -72,9 +73,7 @@
     letter-spacing: .065em;
     text-transform: uppercase;
   }
-  .newsletter-form { width: 100%; }
-  .newsletter-kicker,
-  .newsletter-privacy {
+  .newsletter-kicker, .newsletter-privacy {
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   .newsletter-kicker {
@@ -84,22 +83,8 @@
     font-weight: 700;
     letter-spacing: .12em;
   }
-  .newsletter-form :global(.ml-embedded) {
-    width: 100%;
-    min-width: 0;
-  }
-  .newsletter-form :global(.ml-form-embedContainer .ml-form-embedWrapper.embedForm) {
-    max-width: none;
-  }
-  .newsletter-form :global(.ml-form-embedBody .ml-form-embedContent) {
-    display: none;
-  }
-  .newsletter-form :global(.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody) {
-    padding: 24px 24px 4px;
-  }
-  .newsletter-form :global(.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form) {
-    margin: 0;
-  }
+  .hosted-link { min-width: 220px; text-align: center; }
+  .hosted-link span { margin-left: .7rem; }
   .newsletter-privacy {
     margin: 13px 0 0;
     color: #aab3ad;
@@ -107,30 +92,13 @@
     line-height: 1.6;
     letter-spacing: .035em;
   }
-  .newsletter-privacy a {
-    color: #ccefd2;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .newsletter-privacy a:hover {
-    color: #fff;
-  }
+  .newsletter-privacy a { color: #ccefd2; text-decoration: underline; text-underline-offset: 3px; }
+  .newsletter-privacy a:hover { color: #fff; }
   @media (max-width: 720px) {
-    .newsletter {
-      padding: 8px 0 22px;
-    }
-    .newsletter-panel {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      padding: 22px 20px;
-    }
+    .newsletter { padding: 8px 0 22px; }
+    .newsletter-panel { grid-template-columns: 1fr; gap: 24px; padding: 22px 20px; }
     .newsletter-intro { max-width: none; padding: 0 2px; }
     .newsletter-intro h2 { margin-bottom: 16px; font-size: clamp(2.35rem, 12vw, 3.4rem); }
-    .newsletter-intro > span { margin-top: 17px; }
   }
-  @media (max-width: 360px) {
-    .newsletter-panel {
-      padding-inline: 16px;
-    }
-  }
+  @media (max-width: 360px) { .newsletter-panel { padding-inline: 16px; } }
 </style>

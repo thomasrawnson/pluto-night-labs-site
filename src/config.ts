@@ -4,8 +4,8 @@ export const site = {
   url: 'https://plutonightlabs.com',
   supportEmail: 'hello@plutonightlabs.com',
   businessEmail: 'tom@plutonightlabs.com',
-  // MailerLite embedded form's HTTPS Share URL. Leave blank until supplied and verified.
-  newsletterUrl: '',
+  // Owner-supplied MailerLite-hosted Share URL, verified in a public browser.
+  newsletterUrl: 'https://preview.mailerlite.io/forms/2708813/201212762701956921/share',
   socials: {
     youtube: '',
     x: '',

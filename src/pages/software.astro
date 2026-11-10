@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const products = [
+  {
+    number: '01',
+    name: 'ShelfPick',
+    category: 'Board games · Web app',
+    status: 'In progress',
+    description: 'Bring your board games together, discover what fits your group and make choosing what to play the easy part of the evening.',
+    href: '/products/shelfpick/',
+    action: 'Explore ShelfPick',
+  },
+  {
+    number: '02',
+    name: 'UsageGrid',
+    category: 'Developer utility · macOS',
+    status: 'Free and open source',
+    description: 'A macOS menu-bar utility for Codex quota information, optional local history, configurable alerts and themes. Experimental Claude support provides passive snapshots.',
+    href: '/products/usagegrid/',
+    action: 'Explore UsageGrid',
+  },
+  {
+    number: '03',
+    name: 'Quick Protein',
+    category: 'Mobile cookbook · Draft prototype',
+    status: 'In development',
+    description: 'A draft mobile cookbook for protein-focused meal and snack ideas, designed to make everyday cooking simpler.',
+    href: '/contact/',
+    action: 'Ask about Quick Protein',
+  },
+];
+---
+
+<BaseLayout title="Software | Pluto Night Labs" description="Practical software from Pluto Night Labs: ShelfPick, UsageGrid and Quick Protein, with current project status and details.">
+  <section class="software-hero shell">
+    <p class="eyebrow">Pluto Night Labs / Software</p>
+    <h1>Useful tools.<br /><em>Thoughtfully made.</em></h1>
+    <p>We build our own focused applications and utilities for real tasks. Explore what each project does and where it stands today.</p>
+    <a class="button button-primary" href="#software-projects">Explore the software <span aria-hidden="true">↓</span></a>
+  </section>
+
+  <section class="catalog shell" id="software-projects" aria-labelledby="catalog-title">
+    <div class="catalog-heading"><p class="eyebrow">Current projects</p><h2 id="catalog-title">What we're building.</h2></div>
+    <div class="product-list">
+      {products.map((product) => (
+        <article class="product-card">
+          <div class="product-meta"><span>{product.number} / 03</span><span class="status">{product.status}</span></div>
+          <p class="category">{product.category}</p>
+          <h3>{product.name}</h3>
+          <p class="description">{product.description}</p>
+          <a href={product.href}>{product.action} <span aria-hidden="true">→</span></a>
+        </article>
+      ))}
+    </div>
+    <p class="availability-note">Project status is shown on each listing. Use the links above for current product information or to contact the studio.</p>
+  </section>
+
+  <section class="cross-link shell" aria-labelledby="games-title">
+    <div><p class="eyebrow">The other side of Pluto</p><h2 id="games-title">We make games, too.</h2><p>Explore original playable prototypes and experiments from the studio.</p></div>
+    <a class="button button-secondary" href="/games/">Explore Games <span aria-hidden="true">→</span></a>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(body) { background: #090e12; }
+  :global(#main-content) { background-color: #090e12; background-image: radial-gradient(circle at 57% 9%, rgba(205,112,55,.07),transparent 26%),radial-gradient(rgba(215,227,215,.10) .5px,transparent .7px); background-size: auto, 67px 71px; }
+  .software-hero { padding-block: clamp(72px, 9vw, 130px) 100px; }
+  h1, h2, h3 { letter-spacing: -.035em; }
+  h1 { margin: 0; font-size: clamp(3.15rem, 7.5vw, 7rem); line-height: .97; }
+  h1 em { color: #ffb198; font-style: normal; }
+  .software-hero > p:not(.eyebrow) { max-width: 650px; margin: 28px 0; color: var(--muted); font-size: clamp(1.04rem, 1.8vw, 1.2rem); line-height: 1.7; }
+  .catalog { padding-bottom: 100px; }
+  .catalog-heading { margin-bottom: 28px; }
+  h2 { margin: 0; font-size: clamp(2.2rem, 4vw, 3.8rem); }
+  .product-list { display: grid; gap: 18px; }
+  .product-card { padding: clamp(25px, 4vw, 46px); border: 1px solid var(--line-strong); border-radius: 18px; background: #141927; }
+  .product-meta { display: flex; justify-content: space-between; gap: 16px; color: var(--dim); font: 700 .73rem ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .status { color: #a8e6b4; text-align: right; }
+  .category { margin: 28px 0 7px; color: var(--accent-soft); font-size: .79rem; font-weight: 700; }
+  h3 { margin: 0; font-size: clamp(2.1rem, 4vw, 3.4rem); }
+  .description { max-width: 650px; margin: 15px 0 20px; color: var(--muted); line-height: 1.7; }
+  .product-card a { min-height: 44px; display: inline-flex; align-items: center; gap: 9px; color: #ffd2ba; font-weight: 700; text-decoration: underline; text-underline-offset: 5px; }
+  .availability-note { color: var(--muted); font-size: .86rem; line-height: 1.6; }
+  .cross-link { display: flex; justify-content: space-between; align-items: center; gap: 25px; padding-block: 45px 90px; border-top: 1px solid var(--line-strong); }
+  .cross-link p:not(.eyebrow) { color: var(--muted); line-height: 1.65; }
+  .cross-link .button { flex: none; }
+  @media (max-width: 650px) { .software-hero { padding-bottom: 70px; } .catalog { padding-bottom: 65px; } .cross-link { flex-direction: column; align-items: flex-start; } }
+</style>

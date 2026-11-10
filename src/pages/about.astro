@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About | Pluto Night Labs" description="Meet Pluto Night Labs, an independent UK studio making its own practical software and original games.">
+  <section class="about-hero shell">
+    <p class="eyebrow">About Pluto Night Labs</p>
+    <h1>Useful things.<br /><em>Unexpected things.</em></h1>
+    <p class="lede">Pluto Night Labs is an independent UK software and games studio. We develop our own products: practical digital tools for everyday work and original interactive experiences built for play.</p>
+  </section>
+
+  <section class="divisions shell" aria-labelledby="divisions-title">
+    <div class="section-heading">
+      <p class="eyebrow">Two divisions</p>
+      <h2 id="divisions-title">One curious studio.</h2>
+    </div>
+    <div class="division-grid">
+      <article class="division-card software-card">
+        <span class="division-number">01 / SOFTWARE</span>
+        <h3>Practical by design.</h3>
+        <p>Focused applications and utilities made to help people get something done with less friction.</p>
+        <a href="/software/">Explore Software <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="division-card games-card">
+        <span class="division-number">02 / GAMES</span>
+        <h3>Play is part of the work.</h3>
+        <p>Original browser and mobile game ideas, from playable prototypes to experiments still taking shape.</p>
+        <a href="/games/">Explore Games <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </section>
+
+  <section class="graham shell" aria-labelledby="graham-title">
+    <div class="graham-art"><img src="/team/graham.png" alt="Graham, the Pluto Night Labs mascot" width="343" height="282" loading="lazy" decoding="async" /></div>
+    <div>
+      <p class="eyebrow">Meet Graham</p>
+      <h2 id="graham-title">A familiar face around the studio.</h2>
+      <p>Graham is part of the Pluto Night Labs identity: a reminder to keep curiosity and a sense of humour close to the work.</p>
+      <a href="/team/">Meet the studio characters and assistants <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="contact-panel shell" aria-labelledby="contact-title">
+    <div><p class="eyebrow">Get in touch</p><h2 id="contact-title">Have a question?</h2><p>Contact Pluto Night Labs about the studio or one of its products.</p></div>
+    <a class="button button-primary" href="/contact/">Contact us <span aria-hidden="true">→</span></a>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(#main-content) { background: radial-gradient(circle at 75% 8%, rgba(114,92,166,.14), transparent 30%), #090e12; }
+  .about-hero { padding-block: clamp(72px, 9vw, 132px) 88px; }
+  h1, h2, h3 { letter-spacing: -.05em; }
+  h1 { max-width: 900px; margin: 0; font-size: clamp(3.1rem, 7vw, 6.8rem); line-height: .98; }
+  h1 em { color: var(--accent-soft); font-family: Georgia, serif; font-weight: 400; }
+  .lede { max-width: 720px; margin: 30px 0 0; color: var(--muted); font-size: clamp(1.05rem, 1.8vw, 1.22rem); line-height: 1.7; }
+  .divisions { padding-bottom: 100px; }
+  .section-heading { margin-bottom: 26px; }
+  h2 { margin: 0; font-size: clamp(2.2rem, 4vw, 3.8rem); line-height: 1.08; }
+  .division-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .division-card { display: flex; flex-direction: column; min-height: 320px; padding: clamp(26px, 4vw, 42px); border: 1px solid var(--line-strong); border-radius: 18px; background: #121827; }
+  .games-card { background: radial-gradient(circle at 85% 20%, rgba(255,122,95,.13), transparent 35%), #151622; }
+  .division-number { color: var(--accent-soft); font: 700 .74rem ui-monospace, monospace; letter-spacing: .14em; }
+  h3 { margin: 38px 0 12px; font-size: clamp(1.7rem, 3vw, 2.45rem); }
+  .division-card p, .graham p:not(.eyebrow), .contact-panel p:not(.eyebrow) { max-width: 520px; color: var(--muted); line-height: 1.7; }
+  .division-card a, .graham a { width: fit-content; min-height: 44px; display: inline-flex; align-items: center; gap: 10px; margin-top: auto; color: #ffd2ba; font-weight: 700; text-decoration: underline; text-underline-offset: 5px; }
+  .graham { display: grid; grid-template-columns: minmax(220px, .65fr) minmax(0, 1fr); gap: clamp(30px, 7vw, 110px); align-items: center; padding-block: 65px 100px; border-top: 1px solid var(--line-strong); }
+  .graham-art { display: grid; place-items: center; min-height: 290px; border: 1px solid var(--line); border-radius: 18px; background: radial-gradient(circle at 50% 70%, rgba(255,155,127,.14), transparent 60%), #101623; }
+  .graham-art img { width: min(80%, 343px); height: auto; }
+  .graham h2 { max-width: 600px; }
+  .graham a { margin-top: 12px; }
+  .contact-panel { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 42px 80px; border-top: 1px solid var(--line-strong); }
+  .contact-panel .button { flex: none; }
+  @media (max-width: 700px) { .division-grid, .graham { grid-template-columns: 1fr; } .divisions { padding-bottom: 65px; } .division-card { min-height: 280px; } .graham { padding-block: 55px 70px; } .contact-panel { align-items: flex-start; flex-direction: column; } }
+</style>
