@@ -46,7 +46,11 @@ export function getStaticPaths() {
 }
 const { product } = Astro.props as { product: Product };
 ---
-<BaseLayout title={`${product.name} | Pluto Night Labs`} description={product.summary}>
+<BaseLayout
+  title={`${product.name} | Pluto Night Labs`}
+  description={product.summary}
+  canonicalPath={product.image === 'shelfpick' ? '/shelfpick/' : undefined}
+>
   <div class="detail-page">
     <section class="shell detail-hero">
       <a class="back-link" href="/software/">← All software</a>

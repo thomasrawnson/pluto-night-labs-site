@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/shelfpick.css';
+
+const title = 'ShelfPick Support | Pluto Night Labs';
+const description = 'Help with your ShelfPick account, collection, BoardGameGeek import, Picker, play history and account deletion.';
+const supportEmail = 'hello@plutonightlabs.com';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  socialImage="/images/shelfpick/social-profile-1024.png"
+  socialImageAlt="ShelfPick app icon with three illustrated game boxes and a gold meeple on a wooden shelf"
+  socialImageWidth={1024}
+  socialImageHeight={1024}
+  themeColor="#f6f3eb"
+  darkThemeColor="#151816"
+  colorScheme="light dark"
+  twitterCard="summary"
+>
+  <div class="shelfpick-page support-page">
+    <section class="shelfpick-shell support-hero">
+      <a class="back-link" href="/shelfpick/">← ShelfPick</a>
+      <picture>
+        <source srcset="/images/shelfpick/logo-dark.svg" media="(prefers-color-scheme: dark)" />
+        <img class="shelfpick-wordmark" src="/images/shelfpick/logo-light.svg" alt="ShelfPick" width="390" height="112" />
+      </picture>
+      <h1>How can we help?</h1>
+      <p>Quick guidance for the most common ShelfPick tasks, plus a direct way to reach Pluto Night Labs.</p>
+      <a class="shelfpick-button shelfpick-button-primary" href={`mailto:${supportEmail}?subject=${encodeURIComponent('ShelfPick support')}`}>Email ShelfPick support</a>
+      <p class="studio-note">Please do not include your password or other sensitive information.</p>
+    </section>
+
+    <section class="shelfpick-shell help-grid" aria-label="ShelfPick help topics">
+      <article>
+        <h2>Account access</h2>
+        <p>Sign in with the email address used for your ShelfPick account. If ShelfPick asks you to verify it, use the link in the verification email before trying again.</p>
+      </article>
+      <article>
+        <h2>Reset your password</h2>
+        <p>From the sign-in screen, choose <strong>Forgot password</strong>, enter your account email and use the reset link ShelfPick sends you. Check your spam folder if it does not arrive.</p>
+      </article>
+      <article>
+        <h2>Add games</h2>
+        <p>Open <strong>Collection</strong> and choose <strong>Add game</strong> to search BoardGameGeek by title. You can add a result to Owned or Want to Play.</p>
+      </article>
+      <article>
+        <h2>Import from BoardGameGeek</h2>
+        <p>Go to <strong>Settings → Collection &amp; Data</strong>, enter your BoardGameGeek username and start a collection sync. Keep ShelfPick open while the import finishes.</p>
+      </article>
+      <article>
+        <h2>Use Picker</h2>
+        <p>Choose specific players or a group size, then set complexity and any preferences. Picker recommends from your Owned games and shows the reasons behind the match.</p>
+      </article>
+      <article>
+        <h2>Track plays</h2>
+        <p>Choose <strong>Log a play</strong> from a selected game or recommendation. Add the people and details you want to remember, then save it to your play history.</p>
+      </article>
+      <article class="deletion-help">
+        <h2>Delete your account</h2>
+        <p>In ShelfPick, go to <strong>Settings → Profile</strong> and choose the account-deletion option. Review the confirmation carefully before completing the request.</p>
+      </article>
+    </section>
+
+    <section class="contact-band">
+      <div class="shelfpick-shell contact-inner">
+        <div><h2>Still stuck?</h2><p>Tell us what you were trying to do and what happened. A screenshot can help, but remove personal details first.</p></div>
+        <a class="shelfpick-button shelfpick-button-primary" href={`mailto:${supportEmail}?subject=${encodeURIComponent('ShelfPick support')}`}>{supportEmail}</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .support-page { min-height:100vh; }
+  .support-hero { padding-block:clamp(48px,7vw,88px) clamp(55px,8vw,96px); border-bottom:1px solid var(--sp-line); }
+  .back-link { display:inline-flex; min-height:44px; align-items:center; margin-bottom:1.5rem; color:var(--sp-forest); font-size:.86rem; font-weight:780; text-decoration:underline; }
+  h1 { max-width:760px; margin:1rem 0; font-size:clamp(3rem,7vw,6rem); line-height:.96; letter-spacing:-.04em; }
+  .support-hero > p:not(.studio-note) { max-width:670px; margin:0 0 1.7rem; color:var(--sp-muted); font-size:clamp(1.04rem,1.8vw,1.2rem); line-height:1.7; }
+  .support-hero .studio-note { margin:.75rem 0 0; }
+  .help-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 clamp(2.5rem,7vw,7rem); padding-block:clamp(50px,8vw,100px); }
+  .help-grid article { padding:1.75rem 0; border-bottom:1px solid var(--sp-line); }
+  .help-grid h2 { margin:0 0 .65rem; font-size:clamp(1.35rem,2vw,1.65rem); }
+  .help-grid p { max-width:62ch; margin:0; color:var(--sp-muted); line-height:1.7; }
+  .deletion-help { grid-column:1 / -1; }
+  .contact-band { color:#f4f1e8; background:#284d3c; }
+  .contact-inner { display:flex; align-items:center; justify-content:space-between; gap:2rem; padding-block:clamp(48px,7vw,78px); }
+  .contact-inner h2 { margin:0; font-size:clamp(2rem,4vw,3.6rem); }
+  .contact-inner p { max-width:650px; margin:.8rem 0 0; color:#d9e5de; line-height:1.7; }
+  .contact-inner .shelfpick-button { flex:none; color:#151816; background:#e3ad55; box-shadow:0 10px 25px rgb(0 0 0 / 18%); }
+  .contact-inner .shelfpick-button:hover { background:#f0c576; }
+  @media(max-width:700px) { .help-grid { grid-template-columns:1fr; }.deletion-help { grid-column:auto; }.contact-inner { align-items:flex-start; flex-direction:column; }.contact-inner .shelfpick-button { width:100%; overflow-wrap:anywhere; } }
+</style>

@@ -34,7 +34,7 @@ To validate the configuration without deploying:
 npx wrangler deploy --dry-run
 ```
 
-Astro generates `/`, `/products`, `/lab`, `/microgames`, `/contact`, and `/privacy` as static routes. Wrangler's default HTML handling serves the generated directory index files at those URLs.
+Astro generates `/`, `/products`, `/shelfpick`, `/shelfpick/support`, `/lab`, `/microgames`, `/contact`, and `/privacy` as static routes. Wrangler's default HTML handling serves the generated directory index files at those URLs.
 
 Social profile URLs are configured centrally in `src/config.ts`; empty values are not rendered.
 
@@ -42,9 +42,9 @@ Product cards are maintained in `src/pages/products.astro`; experimental games a
 
 ## Public product detail pages
 
-The product catalogue links to static `/products/shelfpick/` and `/products/usagegrid/` detail pages. They describe in-progress products and offer a manual email enquiry rather than an automated waitlist or purchase.
+The product catalogue links to the canonical `/shelfpick/` product page and the static `/products/usagegrid/` detail page. The legacy `/products/shelfpick/` route remains available but canonicalises to `/shelfpick/`. ShelfPick support is at `/shelfpick/support/`.
 
-- ShelfPick shows a development screenshot from the **public** ShelfPick repository. Review it before launch and replace it when the interface changes.
+- ShelfPick uses approved local branding and a development screenshot from the ShelfPick repository that does not contain third-party cover art. Review it before launch and replace it when the interface changes.
 - UsageGrid uses a labelled visual concept. Do not publish private repository screenshots without explicit approval.
 - DevPip remains an enquiry-only product.
 

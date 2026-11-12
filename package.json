@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "qa:prelaunch": "node scripts/prelaunch-qa.mjs"
+    "qa:prelaunch": "node scripts/prelaunch-qa.mjs",
+    "qa:shelfpick": "node scripts/shelfpick-qa.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",

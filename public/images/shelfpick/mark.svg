@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title description">
+  <title id="title">ShelfPick</title>
+  <desc id="description">Three board games and a gold meeple standing on a wooden shelf.</desc>
+  <style>
+    .shelf { fill: #8B4B24; }
+    .box-one { fill: #2E8794; }
+    .box-two { fill: #C66B32; }
+    .box-three { fill: #214A72; }
+    .meeple { fill: #C28B37; }
+    @media (prefers-color-scheme: dark) {
+      .shelf { fill: #B16C3F; }
+      .box-one { fill: #56AAB3; }
+      .box-two { fill: #E08A4E; }
+      .box-three { fill: #5681AA; }
+      .meeple { fill: #E3AD55; }
+    }
+  </style>
+  <rect class="shelf" x="8" y="100" width="112" height="12" rx="4"/>
+  <rect class="box-one" x="14" y="35" width="24" height="61" rx="4"/>
+  <rect class="box-two" x="43" y="23" width="27" height="73" rx="4"/>
+  <rect class="box-three" x="75" y="41" width="22" height="55" rx="4"/>
+  <path class="meeple" d="M109 40a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm-8.7 20.2-9.5 6.8a5 5 0 0 0 5.8 8.1l3.2-2.3-4 21.2a4 4 0 0 0 6.8 3.6l6.4-7 6.4 7a4 4 0 0 0 6.8-3.6l-4-21.2 3.2 2.3a5 5 0 1 0 5.8-8.1l-9.5-6.8a15 15 0 0 0-17.4 0Z"/>
+</svg>
