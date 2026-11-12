@@ -21,17 +21,19 @@ const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
       <span>© 2026 Pluto Night Labs Ltd · Registered in England and Wales · Company no. 17485329</span>
       <address>Registered office: 128 City Road, London, United Kingdom, EC1V 2NX</address>
     </div>
-    <nav aria-label="Footer navigation">
-      <a href="/software/">Software</a>
-      <a href="/games/">Games</a>
-      <a href="/about/">About</a>
-      <a href="/products/">Products</a>
-      <a href="/lab/">The Lab</a>
-      {site.newsletterUrl.startsWith('https://') && <a href={site.newsletterUrl} rel="noopener noreferrer" target="_blank">Email updates</a>}
-      <a href="/privacy/">Privacy</a>
-      <a href="/contact/">Contact</a>
-      {configuredSocials.map(([network,url]) => <a href={url} rel="me noopener" target="_blank">{socialLabels[network]}</a>)}
-    </nav>
+    <div class="footer-links">
+      <nav class="footer-primary" aria-label="Footer primary navigation">
+        <a href="/software/">Software</a>
+        <a href="/games/">Games</a>
+        <a href="/about/">About</a>
+      </nav>
+      <nav class="footer-secondary" aria-label="Footer secondary navigation">
+        <a href="/contact/">Contact</a>
+        <a href="/privacy/">Privacy</a>
+        {site.newsletterUrl.startsWith('https://') && <a href={site.newsletterUrl} rel="noopener noreferrer" target="_blank">Newsletter</a>}
+        {configuredSocials.map(([network,url]) => <a href={url} rel="me noopener" target="_blank">{socialLabels[network]}</a>)}
+      </nav>
+    </div>
   </div>
 </footer>
 <style>
@@ -59,8 +61,11 @@ const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
   }
   .footer-legal { max-width: 580px; }
   .footer-legal address { font-style: normal; }
-  .footer-bottom nav { display:flex; flex-wrap:wrap; gap:.6rem 1.25rem; }
-  .footer-bottom nav a { min-height:35px; display:inline-flex; align-items:center; color:#d1d5d1; }
+  .footer-links { display:grid; gap:.45rem; }
+  .footer-bottom nav { display:flex; flex-wrap:wrap; gap:.35rem 1.25rem; }
+  .footer-primary a { min-height:44px; display:inline-flex; align-items:center; color:#f4e6dd; font-weight:700; }
+  .footer-secondary a { min-height:44px; display:inline-flex; align-items:center; color:#b1b6b5; font-size:.75rem; }
+  .footer-bottom nav a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
   @media(max-width:650px) {
     .night-footer { padding-block:20px 16px; }
     .footer-top { flex-direction:column; gap:1rem; padding-block:.8rem 1.2rem; }
@@ -68,6 +73,7 @@ const configuredSocials = socialEntries.filter(([, url]) => Boolean(url));
     .footer-reach > span { margin-bottom:.35rem; }
     .footer-studio p,.footer-reach p { margin-top:.5rem; }
     .footer-bottom { align-items:flex-start; }
-    .footer-bottom nav { gap:.35rem 1rem; }
+    .footer-links { width:100%; gap:.25rem; }
+    .footer-bottom nav { gap:.15rem 1.3rem; }
   }
 </style>
