@@ -41,7 +41,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
         </div>
         <div class="product-content">
           <div><h2>ShelfPick</h2><p>Discover your next<br />favourite game.</p><span class="project-kind"><i></i> IN PROGRESS · APP</span></div>
-          <a class="round-link" href="/products/shelfpick/" aria-label="See ShelfPick features">→</a>
+          <a class="round-link" href="/products/shelfpick/" aria-label="See ShelfPick features">Details <span aria-hidden="true">→</span></a>
         </div>
       </article>
       <article class="product-card usage-card">
@@ -50,7 +50,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
         </div>
         <div class="product-content">
           <div><h2>UsageGrid</h2><p>Your AI coding usage,<br />at a glance.</p><span class="project-kind"><i></i> FREE · OPEN SOURCE</span></div>
-          <a class="round-link" href="/products/usagegrid/" aria-label="See UsageGrid features">→</a>
+          <a class="round-link" href="/products/usagegrid/" aria-label="See UsageGrid features">Details <span aria-hidden="true">→</span></a>
         </div>
       </article>
       <article class="product-card effects-card">
@@ -61,7 +61,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
         </div>
         <div class="product-content">
           <div><h2>Personal Effects</h2><p>Pack what matters.<br />Leave the rest behind.</p><span class="project-kind game-kind"><i></i> PLAYABLE · GAME</span></div>
-          <a class="round-link" href="https://personal-effects.pages.dev" target="_blank" rel="noopener noreferrer" aria-label="Play Personal Effects prototype">↗</a>
+          <a class="round-link" href="https://personal-effects.pages.dev" target="_blank" rel="noopener noreferrer" aria-label="Play Personal Effects prototype">Play <span aria-hidden="true">↗</span></a>
         </div>
       </article>
     </div>
@@ -195,7 +195,9 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .product-content p { margin:0; color:#b6b8bb; font-size:.85rem; line-height:1.55; }
   .project-kind { display:flex; align-items:center; gap:9px; margin-top:13px; color:#75e08b; font-size:.64rem; }
   .project-kind i { width:7px; height:7px; border-radius:50%; background:currentColor; }.game-kind { color:#ff9267; }
-  .round-link,.game-arrow { flex-shrink:0; display:grid; place-items:center; width:37px; height:37px; border:1px solid #828386; border-radius:50%; font-size:1.25rem; }
+  .round-link { flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:44px; padding:0 10px; border:1px solid #828386; border-radius:22px; font-size:.72rem; font-weight:700; white-space:nowrap; }
+  .round-link span { font-size:1rem; }
+  .game-arrow { flex-shrink:0; display:grid; place-items:center; width:37px; height:37px; border:1px solid #828386; border-radius:50%; font-size:1.25rem; }
   .round-link:hover { background:#ff986f; color:#111; border-color:#ff986f; }
   .games { padding-bottom:25px; }
   .game-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:23px; }

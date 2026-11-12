@@ -687,6 +687,12 @@ const games = [
     border-color: var(--orange);
   }
 
+  .feedback-form select:focus-visible,
+  .feedback-form textarea:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+  }
+
   .feedback-button {
     display: flex;
     align-items: center;
@@ -712,7 +718,7 @@ const games = [
 
   .form-note {
     margin: 0.75rem 0 0;
-    color: #737982;
+    color: #9098a2;
     font-size: 0.7rem;
   }
 
