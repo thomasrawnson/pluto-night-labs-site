@@ -222,7 +222,7 @@ if (!await linkPage.locator('#featured .effects-card').count()) failures.push('/
 if (!await linkPage.locator('#featured .effects-card .shot-print img[src="/images/games/personal-effects/featured.webp"]').count()) {
   failures.push('/: Personal Effects must use approved gameplay screenshot');
 }
-if (!await linkPage.locator('#games .game-row img[src="/images/games/personal-effects/featured.webp"]').count()) failures.push('/: missing Personal Effects homepage screenshot');
+if (!await linkPage.locator('#games .game-row img[src="/images/games/night-parcel-office/featured.webp"]').count()) failures.push('/: missing Night Parcel Office homepage screenshot');
 if (!await linkPage.locator('#games .game-row img[src="/lab/gladiator-mayhem.svg"]').count()) failures.push('/: missing Gladiator Mayhem homepage artwork');
 if (!await linkPage.locator('#games .game-row .word-tiles').count()) failures.push('/: missing Word Lab homepage artwork');
 if (!await linkPage.locator('.site-header .brand').count()) failures.push('/: studio brand missing from navigation');
@@ -245,7 +245,25 @@ if (await newsletter.locator('.ml-embedded, #newsletter-load-choice, #newsletter
 if (!await newsletter.locator('a[href="/privacy/"]').count()) {
   failures.push('/: newsletter privacy link missing');
 }
-if (await linkPage.locator('script[src*="mailerlite"]').count()) failures.push('/: MailerLite script remains on homepage');
+const footerPrimary = linkPage.getByRole('navigation', { name: 'Footer primary navigation' });
+const footerSecondary = linkPage.getByRole('navigation', { name: 'Footer secondary navigation' });
+const primaryLabels = await footerPrimary.getByRole('link').allTextContents();
+if (JSON.stringify(primaryLabels.map(label => label.trim())) !== JSON.stringify(['Software', 'Games', 'About'])) {
+  failures.push('/: footer primary navigation does not match the header');
+}
+const footerSecondaryLabels = await footerSecondary.getByRole('link').allTextContents();
+if (!['Contact', 'Privacy', 'Newsletter'].every(label => footerSecondaryLabels.some(text => text.trim() === label))) {
+  failures.push('/: footer secondary navigation missing a required link');
+}
+const footerNewsletterLink = footerSecondary.getByRole('link', { name: 'Newsletter', exact: true });
+if (await footerNewsletterLink.count() !== 1 || await footerNewsletterLink.getAttribute('href') !== hostedNewsletterURL) {
+  failures.push('/: footer Newsletter link missing or incorrect');
+} else if (await footerNewsletterLink.getAttribute('target') !== '_blank' || await footerNewsletterLink.getAttribute('rel') !== 'noopener noreferrer') {
+  failures.push('/: footer Newsletter link must open safely in a new tab');
+}
+if (await linkPage.locator('script[src*="mailerlite"], link[href*="mailerlite"][rel="stylesheet"], .ml-embedded').count()) {
+  failures.push('/: embed-only MailerLite resources or form remain on homepage');
+}
 if (await newsletterLink.count() === 1) {
   await newsletterLink.focus();
   if (!await newsletterLink.evaluate(link => document.activeElement === link && getComputedStyle(link).outlineStyle !== 'none')) {
@@ -278,9 +296,10 @@ for (const width of [320, 390]) {
 }
 await linkPage.setViewportSize({ width: 1440, height: 900 });
 const homepageGames = await linkPage.locator('#games .game-row .game-copy strong').allTextContents();
-for (const game of ['Personal Effects', 'Gladiator Mayhem', 'Word Lab']) {
+for (const game of ['Night Parcel Office', 'Gladiator Mayhem', 'Word Lab']) {
   if (!homepageGames.includes(game)) failures.push(`/: missing featured game ${game}`);
 }
+if (homepageGames.includes('Personal Effects')) failures.push('/: Personal Effects appears twice on the homepage');
 if (homepageGames.length !== 3) failures.push(`/: expected exactly 3 homepage games, found ${homepageGames.length}`);
 if (await linkPage.locator('.other-games').count()) failures.push('/: Also in the Lab section should be removed');
 if (!await linkPage.locator('.moon').count()) failures.push('/: orbital interaction controls absent');
