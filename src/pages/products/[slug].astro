@@ -49,7 +49,7 @@ const { product } = Astro.props as { product: Product };
 <BaseLayout title={`${product.name} | Pluto Night Labs`} description={product.summary}>
   <div class="detail-page">
     <section class="shell detail-hero">
-      <a class="back-link" href="/products/">← All products</a>
+      <a class="back-link" href="/software/">← All software</a>
       <p class="eyebrow">{product.category}</p>
       <h1>{product.name}</h1>
       <p class="tagline">{product.tagline}</p>
@@ -98,7 +98,7 @@ const { product } = Astro.props as { product: Product };
 
     <nav class="shell bottom-nav" aria-label="More from Pluto Night Labs">
       <span>Explore more</span>
-      <a href="/products/">Other products →</a>
+      <a href="/software/">Other software →</a>
       <a href="/lab/">Playable game prototypes ↗</a>
     </nav>
   </div>
