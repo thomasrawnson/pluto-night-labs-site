@@ -152,7 +152,9 @@ async function inspect({ name, route, viewport, colorScheme = 'light', screensho
   if (route === '/shelfpick/' && await page.locator('.screenshot-strip img').count() !== 4) failures.push(`${name}: screenshot showcase is incomplete`);
   if (route === '/shelfpick/' && viewport.width <= 820 && await page.locator('#gallery-scroll-hint:visible').count() !== 1) failures.push(`${name}: mobile gallery scroll hint missing`);
   if (route === '/shelfpick/' && await page.locator('.screenshot-strip[tabindex="0"][aria-describedby="gallery-scroll-hint"]').count() !== 1) failures.push(`${name}: gallery keyboard or assistive description missing`);
-  if (route === '/shelfpick/' && await page.locator('.trust a[href*="privacy"]').count()) failures.push(`${name}: studio privacy link is presented as ShelfPick-specific`);
+  if (route === '/shelfpick/' && await page.locator('.trust a[href="/privacy/"]').count()) failures.push(`${name}: studio-wide privacy link is presented as ShelfPick-specific`);
+  if (route === '/shelfpick/' && await page.locator('.trust a[href="/shelfpick/privacy/"]', { hasText: 'ShelfPick Privacy Policy' }).count() !== 1) failures.push(`${name}: ShelfPick-specific privacy link is missing or unclear`);
+  if (route === '/shelfpick/' && await page.locator('.trust a[href="/shelfpick/terms/"]', { hasText: 'ShelfPick Terms of Use' }).count() !== 1) failures.push(`${name}: ShelfPick-specific terms link is missing or unclear`);
   if (await page.locator('footer.night-footer a[href="/privacy/"]').count() !== 1) failures.push(`${name}: global studio privacy link missing or duplicated`);
   if (route === '/shelfpick/support/' && metrics.forms !== 0) failures.push(`${name}: support page must not add a form`);
   const contrastIssues = await auditContrast(page);
