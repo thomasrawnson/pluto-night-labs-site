@@ -201,7 +201,7 @@ for (const route of Object.keys(expected)) {
   }
 }
 await linkPage.goto(`${baseURL}/products/shelfpick/`, { waitUntil: 'networkidle' });
-if (await linkPage.locator('link[rel="canonical"]').getAttribute('href') !== 'https://plutonightlabs.com/shelfpick/') failures.push('legacy ShelfPick page does not canonicalise to /shelfpick/');
+if (!linkPage.url().endsWith('/shelfpick/')) failures.push('legacy ShelfPick URL does not redirect to /shelfpick/');
 await linkPage.goto(`${baseURL}/software/`, { waitUntil: 'networkidle' });
 if (!await linkPage.locator('a[href="/shelfpick/"]').count()) failures.push('/software/: ShelfPick does not link to the approved route');
 

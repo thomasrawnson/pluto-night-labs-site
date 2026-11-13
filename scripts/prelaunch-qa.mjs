@@ -51,8 +51,8 @@ await inspect({ name: 'home-desktop-1440x900', route: '/', viewport: { width: 14
 await inspect({ name: 'products-mobile-320x680', route: '/products/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'products-mobile-390x844', route: '/products/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'products-desktop-1440x900', route: '/products/', viewport: { width: 1440, height: 900 } });
-await inspect({ name: 'shelfpick-mobile-320x680', route: '/products/shelfpick/', viewport: { width: 320, height: 680 } });
-await inspect({ name: 'usagegrid-mobile-390x844', route: '/products/usagegrid/', viewport: { width: 390, height: 844 } });
+await inspect({ name: 'shelfpick-mobile-320x680', route: '/shelfpick/', viewport: { width: 320, height: 680 } });
+await inspect({ name: 'usagegrid-mobile-390x844', route: '/usagegrid/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'lab-mobile-320x680', route: '/lab/', viewport: { width: 320, height: 680 } });
 await inspect({ name: 'lab-mobile-390x844', route: '/lab/', viewport: { width: 390, height: 844 } });
 await inspect({ name: 'lab-desktop-1440x900', route: '/lab/', viewport: { width: 1440, height: 900 } });
@@ -62,7 +62,7 @@ await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: 
 
 const linkContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const linkPage = await linkContext.newPage();
-const siteRoutes = ['/', '/about/', '/software/', '/games/', '/products/', '/products/shelfpick/', '/products/usagegrid/', '/lab/', '/playtests/join/', '/contact/', '/privacy/', '/team/', '/microgames/'];
+const siteRoutes = ['/', '/about/', '/software/', '/games/', '/products/', '/shelfpick/', '/usagegrid/', '/lab/', '/playtests/join/', '/contact/', '/privacy/', '/team/', '/microgames/'];
 for (const route of siteRoutes) {
   await linkPage.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
   const hrefs = await linkPage.locator('a[href]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href')).filter(Boolean))]);

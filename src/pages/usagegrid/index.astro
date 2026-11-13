@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="UsageGrid | Pluto Night Labs" description="Free, open-source macOS menu-bar utility for Codex usage, optional local history, alerts, six themes and experimental Claude snapshots." canonicalPath="/usagegrid/">
+  <main class="usagegrid-page">
+    <section class="shell hero">
+      <a class="back-link" href="/software/">← All software</a>
+      <p class="eyebrow">DEVELOPER UTILITY / macOS</p>
+      <h1>UsageGrid</h1>
+      <p class="tagline">AI coding usage, at a glance.</p>
+      <p class="summary">A free, open-source macOS menu-bar utility for checking Codex quota information, reviewing optional local history, setting alerts and choosing from six themes. Experimental Claude support reads passive snapshots.</p>
+      <div class="actions"><span class="status">FREE AND OPEN SOURCE</span><a class="button button-primary" href="https://github.com/thomasrawnson/UsageGrid" target="_blank" rel="noopener noreferrer">View on GitHub <span aria-hidden="true">↗</span></a></div>
+    </section>
+    <section class="shell detail" aria-labelledby="features-heading">
+      <div class="copy">
+        <p class="eyebrow">A closer look</p>
+        <h2 id="features-heading">Made for your menu bar.</h2>
+        <p>See your Codex usage without opening another dashboard. Optional history stays on your Mac and can be cleared in Settings. Alerts help you notice quota thresholds and observed resets.</p>
+        <div class="feature"><span>01</span><div><h3>Know your limits</h3><p>Check Codex quota windows, with clear stale-data and setup states.</p></div></div>
+        <div class="feature"><span>02</span><div><h3>Track locally</h3><p>Opt in to recorded history and alerts. History is stored locally, not uploaded.</p></div></div>
+        <div class="feature"><span>03</span><div><h3>Make it yours</h3><p>Choose from six themes, including Programming, Professional and 90s Retro.</p></div></div>
+        <p class="disclaimer">Experimental Claude support uses passive local snapshots; it does not independently contact Anthropic. UsageGrid is not an official OpenAI or Anthropic application. No signed or notarised public download is currently available; see the repository for build instructions.</p>
+      </div>
+      <div class="shots" aria-label="Actual UsageGrid application screenshots">
+        <figure><img src="/images/usagegrid/retro-dashboard.png" alt="UsageGrid 90s Retro menu-bar popup showing Codex weekly usage blocks and optional local history" width="343" height="640" loading="eager" decoding="async" /><figcaption>Menu-bar usage and recorded history</figcaption></figure>
+        <figure><img src="/images/usagegrid/appearance-themes.png" alt="UsageGrid Appearance settings showing six selectable themes" width="635" height="561" loading="lazy" decoding="async" /><figcaption>Six customisable themes</figcaption></figure>
+      </div>
+    </section>
+    <nav class="shell bottom-nav" aria-label="More from Pluto Night Labs"><a href="/software/">Other software →</a><a href="/shelfpick/">Explore ShelfPick →</a></nav>
+  </main>
+</BaseLayout>
+<style>
+  :global(body){background:#090e12}
+  :global(#main-content){background-color:#090e12;background-image:radial-gradient(circle at 57% 9%,rgba(205,112,55,.07),transparent 26%),radial-gradient(rgba(215,227,215,.10) .5px,transparent .7px);background-size:auto,67px 71px}
+  .usagegrid-page{padding:3rem 0 5rem}.back-link{display:inline-flex;align-items:center;min-height:44px;color:#bfc6c8;font:700 .75rem ui-monospace,monospace}.back-link:hover{color:#ff9169}
+  .eyebrow{color:#ff9169;font:750 .73rem ui-monospace,monospace;letter-spacing:.08em}.hero{border-bottom:1px solid #ffffff26;padding-bottom:3rem}.hero .eyebrow{margin:1.4rem 0 1rem}
+  h1{margin:0;font-size:clamp(3.5rem,8vw,6.5rem);letter-spacing:-.07em;line-height:1.03}.tagline{color:#e8d5c4;font-size:clamp(1.4rem,3vw,2.1rem);font-weight:700;margin:.6rem 0 1rem}.summary{color:#bfc4c5;line-height:1.7;max-width:760px;font-size:1.08rem}
+  .actions{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:1.8rem}.status{color:#a7e6b5;font:700 .71rem ui-monospace,monospace;letter-spacing:.08em}.actions .button{min-height:46px;border-radius:7px;background:#ff9169;background-image:none;box-shadow:none}.actions .button span{margin-left:.5rem}
+  .detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(24px,5vw,70px);padding-top:3rem}.copy{min-width:0}.copy h2{font-size:clamp(2rem,3vw,2.7rem);letter-spacing:-.05em;line-height:1.1;margin:.7rem 0 1rem}.copy>p:not(.eyebrow){color:#b6bdbe;line-height:1.75}
+  .feature{display:grid;grid-template-columns:26px minmax(0,1fr);gap:18px;border-top:1px solid #ffffff26;padding:1.15rem 0}.feature>span{color:#ff9169;font:700 .72rem ui-monospace,monospace}.feature h3{margin:0 0 .4rem;font-size:1.03rem}.feature p{margin:0;color:#b6bdbe;line-height:1.6;font-size:.87rem}.disclaimer{font-size:.81rem;margin-top:1.5rem}
+  .shots{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px;align-items:start;min-width:0}.shots figure{margin:0;min-width:0;background:radial-gradient(ellipse at 50% 60%,#30213b,#10171d 73%);border:1px solid #ffffff2a;border-radius:12px;padding:15px;display:flex;align-items:center;flex-direction:column;gap:12px}.shots img{display:block;width:auto;max-width:100%;height:auto;max-height:560px;object-fit:contain;filter:drop-shadow(4px 7px 6px #0007)}.shots figcaption{color:#b7c0c4;font:.72rem/1.5 ui-monospace,monospace;text-align:center}.bottom-nav{display:flex;gap:24px;flex-wrap:wrap;border-top:1px solid #ffffff26;margin-top:3rem;padding-top:2rem}.bottom-nav a{color:#ffd0b5;text-decoration:underline;text-underline-offset:5px}
+  @media(max-width:850px){.detail{grid-template-columns:1fr}.shots{max-width:680px}}@media(max-width:460px){.shots{gap:8px}.shots figure{padding:8px}.shots img{max-height:340px}.usagegrid-page{padding-top:1.5rem}}
+</style>
