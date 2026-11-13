@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/shelfpick.css';
+import '../../styles/shelfpick-legal.css';
+
+const supportEmail = 'hello@plutonightlabs.com';
+const title = 'ShelfPick Terms of Use | Pluto Night Labs';
+const description = 'The terms that apply when you create an account and use the ShelfPick board-game companion.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/shelfpick/terms/"
+  socialImage="/images/shelfpick/social-profile-1024.png"
+  socialImageAlt="ShelfPick app icon with three illustrated game boxes and a gold meeple on a wooden shelf"
+  socialImageWidth={1024}
+  socialImageHeight={1024}
+  themeColor="#f6f3eb"
+  darkThemeColor="#151816"
+  colorScheme="light dark"
+  twitterCard="summary"
+>
+  <div class="shelfpick-page shelfpick-legal">
+    <header class="shelfpick-shell shelfpick-legal-hero">
+      <a class="back-link" href="/shelfpick/">← ShelfPick</a>
+      <picture>
+        <source srcset="/images/shelfpick/logo-dark.svg" media="(prefers-color-scheme: dark)" />
+        <img class="shelfpick-wordmark" src="/images/shelfpick/logo-light.svg" alt="ShelfPick" width="390" height="112" />
+      </picture>
+      <h1>Terms of Use</h1>
+      <p class="legal-summary">These terms explain the basis on which Pluto Night Labs provides ShelfPick and the responsibilities that come with using an account.</p>
+      <p class="legal-meta"><span>Applies to ShelfPick 1.0</span><span>Last updated 13 November 2026</span></p>
+    </header>
+
+    <div class="shelfpick-shell legal-layout">
+      <nav class="legal-contents" aria-label="Terms of use contents">
+        <h2>On this page</h2>
+        <ul>
+          <li><a href="#about">About these terms</a></li>
+          <li><a href="#eligibility">Eligibility</a></li>
+          <li><a href="#service">The service</a></li>
+          <li><a href="#accounts">Your account</a></li>
+          <li><a href="#content">Your content</a></li>
+          <li><a href="#third-parties">Third parties</a></li>
+          <li><a href="#acceptable-use">Acceptable use</a></li>
+          <li><a href="#availability">Availability</a></li>
+          <li><a href="#liability">Responsibility</a></li>
+          <li><a href="#ending">Ending use</a></li>
+          <li><a href="#law">Consumer rights</a></li>
+        </ul>
+      </nav>
+
+      <article class="legal-copy">
+        <section id="about">
+          <h2>About these terms</h2>
+          <p>These terms form an agreement between you and <strong>Pluto Night Labs Ltd</strong> when you create a ShelfPick account or use the service. Pluto Night Labs Ltd is registered in England and Wales under company number <strong>17485329</strong>.</p>
+          <address>Registered office: 128 City Road, London, EC1V 2NX, United Kingdom<br />Contact: <a href={`mailto:${supportEmail}?subject=${encodeURIComponent('ShelfPick terms')}`}>{supportEmail}</a></address>
+          <p>Please read these terms together with the <a href="/shelfpick/privacy/">ShelfPick Privacy Policy</a>. If you do not agree, do not create an account or use ShelfPick.</p>
+        </section>
+
+        <section id="eligibility">
+          <h2>Eligibility and age</h2>
+          <p>You must be at least 13 years old to create a ShelfPick account. By registering, you confirm that you meet this requirement and can agree to these terms under the law that applies to you.</p>
+          <p>ShelfPick's App Store content rating is 4+. That rating describes the suitability of the app's content; it does not change the separate 13+ account-registration rule. We do not collect your date of birth or use an external age-verification service.</p>
+        </section>
+
+        <section id="service">
+          <h2>What ShelfPick provides</h2>
+          <p>ShelfPick helps you organise a board-game collection, choose games, record plays, view collection insights and prepare a host-led Game Night. Recommendations are suggestions based on the information available and the criteria you choose; they are not guarantees.</p>
+          <p>The 1.0 launch is Free-only. ShelfPick Pro purchases, paid entitlements, phone voting and QR voting are not offered in this release. Cover artwork is shown in the app under the applicable BoardGameGeek permission, but exported play cards and recaps continue to use ShelfPick's rights-safe artwork fallback.</p>
+        </section>
+
+        <section id="accounts">
+          <h2>Your account</h2>
+          <p>You must provide an email address you control, keep your password secure and give accurate information where accuracy is needed for the service. Do not share verification, password-reset or sign-in links. Tell us promptly if you believe someone has accessed your account without permission.</p>
+          <p>You are responsible for activity carried out through your account unless it resulted from our failure to use reasonable care. ShelfPick may require email verification before ordinary access and may apply reasonable security or rate limits.</p>
+        </section>
+
+        <section id="content">
+          <h2>Information you add</h2>
+          <p>You keep any rights you have in information you add to ShelfPick. You give us permission to host, process, copy and display that information only as needed to provide, secure and maintain the service.</p>
+          <p>You may enter names, scores and optional locations for people who played with you. Use nicknames where appropriate and do not add someone else's personal information unless you have a lawful and fair reason to do so. You must not add unlawful, harmful or misleading material.</p>
+        </section>
+
+        <section id="third-parties">
+          <h2>BoardGameGeek and other services</h2>
+          <p>ShelfPick relies on Render for hosting, Resend for transactional email and BoardGameGeek for game information and images. Their availability can affect ShelfPick.</p>
+          <p>BoardGameGeek is not affiliated with or responsible for ShelfPick. Game information and images may change, be incomplete or become unavailable. If you import a public BoardGameGeek collection, only use a username you are authorised to use. ShelfPick does not ask for your BoardGameGeek password.</p>
+        </section>
+
+        <section id="acceptable-use">
+          <h2>Acceptable use</h2>
+          <p>You must not:</p>
+          <ul>
+            <li>use ShelfPick unlawfully or infringe another person's rights;</li>
+            <li>try to access another account or non-public part of the service without permission;</li>
+            <li>evade security, rate limits, eligibility rules or feature safeguards;</li>
+            <li>interfere with the service, introduce malicious code or automate requests in a way that harms ShelfPick or its providers; or</li>
+            <li>misrepresent ShelfPick, resell access or use game data or artwork outside the rights granted to you.</li>
+          </ul>
+        </section>
+
+        <section id="availability">
+          <h2>Availability and changes</h2>
+          <p>We aim to provide ShelfPick with reasonable care and skill, but uninterrupted availability is not promised. Maintenance, security work, faults or a third-party outage may temporarily limit accounts, imports, recommendations, email or game data.</p>
+          <p>We may change or discontinue parts of the Free service where reasonably necessary for security, legal compliance, provider changes or product development. If a material change adversely affects your use, we will provide reasonable notice where practical.</p>
+          <p>ShelfPick and its original software, branding and design belong to Pluto Night Labs Ltd or its licensors. These terms give you a personal, non-exclusive and revocable right to use the service; they do not transfer intellectual-property ownership.</p>
+        </section>
+
+        <section id="liability">
+          <h2>Our responsibility to you</h2>
+          <p>Nothing in these terms excludes or limits liability where doing so would be unlawful, including liability for death or personal injury caused by negligence, fraud or fraudulent misrepresentation. Nothing in these terms affects rights you cannot lawfully waive as a consumer.</p>
+          <p>If we fail to comply with these terms, we are responsible for loss or damage that was a foreseeable result of that failure or our failure to use reasonable care and skill. We are not responsible for loss that was not reasonably foreseeable, for information you choose not to preserve elsewhere, or for failures caused by events outside our reasonable control.</p>
+          <p>ShelfPick is provided for personal, non-commercial use. We are not responsible for business losses such as lost profits, revenue, opportunity or business interruption.</p>
+        </section>
+
+        <section id="ending">
+          <h2>Ending or suspending an account</h2>
+          <p>You may delete your account in <strong>Settings → Profile</strong>. The <a href="/shelfpick/privacy/">Privacy Policy</a> explains what deletion removes and how recovery copies age out.</p>
+          <p>We may restrict or suspend access where reasonably necessary to protect users or the service, investigate suspected misuse, comply with law or respond to a serious breach of these terms. Where appropriate, we will explain the reason and give you a reasonable opportunity to resolve the issue. We may close an account for a serious or repeated breach.</p>
+        </section>
+
+        <section id="law">
+          <h2>Consumer rights, law and contact</h2>
+          <p>You may have mandatory rights under the consumer law of the country where you live. These terms do not replace or reduce those rights. You can obtain UK consumer information from <a href="https://www.citizensadvice.org.uk/consumer/" target="_blank" rel="noopener noreferrer">Citizens Advice</a>.</p>
+          <p>These terms are governed by the laws of England and Wales. If you live elsewhere in the United Kingdom, you may also rely on mandatory local law and bring proceedings in the courts available to you under that law.</p>
+          <p>We may update these terms for legal, security, provider or service changes. We will update the date above and provide reasonable notice before a material change takes effect where practical. Continuing to use ShelfPick after that date means the updated terms apply; if you do not agree, you may stop using and delete your account.</p>
+          <p>Questions or complaints about ShelfPick can be sent to <a href={`mailto:${supportEmail}?subject=${encodeURIComponent('ShelfPick terms')}`}>{supportEmail}</a>.</p>
+          <div class="legal-end-links"><a href="/shelfpick/privacy/">ShelfPick Privacy Policy</a><a href="/shelfpick/support/">ShelfPick support</a></div>
+        </section>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
