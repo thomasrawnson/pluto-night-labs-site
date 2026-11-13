@@ -28,7 +28,7 @@ const description = 'Organise your board-game collection, find the right game fo
         <h1>Spend less time choosing.<br />Spend more time playing.</h1>
         <p class="hero-lead">Your board-game collection and game-night companion—built to help you organise your shelf, make a confident pick and keep the stories from every play.</p>
         <div class="hero-actions" aria-label="ShelfPick availability">
-          <span class="shelfpick-button shelfpick-button-disabled" aria-disabled="true">Coming soon on the App Store</span>
+          <p class="availability-status"><span class="availability-dot" aria-hidden="true"></span><span>App Store — coming soon</span></p>
           <a class="shelfpick-button shelfpick-button-secondary" href="/shelfpick/support/">Get ShelfPick support</a>
         </div>
       </div>
@@ -38,9 +38,9 @@ const description = 'Organise your board-game collection, find the right game fo
         <figure>
           <div class="phone-frame">
             <span class="phone-speaker" aria-hidden="true"></span>
-            <img src="/images/shelfpick/picker-result-mobile.png" alt="ShelfPick Picker recommendation for Cascadia with a match score, fit explanation and game details" width="390" height="760" fetchpriority="high" decoding="async" />
+            <img src="/images/shelfpick/screenshots/picker-recommendation.png" alt="ShelfPick Picker recommendation for Cascadia with its cover, match score and fit explanation" width="736" height="1600" fetchpriority="high" decoding="async" />
           </div>
-          <figcaption>A real Picker result using ShelfPick’s artwork fallback—no third-party cover art shown.</figcaption>
+          <figcaption>A real Picker recommendation from the current pre-release app.</figcaption>
         </figure>
       </div>
     </section>
@@ -63,6 +63,35 @@ const description = 'Organise your board-game collection, find the right game fo
           <svg viewBox="0 0 52 52" width="52" height="52" aria-hidden="true"><rect x="3" y="3" width="46" height="46" rx="13" fill="var(--sp-forest-soft)"/><path d="M16 17v18h21M21 29l5-6 5 4 6-9" fill="none" stroke="var(--sp-forest)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="37" cy="18" r="3" fill="var(--sp-gold)"/></svg>
           <div><h3>Remember every game night</h3><p>Record your plays, players and results, then return to your history when you want to revisit what reached the table.</p></div>
         </article>
+      </div>
+    </section>
+
+    <section class="screenshot-showcase" aria-labelledby="screenshots-title">
+      <div class="shelfpick-shell">
+        <div class="showcase-intro">
+          <p class="showcase-kicker">Inside ShelfPick</p>
+          <h2 id="screenshots-title">From a crowded shelf to tonight’s pick.</h2>
+          <p>Browse your collection, choose together, log the play and discover what could come next.</p>
+        </div>
+        <p class="gallery-scroll-hint" id="gallery-scroll-hint"><span class="scroll-track" aria-hidden="true"><span></span></span>Swipe or use arrow keys to see all four screens.</p>
+        <div class="screenshot-strip" role="list" aria-label="ShelfPick app screens" aria-describedby="gallery-scroll-hint" tabindex="0">
+          <figure role="listitem">
+            <img src="/images/shelfpick/screenshots/collection.png" alt="ShelfPick collection showing owned games with cover art and play counts" width="736" height="1600" loading="lazy" decoding="async" />
+            <figcaption><strong>Collection</strong><span>Keep your shelf easy to scan.</span></figcaption>
+          </figure>
+          <figure role="listitem">
+            <img src="/images/shelfpick/screenshots/game-night-pick.png" alt="ShelfPick Game Night result recommending Cascadia with reasons for the choice" width="736" height="1600" loading="lazy" decoding="async" />
+            <figcaption><strong>Game Night</strong><span>Turn the shortlist into a confident pick.</span></figcaption>
+          </figure>
+          <figure role="listitem">
+            <img src="/images/shelfpick/screenshots/plays.png" alt="ShelfPick Insights view summarising recorded plays and time around the table" width="736" height="1600" loading="lazy" decoding="async" />
+            <figcaption><strong>Insights</strong><span>See what has reached the table.</span></figcaption>
+          </figure>
+          <figure role="listitem">
+            <img src="/images/shelfpick/screenshots/discover.png" alt="ShelfPick Discover view with game suggestions, cover art and match explanations" width="736" height="1600" loading="lazy" decoding="async" />
+            <figcaption><strong>Discover</strong><span>Save promising games for later.</span></figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -94,18 +123,20 @@ const description = 'Organise your board-game collection, find the right game fo
 </BaseLayout>
 
 <style>
-  .hero { display:grid; grid-template-columns:minmax(0,1.07fr) minmax(300px,.8fr); align-items:center; gap:clamp(2.5rem,7vw,6.5rem); min-height:730px; padding-block:clamp(64px,8vw,112px); }
+  .hero { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(270px,.68fr); align-items:center; gap:clamp(2.5rem,6vw,5.5rem); min-height:680px; padding-block:clamp(48px,5.5vw,76px); }
   .hero-copy { position:relative; z-index:2; }
   h1 { max-width:760px; margin:1.6rem 0 1.35rem; font-size:clamp(3rem,6.7vw,6.1rem); line-height:.94; letter-spacing:-.04em; }
   .hero-lead { max-width:650px; margin:0; color:var(--sp-muted); font-size:clamp(1.06rem,1.7vw,1.24rem); line-height:1.7; }
-  .hero-actions { display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.9rem; }
-  .app-preview { position:relative; min-width:0; padding:1rem; }
+  .hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.15rem; margin-top:1.7rem; }
+  .availability-status { display:inline-flex; align-items:center; gap:.55rem; min-height:44px; margin:0; color:var(--sp-muted); font-size:.86rem; font-weight:760; }
+  .availability-dot { width:8px; height:8px; flex:0 0 auto; border-radius:50%; background:var(--sp-gold); box-shadow:0 0 0 4px color-mix(in srgb,var(--sp-gold) 17%,transparent); }
+  .app-preview { position:relative; min-width:0; padding:.5rem; }
   .preview-glow { position:absolute; inset:8% 0 16%; border-radius:48% 52% 42% 58%; background:color-mix(in srgb,var(--sp-gold) 23%,transparent); filter:blur(34px); opacity:.65; }
   figure { position:relative; margin:0; }
-  .phone-frame { position:relative; width:min(100%,360px); margin-inline:auto; padding:12px; border:1px solid color-mix(in srgb,var(--sp-line) 75%,var(--sp-ink)); border-radius:38px; background:var(--sp-paper); box-shadow:var(--sp-shadow); }
+  .phone-frame { position:relative; width:min(100%,292px); margin-inline:auto; padding:10px; border:1px solid color-mix(in srgb,var(--sp-line) 75%,var(--sp-ink)); border-radius:34px; background:var(--sp-paper); box-shadow:var(--sp-shadow); }
   .phone-frame img { width:100%; border-radius:27px; background:var(--sp-raised); }
-  .phone-speaker { position:absolute; top:19px; left:50%; z-index:2; width:64px; height:6px; border-radius:999px; background:rgb(30 42 36 / 68%); transform:translateX(-50%); }
-  figcaption { max-width:360px; margin:1rem auto 0; color:var(--sp-muted); font-size:.78rem; line-height:1.5; text-align:center; }
+  .phone-speaker { position:absolute; top:16px; left:50%; z-index:2; width:54px; height:5px; border-radius:999px; background:rgb(30 42 36 / 68%); transform:translateX(-50%); }
+  figcaption { max-width:320px; margin:.75rem auto 0; color:var(--sp-muted); font-size:.76rem; line-height:1.5; text-align:center; }
   .benefits { display:grid; grid-template-columns:minmax(250px,.65fr) minmax(0,1.35fr); gap:clamp(2rem,7vw,7rem); padding-block:clamp(70px,9vw,120px); border-top:1px solid var(--sp-line); }
   .benefits-intro { position:sticky; top:120px; align-self:start; }
   .benefits h2,.discover-section h2,.trust h2 { margin:0; font-size:clamp(2.25rem,4.2vw,4.4rem); line-height:1; letter-spacing:-.035em; }
@@ -114,6 +145,19 @@ const description = 'Organise your board-game collection, find the right game fo
   .benefit-list article { display:grid; grid-template-columns:52px minmax(0,1fr); gap:1.3rem; padding:2rem 0; border-bottom:1px solid var(--sp-line); }
   .benefit-list h3 { margin:0 0 .55rem; font-size:clamp(1.35rem,2vw,1.7rem); }
   .benefit-list p { max-width:620px; margin:0; color:var(--sp-muted); line-height:1.68; }
+  .screenshot-showcase { padding-block:clamp(70px,9vw,116px); border-top:1px solid var(--sp-line); background:var(--sp-paper); }
+  .showcase-intro { display:grid; grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr); column-gap:clamp(2rem,7vw,7rem); align-items:end; margin-bottom:clamp(2rem,5vw,3.75rem); }
+  .showcase-kicker { grid-column:1; margin:0 0 .65rem; color:var(--sp-gold-ink); font-size:.78rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+  .showcase-intro h2 { grid-column:1; margin:0; font-size:clamp(2.25rem,4.2vw,4.4rem); line-height:1; letter-spacing:-.035em; }
+  .showcase-intro > p:last-child { grid-column:2; grid-row:1 / span 2; max-width:530px; margin:0; color:var(--sp-muted); line-height:1.72; }
+  .gallery-scroll-hint { display:none; }
+  .screenshot-strip { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(.85rem,2vw,1.35rem); }
+  .screenshot-strip:focus-visible { outline:3px solid var(--sp-gold); outline-offset:8px; border-radius:12px; }
+  .screenshot-strip figure { min-width:0; }
+  .screenshot-strip img { display:block; width:100%; height:auto; border:1px solid var(--sp-line); border-radius:clamp(16px,2.2vw,24px); background:var(--sp-cream); box-shadow:0 16px 38px rgb(30 42 36 / 10%); }
+  .screenshot-strip figcaption { display:grid; gap:.12rem; margin:.85rem .15rem 0; text-align:left; }
+  .screenshot-strip figcaption strong { color:var(--sp-ink); font-size:.86rem; }
+  .screenshot-strip figcaption span { color:var(--sp-muted); }
   .discover-section { overflow:hidden; color:#f4f1e8; background:#284d3c; }
   .discover-inner { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(260px,.7fr); align-items:center; gap:clamp(2rem,7vw,7rem); min-height:470px; padding-block:clamp(65px,9vw,105px); }
   .discover-copy p { max-width:650px; color:#d9e5de; font-size:1.04rem; line-height:1.75; }
@@ -128,6 +172,6 @@ const description = 'Organise your board-game collection, find the right game fo
   .trust-links { align-self:end; padding:1.5rem; border-radius:16px; background:var(--sp-paper); box-shadow:0 8px 24px rgb(30 42 36 / 8%); }
   .trust-links a { display:inline-flex; min-height:44px; align-items:center; color:var(--sp-forest); font-weight:780; text-decoration:underline; }
   .trust-links p { margin:.25rem 0 1rem; color:var(--sp-muted); font-size:.82rem; line-height:1.55; }
-  @media(max-width:820px) { .hero,.benefits,.discover-inner,.trust { grid-template-columns:1fr; }.hero { min-height:0; }.app-preview { max-width:430px; margin-inline:auto; }.benefits-intro { position:static; }.discover-object { min-height:230px; }.trust-links { align-self:start; } }
-  @media(max-width:560px) { .hero { padding-top:34px; }.hero h1 { margin:1rem 0 .9rem; font-size:clamp(2.55rem,13.2vw,3rem); line-height:.95; }.hero-lead { line-height:1.62; }.hero-actions { display:grid; margin-top:1.35rem; }.shelfpick-button { width:100%; }.app-preview { padding-top:.65rem; }.phone-frame { max-width:320px; }.benefit-list article { grid-template-columns:44px minmax(0,1fr); gap:1rem; }.benefit-list article > :global(svg),.benefit-list article > img { width:44px; height:44px; }.discover-object { min-height:200px; transform:scale(.84); } }
+  @media(max-width:820px) { .hero,.benefits,.discover-inner,.trust { grid-template-columns:1fr; }.hero { min-height:0; padding-block:clamp(34px,7vw,58px); }.app-preview { max-width:380px; margin-inline:auto; padding-top:.9rem; }.benefits-intro { position:static; }.showcase-intro { grid-template-columns:1fr; }.showcase-intro > p:last-child { grid-column:1; grid-row:auto; margin-top:1rem; }.gallery-scroll-hint { display:flex; align-items:center; gap:.7rem; margin:-.6rem 0 1.25rem; color:var(--sp-muted); font-size:.8rem; font-weight:700; }.scroll-track { position:relative; width:38px; height:2px; flex:0 0 auto; overflow:hidden; border-radius:999px; background:var(--sp-line); }.scroll-track span { display:block; width:17px; height:100%; border-radius:inherit; background:var(--sp-gold); }.screenshot-strip { grid-template-columns:repeat(4,minmax(230px,72vw)); overflow-x:auto; margin-inline:-20px; padding:8px 20px 1.2rem; scroll-padding-inline:20px; scroll-snap-type:x mandatory; overscroll-behavior-inline:contain; scrollbar-width:thin; scrollbar-color:var(--sp-gold) var(--sp-raised); }.screenshot-strip figure { scroll-snap-align:start; }.discover-object { min-height:230px; }.trust-links { align-self:start; } }
+  @media(max-width:560px) { .hero { padding-top:24px; padding-bottom:42px; }.hero h1 { margin:.7rem 0 .7rem; font-size:clamp(2.28rem,11.8vw,2.72rem); line-height:.96; }.hero-lead { line-height:1.58; }.hero-actions { display:grid; gap:.65rem; margin-top:1.05rem; }.availability-status { min-height:34px; }.shelfpick-button { width:100%; }.app-preview { padding-top:.75rem; }.phone-frame { max-width:278px; padding:9px; border-radius:31px; }.phone-frame img { border-radius:23px; }.phone-speaker { top:15px; }.benefit-list article { grid-template-columns:44px minmax(0,1fr); gap:1rem; }.benefit-list article > :global(svg),.benefit-list article > img { width:44px; height:44px; }.screenshot-strip { grid-template-columns:repeat(4,minmax(238px,78vw)); margin-inline:-14px; padding-inline:14px; scroll-padding-inline:14px; }.discover-object { min-height:200px; transform:scale(.84); } }
 </style>

@@ -85,7 +85,7 @@ const { product } = Astro.props as { product: Product };
       </div>
       <figure class="detail-art">
         {product.image === 'shelfpick' ? (
-          <img src="https://raw.githubusercontent.com/thomasrawnson/shelfpick/main/docs/screenshots/sp-beta-02/beta-1440-dark.png" alt="ShelfPick interface shown in a development screenshot captured during its beta." width="1440" height="900" loading="lazy" decoding="async" />
+          <img src="/images/shelfpick/screenshots/collection.png" alt="ShelfPick collection showing owned games with cover art and play counts." width="736" height="1600" loading="lazy" decoding="async" />
         ) : (
           <div class="usage-concept" aria-hidden="true">
             <div class="usage-window">
@@ -96,7 +96,7 @@ const { product } = Astro.props as { product: Product };
             </div>
           </div>
         )}
-        <figcaption>{product.image === 'shelfpick' ? 'ShelfPick development screenshot — appearance may change before launch.' : 'UsageGrid concept illustration — not an application screenshot or live usage data.'}</figcaption>
+        <figcaption>{product.image === 'shelfpick' ? 'ShelfPick pre-release collection screen — appearance may change before launch.' : 'UsageGrid concept illustration — not an application screenshot or live usage data.'}</figcaption>
       </figure>
     </section>
 
@@ -133,7 +133,7 @@ const { product } = Astro.props as { product: Product };
   .feature h3 { margin:0 0 .5rem; font-size:1.04rem; }
   .feature p { margin:0; line-height:1.6; color:#b5b9bc; font-size:.87rem; }
   .detail-art { align-self:start; min-width:0; margin:0; padding:1rem; border:1px solid rgba(255,255,255,.16); border-radius:7px; background:#0a1014; }
-  .detail-art img { display:block; width:100%; height:auto; border:1px solid rgba(255,255,255,.1); border-radius:4px; }
+  .detail-art img { display:block; width:100%; max-height:760px; height:auto; object-fit:contain; border:1px solid rgba(255,255,255,.1); border-radius:4px; background:#f6f3eb; }
   figcaption { margin:1rem .3rem .2rem; color:#aab0b3; font:.69rem ui-monospace,monospace; line-height:1.5; }
   .usage-concept { display:grid; place-items:center; min-height:355px; background:radial-gradient(ellipse at 52% 73%,rgba(80,93,82,.25),transparent 55%),#11191b; }
   .usage-window { width:78%; max-width:340px; padding:1.4rem; border:3px solid #45574c; border-radius:12px; background:#13201d; box-shadow:9px 18px 29px #0008; }

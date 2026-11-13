@@ -73,6 +73,46 @@ async function inspect({ name, route, viewport, colorScheme = 'light', screensho
   page.on('pageerror', error => consoleErrors.push(error.message));
   const response = await page.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
   if (!response?.ok()) failures.push(`${name}: HTTP ${response?.status() ?? 'no response'}`);
+  if (route === '/shelfpick/') {
+    const screenshotStrip = page.locator('.screenshot-strip');
+    await screenshotStrip.scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => [...document.querySelectorAll('.screenshot-strip img')].every(image => image.complete && image.naturalWidth > 0));
+    await page.locator('.screenshot-strip img').evaluateAll(images => Promise.all(images.map(image => image.decode())));
+    if (viewport.width <= 820) {
+      await screenshotStrip.focus();
+      const focusStyle = await screenshotStrip.evaluate(element => {
+        const style = getComputedStyle(element);
+        return { outlineStyle: style.outlineStyle, outlineWidth: style.outlineWidth };
+      });
+      if (focusStyle.outlineStyle === 'none' || focusStyle.outlineWidth === '0px') failures.push(`${name}: screenshot gallery focus is not visibly rendered`);
+      const scrollBefore = await screenshotStrip.evaluate(element => element.scrollLeft);
+      await page.keyboard.press('ArrowRight');
+      await page.waitForTimeout(450);
+      const scrollAfter = await screenshotStrip.evaluate(element => element.scrollLeft);
+      if (scrollAfter <= scrollBefore) failures.push(`${name}: keyboard does not scroll the screenshot gallery`);
+      await screenshotStrip.evaluate(element => { element.scrollTo({ left: 0, behavior: 'instant' }); });
+      await page.waitForFunction(() => {
+        const strip = document.querySelector('.screenshot-strip');
+        return strip && Math.abs(strip.scrollLeft) < 1;
+      });
+      await page.waitForTimeout(300);
+      const initialAlignment = await screenshotStrip.evaluate(element => ({
+        scrollLeft: element.scrollLeft,
+        containerLeft: element.getBoundingClientRect().left,
+        firstLeft: element.querySelector('figure')?.getBoundingClientRect().left,
+      }));
+      if (initialAlignment.firstLeft == null || initialAlignment.firstLeft < initialAlignment.containerLeft - 1) {
+        failures.push(`${name}: first gallery card is clipped at initial position ${JSON.stringify(initialAlignment)}`);
+      }
+    }
+    await page.evaluate(() => {
+      if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo(0, 0);
+    });
+    await page.waitForFunction(() => window.scrollY === 0);
+    await page.waitForTimeout(100);
+  }
 
   const metrics = await page.evaluate(() => {
     const root = document.querySelector('.shelfpick-page');
@@ -106,8 +146,12 @@ async function inspect({ name, route, viewport, colorScheme = 'light', screensho
   if (consoleErrors.length) failures.push(`${name}: console errors: ${consoleErrors.join(' | ')}`);
   if (/QR voting|£3\.99|Buy Pro|purchase Pro/i.test(metrics.text)) failures.push(`${name}: unavailable feature or purchase copy found`);
   if (route === '/shelfpick/' && await page.locator('a[href*="apps.apple.com"]').count()) failures.push(`${name}: App Store link must not exist yet`);
-  if (route === '/shelfpick/' && await page.locator('[aria-disabled="true"]', { hasText: 'App Store' }).count() !== 1) failures.push(`${name}: disabled App Store CTA missing`);
-  if (route === '/shelfpick/' && await page.locator('img[src="/images/shelfpick/picker-result-mobile.png"]').count() !== 1) failures.push(`${name}: recommendation-result screenshot missing`);
+  if (route === '/shelfpick/' && await page.locator('.availability-status', { hasText: 'App Store — coming soon' }).count() !== 1) failures.push(`${name}: App Store availability status missing`);
+  if (route === '/shelfpick/' && await page.locator('.availability-status:is(a, button), .availability-status[aria-disabled="true"]').count()) failures.push(`${name}: App Store status is misleadingly interactive`);
+  if (route === '/shelfpick/' && await page.locator('img[src="/images/shelfpick/screenshots/picker-recommendation.png"]').count() !== 1) failures.push(`${name}: recommendation-result screenshot missing`);
+  if (route === '/shelfpick/' && await page.locator('.screenshot-strip img').count() !== 4) failures.push(`${name}: screenshot showcase is incomplete`);
+  if (route === '/shelfpick/' && viewport.width <= 820 && await page.locator('#gallery-scroll-hint:visible').count() !== 1) failures.push(`${name}: mobile gallery scroll hint missing`);
+  if (route === '/shelfpick/' && await page.locator('.screenshot-strip[tabindex="0"][aria-describedby="gallery-scroll-hint"]').count() !== 1) failures.push(`${name}: gallery keyboard or assistive description missing`);
   if (route === '/shelfpick/' && await page.locator('.trust a[href*="privacy"]').count()) failures.push(`${name}: studio privacy link is presented as ShelfPick-specific`);
   if (await page.locator('footer.night-footer a[href="/privacy/"]').count() !== 1) failures.push(`${name}: global studio privacy link missing or duplicated`);
   if (route === '/shelfpick/support/' && metrics.forms !== 0) failures.push(`${name}: support page must not add a form`);
@@ -132,7 +176,8 @@ async function inspect({ name, route, viewport, colorScheme = 'light', screensho
 }
 
 await inspect({ name: 'landing-mobile-390x844', route: '/shelfpick/', viewport: { width: 390, height: 844 }, screenshot: true });
-await inspect({ name: 'landing-mobile-320x568', route: '/shelfpick/', viewport: { width: 320, height: 568 } });
+await inspect({ name: 'landing-mobile-320x568', route: '/shelfpick/', viewport: { width: 320, height: 568 }, screenshot: true });
+await inspect({ name: 'landing-tablet-768x1024', route: '/shelfpick/', viewport: { width: 768, height: 1024 }, screenshot: true });
 await inspect({ name: 'landing-desktop-1440x900', route: '/shelfpick/', viewport: { width: 1440, height: 900 }, screenshot: true });
 await inspect({ name: 'support-mobile-390x844', route: '/shelfpick/support/', viewport: { width: 390, height: 844 }, screenshot: true });
 await inspect({ name: 'support-mobile-320x568', route: '/shelfpick/support/', viewport: { width: 320, height: 568 } });
@@ -159,7 +204,7 @@ await linkPage.goto(`${baseURL}/software/`, { waitUntil: 'networkidle' });
 if (!await linkPage.locator('a[href="/shelfpick/"]').count()) failures.push('/software/: ShelfPick does not link to the approved route');
 
 const brokenPage = await linkContext.newPage();
-await brokenPage.route('**/images/shelfpick/picker-result-mobile.png', route => route.abort());
+await brokenPage.route('**/images/shelfpick/screenshots/picker-recommendation.png', route => route.abort());
 await brokenPage.goto(`${baseURL}/shelfpick/`, { waitUntil: 'networkidle' });
 const fallback = await brokenPage.locator('img[alt^="ShelfPick Picker recommendation"]').evaluate(image => {
   const rect = image.getBoundingClientRect();
