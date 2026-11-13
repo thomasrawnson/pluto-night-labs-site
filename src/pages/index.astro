@@ -36,8 +36,8 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
     <div class="product-grid">
       <article class="product-card shelfpick-card">
         <div class="project-art shelfpick-art" aria-hidden="true">
-          <div class="box-stack"><div class="box-one">GAME NIGHT</div><div class="box-two">SHELF PICK</div><div class="box-three">PLAY MORE</div></div>
-          <span class="meeple"></span>
+          <img class="product-shot shelfpick-shot-primary" src="/images/shelfpick/screenshots/picker-recommendation.png" alt="" width="736" height="1600" loading="lazy" decoding="async" />
+          <img class="product-shot shelfpick-shot-secondary" src="/images/shelfpick/screenshots/discover.png" alt="" width="736" height="1600" loading="lazy" decoding="async" />
         </div>
         <div class="product-content">
           <div><h2>ShelfPick</h2><p>Discover your next<br />favourite game.</p><span class="project-kind"><i></i> IN PROGRESS · APP</span></div>
@@ -46,7 +46,8 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
       </article>
       <article class="product-card usage-card">
         <div class="project-art usage-art" aria-hidden="true">
-          <div class="mini-window"><div class="mini-title">USAGEGRID <span>●</span></div><div class="mini-chart"><i style="height:30%"></i><i style="height:54%"></i><i style="height:42%"></i><i style="height:72%"></i><i style="height:58%"></i><i style="height:90%"></i><i style="height:65%"></i><i style="height:78%"></i></div><div class="mini-footer">TODAY 46% &nbsp; WEEK 68%</div></div>
+          <img class="product-shot usage-shot-primary" src="/images/usagegrid/retro-dashboard.png" alt="" width="343" height="640" loading="lazy" decoding="async" />
+          <img class="product-shot usage-shot-secondary" src="/images/usagegrid/appearance-themes.png" alt="" width="635" height="561" loading="lazy" decoding="async" />
         </div>
         <div class="product-content">
           <div><h2>UsageGrid</h2><p>Your AI coding usage,<br />at a glance.</p><span class="project-kind"><i></i> FREE · OPEN SOURCE</span></div>
@@ -173,17 +174,13 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .product-card:focus-within { border-color:#ff9169; }
   .product-card:hover { border-color:rgba(255,153,109,.55); }
   .project-art { position:relative; display:grid; place-items:center; height:178px; overflow:hidden; background:#10171b; border-bottom:1px solid rgba(255,255,255,.09); }
-  .shelfpick-art { background:radial-gradient(ellipse at 52% 76%,#4d3931,#181b1c 74%); }
-  .box-stack { position:relative; width:53%; max-width:180px; height:112px; transform:rotate(-6deg); }
-  .box-stack > div { position:absolute; left:5%; width:91%; height:34px; padding:7px 12px; border:2px solid #614a3b; font:800 .69rem Georgia,serif; letter-spacing:.08em; color:#cfa577; box-shadow:3px 6px 12px #0008; }
-  .box-one { top:2px; background:#283941; }.box-two { top:37px; background:#604337; }.box-three { top:72px; background:#2d3439; }
-  .meeple { position:absolute; right:17%; bottom:14%; width:30px; height:43px; clip-path:polygon(38% 0,63% 0,78% 27%,100% 43%,78% 57%,72% 100%,28% 100%,22% 57%,0 43%,22% 27%); background:#c6a078; filter:drop-shadow(3px 4px 3px #0009); }
-  .usage-art { background:radial-gradient(ellipse at 52% 73%,#323b39,#151b1c 75%); }
-  .mini-window { width:52%; min-width:160px; max-width:205px; padding:10px 12px; border:4px solid #464e4b; border-radius:10px; background:#111b1c; box-shadow:8px 13px 18px #0008; }
-  .mini-title,.mini-footer { color:#d6ad78; font:700 .55rem ui-monospace,monospace; letter-spacing:.08em; }
-  .mini-title { display:flex; justify-content:space-between; }.mini-title span { color:#d59c62; }
-  .mini-chart { display:flex; align-items:end; gap:5px; height:65px; padding:12px 0 4px; border-bottom:1px solid #3c4d45; }
-  .mini-chart i { flex:1; min-width:0; background:#dc985d; }.mini-footer { font-size:.46rem; margin-top:8px; }
+  .shelfpick-art { display:flex; justify-content:center; align-items:center; background:radial-gradient(ellipse at 52% 76%,#4d3931,#181b1c 74%); gap:16px; padding:15px; }
+  .product-shot { display:block; min-width:0; width:auto; height:100%; max-width:none; object-fit:contain; filter:drop-shadow(5px 7px 6px #0009); }
+  .shelfpick-shot-secondary { transform:translateY(12px) rotate(3deg); }
+  .shelfpick-shot-primary { transform:rotate(-3deg); }
+  .usage-art { display:flex; justify-content:center; align-items:center; gap:13px; padding:14px; background:radial-gradient(ellipse at 50% 70%,#262039,#15191e 76%); }
+  .usage-shot-primary { height:100%; }
+  .usage-shot-secondary { max-width:45%; height:auto; max-height:78%; }
   .parcel-art { background:radial-gradient(ellipse at 50% 90%,#4b3526,#151a1b 72%); }
   .parcel-shadow { position:absolute; width:53%; height:17px; bottom:13%; border-radius:50%; background:#050607; filter:blur(12px); }
   .parcel-box { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; width:49%; max-width:178px; height:112px; border:2px solid #987453; background:linear-gradient(135deg,#ad8560,#7d6047); box-shadow:8px 9px 17px #0009; transform:rotate(-2deg); color:#30251f; }
@@ -212,7 +209,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .join-link { display:inline-flex; align-items:center; min-height:44px; margin:14px 0 0; color:#ffd0b5; font-weight:750; font-size:.9rem; text-decoration:underline; text-underline-offset:5px; }
   .join-link:hover { color:#fff0e7; }
   @media(max-width:920px) { .hero-grid { grid-template-columns:1fr; }.orbit-scene { max-width:450px; }.product-grid { gap:12px; }.game-grid { grid-template-columns:1fr; gap:12px; }.product-content { padding:15px; }.project-art { height:155px; }.product-content h2 { font-size:1.1rem; } }
-  @media(max-width:660px) { .hero { padding-top:46px; }.hero-grid { gap:3px; }.hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }.hero h1 em { white-space:normal; }.orbit-scene { max-width:360px; }.telemetry { font-size:.57rem; }.telemetry-center { display:none; }.telemetry-right { width:100%; }.product-grid { grid-template-columns:1fr; }.product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }.project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }.box-stack { transform:scale(.72) rotate(-6deg); width:110%; }.meeple { display:none; }.mini-window { transform:scale(.67); min-width:150px; }.parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }.product-content { min-height:145px; }.section-head { gap:8px; }.section-label { font-size:.65rem; }.game-row { border-bottom:1px solid #ffffff12; }.other-games { align-items:start; }.other-games span { width:100%; } }
+  @media(max-width:660px) { .hero { padding-top:46px; }.hero-grid { gap:3px; }.hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }.hero h1 em { white-space:normal; }.orbit-scene { max-width:360px; }.telemetry { font-size:.57rem; }.telemetry-center { display:none; }.telemetry-right { width:100%; }.product-grid { grid-template-columns:1fr; }.product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }.project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }.shelfpick-art { gap:7px; padding:9px; }.usage-art { gap:5px; padding:8px; }.usage-shot-secondary { max-width:42%; }.parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }.product-content { min-height:145px; }.section-head { gap:8px; }.section-label { font-size:.65rem; }.game-row { border-bottom:1px solid #ffffff12; }.other-games { align-items:start; }.other-games span { width:100%; } }
   @media(max-width:360px) { .product-card { grid-template-columns:100px minmax(0,1fr); }.product-content { padding:12px; }.product-content p { font-size:.78rem; }.hero-actions .button { font-size:.75rem; padding-inline:14px; }.game-art { width:66px; height:66px; flex-basis:66px; }.game-arrow { display:none; } }
   @media(prefers-reduced-motion:reduce){ .moon,.pluto { transition:none; transform:none; } }
   @media(max-width:660px) { .project-kind { font-size:.58rem; letter-spacing:.07em; } }

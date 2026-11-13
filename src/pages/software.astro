@@ -10,6 +10,7 @@ const products = [
     description: 'Bring your board games together, discover what fits your group and make choosing what to play the easy part of the evening.',
     href: '/shelfpick/',
     action: 'Explore ShelfPick',
+    screenshots: [{ src: '/images/shelfpick/screenshots/picker-recommendation.png', alt: 'ShelfPick recommending a board game based on the selected preferences', width: 736, height: 1600 }, { src: '/images/shelfpick/screenshots/discover.png', alt: 'ShelfPick board game discovery screen', width: 736, height: 1600 }],
   },
   {
     number: '02',
@@ -19,6 +20,7 @@ const products = [
     description: 'A macOS menu-bar utility for Codex quota information, optional local history, configurable alerts and themes. Experimental Claude support provides passive snapshots.',
     href: '/products/usagegrid/',
     action: 'Explore UsageGrid',
+    screenshots: [{ src: '/images/usagegrid/retro-dashboard.png', alt: 'UsageGrid 90s Retro theme showing Codex weekly usage and recorded history', width: 343, height: 640 }, { src: '/images/usagegrid/appearance-themes.png', alt: 'UsageGrid settings showing six appearance themes', width: 635, height: 561 }],
   },
   {
     number: '03',
@@ -46,10 +48,19 @@ const products = [
       {products.map((product) => (
         <article class="product-card">
           <div class="product-meta"><span>{product.number} / 03</span><span class="status">{product.status}</span></div>
-          <p class="category">{product.category}</p>
-          <h3>{product.name}</h3>
-          <p class="description">{product.description}</p>
-          <a href={product.href}>{product.action} <span aria-hidden="true">→</span></a>
+          <div class:list={['product-body', { 'has-screenshots': !!product.screenshots }]}>
+            <div class="product-copy">
+              <p class="category">{product.category}</p>
+              <h3>{product.name}</h3>
+              <p class="description">{product.description}</p>
+              <a href={product.href}>{product.action} <span aria-hidden="true">→</span></a>
+            </div>
+            {product.screenshots && (
+              <div class:list={['product-preview', { 'usage-preview': product.name === 'UsageGrid' }]} aria-label={`${product.name} screenshots`}>
+                {product.screenshots.map((shot) => <img src={shot.src} alt={shot.alt} width={shot.width} height={shot.height} loading="lazy" decoding="async" />)}
+              </div>
+            )}
+          </div>
         </article>
       ))}
     </div>
@@ -75,6 +86,14 @@ const products = [
   h2 { margin: 0; font-size: clamp(2.2rem, 4vw, 3.8rem); }
   .product-list { display: grid; gap: 18px; }
   .product-card { padding: clamp(25px, 4vw, 46px); border: 1px solid var(--line-strong); border-radius: 18px; background: #141927; }
+  .product-body.has-screenshots { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px, .86fr); align-items:center; gap:clamp(20px,4vw,50px); }
+  .product-copy { min-width:0; }
+  .product-preview { display:flex; align-items:center; justify-content:center; gap:14px; height:272px; overflow:hidden; border:1px solid #ffffff24; border-radius:12px; padding:16px; background:radial-gradient(ellipse at 50% 75%,#373037,#111923 75%); }
+  .product-preview img { display:block; width:auto; height:100%; max-width:47%; object-fit:contain; filter:drop-shadow(5px 9px 8px #0009); }
+  .product-preview.usage-preview { background:radial-gradient(ellipse at 50% 75%,#30213b,#111923 75%); }
+  .product-preview.usage-preview img:last-child { height:auto; max-height:76%; max-width:56%; }
+  @media (max-width:800px) { .product-body.has-screenshots { grid-template-columns:1fr; }.product-preview { height:240px; } }
+  @media (max-width:420px) { .product-preview { height:205px; padding:12px; gap:8px; } }
   .product-meta { display: flex; justify-content: space-between; gap: 16px; color: var(--dim); font: 700 .73rem ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
   .status { color: #a8e6b4; text-align: right; }
   .category { margin: 28px 0 7px; color: var(--accent-soft); font-size: .79rem; font-weight: 700; }
