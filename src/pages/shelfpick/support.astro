@@ -69,6 +69,11 @@ const supportEmail = 'hello@plutonightlabs.com';
         <a class="shelfpick-button shelfpick-button-primary" href={`mailto:${supportEmail}?subject=${encodeURIComponent('ShelfPick support')}`}>{supportEmail}</a>
       </div>
     </section>
+
+    <nav class="shelfpick-shell support-legal" aria-label="ShelfPick legal information">
+      <p>How ShelfPick handles your information and the terms for using an account.</p>
+      <div><a href="/shelfpick/privacy/">Privacy Policy</a><a href="/shelfpick/terms/">Terms of Use</a></div>
+    </nav>
   </div>
 </BaseLayout>
 
@@ -90,5 +95,10 @@ const supportEmail = 'hello@plutonightlabs.com';
   .contact-inner p { max-width:650px; margin:.8rem 0 0; color:#d9e5de; line-height:1.7; }
   .contact-inner .shelfpick-button { flex:none; color:#151816; background:#e3ad55; box-shadow:0 10px 25px rgb(0 0 0 / 18%); }
   .contact-inner .shelfpick-button:hover { background:#f0c576; }
+  .support-legal { display:flex; align-items:center; justify-content:space-between; gap:2rem; padding-block:2rem; }
+  .support-legal p { max-width:620px; margin:0; color:var(--sp-muted); line-height:1.65; }
+  .support-legal div { display:flex; flex-wrap:wrap; gap:.6rem 1.4rem; }
+  .support-legal a { display:inline-flex; min-height:44px; align-items:center; color:var(--sp-forest); font-weight:780; text-decoration:underline; }
   @media(max-width:700px) { .help-grid { grid-template-columns:1fr; }.deletion-help { grid-column:auto; }.contact-inner { align-items:flex-start; flex-direction:column; }.contact-inner .shelfpick-button { width:100%; overflow-wrap:anywhere; } }
+  @media(max-width:700px) { .support-legal { align-items:flex-start; flex-direction:column; gap:.75rem; } }
 </style>
