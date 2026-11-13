@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/shelfpick.css';
+import '../../styles/shelfpick-legal.css';
+
+const supportEmail = 'hello@plutonightlabs.com';
+const title = 'ShelfPick Privacy Policy | Pluto Night Labs';
+const description = 'How Pluto Night Labs Ltd collects, uses, shares and retains personal information when you use ShelfPick.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/shelfpick/privacy/"
+  socialImage="/images/shelfpick/social-profile-1024.png"
+  socialImageAlt="ShelfPick app icon with three illustrated game boxes and a gold meeple on a wooden shelf"
+  socialImageWidth={1024}
+  socialImageHeight={1024}
+  themeColor="#f6f3eb"
+  darkThemeColor="#151816"
+  colorScheme="light dark"
+  twitterCard="summary"
+>
+  <div class="shelfpick-page shelfpick-legal">
+    <header class="shelfpick-shell shelfpick-legal-hero">
+      <a class="back-link" href="/shelfpick/">← ShelfPick</a>
+      <picture>
+        <source srcset="/images/shelfpick/logo-dark.svg" media="(prefers-color-scheme: dark)" />
+        <img class="shelfpick-wordmark" src="/images/shelfpick/logo-light.svg" alt="ShelfPick" width="390" height="112" />
+      </picture>
+      <h1>Privacy Policy</h1>
+      <p class="legal-summary">This policy explains what personal information ShelfPick uses, why it is needed and the choices you have.</p>
+      <p class="legal-meta"><span>Applies to ShelfPick 1.0</span><span>Last updated 13 November 2026</span></p>
+    </header>
+
+    <div class="shelfpick-shell legal-layout">
+      <nav class="legal-contents" aria-label="Privacy policy contents">
+        <h2>On this page</h2>
+        <ul>
+          <li><a href="#who-we-are">Who we are</a></li>
+          <li><a href="#information">Information we use</a></li>
+          <li><a href="#why">Why we use it</a></li>
+          <li><a href="#providers">Service providers</a></li>
+          <li><a href="#retention">Retention</a></li>
+          <li><a href="#choices">Your choices</a></li>
+          <li><a href="#children">Age and children</a></li>
+          <li><a href="#contact">Contact and complaints</a></li>
+        </ul>
+      </nav>
+
+      <article class="legal-copy">
+        <section id="who-we-are">
+          <h2>Who we are</h2>
+          <p>ShelfPick is operated by <strong>Pluto Night Labs Ltd</strong>, registered in England and Wales under company number <strong>17485329</strong>. We are the controller of the personal information described in this policy.</p>
+          <address>Registered office: 128 City Road, London, EC1V 2NX, United Kingdom<br />Privacy contact: <a href={`mailto:${supportEmail}?subject=${encodeURIComponent('ShelfPick privacy')}`}>{supportEmail}</a></address>
+          <p class="legal-note">ShelfPick is a general-audience board-game companion. Its App Store content rating is 4+, which describes the app's content. Creating an account is separately restricted to people aged 13 or over.</p>
+        </section>
+
+        <section id="information">
+          <h2>Information ShelfPick uses</h2>
+          <h3>Account and profile information</h3>
+          <p>Your email address, password hash, display name, verification status, account identifier, preferences and optional BoardGameGeek username. ShelfPick does not store your password in readable form and does not collect your date of birth.</p>
+          <h3>Your collection and activity</h3>
+          <p>Games you mark as Owned or Want to Play, imported collection records, Picker criteria and recommendations, player profiles, rankings, comparisons, recorded plays, participant names, scores, dates, duration and any optional location you type. Please use a nickname or obtain permission before entering information about another person.</p>
+          <h3>Game Night</h3>
+          <p>ShelfPick can use selected players, group preferences and a shortlist to help a host choose a game. Phone and QR voting are not available in this release.</p>
+          <h3>Security and operations</h3>
+          <p>Verification and password-reset token hashes, pseudonymous abuse-prevention counters, request identifiers, request method, redacted request path, response status and duration. The app stores its sign-in credential securely on your device so you can stay signed in.</p>
+          <h3>BoardGameGeek data</h3>
+          <p>If you supply a BoardGameGeek username, ShelfPick requests that public collection from BoardGameGeek. Game details and cover images also come from BoardGameGeek. ShelfPick does not ask for or receive your BoardGameGeek password.</p>
+        </section>
+
+        <section id="why">
+          <h2>Why we use information</h2>
+          <ul>
+            <li><strong>To provide ShelfPick:</strong> create and secure your account; organise your collection; personalise recommendations; record plays; and provide the features you request. We rely on our contract with you, or steps taken at your request before entering that contract.</li>
+            <li><strong>To send service email:</strong> deliver account verification and password-reset messages. We rely on the same contractual basis. ShelfPick does not send marketing email through the app.</li>
+            <li><strong>To protect and operate the service:</strong> prevent abuse, diagnose failures, maintain security and understand whether core features work as intended. We rely on our legitimate interests in providing a secure, reliable and useful service, balanced against your rights.</li>
+            <li><strong>To handle rights requests and complaints:</strong> respond to you and keep records where reasonably needed. We rely on legal obligations and our legitimate interests in demonstrating and managing compliance.</li>
+          </ul>
+          <p>Picker recommendations are automated suggestions based on your collection and the criteria you choose. They do not make decisions that have legal or similarly significant effects on you.</p>
+        </section>
+
+        <section id="providers">
+          <h2>Service providers and international processing</h2>
+          <p>We use a small number of providers to run ShelfPick:</p>
+          <ul>
+            <li><strong>Render</strong> hosts the FastAPI service and PostgreSQL database in Frankfurt and retains Hobby dashboard application logs for seven days. Its infrastructure and subprocessors may process information outside the United Kingdom.</li>
+            <li><strong>Resend</strong> delivers verification and password-reset email. The sending route is configured for Ireland, while Resend states that email and log data on the Free plan is retained for 30 days and may be stored or processed in the United States.</li>
+            <li><strong>BoardGameGeek</strong> supplies public collection and game information and hosts cover images. Requests can disclose your IP address and ordinary browser or device information to BoardGameGeek and its delivery providers. BoardGameGeek is based in the United States.</li>
+          </ul>
+          <p>These arrangements can involve transfers outside the United Kingdom. Render and Resend publish data-processing terms that describe UK transfer mechanisms, including a UK Addendum and the UK Extension to the EU–US Data Privacy Framework. We have not independently verified which mechanism applies to every transfer under our current account arrangements. BoardGameGeek's privacy policy states that information from outside the United States is transferred to the United States, but we have not verified a separate UK transfer safeguard for that processing. Contact us if you want more information about the provider terms we currently hold.</p>
+          <p>ShelfPick has no advertising SDK and does not sell personal information. Its client analytics and crash-reporting hooks are not connected to a third-party provider in this release.</p>
+        </section>
+
+        <section id="retention">
+          <h2>How long we keep information</h2>
+          <p>We keep account, collection, preference and activity information while your account remains open. We may retain limited information for longer where it is reasonably needed to meet a legal obligation, resolve a dispute or protect the service.</p>
+          <ul>
+            <li>Render dashboard application logs are available for seven days under the current plan.</li>
+            <li>Resend states that email and log data on the current plan is retained for 30 days.</li>
+            <li>Authentication abuse counters contain a keyed hash rather than the raw email or IP address. Rows older than 24 hours are removed when a later authentication write performs cleanup; there is no separate scheduled cleanup.</li>
+            <li>Expired verification and reset token hashes are unusable, but there is no separate scheduled cleanup. They are removed when replaced or when the account is deleted.</li>
+            <li>Production database point-in-time recovery covers a rolling three-day window. Deleted information may remain in recovery copies until that window expires and is used only for service recovery.</li>
+          </ul>
+          <p>We review retention when the service or provider arrangements change. We do not promise an automated inactivity-deletion schedule that the service does not currently operate.</p>
+        </section>
+
+        <section id="choices">
+          <h2>Your choices and rights</h2>
+          <p>You can update your profile and preferences in ShelfPick. You can delete your account from <strong>Settings → Profile</strong> after confirming your password. Deletion removes your account and the ShelfPick records owned by it from the live database, including your collection, players, plays, recommendations and hosted sessions. Shared game-catalogue records remain. Recovery copies age out under the period described above.</p>
+          <p>Depending on the circumstances, you may ask us to give you a copy of your information, correct it, erase it, restrict how it is used, transfer information you provided, or consider an objection. These rights are not absolute and exemptions may apply. We normally respond within one month, subject to any extension permitted by law.</p>
+          <p>To make a request, email <a href={`mailto:${supportEmail}?subject=${encodeURIComponent('ShelfPick data request')}`}>{supportEmail}</a>. We may need to verify that you control the relevant account, but we will never ask you to send your password.</p>
+        </section>
+
+        <section id="children">
+          <h2>Age and children's privacy</h2>
+          <p>You must be at least 13 to create a ShelfPick account. Registration asks you to confirm this; we do not collect a date of birth or use an external age-verification service. If you are under 13, do not create an account.</p>
+          <p>People under 18 have data-protection rights. If you believe a child has created an account or that we hold a child's information inappropriately, contact us so we can investigate and take appropriate action.</p>
+        </section>
+
+        <section id="contact">
+          <h2>Contact, complaints and changes</h2>
+          <p>For a privacy question or request, contact <a href={`mailto:${supportEmail}?subject=${encodeURIComponent('ShelfPick privacy')}`}>{supportEmail}</a>. To make a data-protection complaint, use the subject “ShelfPick data protection complaint” and explain what happened and what you would like us to consider. We will acknowledge the complaint, investigate it fairly, keep you informed and explain the outcome.</p>
+          <p>If you remain unhappy, you can complain to the <a href="https://ico.org.uk/make-a-complaint/data-protection-complaints/data-protection-complaints/" target="_blank" rel="noopener noreferrer">Information Commissioner's Office</a>, the UK data-protection regulator.</p>
+          <p>We may update this policy when ShelfPick, the law or our providers change. We will update the date above and provide additional notice where a change materially affects how we use your information.</p>
+          <div class="legal-end-links"><a href="/shelfpick/terms/">ShelfPick Terms of Use</a><a href="/shelfpick/support/">ShelfPick support</a><a href="/privacy/">Pluto Night Labs website privacy policy</a></div>
+        </section>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
