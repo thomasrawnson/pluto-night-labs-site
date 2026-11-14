@@ -54,15 +54,14 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
           <a class="round-link" href="/usagegrid/" aria-label="See UsageGrid features">Details <span aria-hidden="true">→</span></a>
         </div>
       </article>
-      <article class="product-card effects-card">
-        <div class="project-art effects-feature-art" aria-hidden="true">
-          <div class="shot-print">
-            <img class="gameplay-photo" src="/images/games/personal-effects/featured.webp" data-fallback="/lab/personal-effects.png" alt="" width="800" height="500" loading="lazy" decoding="async" />
-          </div>
+      <article class="product-card lth-card">
+        <div class="project-art lth-art" aria-hidden="true">
+          <img class="product-shot lth-shot-primary" src="/images/last-train-home/screenshots/lay-the-line.webp" alt="" width="736" height="1600" loading="lazy" decoding="async" />
+          <img class="product-shot lth-shot-secondary" src="/images/last-train-home/screenshots/level-5.webp" alt="" width="736" height="1600" loading="lazy" decoding="async" />
         </div>
         <div class="product-content">
-          <div><h2>Personal Effects</h2><p>Pack what matters.<br />Leave the rest behind.</p><span class="project-kind game-kind"><i></i> PLAYABLE · GAME</span></div>
-          <a class="round-link" href="https://personal-effects.pages.dev" target="_blank" rel="noopener noreferrer" aria-label="Play Personal Effects prototype">Play <span aria-hidden="true">↗</span></a>
+          <div><h2>Last Train Home</h2><p>Lay the line.<br />Bring two trains home.</p><span class="project-kind game-kind"><i></i> COMING SOON · iPHONE GAME</span></div>
+          <a class="round-link" href="/last-train-home/" aria-label="See Last Train Home details">Details <span aria-hidden="true">→</span></a>
         </div>
       </article>
     </div>
@@ -219,25 +218,9 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   @media(max-width:660px) { .join-link { font-size:.83rem; } }
 
   /* Real gameplay sits on tactile printed cards, with the existing brand palette. */
-  .effects-card .project-art {
-    background:radial-gradient(ellipse at 55% 65%,rgba(177,120,70,.19),transparent 68%), #19201c;
-  }
-  .shot-print {
-    display:block;
-    width:78%;
-    max-width:280px;
-    aspect-ratio:8/5;
-    padding:5px;
-    border:1px solid #ad9368;
-    border-radius:2px;
-    background:#d4b88c;
-    transform:rotate(-1.2deg);
-    box-shadow:8px 9px 0 #070c0e;
-  }
-  .gameplay-photo {
-    display:block;width:100%;height:100%;object-fit:cover;
-    object-position:center;border-radius:1px;
-  }
+  .lth-art { display:flex; justify-content:center; align-items:center; background:radial-gradient(ellipse at 52% 76%,#3f5140,#181b1c 74%); gap:16px; padding:15px; }
+  .lth-shot-primary { transform:rotate(-3deg); }
+  .lth-shot-secondary { transform:translateY(12px) rotate(3deg); }
   .game-row .game-art {
     padding:4px;
     overflow:hidden;
@@ -254,7 +237,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
     border-radius:1px;
   }
   @media(max-width:660px) {
-    .effects-card .shot-print { width:89%;padding:3px;box-shadow:4px 5px 0 #070c0e; }
+    .lth-art { gap:7px; padding:9px; }
     .game-row .game-art { transform:none; }
   }
 

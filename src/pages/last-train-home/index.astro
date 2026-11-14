@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config';
+
+const title = 'Last Train Home: Rail Puzzle — A cosy railway puzzle for iPhone';
+const description = 'Lay track across a miniature countryside and guide two toy mail trains home. 15 handcrafted railway puzzles for iPhone, with the first five free.';
+
+const screens = [
+  { src: '/images/last-train-home/screenshots/lay-the-line.webp', alt: 'Level 1, First Departure: a curved line of track laid between Ashcombe and Bramley stations', title: 'Lay the line', caption: 'Link the village stations with limited track.' },
+  { src: '/images/last-train-home/screenshots/deliver-both-trains.webp', alt: 'Level completed panel showing track used, completion time and an Economy bonus earned', title: 'Run the trains', caption: 'Watch both mail trains make their deliveries.' },
+  { src: '/images/last-train-home/screenshots/level-5.webp', alt: 'Level 5, The Junction: a five-by-five board with hills, trees, rocks and three stations', title: 'Find a better route', caption: 'New obstacles ask for a smarter line.' },
+  { src: '/images/last-train-home/screenshots/level-picker.webp', alt: 'Timetable level picker listing the Countryside Mail chapter with completed and locked levels', title: 'The timetable', caption: '15 journeys, from First Departure onwards.' },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  socialImage="/images/last-train-home/social-icon-600.png"
+  socialImageAlt="Last Train Home app icon: a red toy steam locomotive on a wooden track"
+  socialImageWidth={600}
+  socialImageHeight={600}
+  themeColor="#efe8d4"
+  colorScheme="light"
+  twitterCard="summary"
+>
+  <div class="lth-page">
+    <section class="lth-shell hero">
+      <div class="hero-copy">
+        <div class="app-id">
+          <img class="app-icon" src="/images/last-train-home/app-icon-256.png" alt="" width="256" height="256" />
+          <p><strong>Last Train Home</strong><span>Rail Puzzle · iPhone</span></p>
+        </div>
+        <h1>Two little mail trains.<br /><em>One line to bring them home.</em></h1>
+        <p class="hero-lead">Lay track across a miniature countryside, link the village stations and run your railway to see whether both trains make their deliveries. Then try another route to improve the journey.</p>
+        <div class="hero-actions" aria-label="Last Train Home availability">
+          <p class="availability-status"><span class="availability-dot" aria-hidden="true"></span><span>App Store — coming soon</span></p>
+          <a class="lth-button" href="#screens">See the game <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+
+      <div class="app-preview">
+        <div class="preview-glow" aria-hidden="true"></div>
+        <figure>
+          <div class="phone-frame">
+            <img src="/images/last-train-home/screenshots/lay-the-line.webp" alt="Last Train Home Level 1 with track laid from Ashcombe to Bramley" width="736" height="1600" fetchpriority="high" decoding="async" />
+          </div>
+          <figcaption>Real gameplay from the iPhone release build.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="lth-shell features" aria-labelledby="features-title">
+      <div class="features-intro">
+        <h2 id="features-title">A small railway with big decisions.</h2>
+        <p>Every board gives you a limited supply of pieces. Where you lay them decides whether both trains get home.</p>
+      </div>
+      <div class="feature-list">
+        <article><span class="feature-num" aria-hidden="true">15</span><div><h3>Handcrafted puzzles</h3><p>Plan routes for two trains through fifteen journeys across the Countryside Mail line.</p></div></article>
+        <article><span class="feature-num" aria-hidden="true">★</span><div><h3>Optional goals</h3><p>Aim for Economy, Express and Balanced bonuses, or simply get everyone home.</p></div></article>
+        <article><span class="feature-num" aria-hidden="true">↻</span><div><h3>Replay for a better line</h3><p>Return to any level to find a route you like more.</p></div></article>
+        <article><span class="feature-num" aria-hidden="true">✈</span><div><h3>Plays offline</h3><p>No account and no ads. Progress and sound settings stay on your device.</p></div></article>
+      </div>
+    </section>
+
+    <section class="screenshot-showcase" id="screens" aria-labelledby="screens-title">
+      <div class="lth-shell">
+        <div class="showcase-intro">
+          <p class="showcase-kicker">Inside Last Train Home</p>
+          <h2 id="screens-title">Lay it. Run it. Improve it.</h2>
+          <p>Build a line, send the trains, then tweak your route until the journey feels just right.</p>
+        </div>
+        <p class="gallery-scroll-hint" id="gallery-scroll-hint"><span class="scroll-track" aria-hidden="true"><span></span></span>Swipe or use arrow keys to see all four screens.</p>
+        <div class="screenshot-strip" role="list" aria-label="Last Train Home screens" aria-describedby="gallery-scroll-hint" tabindex="0">
+          {screens.map((s) => (
+            <figure role="listitem">
+              <img src={s.src} alt={s.alt} width="736" height="1600" loading="lazy" decoding="async" />
+              <figcaption><strong>{s.title}</strong><span>{s.caption}</span></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="ticket-section">
+      <div class="lth-shell ticket-inner">
+        <div class="ticket-copy">
+          <p class="showcase-kicker">Fair fare</p>
+          <h2>The first five journeys are free.</h2>
+          <p>Levels 1–5 are free to play. A one-time Full Game Ticket unlocks Levels 6–15, with no subscriptions. You can restore a previous purchase in Settings.</p>
+        </div>
+        <div class="ticket" aria-hidden="true">
+          <span class="ticket-label">Full Game Ticket</span>
+          <span class="ticket-route">Levels 6 → 15</span>
+          <span class="ticket-stub">One-time · Admit one</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="lth-shell trust" aria-labelledby="trust-title">
+      <div>
+        <h2 id="trust-title">Made by Pluto Night Labs.</h2>
+        <p>Last Train Home is made by {site.legalName}, an independent UK software and games studio.</p>
+      </div>
+      <div class="trust-links">
+        <a href={`mailto:${site.supportEmail}`}>Support: {site.supportEmail}</a>
+        <a href="/last-train-home/privacy/">Last Train Home Privacy Policy <span aria-hidden="true">→</span></a>
+        <a href="/games/">More games from the studio <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .lth-page {
+    --lth-forest:#2f5d46; --lth-forest-strong:#244a37; --lth-brass:#b8862f; --lth-brass-ink:#7a571a; --lth-red:#a8352a;
+    --lth-cream:#f3eddb; --lth-paper:#fbf8ef; --lth-raised:#e9e1c9; --lth-ink:#1f2a22; --lth-muted:#57615a; --lth-line:#d8cfb6;
+    --lth-shadow:0 18px 45px rgb(31 42 34 / 14%);
+    color:var(--lth-ink); background:var(--lth-cream);
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  .lth-page ::selection { color:#fff; background:var(--lth-forest); }
+  .lth-page h1, .lth-page h2, .lth-page h3 { font-family:Georgia, "Iowan Old Style", "Times New Roman", serif; text-wrap:balance; }
+  .lth-page p { text-wrap:pretty; }
+  .lth-page :focus-visible { outline:3px solid var(--lth-brass); outline-offset:3px; }
+  .lth-shell { width:min(calc(100% - 40px), 1120px); margin-inline:auto; }
+  .hero { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(270px,.68fr); align-items:center; gap:clamp(2.5rem,6vw,5.5rem); min-height:680px; padding-block:clamp(48px,5.5vw,76px); }
+  .app-id { display:flex; align-items:center; gap:.9rem; }
+  .app-icon { width:64px; height:64px; border-radius:15px; box-shadow:0 6px 16px rgb(31 42 34 / 22%); }
+  .app-id p { display:grid; margin:0; line-height:1.3; }
+  .app-id strong { font-size:1.05rem; }
+  .app-id span { color:var(--lth-muted); font-size:.84rem; font-weight:650; }
+  h1 { max-width:760px; margin:1.6rem 0 1.35rem; font-size:clamp(2.8rem,6.2vw,5.6rem); font-weight:700; line-height:.98; letter-spacing:-.035em; }
+  h1 em { color:var(--lth-forest); font-weight:400; }
+  .hero-lead { max-width:640px; margin:0; color:var(--lth-muted); font-size:clamp(1.06rem,1.7vw,1.22rem); line-height:1.7; }
+  .hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.15rem; margin-top:1.7rem; }
+  .availability-status { display:inline-flex; align-items:center; gap:.55rem; min-height:44px; margin:0; color:var(--lth-muted); font-size:.86rem; font-weight:760; }
+  .availability-dot { width:8px; height:8px; flex:0 0 auto; border-radius:50%; background:var(--lth-brass); box-shadow:0 0 0 4px color-mix(in srgb,var(--lth-brass) 18%,transparent); }
+  .lth-button { display:inline-flex; align-items:center; justify-content:center; gap:.4rem; min-height:50px; padding:0 21px; border:1px solid var(--lth-forest); border-radius:12px; color:var(--lth-forest); font-size:.92rem; font-weight:760; }
+  .lth-button:hover { color:#fff; background:var(--lth-forest); }
+  .app-preview { position:relative; min-width:0; padding:.5rem; }
+  .preview-glow { position:absolute; inset:8% 0 16%; border-radius:48% 52% 42% 58%; background:color-mix(in srgb,var(--lth-forest) 22%,transparent); filter:blur(34px); opacity:.6; }
+  figure { position:relative; margin:0; }
+  .phone-frame { position:relative; width:min(100%,292px); margin-inline:auto; padding:10px; border:1px solid color-mix(in srgb,var(--lth-line) 70%,var(--lth-ink)); border-radius:34px; background:var(--lth-paper); box-shadow:var(--lth-shadow); }
+  .phone-frame img { display:block; width:100%; height:auto; border-radius:27px; }
+  figcaption { max-width:320px; margin:.75rem auto 0; color:var(--lth-muted); font-size:.76rem; line-height:1.5; text-align:center; }
+  .features { display:grid; grid-template-columns:minmax(250px,.65fr) minmax(0,1.35fr); gap:clamp(2rem,7vw,7rem); padding-block:clamp(70px,9vw,120px); border-top:1px solid var(--lth-line); }
+  .features-intro { position:sticky; top:120px; align-self:start; }
+  .features h2, .showcase-intro h2, .ticket-copy h2, .trust h2 { margin:0; font-size:clamp(2.2rem,4.2vw,4.2rem); line-height:1; letter-spacing:-.03em; }
+  .features-intro p { color:var(--lth-muted); line-height:1.7; }
+  .feature-list { border-top:1px solid var(--lth-line); }
+  .feature-list article { display:grid; grid-template-columns:52px minmax(0,1fr); gap:1.3rem; padding:1.8rem 0; border-bottom:1px solid var(--lth-line); }
+  .feature-num { display:grid; place-items:center; width:52px; height:52px; border-radius:13px; color:var(--lth-forest); background:color-mix(in srgb,var(--lth-forest) 12%,var(--lth-paper)); font:700 1.15rem Georgia, serif; }
+  .feature-list h3 { margin:0 0 .5rem; font-size:clamp(1.3rem,2vw,1.6rem); }
+  .feature-list p { max-width:600px; margin:0; color:var(--lth-muted); line-height:1.68; }
+  .screenshot-showcase { padding-block:clamp(70px,9vw,116px); border-top:1px solid var(--lth-line); background:var(--lth-paper); scroll-margin-top:80px; }
+  .showcase-intro { display:grid; grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr); column-gap:clamp(2rem,7vw,7rem); align-items:end; margin-bottom:clamp(2rem,5vw,3.75rem); }
+  .showcase-kicker { margin:0 0 .65rem; color:var(--lth-brass-ink); font-size:.78rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+  .showcase-intro .showcase-kicker, .showcase-intro h2 { grid-column:1; }
+  .showcase-intro > p:last-child { grid-column:2; grid-row:1 / span 2; max-width:530px; margin:0; color:var(--lth-muted); line-height:1.72; }
+  .gallery-scroll-hint { display:none; }
+  .screenshot-strip { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(.85rem,2vw,1.35rem); }
+  .screenshot-strip:focus-visible { border-radius:12px; outline-offset:8px; }
+  .screenshot-strip figure { min-width:0; }
+  .screenshot-strip img { display:block; width:100%; height:auto; border:1px solid var(--lth-line); border-radius:clamp(16px,2.2vw,24px); box-shadow:0 16px 38px rgb(31 42 34 / 11%); }
+  .screenshot-strip figcaption { display:grid; gap:.12rem; margin:.85rem .15rem 0; text-align:left; }
+  .screenshot-strip figcaption strong { color:var(--lth-ink); font-size:.86rem; }
+  .ticket-section { color:#f4efe0; background:var(--lth-forest-strong); }
+  .ticket-inner { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(260px,.7fr); align-items:center; gap:clamp(2rem,7vw,7rem); min-height:440px; padding-block:clamp(65px,9vw,105px); }
+  .ticket-copy .showcase-kicker { color:#e6c47f; }
+  .ticket-copy p:last-child { max-width:620px; color:#dbe6dd; font-size:1.04rem; line-height:1.75; }
+  .ticket { display:grid; gap:.6rem; justify-self:center; width:min(100%,300px); padding:1.6rem 1.7rem; border:2px dashed #c79a48; border-radius:14px; color:var(--lth-ink); background:var(--lth-cream); box-shadow:0 18px 40px rgb(0 0 0 / 28%); transform:rotate(-3deg); }
+  .ticket-label { color:var(--lth-red); font:800 .74rem ui-monospace, monospace; letter-spacing:.14em; text-transform:uppercase; }
+  .ticket-route { font:700 1.9rem Georgia, serif; }
+  .ticket-stub { padding-top:.6rem; border-top:1px dashed var(--lth-line); color:var(--lth-muted); font-size:.82rem; font-weight:700; }
+  .trust { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.8fr); gap:clamp(2rem,7vw,7rem); padding-block:clamp(70px,9vw,110px); }
+  .trust > div:first-child p { max-width:600px; color:var(--lth-muted); line-height:1.7; }
+  .trust-links { display:grid; align-self:end; padding:1.3rem 1.5rem; border-radius:16px; background:var(--lth-paper); box-shadow:0 8px 24px rgb(31 42 34 / 9%); }
+  .trust-links a { display:inline-flex; min-height:44px; align-items:center; color:var(--lth-forest); font-weight:760; text-decoration:underline; }
+  @media (max-width:820px) {
+    .hero, .features, .ticket-inner, .trust { grid-template-columns:1fr; }
+    .hero { min-height:0; padding-block:clamp(34px,7vw,58px); }
+    .app-preview { max-width:380px; margin-inline:auto; }
+    .features-intro { position:static; }
+    .showcase-intro { grid-template-columns:1fr; }
+    .showcase-intro > p:last-child { grid-column:1; grid-row:auto; margin-top:1rem; }
+    .gallery-scroll-hint { display:flex; align-items:center; gap:.7rem; margin:-.6rem 0 1.25rem; color:var(--lth-muted); font-size:.8rem; font-weight:700; }
+    .scroll-track { position:relative; width:38px; height:2px; flex:0 0 auto; overflow:hidden; border-radius:999px; background:var(--lth-line); }
+    .scroll-track span { display:block; width:17px; height:100%; border-radius:inherit; background:var(--lth-brass); }
+    .screenshot-strip { grid-template-columns:repeat(4,minmax(230px,72vw)); overflow-x:auto; margin-inline:-20px; padding:8px 20px 1.2rem; scroll-padding-inline:20px; scroll-snap-type:x mandatory; overscroll-behavior-inline:contain; }
+    .screenshot-strip figure { scroll-snap-align:start; }
+    .trust-links { align-self:start; }
+  }
+  @media (max-width:560px) {
+    .hero { padding-top:24px; padding-bottom:42px; }
+    h1 { margin:1rem 0 .8rem; font-size:clamp(2.2rem,11vw,2.7rem); }
+    .hero-actions { display:grid; gap:.65rem; }
+    .lth-button { width:100%; }
+    .phone-frame { max-width:278px; padding:9px; border-radius:31px; }
+    .phone-frame img { border-radius:23px; }
+    .feature-list article { grid-template-columns:44px minmax(0,1fr); gap:1rem; }
+    .feature-num { width:44px; height:44px; }
+    .screenshot-strip { grid-template-columns:repeat(4,minmax(238px,78vw)); margin-inline:-14px; padding-inline:14px; }
+  }
+  @media (prefers-reduced-motion:reduce) { .ticket { transform:none; } }
+</style>

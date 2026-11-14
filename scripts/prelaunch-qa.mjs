@@ -62,7 +62,7 @@ await inspect({ name: 'privacy-desktop-1440x900', route: '/privacy/', viewport: 
 
 const linkContext = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const linkPage = await linkContext.newPage();
-const siteRoutes = ['/', '/about/', '/software/', '/games/', '/products/', '/shelfpick/', '/usagegrid/', '/lab/', '/playtests/join/', '/contact/', '/privacy/', '/team/', '/microgames/'];
+const siteRoutes = ['/', '/about/', '/software/', '/games/', '/products/', '/shelfpick/', '/usagegrid/', '/last-train-home/', '/lab/', '/playtests/join/', '/contact/', '/privacy/', '/team/', '/microgames/'];
 for (const route of siteRoutes) {
   await linkPage.goto(`${baseURL}${route}`, { waitUntil: 'networkidle' });
   const hrefs = await linkPage.locator('a[href]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href')).filter(Boolean))]);
@@ -218,9 +218,10 @@ if (!headline?.includes('Useful apps.') || !headline?.includes('Strange games.')
 const featured = await linkPage.locator('#featured .product-card').count();
 if (featured !== 3) failures.push(`/: expected 3 featured projects, found ${featured}`);
 if (await linkPage.locator('#featured .devpip-card').count()) failures.push('/: DevPip should not be a featured homepage product');
-if (!await linkPage.locator('#featured .effects-card').count()) failures.push('/: missing Personal Effects featured card');
-if (!await linkPage.locator('#featured .effects-card .shot-print img[src="/images/games/personal-effects/featured.webp"]').count()) {
-  failures.push('/: Personal Effects must use approved gameplay screenshot');
+if (!await linkPage.locator('#featured .lth-card').count()) failures.push('/: missing Last Train Home featured card');
+if (await linkPage.locator('#featured .lth-card a[href="/last-train-home/"]').count() !== 1) failures.push('/: Last Train Home card must link to /last-train-home/');
+if (await linkPage.locator('#featured .lth-card img[src^="/images/last-train-home/screenshots/"]').count() !== 2) {
+  failures.push('/: Last Train Home card must use two real game screenshots');
 }
 if (!await linkPage.locator('#games .game-row img[src="/images/games/night-parcel-office/featured.webp"]').count()) failures.push('/: missing Night Parcel Office homepage screenshot');
 if (!await linkPage.locator('#games .game-row img[src="/lab/gladiator-mayhem.svg"]').count()) failures.push('/: missing Gladiator Mayhem homepage artwork');
@@ -279,7 +280,7 @@ if (aboutIdCount !== 1) failures.push(`/: expected one id="about", found ${about
 for (const width of [320, 390]) {
   await linkPage.setViewportSize({ width, height: 844 });
   await linkPage.goto(baseURL, { waitUntil: 'networkidle' });
-  for (const selector of ['.shelfpick-card', '.usage-card', '.effects-card']) {
+  for (const selector of ['.shelfpick-card', '.usage-card', '.lth-card']) {
     const metrics = await linkPage.locator(selector).evaluate(card => {
       const visual = card.querySelector('.project-art');
       const copy = card.querySelector('.product-content');

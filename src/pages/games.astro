@@ -3,12 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const featured = [
   {
-    name: 'Personal Effects',
-    status: 'Play now',
-    description: "Pack a stranger's final belongings into one suitcase while obeying the requests they left behind.",
-    image: '/images/games/personal-effects/featured.webp',
-    alt: "Personal Effects gameplay showing a suitcase packed with the Magician's belongings",
-    href: 'https://personal-effects.pages.dev/',
+    name: 'Last Train Home',
+    status: 'Coming soon to iPhone',
+    description: 'Lay track across a miniature countryside and guide two toy mail trains home through 15 handcrafted railway puzzles.',
+    image: '/images/last-train-home/featured.webp',
+    alt: 'Three Last Train Home screens: laying track in Level 1, a completed two-train delivery and the Level 5 junction puzzle',
+    href: '/last-train-home/',
+    linkLabel: 'Discover Last Train Home',
   },
   {
     name: 'Gladiator Mayhem',
@@ -43,7 +44,11 @@ const playable = [
       {featured.map((game) => (
         <article class="featured-card">
           <div class="game-art"><img src={game.image} alt={game.alt} width="800" height="500" loading="lazy" decoding="async" />{game.concept && <span class="art-label">Concept illustration</span>}</div>
-          <div class="game-copy"><span class="status">{game.status}</span><h3>{game.name}</h3><p>{game.description}</p><a href={game.href} target="_blank" rel="noopener noreferrer">Play {game.name} <span aria-hidden="true">↗</span></a></div>
+          <div class="game-copy"><span class="status">{game.status}</span><h3>{game.name}</h3><p>{game.description}</p>{game.linkLabel ? (
+            <a href={game.href}>{game.linkLabel} <span aria-hidden="true">→</span></a>
+          ) : (
+            <a href={game.href} target="_blank" rel="noopener noreferrer">Play {game.name} <span aria-hidden="true">↗</span></a>
+          )}</div>
         </article>
       ))}
     </div>
