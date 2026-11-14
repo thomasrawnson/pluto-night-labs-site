@@ -223,9 +223,9 @@ if (await linkPage.locator('#featured .lth-card a[href="/last-train-home/"]').co
 if (await linkPage.locator('#featured .lth-card img[src^="/images/last-train-home/screenshots/"]').count() !== 2) {
   failures.push('/: Last Train Home card must use two real game screenshots');
 }
-if (!await linkPage.locator('#games .game-row img[src="/images/games/night-parcel-office/featured.webp"]').count()) failures.push('/: missing Night Parcel Office homepage screenshot');
-if (!await linkPage.locator('#games .game-row img[src="/lab/gladiator-mayhem.svg"]').count()) failures.push('/: missing Gladiator Mayhem homepage artwork');
-if (!await linkPage.locator('#games .game-row .word-tiles').count()) failures.push('/: missing Word Lab homepage artwork');
+for (const slug of ['night-parcel-office', 'gladiator-mayhem', 'word-lab']) {
+  if (!await linkPage.locator(`#games .game-row img[src="/images/games/${slug}/thumb.webp"]`).count()) failures.push(`/: missing ${slug} homepage gameplay thumbnail`);
+}
 if (!await linkPage.locator('.site-header .brand').count()) failures.push('/: studio brand missing from navigation');
 if (await linkPage.locator('.telemetry').count()) failures.push('/: redundant status strip remains on homepage');
 

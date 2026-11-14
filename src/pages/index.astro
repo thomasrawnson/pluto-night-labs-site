@@ -32,7 +32,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   </section>
 
   <section class="featured shell" id="featured" aria-labelledby="featured-title">
-    <div class="section-head"><p class="section-label" id="featured-title">FEATURED PROJECTS</p><span class="section-rule"></span><span class="section-count">THREE CURRENT PROJECTS</span></div>
+    <div class="section-head"><p class="section-label" id="featured-title">FEATURED PROJECTS</p><span class="section-rule"></span></div>
     <div class="product-grid">
       <article class="product-card shelfpick-card">
         <div class="project-art shelfpick-art" aria-hidden="true">
@@ -40,7 +40,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
           <img class="product-shot shelfpick-shot-secondary" src="/images/shelfpick/screenshots/discover.png" alt="" width="736" height="1600" loading="lazy" decoding="async" />
         </div>
         <div class="product-content">
-          <div><h2>ShelfPick</h2><p>Discover your next<br />favourite game.</p><span class="project-kind"><i></i> IN PROGRESS · APP</span></div>
+          <div><h2>ShelfPick</h2><p>Discover your next<br />favourite game.</p><span class="project-kind soon-kind"><i></i> IN PROGRESS · APP</span></div>
           <a class="round-link" href="/shelfpick/" aria-label="See ShelfPick features">Details <span aria-hidden="true">→</span></a>
         </div>
       </article>
@@ -60,7 +60,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
           <img class="product-shot lth-shot-secondary" src="/images/last-train-home/screenshots/level-5.webp" alt="" width="736" height="1600" loading="lazy" decoding="async" />
         </div>
         <div class="product-content">
-          <div><h2>Last Train Home</h2><p>Lay the line.<br />Bring two trains home.</p><span class="project-kind game-kind"><i></i> COMING SOON · iPHONE GAME</span></div>
+          <div><h2>Last Train Home</h2><p>Lay the line.<br />Bring two trains home.</p><span class="project-kind soon-kind"><i></i> COMING SOON · iPHONE GAME</span></div>
           <a class="round-link" href="/last-train-home/" aria-label="See Last Train Home details">Details <span aria-hidden="true">→</span></a>
         </div>
       </article>
@@ -68,19 +68,19 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   </section>
 
   <section class="games shell" id="games" aria-labelledby="games-title">
-    <div class="section-head"><p class="section-label" id="games-title">PLAYABLE EXPERIMENTS</p><span class="section-rule"></span><a class="all-games" href="/lab/">ALL EXPERIMENTS ↗</a></div>
+    <div class="section-head"><p class="section-label" id="games-title">PLAYABLE EXPERIMENTS</p><span class="section-rule"></span><a class="all-games" href="/lab/">Browse the Lab <span aria-hidden="true">→</span></a></div>
     <div class="game-grid">
       <a class="game-row" href="https://night-parcel-office.pages.dev/" target="_blank" rel="noopener noreferrer">
-        <span class="game-art effects-art" aria-hidden="true"><img src="/images/games/night-parcel-office/featured.webp" data-fallback="/lab/night-parcel-office.png" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
-        <span class="game-copy"><strong>Night Parcel Office</strong><small>Sort the suspicious parcels.</small></span><span class="game-arrow">↗</span>
+        <span class="game-art" aria-hidden="true"><img src="/images/games/night-parcel-office/thumb.webp" alt="" width="256" height="256" loading="lazy" decoding="async" /></span>
+        <span class="game-copy"><strong>Night Parcel Office</strong><small>Sort the suspicious parcels.</small></span><span class="play-pill">Play <span aria-hidden="true">↗</span></span>
       </a>
       <a class="game-row" href="https://gladiator-mayhem.pages.dev" target="_blank" rel="noopener noreferrer">
-        <span class="game-art gladiator-art" aria-hidden="true"><img src="/lab/gladiator-mayhem.svg" alt="" width="800" height="500" loading="lazy" decoding="async" /></span>
-        <span class="game-copy"><strong>Gladiator Mayhem</strong><small>Plan three moves. Watch the chaos.</small></span><span class="game-arrow">↗</span>
+        <span class="game-art" aria-hidden="true"><img src="/images/games/gladiator-mayhem/thumb.webp" alt="" width="256" height="256" loading="lazy" decoding="async" /></span>
+        <span class="game-copy"><strong>Gladiator Mayhem</strong><small>Plan three moves. Watch the chaos.</small></span><span class="play-pill">Play <span aria-hidden="true">↗</span></span>
       </a>
       <a class="game-row" href="https://word-lab-cl1.pages.dev/" target="_blank" rel="noopener noreferrer">
-        <span class="game-art word-art" aria-hidden="true"><span class="word-tiles"><i>W</i><i>O</i><i>R</i><i>D</i></span></span>
-        <span class="game-copy"><strong>Word Lab</strong><small>Three cosy daily word games.</small></span><span class="game-arrow">↗</span>
+        <span class="game-art" aria-hidden="true"><img src="/images/games/word-lab/thumb.webp" alt="" width="256" height="256" loading="lazy" decoding="async" /></span>
+        <span class="game-copy"><strong>Word Lab</strong><small>Three cosy daily word games.</small></span><span class="play-pill">Play <span aria-hidden="true">↗</span></span>
       </a>
     </div>
     <a class="join-link" href="#about">Playtest invitations are in the newsletter →</a>
@@ -128,7 +128,7 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .eyebrow,.section-label,.section-count,.all-games,.telemetry,.scope-hint,.scope-readout,.project-kind { font-family: ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.12em; }
   .eyebrow { margin:0 0 22px; font-size:.7rem; font-weight:700; }
   h1 { margin:0; font-size:clamp(2.7rem,4.8vw,5rem); line-height:1.04; letter-spacing:-.058em; font-weight:780; }
-  h1 em { color:#fa8961; font-style:normal; white-space:nowrap; }
+  h1 em { color:#dcc4b1; font-style:normal; white-space:nowrap; }
   .intro { max-width:380px; color:#c0c2c6; font-size:1.02rem; line-height:1.65; margin:22px 0 0; }
   .hero-actions { display:flex; flex-wrap:wrap; gap:13px; margin-top:28px; }
   .button { min-height:46px; border-radius:7px; font-size:.83rem; }
@@ -166,13 +166,13 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .section-label::before { content:''; display:inline-block; width:19px; height:2px; margin:0 13px 3px 0; background:#ff8c61; }
   .section-rule { height:1px; background:rgba(255,255,255,.13); flex:1; }
   .section-count,.all-games { font-size:.66rem; color:#a6a8aa; }
-  .all-games:hover { color:#ff9871; }
+  .all-games { text-transform:none; letter-spacing:.04em; }.all-games:hover { color:#ff9871; }
   .product-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
   .product-card { position:relative; min-width:0; display:flex; flex-direction:column; border:1px solid rgba(255,255,255,.17); border-radius:6px; overflow:hidden; background:#0a1014; transition:border-color .15s ease; }
   .round-link::after { content:''; position:absolute; inset:0; }
   .product-card:focus-within { border-color:#ff9169; }
   .product-card:hover { border-color:rgba(255,153,109,.55); }
-  .project-art { position:relative; display:grid; place-items:center; height:178px; overflow:hidden; background:#10171b; border-bottom:1px solid rgba(255,255,255,.09); }
+  .project-art { position:relative; display:grid; place-items:center; height:260px; overflow:hidden; background:#10171b; border-bottom:1px solid rgba(255,255,255,.09); }
   .shelfpick-art { display:flex; justify-content:center; align-items:center; background:radial-gradient(ellipse at 52% 76%,#4d3931,#181b1c 74%); gap:16px; padding:15px; }
   .product-shot { display:block; min-width:0; width:auto; height:100%; max-width:none; object-fit:contain; filter:drop-shadow(5px 7px 6px #0009); }
   .shelfpick-shot-secondary { transform:translateY(12px) rotate(3deg); }
@@ -190,26 +190,25 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .product-content h2 { margin:0 0 6px; font-size:1.25rem; letter-spacing:-.03em; }
   .product-content p { margin:0; color:#b6b8bb; font-size:.85rem; line-height:1.55; }
   .project-kind { display:flex; align-items:center; gap:9px; margin-top:13px; color:#75e08b; font-size:.64rem; }
-  .project-kind i { width:7px; height:7px; border-radius:50%; background:currentColor; }.game-kind { color:#ff9267; }
+  .project-kind i { width:7px; height:7px; border-radius:50%; background:currentColor; }.soon-kind { color:#f1c063; }
   .round-link { flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:44px; padding:0 10px; border:1px solid #828386; border-radius:22px; font-size:.72rem; font-weight:700; white-space:nowrap; }
   .round-link span { font-size:1rem; }
-  .game-arrow { flex-shrink:0; display:grid; place-items:center; width:37px; height:37px; border:1px solid #828386; border-radius:50%; font-size:1.25rem; }
   .round-link:hover { background:#ff986f; color:#111; border-color:#ff986f; }
   .games { padding-bottom:25px; }
   .game-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:23px; }
   .game-row { display:flex; align-items:center; min-width:0; gap:13px; padding-block:5px; }
   .game-row:hover strong { color:#ffa681; }
   .game-art { width:85px; height:85px; flex:0 0 85px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.15); border-radius:6px; font-family:Georgia,serif; }
-  .effects-art { background:#302922; color:#e1bc91; font-size:1.5rem; font-weight:bold; }.effects-art small { display:block; margin-top:-31px; font:700 .39rem ui-monospace,monospace; }
   .anomaly-art { background:#122821; }.specimen { width:39px; height:50px; display:grid; place-items:center; border:2px solid #4bbd86; border-radius:12px; color:#8de5ad; font-size:2rem; background:#175339; box-shadow:0 0 13px #237d4d77; }
   .ghoul-art { background:#302118; }.ghoul-art span { padding:8px 6px; border:2px solid #bd9467; transform:rotate(-12deg); color:#e9bc83; font:800 .8rem ui-monospace,monospace; }
   .game-copy { flex:1; min-width:0; }.game-copy strong { display:block; font-size:.85rem; }.game-copy small { display:block; margin-top:8px; color:#a9adb0; font-size:.77rem; }
-  .game-arrow { width:29px; height:29px; font-size:1rem; }
+  .play-pill { flex-shrink:0; display:inline-flex; align-items:center; gap:5px; min-height:34px; padding:0 12px; border:1px solid #828386; border-radius:17px; font-size:.72rem; font-weight:700; white-space:nowrap; }
+  .game-row:hover .play-pill { background:#ff986f; color:#111; border-color:#ff986f; }
   .join-link { display:inline-flex; align-items:center; min-height:44px; margin:14px 0 0; color:#ffd0b5; font-weight:750; font-size:.9rem; text-decoration:underline; text-underline-offset:5px; }
   .join-link:hover { color:#fff0e7; }
-  @media(max-width:920px) { .hero-grid { grid-template-columns:1fr; }.orbit-scene { max-width:450px; }.product-grid { gap:12px; }.game-grid { grid-template-columns:1fr; gap:12px; }.product-content { padding:15px; }.project-art { height:155px; }.product-content h2 { font-size:1.1rem; } }
+  @media(max-width:920px) { .hero-grid { grid-template-columns:1fr; }.orbit-scene { max-width:450px; }.product-grid { gap:12px; }.game-grid { grid-template-columns:1fr; gap:12px; }.product-content { padding:15px; }.project-art { height:220px; }.product-content h2 { font-size:1.1rem; } }
   @media(max-width:660px) { .hero { padding-top:46px; }.hero-grid { gap:3px; }.hero h1 { font-size:clamp(2.5rem,9vw,3.8rem); }.hero h1 em { white-space:normal; }.orbit-scene { max-width:360px; }.telemetry { font-size:.57rem; }.telemetry-center { display:none; }.telemetry-right { width:100%; }.product-grid { grid-template-columns:1fr; }.product-card { display:grid; grid-template-columns:115px minmax(0,1fr); }.project-art { height:100%; min-height:142px; border:0; border-right:1px solid #ffffff18; }.shelfpick-art { gap:7px; padding:9px; }.usage-art { gap:5px; padding:8px; }.usage-shot-secondary { max-width:42%; }.parcel-box { transform:scale(.77) rotate(-2deg); width:110%; min-width:125px; }.product-content { min-height:145px; }.section-head { gap:8px; }.section-label { font-size:.65rem; }.game-row { border-bottom:1px solid #ffffff12; }.other-games { align-items:start; }.other-games span { width:100%; } }
-  @media(max-width:360px) { .product-card { grid-template-columns:100px minmax(0,1fr); }.product-content { padding:12px; }.product-content p { font-size:.78rem; }.hero-actions .button { font-size:.75rem; padding-inline:14px; }.game-art { width:66px; height:66px; flex-basis:66px; }.game-arrow { display:none; } }
+  @media(max-width:360px) { .product-card { grid-template-columns:100px minmax(0,1fr); }.product-content { padding:12px; }.product-content p { font-size:.78rem; }.hero-actions .button { font-size:.75rem; padding-inline:14px; }.game-art { width:66px; height:66px; flex-basis:66px; }.play-pill { padding:0 9px; } }
   @media(prefers-reduced-motion:reduce){ .moon,.pluto { transition:none; transform:none; } }
   @media(max-width:660px) { .project-kind { font-size:.58rem; letter-spacing:.07em; } }
   .telemetry { color:#b4edbf; }
@@ -252,9 +251,6 @@ import NewsletterSignup from '../components/NewsletterSignup.astro';
   .product-card:hover { transform:translateY(-2px) rotate(-.25deg); }
   .section-label,.all-games { font-size:.76rem; color:#c5c9c7; }
   .section-count,.scope-readout,.scope-hint { font-size:.7rem; color:#bfc5c1; }
-  .word-art { background:radial-gradient(circle at 50% 48%,#56452f,#201d19 72%) !important; }
-  .word-tiles { display:grid;grid-template-columns:repeat(2,24px);gap:4px;transform:rotate(-3deg); }
-  .word-tiles i { display:grid;place-items:center;aspect-ratio:1;border:1px solid #7d6444;border-radius:2px;background:#d7b879;color:#251f18;font:800 .78rem ui-monospace,monospace;font-style:normal;box-shadow:2px 2px 0 #0a0b0c; }
   .game-copy small { font-size:.82rem; color:#c0c6c3; }
   @media(max-width:660px) {
     .hero-copy h1 { letter-spacing:-.03em; }
