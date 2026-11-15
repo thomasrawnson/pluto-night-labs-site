@@ -44,3 +44,16 @@ Owner replies exactly: **`Deploy Ripple Links pages: push feat/ripple-links-app-
 
 **Cost:** none. **Exclusions:** no other site changes, no DNS, no Cloudflare project changes, no deletion of old deployments.
 **Rollback:** only with separate rollback approval, to the previous version ID recorded in step 4 (CF-002 §7).
+
+## Release record (15 Nov 2026) — owner approval `Deploy Ripple Links pages: push feat/ripple-links-app-store-pages to main and wrangler deploy`
+| Step | Result |
+|---|---|
+| 1 Freshness | `origin/main` `a64f2fa` (unchanged); branch head `f5286ac`; tree clean; fast-forward |
+| 2 Git pushed | `a64f2fa..f5286ac` to `origin/main`, no force |
+| 3 Clean rebuild | Fresh detached worktree at `f5286ac`; dependencies unchanged since `a64f2fa`; `npm run build` 0 errors, 0 warnings, 0 hints, 21 pages |
+| 4 Race check | Remote `main` = build `f5286ac`. Live version before: `dde97712-98cc-4d47-aff4-400a419cf2be` (deployed 2026-11-14 20:08 UTC; nothing newer). Live `/`, `/last-train-home/privacy/` and `/shelfpick/privacy/` byte-identical to the build |
+| 5 Cloudflare deployed | 20:53:22 UTC, `npx wrangler deploy`. Worker `pluto-night-labs-site`; 3 assets changed (`/sitemap-0.xml`, `/ripple-links/privacy/index.html`, `/ripple-links/support/index.html`), 90 unchanged. **Version `5a78e87c-2d12-432b-a102-f97f32810c59`** |
+| 6 Live verified | 20:53:53 UTC on https://plutonightlabs.com: **all 24 routes HTTP 200 and byte-identical to the build**, including the preserved legal pages `/privacy/`, `/last-train-home/privacy/`, `/shelfpick/privacy/`, `/shelfpick/terms/` and `/shelfpick/support/`; `robots.txt` and `sitemap-0.xml` identical. `/ripple-links/privacy/` shows "Last updated: 15 November 2026" and "non-personalised ads only"; `/ripple-links/support/` is live and links to `/ripple-links/privacy/` |
+
+**Rollback (separate approval only):** previous version `dde97712-98cc-4d47-aff4-400a419cf2be`.
+This record is committed on the release branch after the deploy. It reaches `main` only with a further docs-only push.
