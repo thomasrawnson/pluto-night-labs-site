@@ -23,7 +23,7 @@
 | Not served anywhere yet | `/app-ads.txt` (AdMob may ask for it later; separate change) |
 
 ## Approval bundle (one phrase covers steps 1–6, in order)
-Owner replies exactly: **`Deploy Ripple Links pages: push c50c3fd to main and wrangler deploy`**
+Owner replies exactly: **`Deploy Ripple Links pages: push feat/ripple-links-app-store-pages to main and wrangler deploy`**. The agent states the branch head SHA when asking, and step 1 refuses if the head has changed since.
 
 1. `git fetch origin`. **Stop** if `origin/main` is no longer `a64f2fa`: rebase, rebuild, rerun the checks and re-ask.
 2. Fast-forward push of the release branch to `origin/main` (no force).
