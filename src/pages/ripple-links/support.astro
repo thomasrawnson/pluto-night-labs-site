@@ -1,0 +1,64 @@
+---
+// Ported from the Ripple Links RIPPLE-REL-06A draft (site-drafts/ripple-links/support.html, 15 November 2026).
+// Deploy together with /ripple-links/privacy/, and not before Ripple Links REL-06 has verified non-personalised ads.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config';
+
+const supportMailto = `mailto:${site.supportEmail}?subject=${encodeURIComponent('Ripple Links support')}`;
+---
+
+<BaseLayout title="Ripple Links — Support" description="Help with playing Ripple Links, Remove Ads and Restore Purchases, sound and haptics, advertising privacy and your progress.">
+  <section class="support shell">
+    <p class="eyebrow">Ripple Links · Support</p>
+    <h1>Support</h1>
+    <p class="lede">Ripple Links is a calm puzzle about waking a pond. Thirty ponds, one tap at a time.</p>
+
+    <div class="support-copy">
+      <h2>How to play</h2>
+      <ol>
+        <li><strong>Tap a stone once to preview its wave.</strong> Pale trails and outlined flowers show what it will reach; a × marks flowers it will miss.</li>
+        <li><strong>Tap the same stone again to release the wave.</strong> Tap a different stone to change the preview.</li>
+        <li>Waves travel along the links for at most two steps. Small whirlpools pass a wave onward. Trails that cross without a whirlpool do not join; one passes under the other.</li>
+        <li>Flowers and other stones stop a wave. A link with a double-bar barrier is broken and carries nothing.</li>
+        <li><strong>Wake every flower within the waves you have.</strong> The count at the top shows how many are left.</li>
+      </ol>
+      <p><strong>Stuck?</strong> Tap <em>Undo</em> to take back your last wave, or <em>?</em> for a hint: first a flower to think about, then a stone to try. <em>Restart level</em> is in Settings. Restored ponds stay open on the map, so you can replay them any time.</p>
+
+      <h2>Remove Ads and Restore Purchases</h2>
+      <p>The free version shows an occasional ad between ponds. To remove them for good, open <em>Settings</em> (the gear button) and tap <em>Buy Remove Ads</em>. It is a one-off purchase through the App Store.</p>
+      <p><strong>New phone, or reinstalled the game?</strong> Open <em>Settings</em> and tap <em>Restore Purchases</em> while signed in to the same Apple ID you bought it with. Purchases are handled by Apple; if Restore does not find it, check that you are using the right Apple ID in the App Store, then try again with an internet connection.</p>
+
+      <h2>Sound and haptics</h2>
+      <ul>
+        <li>Open <em>Settings</em> → <em>Sound and touch</em>. <strong>Music</strong>, <strong>Sounds</strong> and <strong>Haptics</strong> each have their own switch.</li>
+        <li>The game respects your iPhone's silent switch, so it goes quiet when your phone is on silent. Your own music or podcasts keep playing underneath.</li>
+        <li>If you feel no haptics, check that iOS haptics are on in iPhone <em>Settings → Sounds &amp; Haptics</em>.</li>
+        <li>Prefer less movement? Turn on <em>Reduced motion</em> in the game's Settings, or <em>Reduce Motion</em> in iOS Accessibility settings.</li>
+      </ul>
+
+      <h2>Advertising privacy</h2>
+      <p>In the UK, EEA and Switzerland, you can change your advertising consent at any time: <em>Settings</em> → <em>Advertising privacy</em> → <em>Privacy choices</em>. See the <a href="/ripple-links/privacy/">privacy policy</a> for details.</p>
+
+      <h2>Your progress</h2>
+      <p>Progress is saved on your iPhone only; there is no account or cloud save. Deleting the app deletes your progress. Remove Ads can always be restored, but pond progress cannot.</p>
+
+      <h2>Contact</h2>
+      <p>Email <a href={supportMailto}>{site.supportEmail}</a>. It helps to include your iPhone model, iOS version and the pond number.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .support { min-height: 70vh; padding-block: 130px 150px; }
+  h1 { margin: 0; max-width: 880px; font-size: clamp(3rem, 7vw, 6.5rem); line-height: .98; letter-spacing: -.055em; }
+  .lede { max-width: 720px; margin: 30px 0 70px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.22rem); line-height: 1.65; }
+  .support-copy { max-width: 750px; padding-top: 46px; border-top: 1px solid var(--line); }
+  h2 { margin: 38px 0 12px; font-size: 1.25rem; line-height: 1.35; }
+  h2:first-child { margin-top: 0; }
+  .support-copy p, .support-copy li { color: var(--muted); line-height: 1.8; }
+  .support-copy ol, .support-copy ul { margin: 0 0 1em; padding-left: 1.4rem; }
+  .support-copy li + li { margin-top: 6px; }
+  .support-copy strong { color: var(--text); }
+  .support-copy a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  @media (max-width: 600px) { .support { padding-block: 105px 90px; } .lede { margin-bottom: 44px; } }
+</style>
