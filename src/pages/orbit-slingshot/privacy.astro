@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config';
+---
+
+<BaseLayout title="Orbit Slingshot — Privacy Policy" description="How Orbit Slingshot stores game progress and handles ads, purchases, Game Center, support messages and website visits.">
+  <section class="privacy shell">
+    <p class="eyebrow">Orbit Slingshot · Privacy</p>
+    <h1>Your orbit, your data.</h1>
+    <p class="lede">How Pluto Night Labs Ltd handles information relating to <em>Orbit Slingshot</em>.</p>
+    <div class="privacy-copy">
+      <h2>Who we are</h2>
+      <p>Pluto Night Labs Ltd (company number 17485329) is registered in England and Wales at 128 City Road, London EC1V 2NX, United Kingdom. We are responsible for personal information we handle when responding to enquiries about the game. For support or privacy questions, contact <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.</p>
+
+      <h2>Progress stored on your device</h2>
+      <p>The game stores your completed levels, stars, settings and whether you have removed ads on your device so you can resume play. We do not run accounts or servers for the game and do not receive this saved information. Removing the app normally removes its local data, although device backups may retain copies. The game is designed for a general audience and is not directed at children.</p>
+
+      <h2>Ads</h2>
+      <p>The free iPhone app shows occasional full-screen ads between levels, provided by Google AdMob. We request non-personalised ads and do not use the App Tracking Transparency prompt. Where the law requires it, Google's consent form is shown first. When an ad is requested, Google may collect technical information from your device, including a device identifier, approximate location, ad and interaction information, and crash and performance diagnostics. We do not link this information to you and we do not use it to track you across other companies' apps and websites. See <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from apps that use its services</a> and <a href="https://policies.google.com/privacy?hl=en-GB" target="_blank" rel="noopener noreferrer">Google's privacy policy</a>. The web version of the game contains no ads.</p>
+
+      <h2>Remove Ads purchase</h2>
+      <p>Apple processes the optional one-time Remove Ads purchase. The game uses StoreKit to check that you own it, including when you choose Restore purchase. We do not receive your payment details. Apple's handling of account and purchase information is described in <a href="https://www.apple.com/uk/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple's privacy policy</a>.</p>
+
+      <h2>Game Center</h2>
+      <p>If you are signed in to Game Center, the game sends your total star count and achievement progress to Apple's Game Center so they can appear on the leaderboard and in your achievements. Apple handles this information under its own terms and controls, and the leaderboard may show your Game Center name to other players. You can change your Game Center settings in iOS Settings. Apple's handling is described in <a href="https://www.apple.com/uk/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple's privacy policy</a>.</p>
+
+      <h2>Crash reports</h2>
+      <p>We may examine crash reports and aggregate analytics that Apple makes available through its developer tools when necessary to investigate faults and improve stability. These can contain technical details such as the app version, device and operating-system information, and diagnostic identifiers. We do not use them for advertising, marketing or player profiling.</p>
+
+      <h2>If you contact us</h2>
+      <p>If you email us, we receive your email address and the information you include. We use this to respond to and manage your enquiry, including reasonable follow-up. Please do not send payment-card details or sensitive information. We rely on legitimate interests in responding to enquiries and keeping a limited support record, and you can object by contacting us. We keep ordinary support correspondence for up to 12 months after the last relevant interaction, unless an active dispute or legal obligation requires longer.</p>
+      <p>Cloudflare Email Routing forwards incoming mail for our domain to a personal Google Gmail account. They may process support information outside the United Kingdom. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare's privacy policy</a> and <a href="https://policies.google.com/privacy?hl=en-GB" target="_blank" rel="noopener noreferrer">Google's privacy policy</a>.</p>
+
+      <h2>Website visits</h2>
+      <p>If you visit our website, Cloudflare delivers the page and may process technical request information, and we use Cloudflare Web Analytics for information about visits and site performance. The separate <a href="/privacy/">Pluto Night Labs website privacy notice</a> describes website processing and our optional newsletter. Playing the game does not subscribe you to the newsletter.</p>
+
+      <h2>Your rights</h2>
+      <p>For personal information we hold through support enquiries, you may ask us about access, correction, deletion, restriction and other rights that apply under UK data-protection law, and you may object to processing based on legitimate interests. Email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>. You may also complain to the <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener noreferrer">Information Commissioner's Office</a>. For information handled by Apple or Google, please use their account and privacy controls.</p>
+
+      <h2>Changes to this notice</h2>
+      <p>Effective from 16 November 2026. We will update this notice if the game's data handling changes.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .privacy { min-height: 70vh; padding-block: 130px 150px; }
+  h1 { margin: 0; max-width: 880px; font-size: clamp(3rem, 7vw, 6.5rem); line-height: .98; letter-spacing: -.055em; }
+  .lede { max-width: 720px; margin: 30px 0 70px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.22rem); line-height: 1.65; }
+  .privacy-copy { max-width: 750px; padding-top: 46px; border-top: 1px solid var(--line); }
+  h2 { margin: 38px 0 12px; font-size: 1.25rem; line-height: 1.35; }
+  h2:first-child { margin-top: 0; }
+  .privacy-copy p { color: var(--muted); line-height: 1.8; }
+  .privacy-copy a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  @media (max-width: 600px) { .privacy { padding-block: 105px 90px; } .lede { margin-bottom: 44px; } }
+</style>
