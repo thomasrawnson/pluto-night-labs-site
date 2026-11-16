@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!-- Provenance: copy of the owner's Claude artifact "Actby — Clickable Prototype" (https://claude.ai/artifact/QCkFew1jjdgZ7UNWwXKLSs), version 1794833743-83df, copied 2026-11-16.
+     Design reference only. NOT production code and NOT served by the site. All data is made up.
+     scripts/actby-concept-screens.mjs renders the website concept screens from a sanitised in-memory copy of this file
+     (real car model and calendar brand removed, example statistics hidden, local fonts). -->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actby — Clickable Prototype</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600;700&display=swap">
+<style id="st">
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#E9E4DB;font-family:Inter,system-ui,sans-serif;color:#1D1B18;display:flex;flex-direction:column;align-items:center;gap:16px;padding:24px 12px}
+.intro{max-width:390px;text-align:center;font-size:14px;color:#4A4540;line-height:1.45}
+.intro b{color:#1D1B18}
+.themes{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tbtn{font:600 13px Inter,system-ui,sans-serif;padding:10px 14px;border-radius:12px;border:1px solid #CFC9BF;background:#fff;color:#1D1B18;cursor:pointer;display:flex;align-items:center;gap:8px;min-height:44px}
+.tbtn.on{border:2px solid #1D1B18}
+.sw{width:14px;height:14px;border-radius:50%;display:inline-block}
+.phone{width:390px;max-width:100%;height:844px;background:#F5F1EA;border-radius:44px;border:10px solid #1D1B18;position:relative;overflow:hidden;box-shadow:0 30px 60px rgba(29,27,24,.18)}
+.scr{position:absolute;inset:0;overflow-y:auto;padding:48px 20px 110px;display:flex;flex-direction:column;gap:16px}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.muted{color:#6B655E}
+h1{margin:0;font-size:38px;line-height:1.05}
+.card{background:#fff;border:1px solid #E4DED4;border-radius:20px}
+button{font-family:inherit;color:inherit}
+.row{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;min-height:68px;padding:12px 16px;cursor:pointer}
+.row+.row{border-top:1px solid #EFEAE2}
+.row:focus-visible,.btn:focus-visible,.chip:focus-visible,.tab:focus-visible{outline:2px solid #2F5D4E;outline-offset:2px}
+.ic{width:40px;height:40px;border-radius:12px;background:#F1ECE3;display:flex;align-items:center;justify-content:center;flex:none}
+.dot{width:8px;height:8px;border-radius:50%;flex:none;display:inline-block}
+.av{border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:600;color:#fff;flex:none}
+.label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#6B655E}
+.chip{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-radius:14px;background:#fff;border:1px solid #E4DED4;font-size:14px;font-weight:500;cursor:pointer}
+.btn{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:16px;font-size:16px;font-weight:600;cursor:pointer;text-align:center}
+.ink{background:#1D1B18;color:#fff}
+.line{background:#fff;border:1px solid #DCD5CA}
+.sel{background:#E8F0EA;color:#2F5D4E;border:1.5px solid #2F5D4E}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:84px;background:rgba(245,241,234,.97);border-top:1px solid #E4DED4;display:flex;justify-content:space-around;align-items:flex-start;padding-top:8px;z-index:5}
+.tab{all:unset;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B655E;min-width:72px;min-height:44px;cursor:pointer}
+.tab.on{color:#2F5D4E}
+.add{all:unset;width:56px;height:56px;border-radius:18px;background:#2F5D4E;display:flex;align-items:center;justify-content:center;margin-top:-4px;box-shadow:0 8px 20px rgba(47,93,78,.3);cursor:pointer}
+.back{all:unset;display:flex;align-items:center;gap:4px;font-size:15px;min-height:44px;cursor:pointer}
+.overlay{position:absolute;inset:0;background:rgba(29,27,24,.35);z-index:10;display:flex;align-items:flex-end;animation:fade .2s}
+.sheet{width:100%;background:#F5F1EA;border-radius:28px 28px 0 0;padding:12px 20px 30px;display:flex;flex-direction:column;gap:16px;max-height:92%;overflow-y:auto;animation:up .25s ease-out}
+.grab{width:40px;height:5px;border-radius:3px;background:#D6CFC4;align-self:center}
+.toast{position:absolute;left:20px;right:20px;bottom:100px;background:#1D1B18;color:#fff;border-radius:16px;padding:14px 16px;font-size:14px;z-index:20;display:flex;gap:10px;align-items:center;animation:up .25s}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.scan{height:4px;border-radius:2px;background:#E4DED4;overflow:hidden}
+.scan i{display:block;height:100%;width:40%;background:#2F5D4E;animation:sc 1s linear infinite}
+@keyframes sc{from{transform:translateX(-100%)}to{transform:translateX(250%)}}
+.calgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
+.day{all:unset;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:46px;border-radius:14px;font-size:15px;cursor:pointer}
+.switch{width:48px;height:28px;border-radius:14px;background:#2F5D4E;position:relative;border:none;cursor:pointer;flex:none}
+.switch span{position:absolute;right:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}
+.switch.off{background:#CFC9BF}.switch.off span{right:23px}
+</style>
+</head>
+<body>
+<p class="intro"><b>Actby prototype.</b> Tap an item, mark it done, add something with <b>+</b>, try the calendar and household tabs. All data is made up.</p>
+<div class="themes" role="group" aria-label="Appearance">
+<button class="tbtn on" data-theme="paper"><span class="sw" style="background:#2F5D4E"></span>Light</button>
+<button class="tbtn" data-theme="midnight"><span class="sw" style="background:#E9C877;box-shadow:inset 0 0 0 4px #14161B"></span>Dark</button>
+</div>
+<div class="phone" id="phone" aria-live="polite"></div>
+<script>
+const TODAY = new Date(2026,10,16);
+const DAY = 864e5;
+const C = {red:'#C2412D', amb:'#C98A1B', ambText:'#8A5A0B', grn:'#4F8A63', moss:'#2F5D4E'};
+const PEOPLE = {A:{name:'Alex',col:'#2F5D4E'}, S:{name:'Sam',col:'#8A5A3C'}, B:{name:'Both',col:'#6B655E'}};
+const ICONS = {
+ car:'<path d="M5 17h14M6 17v2M18 17v2M4 13l2-5h12l2 5v4H4z"/>',
+ wifi:'<path d="M3 9a14 14 0 0 1 18 0M6 12.5a9 9 0 0 1 12 0M9 16a4 4 0 0 1 6 0"/><circle cx="12" cy="19" r=".8"/>',
+ wrench:'<path d="M14 6a4 4 0 0 0 5 5l-8 8a2 2 0 0 1-3-3l8-8a4 4 0 0 0-2-2z"/>',
+ home:'<path d="M4 11l8-6 8 6v8H4z"/><path d="M10 19v-5h4v5"/>',
+ tv:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M9 3l3 3 3-3"/>',
+ bolt:'<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>',
+ phone:'<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>',
+ passport:'<rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 16h6"/>',
+ flame:'<path d="M12 3c3 4 5 6 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/>',
+ bank:'<path d="M3 10l9-6 9 6M5 10v8M19 10v8M9 10v8M15 10v8M3 20h18"/>',
+ paw:'<circle cx="8" cy="8" r="1.6"/><circle cx="16" cy="8" r="1.6"/><circle cx="5" cy="13" r="1.6"/><circle cx="19" cy="13" r="1.6"/><path d="M12 12c3 0 5 4 4 6s-6 2-8 0 1-6 4-6z"/>',
+ council:'<path d="M4 20h16M6 20V10M18 20V10M10 20v-6h4v6M3 10l9-6 9 6z"/>',
+ shield:'<path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/>',
+ camera:'<path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+ plus:'<path d="M12 5v14M5 12h14"/>', cal:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+ people:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 14.5c2.5 0 6 1.3 6 4.5"/>',
+ list:'<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r=".9"/><circle cx="4.5" cy="12" r=".9"/><circle cx="4.5" cy="18" r=".9"/>',
+ back:'<path d="M15 5l-7 7 7 7"/>', chev:'<path d="M9 5l7 7-7 7"/>', check:'<path d="M5 12l5 5 9-10"/>',
+ spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/>',
+ lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+ bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+ close:'<path d="M6 6l12 12M18 6L6 18"/>', link:'<path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/>',
+ doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>'
+};
+const ic=(n,c='#1D1B18',s=20)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`;
+const av=(k,s=24)=>`<span class="av" style="background:${PEOPLE[k].col};width:${s}px;height:${s}px;font-size:${Math.round(s*.42)}px">${k==='B'?'2':k}</span>`;
+const d=(y,m,dd)=>new Date(y,m-1,dd);
+const fmt=(dt,o={weekday:'short',day:'numeric',month:'short'})=>dt.toLocaleDateString('en-GB',o);
+const days=dt=>Math.round((dt-TODAY)/DAY);
+const money=n=>'£'+n.toLocaleString('en-GB',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
+
+let items=[
+ {id:1,ic:'car',name:'Car insurance',prov:'Harbour Insurance',note:'Ford Fiesta',renew:d(2026,12,11),actBy:d(2026,11,20),last:612,quote:689,who:'A'},
+ {id:2,ic:'wifi',name:'Broadband',prov:'Brightline',note:'Contract ends',renew:d(2026,11,30),actBy:d(2026,11,24),last:474,quote:540,who:'S'},
+ {id:3,ic:'wrench',name:'MOT',prov:'Ford Fiesta',note:'Book a garage',renew:d(2027,1,11),actBy:d(2026,12,12),who:'A'},
+ {id:4,ic:'home',name:'Home insurance',prov:'Oakfield Home',note:'Buildings & contents',renew:d(2027,1,8),actBy:d(2026,12,18),last:268,who:'S'},
+ {id:5,ic:'tv',name:'TV licence',prov:'Annual licence',note:'',renew:d(2027,1,31),actBy:d(2026,12,31),last:174.5,who:'B'},
+ {id:6,ic:'flame',name:'Boiler service',prov:'Annual service',note:'',renew:d(2027,2,10),actBy:d(2027,1,27),who:'B'},
+ {id:7,ic:'phone',name:'Mobile (Alex)',prov:'Northwave Mobile',note:'',renew:d(2027,3,4),actBy:d(2027,2,4),last:216,who:'A'},
+ {id:8,ic:'bolt',name:'Energy',prov:'Lumen Energy',note:'Fixed tariff ends',renew:d(2027,4,1),actBy:d(2027,3,4),who:'S'},
+ {id:9,ic:'car',name:'Car tax',prov:'Ford Fiesta',note:'',renew:d(2027,5,1),actBy:d(2027,4,24),who:'A'},
+ {id:10,ic:'passport',name:'Passport (Sam)',prov:'Expires',note:'',renew:d(2027,9,14),actBy:d(2027,6,14),who:'S'},
+ {id:11,ic:'paw',name:'Pet insurance',prov:'Willow Pet Cover',note:'',renew:d(2027,6,2),actBy:d(2027,5,12),last:221,who:'A'},
+ {id:12,ic:'council',name:'Council tax',prov:'Annual bill',note:'',renew:d(2027,4,1),actBy:d(2027,3,20),who:'B'},
+ {id:13,ic:'shield',name:'Breakdown cover',prov:'Roadside Plus',note:'',renew:d(2027,7,9),actBy:d(2027,6,18),last:96,who:'A'},
+];
+let state={tab:'home',view:null,sheet:null,showClear:false,calDay:20,digest:true,scan:null,toast:null,nextId:20};
+const urg=it=>{const n=days(it.actBy);return n<=14?'red':n<=45?'amb':'grn'};
+const col=it=>({red:C.red,amb:C.amb,grn:C.grn})[urg(it)];
+const tcol=it=>({red:C.red,amb:C.ambText,grn:C.grn})[urg(it)];
+const left=it=>{const n=days(it.actBy);return n<=0?'Today':n===1?'1 day':n+' days'};
+
+function row(it){return `<button class="row" data-open="${it.id}"><span class="ic">${ic(it.ic)}</span>
+<span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;text-align:left"><span style="font-size:16px;font-weight:600">${it.name}</span><span class="muted" style="font-size:13px">${it.prov} · act by ${fmt(it.actBy)}</span></span>
+<span style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:${tcol(it)}"><span class="dot" style="background:${col(it)}"></span>${left(it)}</span>${av(it.who,22)}</span></button>`}
+
+function tabbar(){const t=(k,i,l)=>`<button class="tab ${state.tab===k?'on':''}" data-tab="${k}">${ic(i,state.tab===k?C.moss:'#6B655E',24)}<span>${l}</span></button>`;
+ return `<nav class="tabbar" aria-label="Main">${t('home','list','Up next')}${t('cal','cal','Calendar')}<button class="add" data-sheet="add" aria-label="Add something">${ic('plus','#fff',26)}</button>${t('house','people','Household')}</nav>`}
+
+function home(){
+ const s=[...items].sort((a,b)=>a.actBy-b.actBy);
+ const red=s.filter(i=>urg(i)==='red'),amb=s.filter(i=>urg(i)==='amb'),grn=s.filter(i=>urg(i)==='grn');
+ const pricey=red.filter(i=>i.last);const tot=pricey.reduce((a,i)=>a+i.last,0);
+ const prompt=pricey.length?`<section class="card" style="background:${C.moss};border:none;padding:18px;color:#fff;display:flex;flex-direction:column;gap:10px">
+ <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#CFE2D8">${ic('spark','#CFE2D8',16)}Worth a look this week</div>
+ <div style="font-size:17px;line-height:1.35">${pricey.map(i=>i.name.toLowerCase()).join(' and ').replace(/^./,c=>c.toUpperCase())} cost you <span class="serif" style="font-size:24px">${money(tot)}</span> last year. Compare before their act-by dates.</div>
+ <div style="display:flex;gap:8px"><button class="chip" style="background:#E8F0EA;border:none;color:${C.moss};height:34px" data-open="${pricey[0].id}">Compare ${pricey[0].name.toLowerCase()}</button></div></section>`:
+ `<section class="card" style="padding:18px;display:flex;gap:12px;align-items:center">${ic('check',C.grn,24)}<span style="font-size:15px">Nothing urgent. Enjoy your week.</span></section>`;
+ const grp=(lbl,arr)=>arr.length?`<div style="display:flex;justify-content:space-between;align-items:baseline"><span class="label">${lbl}</span><span class="muted" style="font-size:13px">${arr.length} item${arr.length>1?'s':''}</span></div><div class="card">${arr.map(row).join('')}</div>`:'';
+ const firstClear=grn[0]?fmt(grn[0].actBy,{month:'long'}):'';
+ return `<div class="scr"><header style="display:flex;justify-content:space-between;align-items:center"><div><div class="muted" style="font-size:14px">Monday 16 November</div><h1 class="serif">Up next</h1></div><div style="display:flex">${av('A',36)}<span style="margin-left:-8px;border:2px solid #F5F1EA;border-radius:50%;display:flex">${av('S',36)}</span></div></header>
+ ${prompt}${grp('Act now',red)}${grp('Coming up',amb)}
+ ${grn.length?(state.showClear?grp('All clear',grn):`<button class="row card" data-clear style="min-height:52px;justify-content:space-between"><span style="display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500"><span class="dot" style="background:${C.grn}"></span>${grn.length} more, all clear until ${firstClear}</span>${ic('chev','#6B655E',18)}</button>`):''}
+ </div>${tabbar()}`}
+
+function detail(it){
+ const n=days(it.actBy);const total=Math.max(days(it.renew),1);const pct=Math.min(100,Math.max(4,(1-n/total)*100));
+ const diff=it.quote&&it.last?Math.round((it.quote-it.last)/it.last*100):null;
+ const save=it.last?`<section class="card" style="padding:16px;background:#E8F0EA;border-color:#D3E3D9;display:flex;flex-direction:column;gap:10px">
+ <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:${C.moss}">${ic('spark',C.moss,16)}Before you renew</div>
+ <div style="display:flex;gap:24px"><div><div class="muted" style="font-size:12px">Last year</div><div class="serif" style="font-size:28px">${money(it.last)}</div></div>${it.quote?`<div><div class="muted" style="font-size:12px">Renewal quote</div><div class="serif" style="font-size:28px">${money(it.quote)} <span style="font-family:Inter;font-size:13px;font-weight:600;color:${diff>0?C.red:C.grn}">${diff>0?'+':''}${diff}%</span></div></div>`:''}</div>
+ <div style="font-size:14px;line-height:1.4;color:#24453A">${diff>0?'Your renewal quote is higher than last year. Worth getting a couple of quotes before your act-by date.':'Worth a quick comparison before your act-by date.'}</div></section>`:'';
+ return `<div class="scr" style="padding-bottom:28px"><div style="display:flex;justify-content:space-between;align-items:center"><button class="back" data-back>${ic('back','#1D1B18',22)}Up next</button><span class="chip" style="height:32px;cursor:default">${ic('doc','#1D1B18',16)}Letter</span></div>
+ <div style="display:flex;gap:14px;align-items:center"><span class="ic" style="width:52px;height:52px;border-radius:16px">${ic(it.ic,'#1D1B18',26)}</span><div><div style="font-size:20px;font-weight:600">${it.name}</div><div class="muted" style="font-size:14px">${it.prov}${it.note?' · '+it.note:''}</div></div></div>
+ <section class="card" style="padding:18px;display:flex;flex-direction:column;gap:14px"><div><div class="label" style="color:${tcol(it)}">Act by</div><div class="serif" style="font-size:42px;line-height:1">${fmt(it.actBy,{weekday:'long',day:'numeric',month:'short'})}</div><div style="font-size:14px;font-weight:600;color:${tcol(it)};margin-top:4px">${left(it)} left</div></div>
+ <div><div style="height:6px;border-radius:3px;background:#EFEAE2;position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:${pct}%;background:${col(it)};border-radius:3px"></div></div><div style="display:flex;justify-content:space-between;font-size:12px;margin-top:6px" class="muted"><span>Today</span><span>Renews ${fmt(it.renew)}</span></div></div></section>
+ ${save}
+ <div class="card"><button class="row" data-reassign="${it.id}">${av(it.who,32)}<span style="flex:1;font-size:15px;text-align:left">${it.who==='B'?'<b>Both of you</b> are on this':`<b>${PEOPLE[it.who].name}</b> is handling this`}</span><span style="font-size:14px;font-weight:600;color:${C.moss}">Reassign</span></button></div>
+ <div style="flex:1"></div>
+ <button class="btn ink" data-compare="${it.id}">${it.last?'Compare quotes':'Book it'}</button>
+ <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px"><button class="btn line" style="font-size:14px" data-done="Renewed">Renewed</button><button class="btn line" style="font-size:14px" data-done="Switched">Switched</button><button class="btn line" style="font-size:14px" data-done="Cancelled">Cancelled</button></div></div>`}
+
+function cal(){
+ const first=new Date(2026,10,1).getDay();const blanks=(first+6)%7;let cells='';
+ for(let i=0;i<blanks;i++)cells+='<span></span>';
+ for(let dd=1;dd<=30;dd++){const its=items.filter(i=>i.actBy.getFullYear()===2026&&i.actBy.getMonth()===10&&i.actBy.getDate()===dd);
+  const sel=dd===state.calDay,today=dd===16;
+  cells+=`<button class="day" data-day="${dd}" aria-label="${dd} November${its.length?', '+its.length+' item':''}" style="${sel?'background:#1D1B18;color:#fff;':today?'box-shadow:inset 0 0 0 1.5px '+C.moss+';':''}"><span>${dd}</span>${its.length?`<span class="dot" style="width:6px;height:6px;background:${sel?'#fff':col(its[0])}"></span>`:'<span style="height:6px"></span>'}</button>`}
+ const dayItems=items.filter(i=>i.actBy.getFullYear()===2026&&i.actBy.getMonth()===10&&i.actBy.getDate()===state.calDay);
+ const nextDec=items.filter(i=>i.actBy.getMonth()===11&&i.actBy.getFullYear()===2026).sort((a,b)=>a.actBy-b.actBy);
+ return `<div class="scr"><header style="display:flex;justify-content:space-between;align-items:flex-end"><h1 class="serif">November</h1><span class="muted" style="font-size:14px;padding-bottom:6px">2026</span></header>
+ <div class="card" style="padding:14px 10px"><div class="calgrid" style="margin-bottom:6px">${['M','T','W','T','F','S','S'].map(x=>`<span class="muted" style="text-align:center;font-size:12px;font-weight:600">${x}</span>`).join('')}</div><div class="calgrid">${cells}</div></div>
+ <div class="label">${fmt(new Date(2026,10,state.calDay),{weekday:'long',day:'numeric',month:'long'})}</div>
+ ${dayItems.length?`<div class="card">${dayItems.map(row).join('')}</div>`:`<div class="card" style="padding:16px" ><span class="muted" style="font-size:14px">Nothing due. Tap a day with a dot.</span></div>`}
+ ${nextDec.length?`<div class="label">Next in December</div><div class="card">${nextDec.map(row).join('')}</div>`:''}
+ <div class="row card" style="cursor:default;min-height:52px">${ic('link',C.moss,18)}<span style="flex:1;font-size:14px">Synced to Apple Calendar</span><span class="muted" style="font-size:13px">Both of you</span></div></div>${tabbar()}`}
+
+function house(){
+ const cnt=k=>items.filter(i=>i.who===k).length,soon=k=>items.filter(i=>i.who===k&&urg(i)!=='grn').length;
+ const m=(k,n)=>`<div class="row" style="cursor:default">${av(k,40)}<span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">${n}</span><span class="muted" style="font-size:13px">Handling ${cnt(k)} items</span></span><span style="font-size:14px;font-weight:600">${soon(k)} due soon</span></div>`;
+ return `<div class="scr"><header><div class="muted" style="font-size:14px">${items.length} items · 2 people</div><h1 class="serif">Our household</h1></header>
+ <div class="card">${m('A','Alex (you)')}${m('S','Sam')}<div class="row" style="cursor:default">${av('B',40)}<span style="flex:1;font-size:15px">Shared by both</span><span style="font-size:14px;font-weight:600">${cnt('B')} items</span></div></div>
+ <button class="btn line" data-invite>${ic('plus','#1D1B18',18)}Invite someone</button>
+ <div class="label">This year so far</div>
+ <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px"><div class="card" style="padding:16px"><div class="serif" style="font-size:34px">11</div><div class="muted" style="font-size:13px">renewals handled on time</div></div><div class="card" style="padding:16px"><div class="serif" style="font-size:34px">3</div><div class="muted" style="font-size:13px">switched to a new provider</div></div></div>
+ <div class="row card" style="cursor:default;min-height:60px">${ic('bell','#1D1B18',20)}<span style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:600">Sunday digest</span><span class="muted" style="font-size:13px">One summary for both of you</span></span><button class="switch ${state.digest?'':'off'}" role="switch" aria-checked="${state.digest}" aria-label="Sunday digest" data-digest><span></span></button></div></div>${tabbar()}`}
+
+const PRESETS=[['car','Car insurance',21],['wrench','MOT',30],['car','Car tax',14],['home','Home insurance',21],['bolt','Energy',30],['wifi','Broadband',30],['phone','Mobile',30],['tv','TV licence',30],['council','Council tax',14],['flame','Boiler service',21],['passport','Passport',90],['paw','Pet insurance',21],['shield','Breakdown',21],['bank','Mortgage fix',180]];
+function addSheet(){return `<div class="overlay" data-dismiss><div class="sheet" role="dialog" aria-label="Add something"><div class="grab"></div>
+ <div style="display:flex;justify-content:space-between;align-items:center"><h2 class="serif" style="margin:0;font-size:32px">Add something</h2><button class="back" data-close aria-label="Close">${ic('close','#1D1B18',22)}</button></div>
+ <button class="btn" data-snap style="height:auto;background:#1D1B18;border-radius:22px;padding:20px;justify-content:flex-start;gap:16px"><span style="width:56px;height:56px;border-radius:16px;background:${C.moss};display:flex;align-items:center;justify-content:center">${ic('camera','#fff',28)}</span><span style="display:flex;flex-direction:column;gap:4px;color:#fff;text-align:left"><span style="font-size:18px">Snap a letter</span><span style="font-size:14px;font-weight:400;color:#CFC9BF">We'll read the dates and price for you</span></span></button>
+ <div class="label">Or pick one</div><div style="display:flex;flex-wrap:wrap;gap:8px">${PRESETS.map((p,i)=>`<button class="chip" data-preset="${i}">${ic(p[0],'#1D1B18',16)}${p[1]}</button>`).join('')}</div></div></div>`}
+
+function confirmSheet(){const s=state.scan;
+ if(s.reading)return `<div class="overlay"><div class="sheet" style="min-height:360px;justify-content:center;align-items:center;text-align:center"><div style="width:120px;height:150px;border-radius:12px;background:#fff;border:1px solid #E4DED4;padding:12px;display:flex;flex-direction:column;gap:7px;transform:rotate(-3deg)" aria-hidden="true"><div style="height:8px;width:60%;background:${C.moss};border-radius:2px"></div><div style="height:4px;background:#E4DED4"></div><div style="height:4px;background:#E4DED4"></div><div style="height:4px;width:70%;background:#E4DED4"></div></div><div style="font-size:16px;font-weight:600">Reading your letter…</div><div class="scan" style="width:160px"><i></i></div></div></div>`;
+ return `<div class="overlay"><div class="sheet" role="dialog" aria-label="Check and save"><div class="grab"></div>
+ <div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:${C.moss}">${ic('check',C.moss,16)}${s.fromSnap?'Read from your letter':'Pre-filled for you'}</div>
+ <h2 class="serif" style="margin:0;font-size:32px;line-height:1.05">${s.name}</h2>
+ <div class="card">${[['Provider',s.prov],['Renews',fmt(s.renew,{weekday:'short',day:'numeric',month:'short',year:'numeric'})],['Price',s.last?money(s.last)+' a year':'Add later'],['Act by',fmt(s.actBy)+`<div style="font-size:13px;font-weight:600;color:${C.moss}">${s.lead} days before</div>`]].map(([l,v])=>`<div class="row" style="cursor:default;justify-content:space-between"><span class="muted" style="font-size:14px">${l}</span><span style="font-size:15px;font-weight:600;text-align:right">${v}</span></div>`).join('')}</div>
+ <div class="label">Who's handling it?</div>
+ <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">${['A','S','B'].map(k=>`<button class="btn ${s.who===k?'sel':'line'}" style="height:48px;font-size:14px" data-who="${k}">${k!=='B'?av(k,22):''}${PEOPLE[k].name}</button>`).join('')}</div>
+ <button class="btn ink" data-save>Save</button></div></div>`}
+
+function render(){
+ const p=document.getElementById('phone');let h='';
+ if(state.view){const it=items.find(i=>i.id===state.view);h=it?detail(it):home()}
+ else h=state.tab==='home'?home():state.tab==='cal'?cal():house();
+ if(state.sheet==='add')h+=addSheet();
+ if(state.sheet==='confirm')h+=confirmSheet();
+ if(state.sheet==='compare')h+=`<div class="overlay" data-dismiss><div class="sheet" role="dialog"><div class="grab"></div><h2 class="serif" style="margin:0;font-size:30px">Compare quotes</h2><p style="margin:0;line-height:1.5;color:#4A4540">In the real app this opens your chosen comparison site with your details ready. Actby never recommends a provider.</p><button class="btn ink" data-close>Got it</button></div></div>`;
+ if(state.sheet==='invite')h+=`<div class="overlay" data-dismiss><div class="sheet" role="dialog"><div class="grab"></div><h2 class="serif" style="margin:0;font-size:30px">Invite to your household</h2><div class="card" style="padding:16px;font-size:15px;word-break:break-all">actby.app/join/7Q4-OAK</div><p style="margin:0;color:#4A4540">Send this link. They'll see the same list straight away.</p><button class="btn ink" data-close>Done</button></div></div>`;
+ if(state.toast&&!state.sheet)h+=`<div class="toast">${ic('check','#fff',18)}<span>${state.toast}</span></div>`;
+ p.innerHTML=themed(h);
+}
+function toast(msg){state.toast=msg;render();clearTimeout(window._t);window._t=setTimeout(()=>{state.toast=null;render()},2600)}
+
+document.getElementById('phone').addEventListener('click',e=>{
+ const t=e.target.closest('[data-open],[data-tab],[data-sheet],[data-back],[data-clear],[data-done],[data-reassign],[data-compare],[data-close],[data-snap],[data-preset],[data-who],[data-save],[data-day],[data-digest],[data-invite],[data-dismiss]');
+ if(!t)return;const ds=t.dataset;
+ if('dismiss' in ds && e.target!==t)return;
+ if(ds.open){state.view=+ds.open;state.sheet=null}
+ else if(ds.tab){state.tab=ds.tab;state.view=null}
+ else if(ds.sheet){state.sheet=ds.sheet}
+ else if('back' in ds){state.view=null}
+ else if('clear' in ds){state.showClear=true}
+ else if(ds.done){const it=items.find(i=>i.id===state.view);const y=new Date(it.renew);y.setFullYear(y.getFullYear()+1);const a=new Date(it.actBy);a.setFullYear(a.getFullYear()+1);it.renew=y;it.actBy=a;if(it.quote){it.last=it.quote;it.quote=null}state.view=null;toast(`${it.name} marked ${ds.done.toLowerCase()}. See you next ${fmt(a,{month:'long'})}.`);return}
+ else if(ds.reassign){const it=items.find(i=>i.id===+ds.reassign);it.who={A:'S',S:'B',B:'A'}[it.who];render();return}
+ else if(ds.compare){state.sheet='compare'}
+ else if('close' in ds||'dismiss' in ds){state.sheet=null}
+ else if('snap' in ds){const r=d(2027,1,18),a=new Date(r-21*DAY);state.scan={reading:true,fromSnap:true,ic:'home',name:'Home insurance (flat)',prov:'Oakfield Home',renew:r,actBy:a,lead:21,last:284.16,who:'A'};state.sheet='confirm';render();setTimeout(()=>{if(state.scan){state.scan.reading=false;render()}},1400);return}
+ else if(ds.preset){const p=PRESETS[+ds.preset];const r=new Date(TODAY.getTime()+120*DAY),a=new Date(r-p[2]*DAY);state.scan={reading:false,fromSnap:false,ic:p[0],name:p[1],prov:'Tap to add provider',renew:r,actBy:a,lead:p[2],last:null,who:'A'};state.sheet='confirm'}
+ else if(ds.who){state.scan.who=ds.who}
+ else if('save' in ds){const s=state.scan;items.push({id:state.nextId++,ic:s.ic,name:s.name,prov:s.prov,note:'',renew:s.renew,actBy:s.actBy,last:s.last,who:s.who});state.sheet=null;state.scan=null;state.tab='home';state.view=null;state.showClear=true;toast(`${s.name} added. ${PEOPLE[s.who].name==='Both'?'You both':PEOPLE[s.who].name} will get a nudge on ${fmt(new Date(s.actBy-7*DAY))}.`);return}
+ else if(ds.day){state.calDay=+ds.day}
+ else if('digest' in ds){state.digest=!state.digest}
+ else if('invite' in ds){state.sheet='invite'}
+ render();
+});
+
+const THEMES={paper:[],
+ harbour:[["#F5F1EA","#F1F4F7"],["#2F5D4E","#1F4E79"],["#CFE2D8","#CFE0F0"],["#E8F0EA","#E3EDF7"],["#D3E3D9","#CADBEC"],["#24453A","#183C5E"],["#1D1B18","#13202B"],["#6B655E","#56636F"],["#E4DED4","#DCE3EA"],["#EFEAE2","#EAEFF4"],["#F1ECE3","#E8EEF4"],["#DCD5CA","#D3DCE4"],["#D6CFC4","#CBD5DF"],["rgba(245,241,234,.97)","rgba(241,244,247,.97)"],["rgba(47,93,78,.3)","rgba(31,78,121,.3)"]],
+ plum:[["#F5F1EA","#F6F2EF"],["#2F5D4E","#5B3A6E"],["#CFE2D8","#E6D6EE"],["#E8F0EA","#F0E8F4"],["#D3E3D9","#E3D3EA"],["#24453A","#43294F"],["#1D1B18","#221B26"],["#6B655E","#695F6C"],["#E4DED4","#E6DDE2"],["#EFEAE2","#F0EAEC"],["#F1ECE3","#F1EAEE"],["#DCD5CA","#DDD2D8"],["#D6CFC4","#D8CCD3"],["rgba(245,241,234,.97)","rgba(246,242,239,.97)"],["rgba(47,93,78,.3)","rgba(91,58,110,.3)"]],
+ midnight:[
+  ["background:#2F5D4E;border:none;padding:18px;color:#fff","background:#2B3A4A;border:none;padding:18px;color:#F2EFE9"],
+  ["background:#E8F0EA;border:none;color:#2F5D4E","background:#E9C877;border:none;color:#14161B"],
+  ["background:#E8F0EA;border-color:#D3E3D9","background:#20232B;border-color:#2E323C"],
+  [".sel{background:#E8F0EA;color:#2F5D4E;border:1.5px solid #2F5D4E}",".sel{background:#2B3A4A;color:#E9C877;border:1.5px solid #E9C877}"],
+  [".ink{background:#1D1B18;color:#fff}",".ink{background:#E9C877;color:#14161B}"],
+  ["background:#1D1B18;color:#fff;","background:#E9C877;color:#14161B;"],
+  ["background:#1D1B18;border-radius:22px","background:#2B3A4A;border-radius:22px"],
+  ["border:10px solid #1D1B18","border:10px solid #000"],
+  ["background:#2F5D4E;width","background:#3E5568;width"],
+  ["stroke=\"#fff\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/>","stroke=\"#14161B\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/>"],
+  ["background:#fff","background:#20232B"],
+  ["#F5F1EA","#14161B"],["#2F5D4E","#E9C877"],["#CFE2D8","#E9C877"],["#24453A","#E8E4DC"],["#1D1B18","#F2EFE9"],["#6B655E","#A8A29A"],["#4A4540","#C9C3BA"],
+  ["#E4DED4","#2E323C"],["#EFEAE2","#2A2D36"],["#F1ECE3","#2A2E38"],["#DCD5CA","#363A45"],["#D6CFC4","#3A3E48"],["#8A5A0B","#E8AE45"],["#C2412D","#F0705A"],
+  ["rgba(245,241,234,.97)","rgba(20,22,27,.97)"],["rgba(47,93,78,.3)","rgba(0,0,0,.45)"]]
+};
+let theme='paper';
+const ORIG_CSS=document.getElementById('st').textContent;
+function themed(str){const m=THEMES[theme];if(!m.length)return str;const toks=[];m.forEach(([a,b],i)=>{const t='@@'+i+'@@';str=str.split(a).join(t);toks.push([t,b])});toks.forEach(([t,b])=>{str=str.split(t).join(b)});return str}
+function setTheme(t){theme=t;const css=themed(ORIG_CSS);document.getElementById('st').textContent=css.replace(/\.intro b\{color:[^}]*\}/,'.intro b{color:#1D1B18}').replace(/body\{([^}]*)background:[^;]*;/,'body{$1background:#E9E4DB;').replace(/\.tbtn\{[^}]*\}/,'.tbtn{font:600 13px Inter,system-ui,sans-serif;padding:10px 14px;border-radius:12px;border:1px solid #CFC9BF;background:#fff;color:#1D1B18;cursor:pointer;display:flex;align-items:center;gap:8px;min-height:44px}').replace(/\.tbtn\.on\{[^}]*\}/,'.tbtn.on{border:2px solid #1D1B18}').replace(/\.intro\{([^}]*)color:[^;]*;/,'.intro{$1color:#4A4540;');document.querySelectorAll('.tbtn').forEach(b=>b.classList.toggle('on',b.dataset.theme===t));render()}
+document.querySelector('.themes').addEventListener('click',e=>{const b=e.target.closest('[data-theme]');if(b)setTheme(b.dataset.theme)});
+try{if(window.matchMedia('(prefers-color-scheme: dark)').matches)setTheme('midnight');else render()}catch(e){render()}
+</script>
+</body>
+</html>

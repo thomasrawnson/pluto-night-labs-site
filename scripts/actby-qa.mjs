@@ -6,7 +6,15 @@ import { mkdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const baseURL = process.env.QA_BASE_URL ?? 'http://127.0.0.1:4321';
-const chromePath = process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+// Uses the headless shell already in the Playwright cache: it cannot hand mailto: links to the OS mail app
+// (the installed Chrome does, which opens real Mail compose windows). Override with CHROME_PATH only if you must.
+import { readdirSync } from 'node:fs';
+import { homedir } from 'node:os';
+const cache = path.join(homedir(), 'Library/Caches/ms-playwright');
+const shellDir = readdirSync(cache).filter((d) => d.startsWith('chromium_headless_shell-')).sort().pop();
+const shellBin = shellDir && readdirSync(path.join(cache, shellDir)).map((d) => path.join(cache, shellDir, d, 'chrome-headless-shell')).find((f) => { try { return readdirSync(path.dirname(f)).includes('chrome-headless-shell'); } catch { return false; } });
+const chromePath = process.env.CHROME_PATH ?? shellBin;
+if (!chromePath) throw new Error('No headless shell found in the Playwright cache; refusing to use the installed Chrome (it opens Mail drafts).');
 const axePath = process.env.AXE_PATH; // path to an existing axe-core axe.min.js (no install performed)
 const outputDir = path.resolve(process.env.QA_OUTPUT_DIR ?? 'docs/screenshots/act-web-01');
 const route = '/actby/';
