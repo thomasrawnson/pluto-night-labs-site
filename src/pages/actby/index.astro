@@ -38,7 +38,7 @@ const faqs = [
   { q: 'Is Actby available yet?', a: 'No. Actby is in early design and there is no app to download. The waitlist is how we find out whether UK households want it before we build it.' },
   { q: 'Do I need to connect my bank?', a: 'No. Actby is planned to work from letters you photograph and details you type in. It will never ask for a bank login.' },
   { q: 'Does Actby give financial advice?', a: 'No. It reminds you when to act so you can compare in good time. Which provider or deal to choose is always your decision.' },
-  { q: 'What happens to my email address?', a: 'This page stores nothing. Joining opens an email to us in your email app, and we only receive it if you send it. We use it to tell you about the Actby launch.' },
+  { q: 'What happens to my email address?', a: 'The form stores nothing. Joining opens an email to us in your email app, and we only receive it if you send it. We use it to tell you about the Actby launch and to see which price options people prefer.' },
   { q: 'Is there an Android version?', a: 'iPhone first. Android is not planned yet.' },
 ];
 ---
@@ -166,7 +166,7 @@ const faqs = [
 
             <label class="consent"><input id="consent" name="consent" type="checkbox" required /><span id="consent-text">{consentText}</span></label>
 
-            <p class="fine">This page stores nothing. We don’t get your details unless you send the email. <a class="textlink" href="/privacy/">Read our privacy information</a></p>
+            <p class="fine">The form stores nothing. We only get your details if you send the email. <a class="textlink" href="/privacy/">Read our privacy information</a></p>
             <button class="cta" type="submit">Prepare waitlist email</button>
             <p id="waitlist-feedback" class="feedback" role="status" aria-live="polite"></p>
           </form>
@@ -225,6 +225,8 @@ const faqs = [
 </script>
 
 <style>
+  @font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/instrument-serif-latin-400.woff2') format('woff2'); }
+  @font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url('/fonts/inter-latin-var.woff2') format('woff2'); }
   .actby {
     --paper: #F5F1EA; --card: #FFFFFF; --ink: #1D1B18; --muted: #5F5952; --body: #4A4540;
     --moss: #2F5D4E; --moss-tint: #E8F0EA; --line: #DCD5CA; --hot: #B23A27; --soon: #8A5A0B;
