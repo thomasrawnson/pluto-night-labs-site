@@ -31,10 +31,19 @@ const products = [
     href: '/contact/',
     action: 'Ask about Quick Protein',
   },
+  {
+    number: '04',
+    name: 'Actby',
+    category: 'Household admin · iPhone',
+    status: 'Coming soon',
+    description: 'A shared list of your household\'s UK renewals, sorted by the last sensible day to compare, switch or cancel. Early design: not built yet, and the waitlist helps us decide whether to build it.',
+    href: '/actby/',
+    action: 'Join the waitlist',
+  },
 ];
 ---
 
-<BaseLayout title="Software | Pluto Night Labs" description="Practical software from Pluto Night Labs: ShelfPick, UsageGrid and Quick Protein, with current project status and details.">
+<BaseLayout title="Software | Pluto Night Labs" description="Practical software from Pluto Night Labs: ShelfPick, UsageGrid, Quick Protein and Actby, with current project status and details.">
   <section class="software-hero shell">
     <p class="eyebrow">Pluto Night Labs / Software</p>
     <h1>Useful tools.<br /><em>Thoughtfully made.</em></h1>
@@ -47,7 +56,7 @@ const products = [
     <div class="product-list">
       {products.map((product) => (
         <article class="product-card">
-          <div class="product-meta"><span>{product.number} / 03</span><span class="status">{product.status}</span></div>
+          <div class="product-meta"><span>{product.number} / {String(products.length).padStart(2, '0')}</span><span class="status">{product.status}</span></div>
           <div class:list={['product-body', { 'has-screenshots': !!product.screenshots }]}>
             <div class="product-copy">
               <p class="category">{product.category}</p>
