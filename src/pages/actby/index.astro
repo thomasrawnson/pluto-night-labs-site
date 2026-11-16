@@ -1,0 +1,351 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config';
+
+// Single source for the consent wording: rendered in the form and copied verbatim into the email body.
+const consentText = `I agree that Pluto Night Labs may email me about the Actby launch and use my price choice to decide what to build. I can withdraw by emailing ${site.supportEmail} with “Stop Actby emails”.`;
+
+const choices = [
+  { value: 'Free (up to 8 items)', label: 'Free (up to 8 items)' },
+  { value: '£2.99 a month', label: '£2.99 a month' },
+  { value: '£24.99 a year', label: '£24.99 a year' },
+  { value: '£14.99 once', label: '£14.99 once' },
+  { value: 'Wouldn’t pay', label: 'Wouldn’t pay' },
+];
+
+const problems = [
+  { title: 'The letter in the drawer', text: 'The renewal notice arrived, got put somewhere safe, and the policy rolled over anyway.' },
+  { title: 'The quiet price rise', text: 'Broadband out of contract, mobile still on the old deal, nobody noticed for months.' },
+  { title: '“I thought you’d done it”', text: 'Two adults, one MOT, and nobody booked it.' },
+];
+
+const steps = [
+  { title: 'Snap the letter', text: 'Or tap a UK preset such as MOT, car tax or TV licence. Actby picks out the dates and the price.' },
+  { title: 'Get your act-by date', text: 'Not the renewal date: the last sensible day to compare, switch or cancel.' },
+  { title: 'You both get a nudge', text: 'Whoever is handling it gets reminded, and everyone sees when it is done.' },
+];
+
+const presets = ['MOT', 'Car tax', 'Car insurance', 'Home insurance', 'TV licence', 'Council tax', 'Broadband', 'Boiler service', 'Passport', 'Mortgage fix'];
+
+const calm = [
+  'No bank login, ever.',
+  'No ads, and we don’t sell your data.',
+  'No filters or settings to learn: one list, already sorted.',
+  'We nudge you to compare. We never tell you what to buy, and Actby is not financial advice.',
+];
+
+const faqs = [
+  { q: 'Is Actby available yet?', a: 'No. Actby is in early design and there is no app to download. The waitlist is how we find out whether UK households want it before we build it.' },
+  { q: 'Do I need to connect my bank?', a: 'No. Actby is planned to work from letters you photograph and details you type in. It will never ask for a bank login.' },
+  { q: 'Does Actby give financial advice?', a: 'No. It reminds you when to act so you can compare in good time. Which provider or deal to choose is always your decision.' },
+  { q: 'What happens to my email address?', a: 'This page stores nothing. Joining opens an email to us in your email app, and we only receive it if you send it. We use it to tell you about the Actby launch.' },
+  { q: 'Is there an Android version?', a: 'iPhone first. Android is not planned yet.' },
+];
+---
+<BaseLayout
+  title="Actby: never auto-renew by accident again | Pluto Night Labs"
+  description="Actby is a planned iPhone app for UK households: one shared list of renewals, sorted by the last sensible day to act. Join the waitlist and tell us what you would pay."
+>
+  <div class="actby">
+    <div class="bar wrap">
+      <span class="brand-mark"><span class="logo" aria-hidden="true">A</span><span class="word">Actby</span></span>
+      <nav aria-label="Actby sections">
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a class="pill" href="#join">Join the waitlist</a>
+      </nav>
+    </div>
+
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="badge">For UK households · iPhone · Coming soon</p>
+        <h1 id="hero-title">Never auto-renew by accident again.</h1>
+        <p class="lede">Actby tracks your household’s renewals, tells you the last day to act, and shows who’s on it. Car insurance, MOT, broadband, TV licence: all in one calm list.</p>
+        <p><a class="cta" href="#join">Join the waitlist</a></p>
+        <p class="fine">No bank login. No spam. Actby is in early design, so joining tells us you’d use it.</p>
+      </div>
+      <div class="hero-art">
+        <figure class="phone" aria-label="Illustration of the planned Actby app showing an Up next list, with example data">
+          <div class="phone-screen" aria-hidden="true">
+            <div class="mock-small">Example list</div>
+            <div class="mock-title">Up next</div>
+            <div class="mock-banner">Car insurance and broadband both renew soon. Compare before Friday.</div>
+            <div class="mock-list">
+              <div class="mock-row"><div><b>Car insurance</b><span>Act by Friday</span></div><em class="hot">4 days</em></div>
+              <div class="mock-row"><div><b>Broadband</b><span>Act by Tuesday</span></div><em class="hot">8 days</em></div>
+              <div class="mock-row"><div><b>MOT</b><span>Due Saturday</span></div><em class="soon">26 days</em></div>
+            </div>
+          </div>
+          <figcaption>Concept illustration, not a screenshot</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="problem-title">
+      <div class="wrap stack">
+        <h2 id="problem-title">Sound familiar?</h2>
+        <ul class="cards">
+          {problems.map((p) => (
+            <li class="card tint"><h3>{p.title}</h3><p>{p.text}</p></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="wrap stack pad" id="how" aria-labelledby="how-title">
+      <h2 id="how-title">How it works</h2>
+      <ol class="cards steps">
+        {steps.map((s, i) => (
+          <li class="card"><span class="num" aria-hidden="true">{i + 1}</span><h3>{s.title}</h3><p>{s.text}</p></li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="moss" aria-labelledby="two-title">
+      <div class="wrap two">
+        <div class="two-copy">
+          <h2 id="two-title">Made for two (or more).</h2>
+          <p>One shared list for the household. Every item shows who’s on it. Invite your partner with a link: no setup, no permissions maze.</p>
+        </div>
+        <ul class="people" aria-label="Example shared list">
+          <li><span class="item">Car insurance</span><span class="who">Alex <span class="av a1" aria-hidden="true">A</span></span></li>
+          <li><span class="item">Broadband</span><span class="who">Sam <span class="av a2" aria-hidden="true">S</span></span></li>
+          <li><span class="item">Boiler service</span><span class="who">Both</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="wrap duo pad" aria-label="UK presets and principles">
+      <div class="stack">
+        <h2>Built for UK life admin.</h2>
+        <ul class="chips">
+          {presets.map((p) => <li>{p}</li>)}
+        </ul>
+        <p class="fine">Provider names in examples are fictional. Actby is not connected to any company.</p>
+      </div>
+      <div class="stack">
+        <h2>Calm by design.</h2>
+        <ul class="ticks">
+          {calm.map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="band" id="pricing" aria-labelledby="pricing-title">
+      <div class="wrap stack center">
+        <h2 id="pricing-title">What would you pay?</h2>
+        <p class="lede narrow">Nothing is on sale yet. These are the ideas we’re testing, and your answer helps us decide what to build.</p>
+        <div class="plans">
+          <div class="plan">
+            <h3>Free</h3>
+            <p class="price">£0</p>
+            <p>Up to 8 items.</p>
+          </div>
+          <div class="plan feature">
+            <h3>Actby Household</h3>
+            <p class="price">£2.99<small> a month</small></p>
+            <p>Or £24.99 a year, or £14.99 once. Unlimited items and a shared household list.</p>
+          </div>
+        </div>
+
+        <div class="join-card" id="join">
+          <h3>Join the waitlist</h3>
+          <form id="waitlist" class="form" data-to={site.supportEmail}>
+            <div class="field">
+              <label for="email">Your email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="you@example.co.uk" />
+            </div>
+
+            <fieldset class="choices">
+              <legend>Which would you pick?</legend>
+              {choices.map((c) => (
+                <label class="choice"><input type="radio" name="price" value={c.value} required /><span>{c.label}</span></label>
+              ))}
+            </fieldset>
+
+            <label class="consent"><input id="consent" name="consent" type="checkbox" required /><span id="consent-text">{consentText}</span></label>
+
+            <p class="fine">This page stores nothing. We don’t get your details unless you send the email. <a class="textlink" href="/privacy/">Read our privacy information</a></p>
+            <button class="cta" type="submit">Prepare waitlist email</button>
+            <p id="waitlist-feedback" class="feedback" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap faq pad" id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">Questions</h2>
+      {faqs.map((f) => (
+        <details><summary>{f.q}</summary><p>{f.a}</p></details>
+      ))}
+    </section>
+
+    <section class="foot" aria-labelledby="foot-title">
+      <div class="wrap foot-in">
+        <h2 id="foot-title">Stay on top of it, together.</h2>
+        <a class="cta light" href="#join">Join the waitlist</a>
+        <p class="foot-note">Actby is a Pluto Night Labs product.</p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#waitlist');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const to = form.dataset.to ?? '';
+    const email = (form.querySelector<HTMLInputElement>('#email')?.value ?? '').trim();
+    const choice = form.querySelector<HTMLInputElement>('input[name="price"]:checked')?.value ?? '';
+    const consent = (form.querySelector<HTMLElement>('#consent-text')?.textContent ?? '').trim();
+    const body = [
+      'Actby waitlist',
+      '',
+      'Email: ' + email,
+      'Which would you pick?: ' + choice,
+      '',
+      consent,
+      '',
+      'Sent by choice from plutonightlabs.com/actby/.',
+    ].join('\n');
+    const href = 'mailto:' + to + '?subject=' + encodeURIComponent('Actby waitlist') + '&body=' + encodeURIComponent(body);
+    const status = form.querySelector<HTMLElement>('#waitlist-feedback');
+    if (status) {
+      const retry = document.createElement('a');
+      retry.href = href;
+      retry.id = 'waitlist-mailto';
+      retry.className = 'textlink';
+      retry.textContent = 'Email app didn’t open? Open the email again';
+      status.replaceChildren('Your email app should open. Please send the message there to join the waitlist. ', retry);
+    }
+    window.location.href = href;
+  });
+</script>
+
+<style>
+  .actby {
+    --paper: #F5F1EA; --card: #FFFFFF; --ink: #1D1B18; --muted: #5F5952; --body: #4A4540;
+    --moss: #2F5D4E; --moss-tint: #E8F0EA; --line: #DCD5CA; --hot: #B23A27; --soon: #8A5A0B;
+    --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color-scheme: light;
+    background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.5;
+  }
+  .actby a { color: inherit; }
+  .actby :focus-visible { outline: 3px solid var(--moss); outline-offset: 3px; }
+  .actby .moss :focus-visible, .actby .foot :focus-visible { outline-color: #FFFFFF; }
+  .wrap { width: min(100% - 40px, 1160px); margin-inline: auto; }
+  .stack { display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
+  .center { align-items: center; text-align: center; }
+  .pad { padding-block: clamp(3rem, 8vw, 5rem); }
+  .actby h1, .actby h2 { margin: 0; font-family: var(--serif); font-weight: 400; line-height: 1; overflow-wrap: break-word; }
+  .actby h2 { font-size: clamp(2.1rem, 5vw, 3.25rem); }
+  .actby h3 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+  .actby p { margin: 0; }
+  .lede { font-size: clamp(1.05rem, 2.4vw, 1.25rem); line-height: 1.55; color: var(--body); max-width: 34rem; }
+  .narrow { max-width: 38rem; }
+  .fine { font-size: .9rem; color: var(--muted); line-height: 1.55; }
+  .actby .textlink { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 3px; font-weight: 600; color: var(--moss); }
+
+  .bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem 1rem; padding-block: 1rem; }
+  .brand-mark { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; }
+  .logo { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: var(--moss); color: #fff; font-family: var(--serif); font-size: 1.5rem; }
+  .word { font-family: var(--serif); font-size: 1.75rem; }
+  .bar nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0 .25rem; }
+  .bar nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 .75rem; text-decoration: none; font-size: .95rem; }
+  .bar nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .bar nav a.pill { background: var(--ink); color: #fff; border-radius: 14px; font-weight: 600; padding: 0 1.1rem; margin-left: .25rem; }
+  .bar nav a.pill:hover { text-decoration: none; background: #000; }
+  @media (max-width: 520px) { .bar nav a:not(.pill) { padding: 0 .55rem; } .bar nav a.pill { margin-left: 0; } }
+
+  .actby .cta { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 1.6rem; border: 0; border-radius: 16px; background: var(--moss); color: #fff; font: 600 1rem/1 var(--sans); text-decoration: none; cursor: pointer; }
+  .actby .cta:hover { background: #254c3f; }
+  .actby .cta.light { background: #fff; color: var(--ink); }
+  .actby .cta.light:hover { background: #E8E3DA; }
+
+  .hero { display: flex; flex-wrap: wrap; gap: 3rem 4rem; align-items: center; padding-block: clamp(2rem, 6vw, 4rem) clamp(3rem, 8vw, 5rem); }
+  .hero-copy { flex: 1 1 min(100%, 28rem); min-width: 0; display: flex; flex-direction: column; gap: 1.4rem; }
+  .hero h1 { font-size: clamp(2.7rem, 9vw, 5.5rem); line-height: .98; }
+  .badge { align-self: flex-start; padding: .55rem .8rem; border-radius: 10px; background: var(--moss-tint); color: var(--moss); font-size: .8rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+  .hero-art { flex: 1 1 18rem; display: flex; justify-content: center; min-width: 0; }
+
+  .phone { margin: 0; width: min(100%, 320px); display: flex; flex-direction: column; gap: .75rem; align-items: center; }
+  .phone-screen { width: 100%; border: 12px solid var(--ink); border-radius: 44px; background: var(--paper); padding: 2rem 1rem 1.25rem; display: flex; flex-direction: column; gap: .75rem; box-shadow: 0 30px 60px rgba(29,27,24,.18); }
+  .phone figcaption { font-size: .85rem; color: var(--muted); text-align: center; }
+  .mock-small { font-size: .75rem; color: var(--muted); }
+  .mock-title { font-family: var(--serif); font-size: 2rem; line-height: 1; }
+  .mock-banner { background: var(--moss); color: #fff; border-radius: 16px; padding: .85rem; font-size: .875rem; line-height: 1.35; }
+  .mock-list { background: var(--card); border: 1px solid #E4DED4; border-radius: 16px; }
+  .mock-row { display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .75rem .85rem; }
+  .mock-row + .mock-row { border-top: 1px solid #EFEAE2; }
+  .mock-row b { display: block; font-size: .875rem; }
+  .mock-row span { font-size: .75rem; color: var(--muted); }
+  .mock-row em { font-style: normal; font-size: .75rem; font-weight: 700; white-space: nowrap; }
+  .mock-row em.hot { color: var(--hot); }
+  .mock-row em.soon { color: var(--soon); }
+
+  .band { background: var(--card); border-block: 1px solid #E4DED4; padding-block: clamp(3rem, 8vw, 4.5rem); }
+  .cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: 1.25rem; }
+  .card { display: flex; flex-direction: column; gap: .6rem; padding: 1.5rem; border-radius: 20px; background: var(--card); border: 1px solid #E4DED4; }
+  .card.tint { background: var(--paper); border-color: transparent; }
+  .card h3 { font-size: 1.25rem; }
+  .card p { color: var(--body); }
+  .num { font-family: var(--serif); font-size: 2.75rem; line-height: 1; color: var(--moss); }
+
+  .moss { background: var(--moss); color: #fff; }
+  .two { display: flex; flex-wrap: wrap; gap: 2.5rem 3rem; align-items: center; padding-block: clamp(3rem, 8vw, 5rem); }
+  .two-copy { flex: 1 1 min(100%, 22rem); display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+  .two-copy p { font-size: 1.1rem; line-height: 1.55; color: #E3EEE7; }
+  .people { flex: 1 1 min(100%, 20rem); list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; min-width: 0; }
+  .people li { display: flex; justify-content: space-between; align-items: center; gap: .75rem; padding: .9rem 1rem; border-radius: 16px; background: #fff; color: var(--ink); }
+  .people .item { font-weight: 600; }
+  .people .who { display: inline-flex; align-items: center; gap: .5rem; font-size: .9rem; }
+  .av { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: #fff; font-size: .75rem; font-weight: 600; }
+  .a1 { background: var(--moss); } .a2 { background: #8A5A3C; }
+
+  .duo { display: flex; flex-wrap: wrap; gap: 3rem; }
+  .duo > .stack { flex: 1 1 min(100%, 22rem); }
+  .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .chips li { padding: .6rem .9rem; border-radius: 14px; background: var(--card); border: 1px solid #E4DED4; font-weight: 500; }
+  .ticks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .8rem; font-size: 1.05rem; }
+  .ticks li { position: relative; padding-left: 1.7rem; }
+  .ticks li::before { content: ''; position: absolute; left: .15rem; top: .45rem; width: .8rem; height: .45rem; border-left: 2px solid var(--moss); border-bottom: 2px solid var(--moss); transform: rotate(-45deg); }
+
+  .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); gap: 1.25rem; width: 100%; max-width: 46rem; text-align: left; }
+  .plan { display: flex; flex-direction: column; gap: .6rem; padding: 1.75rem; border: 1px solid var(--line); border-radius: 24px; background: var(--card); }
+  .plan.feature { border: 2px solid var(--moss); }
+  .plan p:not(.price) { color: var(--body); }
+  .price { font-family: var(--serif); font-size: 3rem; line-height: 1; }
+  .price small { font-family: var(--sans); font-size: 1rem; color: var(--muted); }
+
+  .join-card { width: 100%; max-width: 40rem; padding: clamp(1.25rem, 4vw, 2rem); border: 1px solid var(--line); border-radius: 24px; background: var(--paper); text-align: left; scroll-margin-top: 90px; }
+  .join-card h3 { font-family: var(--serif); font-weight: 400; font-size: 2rem; line-height: 1; margin-bottom: 1.25rem; }
+  .form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .field { display: flex; flex-direction: column; gap: .4rem; }
+  .field label, .choices legend { font-weight: 600; }
+  .field input { width: 100%; min-height: 56px; padding: 0 1rem; border: 1px solid #8F877C; border-radius: 16px; background: #fff; color: var(--ink); font: inherit; font-size: 1rem; }
+  .choices { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: .5rem; }
+  .choices legend { padding: 0; margin-bottom: .5rem; }
+  .choice, .consent { display: flex; align-items: center; gap: .75rem; min-height: 48px; padding: .5rem .9rem; border: 1px solid var(--line); border-radius: 14px; background: #fff; cursor: pointer; }
+  .consent { align-items: flex-start; padding-block: .8rem; line-height: 1.5; font-size: .95rem; }
+  .choice:has(input:checked) { border-color: var(--moss); background: var(--moss-tint); }
+  .choice input, .consent input { flex-shrink: 0; width: 22px; height: 22px; margin: 0; accent-color: var(--moss); }
+  .consent input { margin-top: .1rem; }
+  .feedback { font-size: .95rem; color: var(--ink); }
+  .feedback:empty { display: none; }
+
+  .faq { max-width: 48rem; display: flex; flex-direction: column; gap: .75rem; }
+  .faq h2 { margin-bottom: .5rem; }
+  .faq details { background: var(--card); border: 1px solid #E4DED4; border-radius: 16px; }
+  .faq summary { display: flex; align-items: center; min-height: 56px; padding: .5rem 1.25rem; font-weight: 600; cursor: pointer; }
+  .faq details p { padding: 0 1.25rem 1.1rem; color: var(--body); }
+
+  .foot { background: var(--ink); color: #fff; }
+  .foot-in { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: space-between; align-items: center; padding-block: clamp(2.5rem, 7vw, 4rem); }
+  .foot h2 { font-size: clamp(1.9rem, 4.5vw, 2.75rem); }
+  .foot-note { flex-basis: 100%; font-size: .85rem; color: #C9C2B8; }
+
+  @media (prefers-reduced-motion: reduce) { .actby * { transition: none !important; } }
+</style>

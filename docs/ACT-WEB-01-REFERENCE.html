@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACT-WEB-01 reference — Actby landing page (design only)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600;700&display=swap">
+<style>body{margin:0}</style></head><body>
+<!-- DESIGN REFERENCE ONLY. Not production code. Owner-approved design direction from the Claude design canvas, 2026-11-16.
+     Tokens: paper #F5F1EA, card #FFFFFF, ink #1D1B18, muted #6B655E, accent moss #2F5D4E, act-now #C2412D, soon #C98A1B / text #8A5A0B, clear #4F8A63.
+     Dark mode (Midnight Brass): bg #14161B, card #20232B, text #F2EFE9, muted #A8A29A, accent #E9C877.
+     Type: Instrument Serif headings, Inter body. The pricing card shows a [TEST PRICE] placeholder; ACT-WEB-01 replaces it with the price-preference question.
+     The email form here is a mock; production must use the site's existing mailto pattern (src/pages/playtests/join.astro). -->
+<main style="background:#F5F1EA;color:#1D1B18;font-family:Inter,system-ui,sans-serif">
+<header style="max-width:1160px;margin:0 auto;padding:24px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+<div style="display:flex;align-items:center;gap:10px"><span style="width:34px;height:34px;border-radius:10px;background:#2F5D4E;display:flex;align-items:center;justify-content:center;color:#FFFFFF;font-family:'Instrument Serif',Georgia,serif;font-size:24px">A</span><span style="font-family:'Instrument Serif',Georgia,serif;font-size:28px">Actby</span></div>
+<nav style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;font-size:15px"><a href="#how" style="color:#1D1B18;text-decoration:none">How it works</a><a href="#pricing" style="color:#1D1B18;text-decoration:none">Pricing</a><a href="#faq" style="color:#1D1B18;text-decoration:none">FAQ</a><a href="#join" style="background:#1D1B18;color:#FFFFFF;text-decoration:none;padding:12px 18px;border-radius:14px;font-weight:600">Join the waitlist</a></nav>
+</header>
+
+<section style="max-width:1160px;margin:0 auto;padding:56px 24px 80px;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+<div style="flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:24px">
+<span style="align-self:flex-start;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#2F5D4E;background:#E8F0EA;padding:8px 12px;border-radius:10px">For UK households · iPhone</span>
+<h1 style="margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(48px,7vw,88px);line-height:.98">Never auto-renew by accident again.</h1>
+<p style="margin:0;font-size:20px;line-height:1.5;color:#4A4540;max-width:520px">Actby tracks your household's renewals, tells you the last day to act, and shows who's on it. Car insurance, MOT, broadband, TV licence — all in one calm list.</p>
+<form id="join" style="display:flex;gap:10px;flex-wrap:wrap;max-width:520px">
+<label for="email" style="position:absolute;left:-9999px">Email address</label>
+<input id="email" type="email" placeholder="you@example.co.uk" style="flex:1 1 240px;height:56px;border-radius:16px;border:1px solid #DCD5CA;background:#FFFFFF;padding:0 18px;font-size:16px;font-family:inherit">
+<button type="button" style="height:56px;padding:0 24px;border-radius:16px;border:none;background:#2F5D4E;color:#FFFFFF;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer">Join the waitlist</button>
+</form>
+<p style="margin:0;font-size:14px;color:#6B655E">No bank login. No spam. One email when it launches.</p>
+</div>
+<div style="flex:1 1 360px;display:flex;justify-content:center">
+<div aria-label="Actby app showing the Up next list" role="img" style="width:320px;border-radius:44px;background:#1D1B18;padding:12px;box-shadow:0 30px 60px rgba(29,27,24,.18)">
+<div style="border-radius:34px;background:#F5F1EA;padding:36px 16px 20px;display:flex;flex-direction:column;gap:12px">
+<div style="font-size:12px;color:#6B655E">Monday 16 November</div>
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:32px;line-height:1">Up next</div>
+<div style="background:#2F5D4E;color:#FFFFFF;border-radius:16px;padding:14px;font-size:14px;line-height:1.35">Car insurance and broadband cost you <b>£1,086</b> last year. Compare before Friday.</div>
+<div style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:16px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #EFEAE2"><div><div style="font-weight:600;font-size:14px">Car insurance</div><div style="font-size:12px;color:#6B655E">Act by Fri 20 Nov</div></div><div style="font-size:12px;font-weight:600;color:#C2412D">4 days</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #EFEAE2"><div><div style="font-weight:600;font-size:14px">Broadband</div><div style="font-size:12px;color:#6B655E">Act by Tue 24 Nov</div></div><div style="font-size:12px;font-weight:600;color:#C2412D">8 days</div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px"><div><div style="font-weight:600;font-size:14px">MOT</div><div style="font-size:12px;color:#6B655E">Due Sat 12 Dec</div></div><div style="font-size:12px;font-weight:600;color:#8A5A0B">26 days</div></div>
+</div>
+</div></div></div>
+</section>
+
+<section style="background:#FFFFFF;border-top:1px solid #E4DED4;border-bottom:1px solid #E4DED4">
+<div style="max-width:1160px;margin:0 auto;padding:72px 24px;display:flex;flex-direction:column;gap:32px">
+<h2 style="margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,4vw,52px)">Sound familiar?</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+<div style="background:#F5F1EA;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:8px"><div style="font-size:20px;font-weight:600">The letter in the drawer</div><p style="margin:0;color:#4A4540;line-height:1.5">The renewal notice arrived, got put somewhere safe, and the policy rolled over anyway.</p></div>
+<div style="background:#F5F1EA;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:8px"><div style="font-size:20px;font-weight:600">The quiet price rise</div><p style="margin:0;color:#4A4540;line-height:1.5">Broadband out of contract, mobile still on the old deal, nobody noticed for months.</p></div>
+<div style="background:#F5F1EA;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:8px"><div style="font-size:20px;font-weight:600">"I thought you'd done it"</div><p style="margin:0;color:#4A4540;line-height:1.5">Two adults, one MOT, and nobody booked it.</p></div>
+</div></div></section>
+
+<section id="how" style="max-width:1160px;margin:0 auto;padding:80px 24px;display:flex;flex-direction:column;gap:32px">
+<h2 style="margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,4vw,52px)">How it works</h2>
+<ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+<li style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Instrument Serif',Georgia,serif;font-size:44px;color:#2F5D4E">1</span><span style="font-size:20px;font-weight:600">Snap the letter</span><span style="color:#4A4540;line-height:1.5">Or tap MOT, car tax, TV licence and more. Actby reads the dates and price.</span></li>
+<li style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Instrument Serif',Georgia,serif;font-size:44px;color:#2F5D4E">2</span><span style="font-size:20px;font-weight:600">Get your act-by date</span><span style="color:#4A4540;line-height:1.5">Not the renewal date — the last sensible day to compare, switch or cancel.</span></li>
+<li style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px"><span style="font-family:'Instrument Serif',Georgia,serif;font-size:44px;color:#2F5D4E">3</span><span style="font-size:20px;font-weight:600">You both get a nudge</span><span style="color:#4A4540;line-height:1.5">Whoever's handling it gets reminded. Everyone sees when it's done.</span></li>
+</ol></section>
+
+<section style="background:#2F5D4E;color:#FFFFFF">
+<div style="max-width:1160px;margin:0 auto;padding:80px 24px;display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+<div style="flex:1 1 420px;display:flex;flex-direction:column;gap:16px"><h2 style="margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,4vw,52px)">Made for two (or more).</h2><p style="margin:0;font-size:18px;line-height:1.5;color:#D7E6DD">One shared list for the household. Every item shows who's on it. Invite your partner with a link — no setup, no permissions maze.</p></div>
+<div style="flex:1 1 360px;display:flex;flex-direction:column;gap:10px">
+<div style="background:#FFFFFF;color:#1D1B18;border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600">Car insurance</span><span style="display:flex;align-items:center;gap:8px;font-size:14px">Alex <span style="width:26px;height:26px;border-radius:50%;background:#2F5D4E;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">A</span></span></div>
+<div style="background:#FFFFFF;color:#1D1B18;border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600">Broadband</span><span style="display:flex;align-items:center;gap:8px;font-size:14px">Sam <span style="width:26px;height:26px;border-radius:50%;background:#8A5A3C;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">S</span></span></div>
+<div style="background:#FFFFFF;color:#1D1B18;border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600">Boiler service</span><span style="font-size:14px">Both</span></div>
+</div></div></section>
+
+<section style="max-width:1160px;margin:0 auto;padding:80px 24px;display:flex;flex-wrap:wrap;gap:48px">
+<div style="flex:1 1 420px;display:flex;flex-direction:column;gap:16px"><h2 style="margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,4vw,48px)">Built for UK life admin.</h2>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<span style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:14px;padding:10px 14px;font-weight:500">MOT</span><span style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:14px;padding:10px 14px;font-weight:500">Car tax</span><span style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:14px;padding:10px 14px;font-weight:500">TV licence</span><span style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:14px;padding:10px 14px;font-weight:500">Council tax</span><span style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:14px;padding:10px 14px;font-weight:500">Boiler service</span><span style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:14px;padding:10px 14px;font-weight:500">Home insurance</span><span style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:14px;padding:10px 14px;font-weight:500">Broadband</span><span style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:14px;padding:10px 14px;font-weight:500">Passport</span><span style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:14px;padding:10px 14px;font-weight:500">Mortgage fix</span></div></div>
+<div style="flex:1 1 420px;display:flex;flex-direction:column;gap:16px"><h2 style="margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,4vw,48px)">Calm by design.</h2>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:17px">
+<li>No bank login, ever.</li><li>No ads, no selling your data.</li><li>No filters or settings to learn — one list, already sorted.</li><li>We nudge you to compare. We never tell you what to buy.</li></ul></div>
+</section>
+
+<section id="pricing" style="background:#FFFFFF;border-top:1px solid #E4DED4;border-bottom:1px solid #E4DED4">
+<div style="max-width:1160px;margin:0 auto;padding:80px 24px;display:flex;flex-direction:column;gap:28px;align-items:center;text-align:center">
+<h2 style="margin:0;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,4vw,52px)">Simple pricing</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;width:100%;max-width:760px;text-align:left">
+<div style="border:1px solid #E4DED4;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:12px"><div style="font-size:18px;font-weight:600">Free</div><div style="font-family:'Instrument Serif',Georgia,serif;font-size:48px">£0</div><div style="color:#4A4540">Up to 8 items, reminders, calendar sync.</div></div>
+<div style="border:2px solid #2F5D4E;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:12px"><div style="font-size:18px;font-weight:600">Actby Household</div><div style="font-family:'Instrument Serif',Georgia,serif;font-size:48px">[TEST PRICE]</div><div style="color:#4A4540">Unlimited items, shared household, letter scanning, price history.</div><div style="font-size:13px;color:#6B655E">Variant A: £2.99/month · Variant B: £14.99 once</div></div>
+</div></div></section>
+
+<section id="faq" style="max-width:760px;margin:0 auto;padding:80px 24px;display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0 0 12px;font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(34px,4vw,48px)">Questions</h2>
+<details style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:16px;padding:18px 20px"><summary style="font-weight:600;cursor:pointer">Do I need to connect my bank?</summary><p style="margin:10px 0 0;color:#4A4540">No. Actby works from your letters, emails and what you tell it.</p></details>
+<details style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:16px;padding:18px 20px"><summary style="font-weight:600;cursor:pointer">Does Actby give financial advice?</summary><p style="margin:10px 0 0;color:#4A4540">No. It reminds you when to act and shows last year's price. The decision is yours.</p></details>
+<details style="background:#FFFFFF;border:1px solid #E4DED4;border-radius:16px;padding:18px 20px"><summary style="font-weight:600;cursor:pointer">Is there an Android version?</summary><p style="margin:10px 0 0;color:#4A4540">iPhone first. Join the waitlist and tell us you're on Android.</p></details>
+</section>
+
+<footer style="background:#1D1B18;color:#FFFFFF">
+<div style="max-width:1160px;margin:0 auto;padding:64px 24px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center">
+<div style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(30px,4vw,44px)">Stay on top of it, together.</div>
+<a href="#join" style="background:#FFFFFF;color:#1D1B18;text-decoration:none;padding:16px 22px;border-radius:16px;font-weight:600">Join the waitlist</a>
+<div style="flex-basis:100%;font-size:13px;color:#B8B1A7">Actby is a Pluto Night Labs product.</div>
+</div></footer>
+</main>
+
+</body></html>
