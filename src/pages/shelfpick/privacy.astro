@@ -30,7 +30,7 @@ const description = 'How Pluto Night Labs Ltd collects, uses, shares and retains
       </picture>
       <h1>Privacy Policy</h1>
       <p class="legal-summary">This policy explains what personal information ShelfPick uses, why it is needed and the choices you have.</p>
-      <p class="legal-meta"><span>Applies to ShelfPick 1.0</span><span>Last updated 13 November 2026</span></p>
+      <p class="legal-meta"><span>Applies to ShelfPick 1.0 and later</span><span>Last updated 17 November 2026</span></p>
     </header>
 
     <div class="shelfpick-shell legal-layout">
@@ -63,9 +63,10 @@ const description = 'How Pluto Night Labs Ltd collects, uses, shares and retains
           <h3>Your collection and activity</h3>
           <p>Games you mark as Owned or Want to Play, imported collection records, Picker criteria and recommendations, player profiles, rankings, comparisons, recorded plays, participant names, scores, dates, duration and any optional location you type. Please use a nickname or obtain permission before entering information about another person.</p>
           <h3>Game Night</h3>
-          <p>ShelfPick can use selected players, group preferences and a shortlist to help a host choose a game. Phone and QR voting are not available in this release.</p>
+          <p>ShelfPick can use selected players, group preferences and a shortlist to help a host choose a game.</p>
+          <p>A host with an account can also open a phone vote. ShelfPick creates a link and QR code for that vote. Anyone with the link can join without an account or email address: they choose a nickname and cast a ballot for the shortlisted games. ShelfPick stores the nickname, a hashed credential that lets that browser or device change its own ballot, and the ballot itself. The host sees nicknames and the group's totals, not each guest's individual choice. Please ask children and other guests to use nicknames rather than real names. A guest's credential is kept in that browser's local storage on their device.</p>
           <h3>Security and operations</h3>
-          <p>Verification and password-reset token hashes, pseudonymous abuse-prevention counters, request identifiers, request method, redacted request path, response status and duration. The app stores its sign-in credential securely on your device so you can stay signed in.</p>
+          <p>Verification and password-reset token hashes, pseudonymous abuse-prevention counters, request identifiers, request method, redacted request path, response status and duration. Guests who vote are logged in the same way as signed-in users; ShelfPick does not ask guests for an email address, location or contact details. The app stores its sign-in credential securely on your device so you can stay signed in.</p>
           <h3>BoardGameGeek data</h3>
           <p>If you supply a BoardGameGeek username, ShelfPick requests that public collection from BoardGameGeek. Game details and cover images also come from BoardGameGeek. ShelfPick does not ask for or receive your BoardGameGeek password.</p>
         </section>
@@ -76,6 +77,7 @@ const description = 'How Pluto Night Labs Ltd collects, uses, shares and retains
             <li><strong>To provide ShelfPick:</strong> create and secure your account; organise your collection; personalise recommendations; record plays; and provide the features you request. We rely on our contract with you, or steps taken at your request before entering that contract.</li>
             <li><strong>To send service email:</strong> deliver account verification and password-reset messages. We rely on the same contractual basis. ShelfPick does not send marketing email through the app.</li>
             <li><strong>To protect and operate the service:</strong> prevent abuse, diagnose failures, maintain security and understand whether core features work as intended. We rely on our legitimate interests in providing a secure, reliable and useful service, balanced against your rights.</li>
+            <li><strong>To run phone votes:</strong> let a host collect and count votes from guests at game night. We rely on our legitimate interests in providing the feature the host asked for, using a limited set of information and giving guests a way to remove it.</li>
             <li><strong>To handle rights requests and complaints:</strong> respond to you and keep records where reasonably needed. We rely on legal obligations and our legitimate interests in demonstrating and managing compliance.</li>
           </ul>
           <p>Picker recommendations are automated suggestions based on your collection and the criteria you choose. They do not make decisions that have legal or similarly significant effects on you.</p>
@@ -101,6 +103,7 @@ const description = 'How Pluto Night Labs Ltd collects, uses, shares and retains
             <li>Resend states that email and log data on the current plan is retained for 30 days.</li>
             <li>Authentication abuse counters contain a keyed hash rather than the raw email or IP address. Rows older than 24 hours are removed when a later authentication write performs cleanup; there is no separate scheduled cleanup.</li>
             <li>Expired verification and reset token hashes are unusable, but there is no separate scheduled cleanup. They are removed when replaced or when the account is deleted.</li>
+            <li>A phone vote link stops working 12 hours after it is created. Guest nicknames, hashed credentials and ballots are kept until the guest removes them or the host deletes their ShelfPick account, which also removes the host's vote sessions and everything guests submitted to them. We do not currently run an automatic deletion of expired votes.</li>
             <li>Production database point-in-time recovery covers a rolling three-day window. Deleted information may remain in recovery copies until that window expires and is used only for service recovery.</li>
           </ul>
           <p>We review retention when the service or provider arrangements change. We do not promise an automated inactivity-deletion schedule that the service does not currently operate.</p>
@@ -110,12 +113,14 @@ const description = 'How Pluto Night Labs Ltd collects, uses, shares and retains
           <h2>Your choices and rights</h2>
           <p>You can update your profile and preferences in ShelfPick. You can delete your account from <strong>Settings → Profile</strong> after confirming your password. Deletion removes your account and the ShelfPick records owned by it from the live database, including your collection, players, plays, recommendations and hosted sessions. Shared game-catalogue records remain. Recovery copies age out under the period described above.</p>
           <p>Depending on the circumstances, you may ask us to give you a copy of your information, correct it, erase it, restrict how it is used, transfer information you provided, or consider an objection. These rights are not absolute and exemptions may apply. We normally respond within one month, subject to any extension permitted by law.</p>
+          <p>Guests can change their nickname or ballot, or remove their nickname and ballot, from the device they joined on while the vote is open. Guests are not identified by email, so a guest who wants a record removed after leaving the page can email us with the host's name, the approximate date of the vote and the nickname they used. We will try to find and remove it, but may not be able to identify a record from a nickname alone, and we will not disclose other guests' information to do so.</p>
           <p>To make a request, email <a href={`mailto:${supportEmail}?subject=${encodeURIComponent('ShelfPick data request')}`}>{supportEmail}</a>. We may need to verify that you control the relevant account, but we will never ask you to send your password.</p>
         </section>
 
         <section id="children">
           <h2>Age and children's privacy</h2>
           <p>You must be at least 13 to create a ShelfPick account. Registration asks you to confirm this; we do not collect a date of birth or use an external age-verification service. If you are under 13, do not create an account.</p>
+          <p>The 13+ requirement applies to creating an account, not to joining a phone vote as a guest. A phone vote does not collect a date of birth, so ShelfPick cannot tell a guest's age. Hosts should only share a vote link with the people they are playing with and should ask children to use nicknames.</p>
           <p>People under 18 have data-protection rights. If you believe a child has created an account or that we hold a child's information inappropriately, contact us so we can investigate and take appropriate action.</p>
         </section>
 
