@@ -30,7 +30,7 @@ const description = 'How Pluto Night Labs Ltd collects, uses, shares and retains
       </picture>
       <h1>Privacy Policy</h1>
       <p class="legal-summary">This policy explains what personal information ShelfPick uses, why it is needed and the choices you have.</p>
-      <p class="legal-meta"><span>Applies to ShelfPick 1.0 and later</span><span>Last updated 17 November 2026</span></p>
+      <p class="legal-meta"><span>Applies to ShelfPick 1.0 and later</span><span>Last updated 18 November 2026</span></p>
     </header>
 
     <div class="shelfpick-shell legal-layout">
@@ -89,10 +89,12 @@ const description = 'How Pluto Night Labs Ltd collects, uses, shares and retains
           <ul>
             <li><strong>Render</strong> hosts the FastAPI service and PostgreSQL database in Frankfurt and retains Hobby dashboard application logs for seven days. Its infrastructure and subprocessors may process information outside the United Kingdom.</li>
             <li><strong>Resend</strong> delivers verification and password-reset email. The sending route is configured for Ireland, while Resend states that email and log data on the Free plan is retained for 30 days and may be stored or processed in the United States.</li>
+            <li><strong>PostHog</strong> (PostHog EU Cloud, hosted in the European Union) acts as our processor for anonymous usage analytics in the app, described below.</li>
             <li><strong>BoardGameGeek</strong> supplies public collection and game information and hosts cover images. Requests can disclose your IP address and ordinary browser or device information to BoardGameGeek and its delivery providers. BoardGameGeek is based in the United States.</li>
           </ul>
           <p>These arrangements can involve transfers outside the United Kingdom. Render and Resend publish data-processing terms that describe UK transfer mechanisms, including a UK Addendum and the UK Extension to the EU–US Data Privacy Framework. We have not independently verified which mechanism applies to every transfer under our current account arrangements. BoardGameGeek's privacy policy states that information from outside the United States is transferred to the United States, but we have not verified a separate UK transfer safeguard for that processing. Contact us if you want more information about the provider terms we currently hold.</p>
-          <p>ShelfPick has no advertising SDK and does not sell personal information. Its client analytics and crash-reporting hooks are not connected to a third-party provider in this release.</p>
+          <p><strong>Anonymous usage analytics.</strong> Recent versions of ShelfPick use PostHog to count which features are used, for example finishing onboarding or running the Picker. Events carry a random identifier stored on your device, the app version and basic device information such as the operating system. They never include your name, email address, account details, search text, notes or game names, and we do not use them for advertising or share them with data brokers. You can turn this off at any time in Settings &gt; About &gt; "Share anonymous usage analytics"; when it is off nothing is sent.</p>
+          <p>ShelfPick has no advertising SDK and does not sell personal information. Its crash-reporting hook is not connected to a third-party provider in this release.</p>
         </section>
 
         <section id="retention">
