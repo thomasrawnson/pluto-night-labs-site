@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config';
+import '../../styles/orbit-slingshot.css';
+
+const title = 'Orbit Slingshot Support | Pluto Night Labs';
+const description = 'Help with Orbit Slingshot: how to play, stars, timed levels, Remove Ads and Restore purchase, Game Center, settings and your progress.';
+const mailto = `mailto:${site.supportEmail}?subject=${encodeURIComponent('Orbit Slingshot support')}`;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  socialImage="/images/orbit-slingshot/social-icon-600.png"
+  socialImageAlt="Orbit Slingshot app icon: a glowing yellow planet with a neon orbit ring"
+  socialImageWidth={600}
+  socialImageHeight={600}
+  themeColor="#04060d"
+  colorScheme="dark"
+  twitterCard="summary"
+>
+  <div class="os-page">
+    <section class="os-shell os-support-hero">
+      <a class="os-back" href="/orbit-slingshot/">← Orbit Slingshot</a>
+      <div class="os-app-id">
+        <img class="os-app-icon" src="/images/orbit-slingshot/app-icon-256.png" alt="" width="256" height="256" />
+        <p><strong>Orbit Slingshot</strong><span>Support</span></p>
+      </div>
+      <h1>How can we help?</h1>
+      <p>Quick answers for the most common Orbit Slingshot questions, plus a direct way to reach Pluto Night Labs.</p>
+      <a class="os-button os-button-primary" href={mailto}>Email Orbit Slingshot support</a>
+      <p class="os-note">Please do not include your password or other sensitive information.</p>
+    </section>
+
+    <section class="os-shell os-help" aria-label="Orbit Slingshot help topics">
+      <article>
+        <h2>How to play</h2>
+        <p>Pull back from the ship and release to launch. Gravity bends your flight, so curve around the planets to reach the portal. Prefer buttons to dragging? Open <strong>Aim controls</strong> under the board to set the direction and power, then tap <strong>Launch</strong>.</p>
+      </article>
+      <article>
+        <h2>Stars</h2>
+        <p>Each level has up to three stars: dock in the portal, collect the bonus star, and dock within three launches. You can replay any level to improve your stars.</p>
+      </article>
+      <article>
+        <h2>Timed levels</h2>
+        <p>Levels 6, 9, 12, 14 and 15 have a moving portal or an energy gate. Watch the timer beside them and launch when the way is clear. If a flight misses, retry and change your aim or your timing.</p>
+      </article>
+      <article>
+        <h2>Remove ads</h2>
+        <p>Orbit Slingshot shows occasional ads between levels. Open <strong>Settings</strong> (the cog at the top right) and choose <strong>Remove ads</strong> for a one-time purchase that takes them away for good. There is no subscription.</p>
+      </article>
+      <article>
+        <h2>Restore a purchase</h2>
+        <p>If you reinstall the game or move to a new iPhone, open <strong>Settings</strong> and choose <strong>Restore purchase</strong>, using the same Apple Account you bought it with. Apple handles payment and purchase records, so we cannot see or refund purchases. For refunds, use Apple’s <a href="https://reportaproblem.apple.com/" target="_blank" rel="noopener noreferrer">Report a Problem</a> page.</p>
+      </article>
+      <article>
+        <h2>Game Center</h2>
+        <p>Sign in to Game Center in your iPhone’s Settings, then open <strong>Settings</strong> in the game and choose <strong>Leaderboard</strong> or <strong>Achievements</strong>. The game sends your total stars and achievement progress to Game Center. It plays fully without it.</p>
+      </article>
+      <article>
+        <h2>Haptics and reduced motion</h2>
+        <p>In <strong>Settings</strong> you can switch haptic vibrations on or off, and choose Reduced motion: <strong>Match device</strong>, <strong>Always reduce</strong> or <strong>Full effects</strong>.</p>
+      </article>
+      <article>
+        <h2>Your progress</h2>
+        <p>There is no account. Your completed levels, stars and settings are stored on your device. Deleting the game removes them, although a device backup may keep a copy. Restore purchase brings back an ads-free game.</p>
+      </article>
+      <article class="os-help-wide">
+        <h2>Ads and privacy</h2>
+        <p>Ads come from Google AdMob and are requested as non-personalised. Where the law requires it, a consent form appears first. Read the full <a href="/orbit-slingshot/privacy/">Orbit Slingshot Privacy Policy</a> for what is collected and why.</p>
+      </article>
+    </section>
+
+    <section class="os-contact">
+      <div class="os-shell os-contact-inner">
+        <div><h2>Still stuck?</h2><p>Tell us what you were trying to do and what happened. A screenshot can help, but remove personal details first.</p></div>
+        <a class="os-button os-button-primary" href={mailto}>{site.supportEmail}</a>
+      </div>
+    </section>
+
+    <nav class="os-shell os-legal" aria-label="Orbit Slingshot legal information">
+      <p>How Orbit Slingshot handles your information.</p>
+      <div><a href="/orbit-slingshot/privacy/">Privacy Policy</a><a href="/orbit-slingshot/">About the game</a></div>
+    </nav>
+  </div>
+</BaseLayout>

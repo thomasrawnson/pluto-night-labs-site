@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config';
+import '../../styles/orbit-slingshot.css';
+
+const title = 'Orbit Slingshot — A neon gravity puzzle for iPhone';
+const description = 'Pull back, release and let the planets bend your flight to the portal. 15 hand-built gravity puzzles for iPhone, free with occasional ads.';
+
+const screens = [
+  { src: '/images/orbit-slingshot/screenshots/aim-and-launch.webp', alt: 'Level 3, Twin Currents: a dotted aim line from the ship, two planets and a bonus star above it', title: 'Aim and launch', caption: 'Pull back to set the direction and power.' },
+  { src: '/images/orbit-slingshot/screenshots/docked-twin-currents.webp', alt: 'Level 3 docked: a glowing route curves past two planets into the portal', title: 'Dock the portal', caption: 'Replay your winning route, or share it as a picture.' },
+  { src: '/images/orbit-slingshot/screenshots/around-the-world.webp', alt: 'Level 4, Around the World: the route bends around a pink planet into the portal', title: 'Let gravity do the work', caption: 'Every planet bends the path a little differently.' },
+  { src: '/images/orbit-slingshot/screenshots/title.webp', alt: 'Orbit Slingshot title screen with Play, Levels and Settings buttons', title: 'Fifteen levels', caption: 'Three chapters, from a straight shot to timed gates.' },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  socialImage="/images/orbit-slingshot/social-icon-600.png"
+  socialImageAlt="Orbit Slingshot app icon: a glowing yellow planet with a neon orbit ring"
+  socialImageWidth={600}
+  socialImageHeight={600}
+  themeColor="#04060d"
+  colorScheme="dark"
+  twitterCard="summary"
+>
+  <div class="os-page">
+    <section class="os-shell os-hero">
+      <div>
+        <div class="os-app-id">
+          <img class="os-app-icon" src="/images/orbit-slingshot/app-icon-256.png" alt="" width="256" height="256" />
+          <p><strong>Orbit Slingshot</strong><span>Gravity puzzle · iPhone</span></p>
+        </div>
+        <h1>Bend gravity.<br /><em>Dock the portal.</em></h1>
+        <p class="os-lead">Pull back from your ship, release, and let the planets bend your flight to the portal. Fifteen hand-built puzzles, from a straight shot to moving portals and timed energy gates.</p>
+        <div class="os-actions" aria-label="Orbit Slingshot availability">
+          <p class="os-status"><span class="os-dot" aria-hidden="true"></span><span>App Store — coming soon</span></p>
+          <a class="os-button" href="#screens">See the game <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+
+      <div class="os-preview">
+        <div class="os-glow" aria-hidden="true"></div>
+        <figure>
+          <div class="os-phone">
+            <img src="/images/orbit-slingshot/screenshots/aim-and-launch.webp" alt="Orbit Slingshot Level 3 with the ship aimed past two planets towards the portal" width="736" height="1600" fetchpriority="high" decoding="async" />
+          </div>
+          <figcaption>Real gameplay from the iPhone release build.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="os-shell os-features" aria-labelledby="features-title">
+      <div class="os-features-intro">
+        <h2 id="features-title">Simple to throw. Hard to master.</h2>
+        <p>One pull, one release. Where you aim decides whether gravity carries you home.</p>
+      </div>
+      <div class="os-feature-list">
+        <article><span class="os-feature-num" aria-hidden="true">15</span><div><h3>Hand-built puzzles</h3><p>Fifteen levels across three chapters, with moving portals and timed energy gates to keep you thinking.</p></div></article>
+        <article><span class="os-feature-num" aria-hidden="true">◌</span><div><h3>Plan every shot</h3><p>A preview line shows where gravity will carry you, so you can adjust before you let go.</p></div></article>
+        <article><span class="os-feature-num" aria-hidden="true">★</span><div><h3>Up to three stars</h3><p>Dock in the portal, collect the bonus star and finish within three launches for a perfect orbit.</p></div></article>
+        <article><span class="os-feature-num" aria-hidden="true">✈</span><div><h3>Plays offline</h3><p>No account needed. Your progress stays on your device, with a Game Center leaderboard and achievements if you want them.</p></div></article>
+      </div>
+    </section>
+
+    <section class="os-showcase" id="screens" aria-labelledby="screens-title">
+      <div class="os-shell">
+        <div class="os-showcase-intro">
+          <p class="os-kicker">Inside Orbit Slingshot</p>
+          <h2 id="screens-title">Aim it. Fly it. Dock it.</h2>
+          <p>Neon planets, glowing routes and a replay of every winning flight.</p>
+        </div>
+        <p class="os-scroll-hint" id="gallery-scroll-hint"><span class="os-scroll-track" aria-hidden="true"><span></span></span>Swipe or use arrow keys to see all four screens.</p>
+        <div class="os-strip" role="list" aria-label="Orbit Slingshot screens" aria-describedby="gallery-scroll-hint" tabindex="0">
+          {screens.map((s) => (
+            <figure role="listitem">
+              <img src={s.src} alt={s.alt} width="736" height="1600" loading="lazy" decoding="async" />
+              <figcaption><strong>{s.title}</strong><span>{s.caption}</span></figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="os-fair">
+      <div class="os-shell os-fair-inner">
+        <div class="os-fair-copy">
+          <p class="os-kicker">Fair play</p>
+          <h2>Free to play. Ads gone for good with one purchase.</h2>
+          <p>Orbit Slingshot is free, with occasional ads between levels. A one-time Remove Ads purchase takes them away for good, with no subscription. You can restore it any time in Settings.</p>
+        </div>
+        <div class="os-card" aria-hidden="true">
+          <span class="os-card-label">Remove Ads</span>
+          <span class="os-card-title">One-time</span>
+          <span class="os-card-note">No subscription · Restore in Settings</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="os-shell os-trust" aria-labelledby="trust-title">
+      <div>
+        <h2 id="trust-title">Made by Pluto Night Labs.</h2>
+        <p>Orbit Slingshot is made by {site.legalName}, an independent UK software and games studio.</p>
+      </div>
+      <div class="os-trust-links">
+        <a href="/orbit-slingshot/support/">Orbit Slingshot Support <span aria-hidden="true">→</span></a>
+        <a href={`mailto:${site.supportEmail}?subject=${encodeURIComponent('Orbit Slingshot')}`}>{site.supportEmail}</a>
+        <a href="/orbit-slingshot/privacy/">Orbit Slingshot Privacy Policy <span aria-hidden="true">→</span></a>
+        <a href="/games/">More games from the studio <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
