@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const baseURL = process.env.QA_BASE_URL ?? 'http://127.0.0.1:4324';
 const chromePath = process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-const outputDir = path.resolve(process.env.QA_OUTPUT_DIR ?? 'docs/screenshots/sp-web-01');
+const outputDir = path.resolve(process.env.QA_OUTPUT_DIR ?? 'docs/screenshots/sp-web-02');
 const failures = [];
 const results = [];
 
@@ -145,10 +145,11 @@ async function inspect({ name, route, viewport, colorScheme = 'light', screensho
   if (metrics.images.some(image => !image.complete || image.naturalWidth === 0)) failures.push(`${name}: unloaded image ${JSON.stringify(metrics.images)}`);
   if (consoleErrors.length) failures.push(`${name}: console errors: ${consoleErrors.join(' | ')}`);
   if (/QR voting|£3\.99|Buy Pro|purchase Pro/i.test(metrics.text)) failures.push(`${name}: unavailable feature or purchase copy found`);
-  if (route === '/shelfpick/' && await page.locator('a[href*="apps.apple.com"]').count()) failures.push(`${name}: App Store link must not exist yet`);
-  if (route === '/shelfpick/' && await page.locator('.availability-status', { hasText: 'App Store — coming soon' }).count() !== 1) failures.push(`${name}: App Store availability status missing`);
+  // ShelfPick is live on the App Store (id6833957995): the landing page must link to it exactly once.
+  if (route === '/shelfpick/' && await page.locator('a[href="https://apps.apple.com/gb/app/shelfpick/id6833957995"]').count() !== 1) failures.push(`${name}: App Store link missing`);
+  if (route === '/shelfpick/' && await page.locator('.availability-status', { hasText: 'Free on the App Store for iPhone' }).count() !== 1) failures.push(`${name}: App Store availability status missing`);
   if (route === '/shelfpick/' && await page.locator('.availability-status:is(a, button), .availability-status[aria-disabled="true"]').count()) failures.push(`${name}: App Store status is misleadingly interactive`);
-  if (route === '/shelfpick/' && await page.locator('img[src="/images/shelfpick/screenshots/picker-recommendation.png"]').count() !== 1) failures.push(`${name}: recommendation-result screenshot missing`);
+  if (route === '/shelfpick/' && await page.locator('img[src="/images/shelfpick/screenshots/tonights-pick.png"]').count() !== 1) failures.push(`${name}: recommendation-result screenshot missing`);
   if (route === '/shelfpick/' && await page.locator('.screenshot-strip img').count() !== 4) failures.push(`${name}: screenshot showcase is incomplete`);
   if (route === '/shelfpick/' && viewport.width <= 820 && await page.locator('#gallery-scroll-hint:visible').count() !== 1) failures.push(`${name}: mobile gallery scroll hint missing`);
   if (route === '/shelfpick/' && await page.locator('.screenshot-strip[tabindex="0"][aria-describedby="gallery-scroll-hint"]').count() !== 1) failures.push(`${name}: gallery keyboard or assistive description missing`);
@@ -206,9 +207,9 @@ await linkPage.goto(`${baseURL}/software/`, { waitUntil: 'networkidle' });
 if (!await linkPage.locator('a[href="/shelfpick/"]').count()) failures.push('/software/: ShelfPick does not link to the approved route');
 
 const brokenPage = await linkContext.newPage();
-await brokenPage.route('**/images/shelfpick/screenshots/picker-recommendation.png', route => route.abort());
+await brokenPage.route('**/images/shelfpick/screenshots/tonights-pick.png', route => route.abort());
 await brokenPage.goto(`${baseURL}/shelfpick/`, { waitUntil: 'networkidle' });
-const fallback = await brokenPage.locator('img[alt^="ShelfPick Picker recommendation"]').evaluate(image => {
+const fallback = await brokenPage.locator('img[alt^="ShelfPick Tonight’s pick"]').evaluate(image => {
   const rect = image.getBoundingClientRect();
   return { complete: image.complete, naturalWidth: image.naturalWidth, width: rect.width, height: rect.height, alt: image.alt };
 });
