@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import '../../styles/shelfpick.css';
 
 const title = 'ShelfPick — Spend less time choosing. Spend more time playing.';
-const description = 'Organise your board-game collection, find the right game for your group and remember every game night with ShelfPick.';
+const description = 'Organise your board-game collection, find the right game for your group and remember every game night with ShelfPick. Free to download, with an optional Pro upgrade.';
 ---
 
 <BaseLayout
@@ -28,7 +28,7 @@ const description = 'Organise your board-game collection, find the right game fo
         <h1>Spend less time choosing.<br />Spend more time playing.</h1>
         <p class="hero-lead">Your board-game collection and game-night companion—built to help you organise your shelf, make a confident pick and keep the stories from every play.</p>
         <div class="hero-actions" aria-label="ShelfPick availability">
-          <p class="availability-status"><span class="availability-dot" aria-hidden="true"></span><span>Free on the App Store for iPhone</span></p>
+          <p class="availability-status"><span class="availability-dot" aria-hidden="true"></span><span>Free to download for iPhone · optional ShelfPick Pro upgrade</span></p>
           <a class="shelfpick-button shelfpick-button-primary" href="https://apps.apple.com/gb/app/shelfpick/id6833957995">Get ShelfPick on the App Store</a>
           <a class="shelfpick-button shelfpick-button-secondary" href="/shelfpick/support/">Get ShelfPick support</a>
         </div>
@@ -39,9 +39,9 @@ const description = 'Organise your board-game collection, find the right game fo
         <figure>
           <div class="phone-frame">
             <span class="phone-speaker" aria-hidden="true"></span>
-            <img src="/images/shelfpick/screenshots/tonights-pick.png" alt="ShelfPick Tonight’s pick recommending Azul for three players, with a Good fit label, why it fits and a Log a play button" width="736" height="1600" fetchpriority="high" decoding="async" />
+            <img src="/images/shelfpick/screenshots/tonight.png" alt="ShelfPick Tonight screen asking who is playing, with three players chosen, complexity options, a Find a game button, a Start a group vote button and recently played games" width="736" height="1600" fetchpriority="high" decoding="async" />
           </div>
-          <figcaption>Tonight’s pick in ShelfPick 1.1 for iPhone.</figcaption>
+          <figcaption>Tonight in ShelfPick for iPhone. Screens on this page show sample games and illustrative artwork.</figcaption>
         </figure>
       </div>
     </section>
@@ -62,7 +62,7 @@ const description = 'Organise your board-game collection, find the right game fo
         </article>
         <article>
           <svg viewBox="0 0 52 52" width="52" height="52" aria-hidden="true"><rect x="3" y="3" width="46" height="46" rx="13" fill="var(--sp-forest-soft)"/><path d="M16 17v18h21M21 29l5-6 5 4 6-9" fill="none" stroke="var(--sp-forest)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="37" cy="18" r="3" fill="var(--sp-gold)"/></svg>
-          <div><h3>Remember every game night</h3><p>Record your plays, players and results, then return to your history when you want to revisit what reached the table.</p></div>
+          <div><h3>Remember every game night</h3><p>Record your plays, players and results, follow your trends and share a monthly or yearly recap of what reached the table.</p></div>
         </article>
       </div>
     </section>
@@ -72,7 +72,7 @@ const description = 'Organise your board-game collection, find the right game fo
         <div class="showcase-intro">
           <p class="showcase-kicker">Inside ShelfPick</p>
           <h2 id="screenshots-title">From a crowded shelf to tonight’s pick.</h2>
-          <p>Browse your collection, choose together, log the play and discover what could come next.</p>
+          <p>Browse your collection, log the play, follow your trends and share a recap of the month.</p>
         </div>
         <p class="gallery-scroll-hint" id="gallery-scroll-hint"><span class="scroll-track" aria-hidden="true"><span></span></span>Swipe or use arrow keys to see all four screens.</p>
         <div class="screenshot-strip" role="list" aria-label="ShelfPick app screens" aria-describedby="gallery-scroll-hint" tabindex="0">
@@ -81,18 +81,40 @@ const description = 'Organise your board-game collection, find the right game fo
             <figcaption><strong>Shelf</strong><span>Keep your collection easy to scan.</span></figcaption>
           </figure>
           <figure role="listitem">
-            <img src="/images/shelfpick/screenshots/log-play.png" alt="ShelfPick Log play sheet for Azul with three players, their scores and the winner picked from the scores" width="736" height="1600" loading="lazy" decoding="async" />
-            <figcaption><strong>Log play</strong><span>Scores in, winner worked out.</span></figcaption>
+            <img src="/images/shelfpick/screenshots/plays.png" alt="ShelfPick Plays listing recent plays by month with players, duration, winner and a Rematch button" width="736" height="1600" loading="lazy" decoding="async" />
+            <figcaption><strong>Plays</strong><span>Every play, one tap from a rematch.</span></figcaption>
           </figure>
           <figure role="listitem">
-            <img src="/images/shelfpick/screenshots/stats.png" alt="ShelfPick Stats showing games owned, how much of the shelf has been played and games waiting to be played" width="736" height="1600" loading="lazy" decoding="async" />
-            <figcaption><strong>Stats</strong><span>See what has reached the table.</span></figcaption>
+            <img src="/images/shelfpick/screenshots/stats.png" alt="ShelfPick Stats Trends showing a week streak, H-index, games to play next and a plays-per-month chart" width="736" height="1600" loading="lazy" decoding="async" />
+            <figcaption><strong>Stats</strong><span>Trends, streaks and your H-index.</span></figcaption>
           </figure>
           <figure role="listitem">
-            <img src="/images/shelfpick/screenshots/discover-hot.png" alt="ShelfPick Discover showing hot games with covers, facts and a Want to Play button" width="736" height="1600" loading="lazy" decoding="async" />
-            <figcaption><strong>Discover</strong><span>Save promising games for later.</span></figcaption>
+            <img src="/images/shelfpick/screenshots/monthly-recap.png" alt="ShelfPick share screen with a My month in games card showing a cover collage, play totals and most-played game" width="736" height="1600" loading="lazy" decoding="async" />
+            <figcaption><strong>Monthly recap</strong><span>Share your month in games.</span></figcaption>
           </figure>
         </div>
+      </div>
+    </section>
+
+    <section class="shelfpick-shell pro-section" aria-labelledby="pro-title">
+      <figure class="pro-shot">
+        <div class="phone-frame">
+          <span class="phone-speaker" aria-hidden="true"></span>
+          <img src="/images/shelfpick/screenshots/pro.png" alt="ShelfPick Pro screen saying Free covers the essentials, with Pro Yearly and Pro Lifetime plans" width="736" height="1600" loading="lazy" decoding="async" />
+        </div>
+      </figure>
+      <div class="pro-copy">
+        <p class="showcase-kicker">Free, with optional Pro</p>
+        <h2 id="pro-title">Free for everyday play. Pro when you want more.</h2>
+        <p>ShelfPick is free to download and use. Your shelf, Picker, play history and basic Game Night stay free. ShelfPick Pro is an optional in-app purchase, bought through the App Store in the iPhone app, for people who want to go deeper.</p>
+        <ul class="pro-list">
+          <li><strong>Deeper statistics</strong> with score records, head-to-head and filters</li>
+          <li><strong>Help my H-index</strong> suggestions in Picker</li>
+          <li><strong>Custom scoresheets</strong> for any game</li>
+          <li><strong>For You</strong> suggestions shaped by how you play</li>
+          <li><strong>Live game timer</strong> inside ShelfPick</li>
+        </ul>
+        <p class="pro-plans">Choose <strong>Pro Yearly</strong>, an auto-renewing subscription you can cancel in your Apple settings, or <strong>Pro Lifetime</strong>, a one-time purchase. Prices are shown in the app before you buy. <a href="/shelfpick/terms/#pro">Read the ShelfPick Pro terms</a>.</p>
       </div>
     </section>
 
@@ -161,6 +183,14 @@ const description = 'Organise your board-game collection, find the right game fo
   .screenshot-strip figcaption { display:grid; gap:.12rem; margin:.85rem .15rem 0; text-align:left; }
   .screenshot-strip figcaption strong { color:var(--sp-ink); font-size:.86rem; }
   .screenshot-strip figcaption span { color:var(--sp-muted); }
+  .pro-section { display:grid; grid-template-columns:minmax(220px,.5fr) minmax(0,1fr); align-items:center; gap:clamp(2rem,7vw,6rem); padding-block:clamp(70px,9vw,116px); border-top:1px solid var(--sp-line); }
+  .pro-shot { max-width:300px; margin-inline:auto; }
+  .pro-copy h2 { margin:0 0 1.1rem; font-size:clamp(2.25rem,4.2vw,4.4rem); line-height:1; letter-spacing:-.035em; }
+  .pro-copy > p { max-width:620px; color:var(--sp-muted); line-height:1.72; }
+  .pro-list { max-width:620px; margin:1.2rem 0; padding:0; list-style:none; border-top:1px solid var(--sp-line); }
+  .pro-list li { padding:.75rem 0; border-bottom:1px solid var(--sp-line); color:var(--sp-muted); line-height:1.5; }
+  .pro-list strong { color:var(--sp-ink); }
+  .pro-plans a { color:var(--sp-forest); font-weight:780; }
   .discover-section { overflow:hidden; color:#f4f1e8; background:#284d3c; }
   .discover-inner { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(260px,.7fr); align-items:center; gap:clamp(2rem,7vw,7rem); min-height:470px; padding-block:clamp(65px,9vw,105px); }
   .discover-copy p { max-width:650px; color:#d9e5de; font-size:1.04rem; line-height:1.75; }
@@ -175,6 +205,6 @@ const description = 'Organise your board-game collection, find the right game fo
   .trust-links { align-self:end; padding:1.5rem; border-radius:16px; background:var(--sp-paper); box-shadow:0 8px 24px rgb(30 42 36 / 8%); }
   .trust-links a { display:inline-flex; min-height:44px; align-items:center; color:var(--sp-forest); font-weight:780; text-decoration:underline; }
   .trust-links p { margin:.25rem 0 1rem; color:var(--sp-muted); font-size:.82rem; line-height:1.55; }
-  @media(max-width:820px) { .hero,.benefits,.discover-inner,.trust { grid-template-columns:1fr; }.hero { min-height:0; padding-block:clamp(34px,7vw,58px); }.app-preview { max-width:380px; margin-inline:auto; padding-top:.9rem; }.benefits-intro { position:static; }.showcase-intro { grid-template-columns:1fr; }.showcase-intro > p:last-child { grid-column:1; grid-row:auto; margin-top:1rem; }.gallery-scroll-hint { display:flex; align-items:center; gap:.7rem; margin:-.6rem 0 1.25rem; color:var(--sp-muted); font-size:.8rem; font-weight:700; }.scroll-track { position:relative; width:38px; height:2px; flex:0 0 auto; overflow:hidden; border-radius:999px; background:var(--sp-line); }.scroll-track span { display:block; width:17px; height:100%; border-radius:inherit; background:var(--sp-gold); }.screenshot-strip { grid-template-columns:repeat(4,minmax(230px,72vw)); overflow-x:auto; margin-inline:-20px; padding:8px 20px 1.2rem; scroll-padding-inline:20px; scroll-snap-type:x mandatory; overscroll-behavior-inline:contain; scrollbar-width:thin; scrollbar-color:var(--sp-gold) var(--sp-raised); }.screenshot-strip figure { scroll-snap-align:start; }.discover-object { min-height:230px; }.trust-links { align-self:start; } }
+  @media(max-width:820px) { .hero,.benefits,.discover-inner,.trust,.pro-section { grid-template-columns:1fr; }.pro-shot { max-width:260px; }.hero { min-height:0; padding-block:clamp(34px,7vw,58px); }.app-preview { max-width:380px; margin-inline:auto; padding-top:.9rem; }.benefits-intro { position:static; }.showcase-intro { grid-template-columns:1fr; }.showcase-intro > p:last-child { grid-column:1; grid-row:auto; margin-top:1rem; }.gallery-scroll-hint { display:flex; align-items:center; gap:.7rem; margin:-.6rem 0 1.25rem; color:var(--sp-muted); font-size:.8rem; font-weight:700; }.scroll-track { position:relative; width:38px; height:2px; flex:0 0 auto; overflow:hidden; border-radius:999px; background:var(--sp-line); }.scroll-track span { display:block; width:17px; height:100%; border-radius:inherit; background:var(--sp-gold); }.screenshot-strip { grid-template-columns:repeat(4,minmax(230px,72vw)); overflow-x:auto; margin-inline:-20px; padding:8px 20px 1.2rem; scroll-padding-inline:20px; scroll-snap-type:x mandatory; overscroll-behavior-inline:contain; scrollbar-width:thin; scrollbar-color:var(--sp-gold) var(--sp-raised); }.screenshot-strip figure { scroll-snap-align:start; }.discover-object { min-height:230px; }.trust-links { align-self:start; } }
   @media(max-width:560px) { .hero { padding-top:24px; padding-bottom:42px; }.hero h1 { margin:.7rem 0 .7rem; font-size:clamp(2.28rem,11.8vw,2.72rem); line-height:.96; }.hero-lead { line-height:1.58; }.hero-actions { display:grid; gap:.65rem; margin-top:1.05rem; }.availability-status { min-height:34px; }.shelfpick-button { width:100%; }.app-preview { padding-top:.75rem; }.phone-frame { max-width:278px; padding:9px; border-radius:31px; }.phone-frame img { border-radius:23px; }.phone-speaker { top:15px; }.benefit-list article { grid-template-columns:44px minmax(0,1fr); gap:1rem; }.benefit-list article > :global(svg),.benefit-list article > img { width:44px; height:44px; }.screenshot-strip { grid-template-columns:repeat(4,minmax(238px,78vw)); margin-inline:-14px; padding-inline:14px; scroll-padding-inline:14px; }.discover-object { min-height:200px; transform:scale(.84); } }
 </style>
