@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../config';
+---
+
+<BaseLayout title="Actby app privacy | Pluto Night Labs" description="How Pluto Night Labs Ltd handles information when you use the Actby iPhone app: your renewals stay on your iPhone unless you switch on household sharing through your own iCloud.">
+  <section class="privacy shell">
+    <p class="eyebrow">Actby app privacy</p>
+    <h1>Your renewals are yours.</h1>
+    <p class="lede">What the Actby iPhone app stores, where it goes, and the choices you have. This page covers the app. Our website, waitlist and newsletter are covered by the <a href="/privacy/">website privacy notice</a>.</p>
+    <div class="privacy-copy">
+      <h2>Who we are</h2>
+      <p>Actby is made by Pluto Night Labs Ltd, registered in England and Wales, company number 17485329. Our registered office is 128 City Road, London EC1V 2NX, United Kingdom. Contact <a href={`mailto:${site.supportEmail}?subject=${encodeURIComponent('Actby privacy')}`}>{site.supportEmail}</a> with privacy questions.</p>
+
+      <h2>In short</h2>
+      <ul>
+        <li>Actby has no accounts, no advertising, no analytics and no tracking.</li>
+        <li>It never asks for your bank details or any bank login.</li>
+        <li>What you enter stays on your iPhone. Pluto Night Labs does not receive it and runs no server for the app.</li>
+        <li>If you choose to share your household, a copy is stored in your own iCloud and shared only with the people you invite.</li>
+      </ul>
+
+      <h2>What the app stores on your iPhone</h2>
+      <p>The renewals you enter: the title, provider, notes, renewal date, how many days' notice you want, prices you choose to add, and the history of what you did about each one. Also the names and colours of the household members you add, who is handling each renewal, and a small label recording whether an item was typed in or started from a preset. This is stored in the app's own storage on your device and is removed when you delete the app.</p>
+      <p>Reminders are local notifications scheduled on your iPhone, by default seven days before the act-by date, on the day, and the morning after, at 09:00. Actby asks for permission to send notifications the first time you save an item. If you say no, the app still works and shows your dates; you just don't get reminders.</p>
+
+      <h2>Household sharing (optional, off by default)</h2>
+      <p>If you switch on household sharing, a copy of your renewals, their history and the member names is stored in your own iCloud account using Apple's CloudKit, and shared with the people you invite through Apple's iCloud sharing sheet. Sharing is by invitation only; there is no public link. People you invite can see and change the shared renewals, so only invite people you trust with them.</p>
+      <p>Pluto Night Labs cannot read this data, because it lives in iCloud accounts, not on any server we run. Apple processes it under <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple's own privacy policy</a>, and you need to be signed in to iCloud for sharing to work. Before sharing first starts, Actby saves a backup of your renewals on your iPhone.</p>
+
+      <h2>What we collect</h2>
+      <p>We do not collect your renewals, your household's names or anything else you enter. The app contains no analytics, advertising or crash-reporting software and no network code of our own. The only network traffic it creates is Apple's CloudKit, and only when household sharing is on.</p>
+      <p>If you email us, for example to give feedback, we receive your email address and what you write, and use them to reply. See the <a href="/privacy/">website privacy notice</a> for how long we keep correspondence.</p>
+
+      <h2>Test builds</h2>
+      <p>Test versions of Actby are distributed through Apple's TestFlight, which collects its own information about testers under Apple's terms. We do not receive your Actby data through TestFlight.</p>
+
+      <h2>Stopping sharing and deleting your data</h2>
+      <ul>
+        <li><strong>Stop sharing:</strong> in Actby you can stop sharing and either keep the copy in iCloud or stop and remove it from iCloud.</li>
+        <li><strong>Leave a household:</strong> if you were invited, you can leave. A copy of the renewals stays on your iPhone.</li>
+        <li><strong>Delete everything on your iPhone:</strong> delete the app. This removes the data stored on that iPhone.</li>
+        <li><strong>Delete the iCloud copy:</strong> stop sharing and remove it in the app, or manage the app's data in your iCloud storage settings. Copies already on other people's iPhones are on their devices; ask them to delete the app or leave the household.</li>
+      </ul>
+
+      <h2>Your rights</h2>
+      <p>Because we hold none of your Actby data, most requests (access, correction, deletion) are things you can do yourself in the app or on your device. For anything we do hold, such as an email you sent us, you may ask to access, correct or erase it, restrict how we use it, or object to our use of it. Contact <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>. You can also complain to the <a href="https://ico.org.uk/" target="_blank" rel="noopener noreferrer">Information Commissioner's Office</a>.</p>
+
+      <h2>Children</h2>
+      <p>Actby is a household admin tool for adults and is not directed at children.</p>
+
+      <h2>Financial information</h2>
+      <p>Actby reminds you when to compare and act. It does not give financial advice or recommend providers. Any prices you enter are for your own reference and stay with the rest of your data as described above.</p>
+
+      <h2>Updates</h2>
+      <p>We will update this page when the app changes in a way that affects your information, for example if a future version adds a feature that reads photos of letters, before that version is released.</p>
+      <p class="updated">Applies to Actby 0.3.0 and later. Last updated: 25 November 2026</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .privacy { min-height: 70vh; padding-block: 130px 150px; }
+  h1 { margin: 0; font-size: clamp(3.4rem, 7vw, 6.5rem); line-height: .94; letter-spacing: -.06em; }
+  .lede { max-width: 700px; margin: 32px 0 70px; color: var(--muted); font-size: 1.22rem; line-height: 1.65; }
+  .lede a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .privacy-copy { max-width: 720px; padding-top: 48px; border-top: 1px solid var(--line); }
+  h2 { margin: 38px 0 12px; font-size: 1.25rem; } h2:first-child { margin-top: 0; }
+  .privacy-copy p, .privacy-copy li { color: var(--muted); line-height: 1.8; }
+  .privacy-copy ul { padding-left: 1.2em; }
+  .privacy-copy a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .updated { margin-top: 50px; color: var(--dim) !important; font-size: .8rem; }
+</style>
