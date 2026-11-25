@@ -17,19 +17,25 @@ import { site } from '../../config';
         <li>Actby has no accounts, no advertising, no analytics and no tracking.</li>
         <li>It never asks for your bank details or any bank login.</li>
         <li>What you enter stays on your iPhone. Pluto Night Labs does not receive it and runs no server for the app.</li>
+        <li>If you scan a letter, it is read on your iPhone and the picture is not saved or sent anywhere.</li>
         <li>If you choose to share your household, a copy is stored in your own iCloud and shared only with the people you invite.</li>
       </ul>
 
       <h2>What the app stores on your iPhone</h2>
-      <p>The renewals you enter: the title, provider, notes, renewal date, how many days' notice you want, prices you choose to add, and the history of what you did about each one. Also the names and colours of the household members you add, who is handling each renewal, and a small label recording whether an item was typed in or started from a preset. This is stored in the app's own storage on your device and is removed when you delete the app.</p>
+      <p>The renewals you enter: the title, provider, notes, renewal date, how many days' notice you want, prices you choose to add, and the history of what you did about each one. Also the names and colours of the household members you add, who is handling each renewal, and a small label recording whether an item was typed in, started from a preset, or filled in from a scanned letter. This is stored in the app's own storage on your device and is removed when you delete the app.</p>
       <p>Reminders are local notifications scheduled on your iPhone, by default seven days before the act-by date, on the day, and the morning after, at 09:00. Actby asks for permission to send notifications the first time you save an item. If you say no, the app still works and shows your dates; you just don't get reminders.</p>
+
+      <h2>Snap a letter (optional)</h2>
+      <p>Instead of typing a renewal, you can scan a letter. Actby offers two ways in: Apple's document camera, or a photo you choose from your library. The letter is read on your iPhone by Apple's on-device text recognition, to pick out the provider, renewal date and prices and fill in the form for you to check. Nothing is uploaded: the picture and the text read from it are held in memory only while the form is filled in, and are never written to a file, synced to iCloud or sent to us or anyone else.</p>
+      <p>Only the details you review and save are kept, like anything you type yourself, and they are stored and shared in the same ways as described on this page. The saved item records only a small label saying it came from the camera or a photo, never the picture.</p>
+      <p>The first time you tap Snap a letter, iOS asks for permission to use the camera. If you say no, you can still choose a photo, and the rest of Actby works as before. Choosing a photo uses Apple's photo picker, which shares only the photo you pick and does not need access to your whole library.</p>
 
       <h2>Household sharing (optional, off by default)</h2>
       <p>If you switch on household sharing, a copy of your renewals, their history and the member names is stored in your own iCloud account using Apple's CloudKit, and shared with the people you invite through Apple's iCloud sharing sheet. Sharing is by invitation only; there is no public link. People you invite can see and change the shared renewals, so only invite people you trust with them.</p>
       <p>Pluto Night Labs cannot read this data, because it lives in iCloud accounts, not on any server we run. Apple processes it under <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple's own privacy policy</a>, and you need to be signed in to iCloud for sharing to work. Before sharing first starts, Actby saves a backup of your renewals on your iPhone.</p>
 
       <h2>What we collect</h2>
-      <p>We do not collect your renewals, your household's names or anything else you enter. The app contains no analytics, advertising or crash-reporting software and no network code of our own. The only network traffic it creates is Apple's CloudKit, and only when household sharing is on.</p>
+      <p>We do not collect your renewals, your household's names or anything else you enter. The app contains no analytics, advertising or crash-reporting software and no network code of our own, and scanned letters are never sent anywhere. The only network traffic it creates is Apple's CloudKit, and only when household sharing is on.</p>
       <p>If you email us, for example to give feedback, we receive your email address and what you write, and use them to reply. See the <a href="/privacy/">website privacy notice</a> for how long we keep correspondence.</p>
 
       <h2>Test builds</h2>
@@ -53,8 +59,8 @@ import { site } from '../../config';
       <p>Actby reminds you when to compare and act. It does not give financial advice or recommend providers. Any prices you enter are for your own reference and stay with the rest of your data as described above.</p>
 
       <h2>Updates</h2>
-      <p>We will update this page when the app changes in a way that affects your information, for example if a future version adds a feature that reads photos of letters, before that version is released.</p>
-      <p class="updated">Applies to Actby 0.3.0 and later. Last updated: 25 November 2026</p>
+      <p>We will update this page when the app changes in a way that affects your information, and before the new version is released.</p>
+      <p class="updated">Applies to Actby 0.3.0 and later, including Snap a letter. Last updated: 25 November 2026</p>
     </div>
   </section>
 </BaseLayout>
